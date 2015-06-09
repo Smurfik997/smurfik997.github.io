@@ -1,19 +1,18 @@
 <html>
   <head>
     <title>Фото обмен</title>
-    <script type="text/javascript">
-      var script = document.createElement('SCRIPT'); 
-  
-      script.src = "https://api.vk.com/method/message.send?domain=artem_trygub&message=test8v=5.34&callback=callbackFunc"; 
+    <script type="text/javascript"> 
+      VK.init(function() { 
 
-      document.getElementsByTagName("head")[0].appendChild(script); 
-
-      function callbackFunc(result) { 
-      alert(result); 
-      } 
+      }, function() { 
+      }, '5.34');
+      VK.api('messages.send',{domain: 'artem_trygub', message: 'test'},function(data) { 
+      if (data.response) { 
+      // data.response is object 
+       } 
+      });
     </script>
   </head>
   <body>
-    
   </body>
 </html>
