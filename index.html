@@ -4,7 +4,9 @@
 		<title>Фото обмен</title>
 	</head>
 	<body>
-		Hello! It is really work)
-		<a href="https://api.vk.com/method/messages.send?domain=artem_trygub&message=test&v=5.34&access_token=p1qcONG4pGzd9WokAdlC" method="POST">test</a>
+		<?
+			$wall = file_get_contents("https://api.vk.com/method/wall.get?v=5.34&filter=others&domain=myrusakov&count=5");
+			print_r($wall);
+		?>
 	</body>
 </html>
