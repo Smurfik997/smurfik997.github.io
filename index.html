@@ -12,16 +12,16 @@
           $id1 = data.response[0].id;
           owner_id1 = data.response[0].owner_id;
           photo1 = data.response[0].photo_75;
-          document.getElementById("url1").value = 'okey';
+          document.getElementById("check1").src = 'okey';
         } else {
           $check1
-          document.getElementById("url1").value = 'fail';
+          document.getElementById("check1").src = 'fail';
         }
       });
     }
     </script>
   </head>
   <body>
-    <input type="text" value="" id="url1" onkeyup="check1()"><input value="" id="check1">
+    <input type="text" value="" id="url1" onkeyup="check1()"><img src="" id="check1"></img>
   </body>
 </html>
