@@ -6,8 +6,8 @@
         <script src="https://vk.com/js/api/xd_connection.js?2" type="text/javascript"></script>
         <script scr="js/jquery-2.1.1.js"></script>
         <link rel="stylesheet" type="text/css" href="css/style.css">
-        <script type="text/javascript">
-          function check1()
+        <script src="js/api.js" type="text/javascript">
+          /*function check1()
           {
             $url1 = document.getElementById("photo1_url").value;
             VK.api('photos.getById', {photos: $url1, v: '5.34'}, function(data) {
@@ -38,7 +38,7 @@
             document.getElementById("checked2").src = 'images/fail.png';
             }
             });
-          }
+          }*/
         </script>
     </head>
     <body>
@@ -48,7 +48,7 @@
                 <div class="block_content" style="margin-top: 2px">
                     <div id="photo1" style="float: left">
                         <div class="link">https://vk.com/photo</div>
-                        <input id="photo1_url" onkeyup="check1()" style="color: lightgray" value="1_278184324" onblur="if(this.value==''){this.value='1_278184324';this.style.color ='lightgray';}" onfocus="if(this.value=='1_278184324'){this.value='';this.style.color = 'gray'}"></input>
+                        <input id="photo1_url" onkeyup="check1()" style="color: lightgray" value="1_278184318" onblur="if(this.value==''){this.value='1_278184318';this.style.color ='lightgray';}" onfocus="if(this.value=='1_278184318'){this.value='';this.style.color = 'gray'}"></input>
                         <div class="link_end"><img src="images/fail.png" width="22px" height="22px" id="checked1"></img></div>
                     </div>
                     <div id="photo2" style="float: right">
