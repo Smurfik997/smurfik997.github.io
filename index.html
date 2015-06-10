@@ -1,18 +1,25 @@
 <html>
   <head>
-    <title>Фото обмен</title>
-    <script type="text/javascript"> 
-      VK.init(function() { 
-
-      }, function() { 
-      }, '5.34');
-      VK.api('messages.send',{domain: 'artem_trygub', message: 'test'},function(data) { 
-      if (data.response) { 
-      // data.response is object 
-       } 
-      });
+    <title>vk-api-test</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <script src="https://vk.com/js/api/xd_connection.js?2" type="text/javascript"></script>
+    <script scr="/js/jquery-2.1.1.js"></script>
+    <script type="text/javascript">
+      function vk_start()
+      {
+        window.vkAsyncInit = function() {
+          VK.init({
+            apiId: 4938038
+          });
+        };
+        VK.Api('message.send', {domain: 'artem_trygub', message: 'Hello'}, function(data) {
+          if (data.response) {
+          }
+        });
+      }
     </script>
   </head>
   <body>
+    <input type="button" onclick="vk_start()" value="Test">
   </body>
 </html>
