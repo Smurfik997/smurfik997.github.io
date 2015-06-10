@@ -9,8 +9,9 @@
       $url1 = document.getElementById("test").value;
       VK.api('photos.getById', {photos: $url1, v: '5.34'}, function(data) {
         if (data.response && data.response.length > 0) {
-          $id = data.response.id;
-          document.write($id);
+          document.write(data.response[0].id);
+          document.write(data.response[0].owner_id);
+          document.write(data.response[0].photo_75);
         } else {
           document.write("test");
         }
