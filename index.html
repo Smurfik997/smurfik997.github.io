@@ -8,9 +8,8 @@
     function test() {
       $url1 = document.getElementById("test").value;
       VK.api('photos.getById', {photos: $url1, v: '5.34'}, function(data) {
-        if (data.response && data.response.length == 0) {
-          document.write("fail");
-        }
+        if (data.response && data.response.length > 0) {
+        } else {document.write("test");}
       });
     }
     </script>
