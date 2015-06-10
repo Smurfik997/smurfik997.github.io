@@ -5,19 +5,23 @@
     <script src="https://vk.com/js/api/xd_connection.js?2" type="text/javascript"></script>
     <script scr="/js/jquery-2.1.1.js"></script>
     <script type="text/javascript">
-    function test() {
-      $url1 = document.getElementById("test").value;
+    function check1() {
+      $url1 = document.getElementById("url1").value;
       VK.api('photos.getById', {photos: $url1, v: '5.34'}, function(data) {
         if (data.response && data.response.length > 0) {
-          document.write(data.response[0].id && ' ' && data.response[0].owner_id && ' ' && data.response[0].photo_75 && '<input type="text" value="Test" id="test" onkeyup="test()">');
+          $id1 = data.response[0].id;
+          owner_id1 = data.response[0].owner_id;
+          photo1 = data.response[0].photo_75;
+          document.getElementById("url1").value = 'okey';
         } else {
-          document.write("test");
+          $check1
+          document.getElementById("url1").value = 'fail';
         }
       });
     }
     </script>
   </head>
   <body>
-    <input type="text" value="Test" id="test" onkeyup="test()">
+    <input type="text" value="" id="url1" onkeyup="check1()"><input value="" id="check1">
   </body>
 </html>
