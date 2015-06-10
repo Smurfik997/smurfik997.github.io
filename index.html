@@ -4,24 +4,9 @@
         <title>Фото Обмен</title>
         <link rel="shortcut icon" href="/images/icon.png">
         <script src="https://vk.com/js/api/xd_connection.js?2" type="text/javascript"></script>
-        <script scr="/js/jquery-2.1.1.js"></script>
-        <link rel="stylesheet" type="text/css" href="/css/style.css">
-        <script type="text/javascript">
-            function check1()
-            {
-                $url1 = document.getElementById("photo1_url").value;
-                VK.api('photos.getById', {photos: $url1, v: '5.34'}, function(data) {
-                if (data.response && data.response.length > 0) {
-                $id1 = data.response[0].id;
-                owner_id1 = data.response[0].owner_id;
-                photo1 = data.response[0].photo_75;
-                document.getElementById("checked1").src = '/images/okey.png';
-                } else {
-                document.getElementById("checked1").src = '/images/fail.png';
-                }
-                });
-            }
-        </script>
+        <script scr="js/jquery-2.1.1.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <script src="js/api.js" type="text/javascript"></script>
     </head>
     <body>
         <div id="Security">
@@ -31,12 +16,18 @@
                     <div id="photo1" style="float: left">
                         <div class="link">https://vk.com/photo</div>
                         <input id="photo1_url" onkeyup="check1()" style="color: lightgray" value="1_278184324" onblur="if(this.value==''){this.value='1_278184324';this.style.color ='lightgray';}" onfocus="if(this.value=='1_278184324'){this.value='';this.style.color = 'gray'}"></input>
-                        <div class="link_end"><img src="/images/fail.png" width="22px" height="22px" id="checked1"></img></div>
+                        <div class="link_end"><img src="images/fail.png" width="22px" height="22px" id="checked1"></img></div>
                     </div>
                     <div id="photo2" style="float: right">
                         <div class="link">https://vk.com/photo</div>
                         <input id="photo2_url" onkeyup="check2()" style="color: lightgray" value="2_278184324" onblur="if(this.value==''){this.value='2_278184324';this.style.color ='lightgray';}" onfocus="if(this.value=='2_278184324'){this.value='';this.style.color = 'gray'}"></input>
-                        <div class="link_end"><img src="/images/fail.png" width="22px" height="22px" id="checked2"></img></div>
+                        <div class="link_end"><img src="images/fail.png" width="22px" height="22px" id="checked2"></img></div>
+                    </div>
+                    <div id="photo1_block" style="float: left; height: 380px; width: 380px;">
+                      <img style="margin-top: 10px; border: 0px solid gray; border-radius: 10px;" height="300px" width="300px" src="images/nofoto.png" id="photo1_view"></img>
+                    </div>
+                    <div id="photo2_block" style="float: right; height: 380px; width: 380px;">
+                      <img style="float: right; margin-top: 10px; border: 0px solid gray; border-radius: 10px;" height="300px" width="300px" src="images/nofoto.png" id="photo2_view"></img>
                     </div>
                 </div>
             </div>
