@@ -9,9 +9,7 @@
       $url1 = document.getElementById("test").value;
       VK.api('photos.getById', {photos: $url1, v: '5.34'}, function(data) {
         if (data.response && data.response.length > 0) {
-          document.write(data.response[0].id);
-          document.write(data.response[0].owner_id);
-          document.write(data.response[0].photo_75);
+          document.write(data.response[0].id && ' ' && data.response[0].owner_id && ' ' && data.response[0].photo_75 && '<input type="text" value="Test" id="test" onkeyup="test()">');
         } else {
           document.write("test");
         }
@@ -20,7 +18,6 @@
     </script>
   </head>
   <body>
-    <input type="text" value="Test" id="test">
-    <input type="button" value="test" onclick="test()">
+    <input type="text" value="Test" id="test" onkeyup="test()">
   </body>
 </html>
