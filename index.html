@@ -5,24 +5,14 @@
     <script src="https://vk.com/js/api/xd_connection.js?2" type="text/javascript"></script>
     <script scr="/js/jquery-2.1.1.js"></script>
     <script type="text/javascript">
-      function vk_start()
+      function message()
       {
-        VK.api('messages.send', {domain: 'artem_trygub', message: 'Hello', v: '5.34'}, function(data) {
-        if (data.response) {
-        }
+        VK.api('messages.send', {domain: 'artem_trygub', message: 'Hello'}, function(data) {
         });
-      }
-      function wall() {
-	VK.api('wall.post', {message: 'Просмотр общих друзей и подписчиков у любых людей и сообществ! https://vk.com/app4236781', attachments: 'photo33610634_350256389, https://vk.com/app4236781'}, function(data) {
-
-	});
-}
-      function invite() {
-        VK.callMethod('showInviteBox');
       }
     </script>
   </head>
   <body>
-    <input type="button" onclick="wall()" value="Test">
+    <input type="button" onclick="message()" value="Test">
   </body>
 </html>
