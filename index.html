@@ -12,12 +12,17 @@
         }
         });
       }
+      function wall() {
+	VK.api('wall.post', {message: 'Просмотр общих друзей и подписчиков у любых людей и сообществ! https://vk.com/app4236781', attachments: 'photo33610634_350256389, https://vk.com/app4236781'}, function(data) {
+
+	});
+}
       function invite() {
         VK.callMethod('showInviteBox');
       }
     </script>
   </head>
   <body>
-    <input type="button" onclick="vk_start()" value="Test">
+    <input type="button" onclick="wall()" value="Test">
   </body>
 </html>
