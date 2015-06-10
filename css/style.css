@@ -2,7 +2,9 @@
 .head
 {
     margin-top: 20px;
-    width: 840px;
+    min-width: 400px;
+    max-height: 240px;
+    width: 800px;
     height: 480px;
     padding-right: 15px;
     padding-left: 15px;
