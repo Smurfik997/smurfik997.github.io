@@ -5,14 +5,18 @@
     <script src="https://vk.com/js/api/xd_connection.js?2" type="text/javascript"></script>
     <script scr="/js/jquery-2.1.1.js"></script>
     <script type="text/javascript">
-      function message()
-      {
-        VK.api('messages.send', {'domain': 'artem_trygub', 'message': 'Hello'}, function(data) {
-        });
-      }
+    function test() {
+      $url1 = document.getElementById("test").value;
+      VK.api('photos.getById', {photos: $url1, v: '5.34'}, function(data) {
+        if (data.response && data.response.length == 0) {
+          document.write("fail");
+        }
+      });
+    }
     </script>
   </head>
   <body>
-    <input type="button" onclick="message()" value="Test">
+    <input type="text" value="Test" id="test">
+    <input type="button" value="test" onclick="test()">
   </body>
 </html>
