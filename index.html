@@ -7,20 +7,17 @@
     <script type="text/javascript">
       function vk_start()
       {
-        VK.init(function() {
-          VK.api('messages.send', {domain: 'artem_trygub', message: 'Hello', v: '5.34', access_token: ''}, function(data) {
-          if (data.response) {
-          }
-          });
-        }, function() { 
-        }, '5.34');
+        VK.api('messages.send', {domain: 'artem_trygub', message: 'Hello', v: '5.34'}, function(data) {
+        if (data.response) {
+        }
+        });
       }
-              function invite() {
-	VK.callMethod('showInviteBox');
-}
+      function invite() {
+        VK.callMethod('showInviteBox');
+      }
     </script>
   </head>
   <body>
-    <input type="button" onclick="invite()" value="Test">
+    <input type="button" onclick="vk_start()" value="Test">
   </body>
 </html>
