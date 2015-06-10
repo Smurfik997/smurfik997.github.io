@@ -15,9 +15,10 @@
             $id1 = data.response[0].id;
             $owner_id1 = data.response[0].owner_id;
             $photo1 = data.response[0].photo_604;
-            document.getElementById("photo1_view").src = 'https://vk.com/photo'.$url1;
+            document.getElementById("photo1_view").src = 'https://vk.com/photo'.document.getElementById("photo1_url").value;
             document.getElementById("checked1").src = 'images/okey.png';
             } else {
+            document.getElementById("photo1_view").src = 'images/nofoto.png';
             document.getElementById("checked1").src = 'images/fail.png';
             }
             });
@@ -30,9 +31,10 @@
             $id2 = data.response[0].id;
             $owner_id2 = data.response[0].owner_id;
             $photo2 = data.response[0].photo_604;
-            document.getElementById("photo2_view").src = 'https://vk.com/photo'.$url2;
+            document.getElementById("photo2_view").src = 'https://vk.com/photo'.document.getElementById("photo2_url").value;
             document.getElementById("checked2").src = 'images/okey.png';
             } else {
+            document.getElementById("photo2_view").src = 'images/nofoto.png';
             document.getElementById("checked2").src = 'images/fail.png';
             }
             });
