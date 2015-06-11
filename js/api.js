@@ -30,3 +30,7 @@ function check2()
     }
     });
 }
+function invite()
+{
+    VK.callMethod('showInviteBox');
+}
