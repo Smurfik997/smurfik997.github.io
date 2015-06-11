@@ -45,9 +45,8 @@ a
     border: 0px solid gray;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
-    color: white;
     background-color: gray; 
-    font-size: 18px;
+    text-align: left;
     padding: 6px 0px 6px 6px;
     height: 22px;
     float: left;
@@ -75,5 +74,5 @@ input
     font-size: 17px;
     padding: 6px;
     height: 34px;
-    width: 133px;
+    width: 190px;
 }
