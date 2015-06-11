@@ -76,3 +76,15 @@ input
     height: 34px;
     width: 190px;
 }
+.block_error
+{
+    border: 4px solid gray;
+    border-radius: 10px;
+    color: red;
+    margin-top: 10px;
+    width: 97.55%;
+    float: left;
+    padding: 6px;
+    font-size: 18px;
+    height: 22px;
+}
