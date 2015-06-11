@@ -2,8 +2,6 @@
 .head
 {
     margin-top: 20px;
-    min-width: 800px;
-    max-height: 480px;
     width: 800px;
     height: 480px;
     padding-right: 15px;
@@ -49,10 +47,9 @@ a
     border-bottom-left-radius: 10px;
     color: white;
     background-color: gray; 
-    font-size: 17px;
-    padding: 6px 12px;
+    font-size: 18px;
+    padding: 6px 0px 6px 6px;
     height: 22px;
-    width: 140px;
     float: left;
 }
 .link_end
@@ -63,10 +60,9 @@ a
     color: white;
     background-color: gray; 
     font-size: 17px;
-    padding: 6px;
+    padding: 6px 8px 6px 3px;
     height: 22px;
-    width: 30px;
-    float: right;
+    float: left;
 }
 input
 {
@@ -74,9 +70,10 @@ input
     border: 3px solid gray;
     background-color: white; 
     text-align: left;
+    float: left;
     color: gray;
     font-size: 17px;
-    padding: 6px 12px;
+    padding: 6px;
     height: 34px;
-    width: 140px;
+    width: 133px;
 }
