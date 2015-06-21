@@ -1,6 +1,6 @@
 function check1()
 {
-    $uid = $GET('viewer_id');
+    var api_result = JSON.parse($_GET('api_result'));
     $url1 = document.getElementById("photo1_url").value;
     VK.api('photos.getById', {photos: $url1, v: '5.34'}, function(data) {
     if (data.response && data.response.length > 0) {
@@ -14,7 +14,7 @@ function check1()
     document.getElementById("checked1").src = 'images/fail.png';
     }
     });
-    if ($uid != $owner_id1) {
+    if ($uid != api_result.response[0].id) {
         $error = 'Ошибка! Вы не являетесь автором первой фотки';
         document.getElementById("block_error").style.display = 'block';
     } else {
