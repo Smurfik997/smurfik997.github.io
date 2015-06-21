@@ -13,6 +13,9 @@ function check1()
     document.getElementById("checked1").src = 'images/fail.png';
     }
     });
+    if ($uid != $owner_id1) {
+        $error = 'Ошибка! Вы не являетесь автором первой фотки'
+    }
 }
 function check2()
 {
@@ -34,3 +37,6 @@ function invite()
 {
     VK.callMethod('showInviteBox');
 }
+function callbackFunc(result) { 
+  alert(result); 
+} 
