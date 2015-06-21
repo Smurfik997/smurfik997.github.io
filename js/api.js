@@ -12,7 +12,7 @@ function check1()
     $uid = $_GET('viewer_id');
     if ($uid != $owner_id1) {
         document.getElementById("block_error").style.display = 'block';
-        document.getElementById("block_error").TEXT_NODE = '<div class="block_error'.$error.'</div>';
+        document.getElementById("block_error") = '<div class="block_error'.$error.'</div>';
     } else {
         document.getElementById("block_error").style.display = 'none';
     }
