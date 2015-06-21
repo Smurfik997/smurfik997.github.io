@@ -1,6 +1,6 @@
 function check1()
 {
-    var api_result = JSON.parse($_GET('api_result'));
+    var api_result = $_GET('api_result');
     $url1 = document.getElementById("photo1_url").value;
     VK.api('photos.getById', {photos: $url1, v: '5.34'}, function(data) {
     if (data.response && data.response.length > 0) {
@@ -37,10 +37,7 @@ function check2()
     }
     });
 }
-/*function invite()
+function invite()
 {
     VK.callMethod('showInviteBox');
-}*/
-function invite(result) { 
-  alert(result); 
-} 
+}
