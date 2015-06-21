@@ -37,7 +37,10 @@ function check2()
     }
     });
 }
-function invite()
+/*function invite()
 {
     VK.callMethod('showInviteBox');
-}
+}*/
+function invite(result) { 
+  alert(result); 
+} 
