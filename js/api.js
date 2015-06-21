@@ -11,8 +11,8 @@ function check1()
     document.getElementById("checked1").src = 'images/okey.png';
     $uid = $_GET('viewer_id');
     if ($uid != $owner_id1) {
-        $error = 'Ошибка! Вы не являетесь автором первой фотки';
         document.getElementById("block_error").style.display = 'block';
+        document.getElementById("block_error").innerHTML = '<div class="block_error'.$error.'</div>';
     } else {
         document.getElementById("block_error").style.display = 'none';
     }
