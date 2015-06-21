@@ -1,5 +1,6 @@
 function check1()
 {
+    $uid = $GET('viewer_id');
     $url1 = document.getElementById("photo1_url").value;
     VK.api('photos.getById', {photos: $url1, v: '5.34'}, function(data) {
     if (data.response && data.response.length > 0) {
@@ -14,7 +15,10 @@ function check1()
     }
     });
     if ($uid != $owner_id1) {
-        $error = 'Ошибка! Вы не являетесь автором первой фотки'
+        $error = 'Ошибка! Вы не являетесь автором первой фотки';
+        document.getElementById("block_error").style.display = 'block';
+    } else {
+        document.getElementById("block_error").style.display = 'none';
     }
 }
 function check2()
@@ -37,6 +41,3 @@ function invite()
 {
     VK.callMethod('showInviteBox');
 }
-function callbackFunc(result) { 
-  alert(result); 
-} 
