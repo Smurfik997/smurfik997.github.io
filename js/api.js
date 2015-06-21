@@ -1,3 +1,4 @@
+function $_GET(key) { return decodeURIComponent(window.location.search.match(new RegExp(key + '=([^&=]+)'))[1]); }
 function check1()
 {
     $uid = $_GET('viewer_id');
