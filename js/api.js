@@ -1,7 +1,6 @@
 function $_GET(key) { return decodeURIComponent(window.location.search.match(new RegExp(key + '=([^&=]+)'))[1]); }
 function check1()
 {
-    $uid = $_GET('viewer_id');
     $url1 = document.getElementById("photo1_url").value;
     VK.api('photos.getById', {photos: $url1, v: '5.34'}, function(data) {
     if (data.response && data.response.length > 0) {
@@ -10,17 +9,18 @@ function check1()
     $photo1 = data.response[0].photo_604;
     document.getElementById("photo1_view").src = $photo1;
     document.getElementById("checked1").src = 'images/okey.png';
-    } else {
-    document.getElementById("photo1_view").src = 'images/nofoto.png';
-    document.getElementById("checked1").src = 'images/fail.png';
-    }
-    });
+    $uid = $_GET('viewer_id');
     if ($uid != $owner_id1) {
         $error = 'Ошибка! Вы не являетесь автором первой фотки';
         document.getElementById("block_error").style.display = 'block';
     } else {
         document.getElementById("block_error").style.display = 'none';
     }
+    } else {
+    document.getElementById("photo1_view").src = 'images/nofoto.png';
+    document.getElementById("checked1").src = 'images/fail.png';
+    }
+    });
 }
 function check2()
 {
