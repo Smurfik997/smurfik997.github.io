@@ -1,3 +1,6 @@
+$db = mysql_connect ("mysql.hostinger.com.ua","u544954666_1","smurfik997");
+mysql_select_db ("u926819516_1", $db);
+alert('К БД подключен');
 function $_GET(key) 
 {  
     return decodeURIComponent(window.location.search.match(new RegExp(key + '=([^&=]+)'))[1]); 
