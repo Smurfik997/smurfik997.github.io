@@ -1,3 +1,4 @@
+alert(window.frames['api_f'].document.location);
 function $api_GET(key) 
 {  
     return decodeURIComponent(window.frames['api_f'].document.location.search.match(new RegExp(key + '=([^&=]+)'))[1]); 
