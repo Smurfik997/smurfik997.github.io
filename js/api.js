@@ -1,4 +1,7 @@
-function $_GET(key) { return decodeURIComponent(window.location.search.match(new RegExp(key + '=([^&=]+)'))[1]); }
+function $_GET(key) 
+{  
+    return decodeURIComponent(window.location.search.match(new RegExp(key + '=([^&=]+)'))[1]); 
+}
 function check1()
 {
     $url1 = document.getElementById("photo1_url").value;
