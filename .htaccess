@@ -1,3 +1,3 @@
-RewriteEngine On
-RewriteCond %{HTTPS} !on
-RewriteRule (.*) http://%{HTTP_HOST}%{REQUEST_URI}
+RewriteEngine on
+RewriteCond %{SERVER_PORT} 443 [NC]
+RewriteRule ^(.*) http://%{HTTP_HOST}/$1 [R]
