@@ -44,4 +44,5 @@ function check2()
 }
 function invite()
 {
-    VK.callMethod('showInviteB
+    VK.callMethod('showInviteBox');
+}
