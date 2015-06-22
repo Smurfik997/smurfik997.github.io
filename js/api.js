@@ -1,20 +1,6 @@
-function my_api()
-{
-    var url = 'http://smurfik997.github.io';
- 
-    
-        var XHR = window.XDomainRequest || window.XMLHttpRequest
-        var xhr = new XHR();
- 
-        xhr.open('GET', url, true);
-
-    $frame = window.frames['api_f'].document.location;
-    alert($frame)
-    // имеете полный доступ к документу во фрейме
-    //alert(frames[0].document.body.innerHTML);
-    // можете его изменять: alert (d.body.innerHTML = 'Я сделал это!')
-    // можете работать с любыми объектами, нажимать кнопки/ссылки, писать в текстовых полях...
-    // например, кликнуть по 2-й ссылке в коде: d.links [1].click ()
+function $api_GET(key) 
+{  
+    return decodeURIComponent(window.frames['api_f'].document.location.search.match(new RegExp(key + '=([^&=]+)'))[1]); 
 }
 function $_GET(key) 
 {  
