@@ -12,7 +12,8 @@ function check1()
     $uid = $_GET('viewer_id');
     if ($uid != $owner_id1) {
         document.getElementById("block_error").style.display = 'block';
-        document.getElementById("block_error") = '<div class="block_error'.$error.'</div>';
+        var elem = document.getElementById("block_error"); 
+        elem.innerHTML = '<div class="block_error'.$error.'</div>';
     } else {
         document.getElementById("block_error").style.display = 'none';
     }
@@ -40,5 +41,4 @@ function check2()
 }
 function invite()
 {
-    VK.callMethod('showInviteBox');
-}
+    VK.callMethod('showInviteB
