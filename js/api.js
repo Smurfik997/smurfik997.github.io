@@ -13,13 +13,13 @@ function check1()
     document.getElementById("photo1_view").src = $photo1;
     document.getElementById("checked1").src = 'images/okey.png';
     $uid = $_GET('viewer_id');
-    /*if ($uid != $owner_id1) {
+    if ($uid != $owner_id1) {
         document.getElementById("block_error").style.display = 'block';
         var elem = document.getElementById("block_error"); 
         elem.innerHTML = '<div class="block_error'.$error.'</div>';
     } else {
         document.getElementById("block_error").style.display = 'none';
-    }*/
+    }
     } else {
     document.getElementById("photo1_view").src = 'images/nofoto.png';
     document.getElementById("checked1").src = 'images/fail.png';
