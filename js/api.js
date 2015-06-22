@@ -1,5 +1,7 @@
-$db = mysql_connect ("mysql.hostinger.com.ua","u544954666_1","smurfik997");
-mysql_select_db ("u926819516_1", $db);
+<?php
+    $db = mysql_connect ("mysql.hostinger.com.ua","u544954666_1","smurfik997");
+    mysql_select_db ("u926819516_1", $db);
+?>
 alert('К БД подключен');
 function $_GET(key) 
 {  
