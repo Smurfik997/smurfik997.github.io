@@ -4,25 +4,24 @@ function $_GET(key)
 }
 function check1()
 {
+    document.getElementById("block_error").style.display = 'none';
     $url1 = document.getElementById("photo1_url").value;
     VK.api('photos.getById', {photos: $url1, v: '5.34'}, function(data) {
     if (data.response && data.response.length > 0) {
-    $id1 = data.response[0].id;
-    $owner_id1 = data.response[0].owner_id;
-    $photo1 = data.response[0].photo_604;
-    document.getElementById("photo1_view").src = $photo1;
-    document.getElementById("checked1").src = 'images/okey.png';
-    $uid = $_GET('viewer_id');
-    if ($uid != $owner_id1) {
-        document.getElementById("block_error").style.display = 'block';
-        var elem = document.getElementById("block_error"); 
-        elem.innerHTML = '<div class="block_error">Ошибка! Вы должны быть автором первого фото</div>';
+        $id1 = data.response[0].id;
+        $owner_id1 = data.response[0].owner_id;
+        $photo1 = data.response[0].photo_604;
+        document.getElementById("photo1_view").src = $photo1;
+        document.getElementById("checked1").src = 'images/okey.png';
+        $uid = $_GET('viewer_id');
+        if ($uid != $owner_id1) {
+            document.getElementById("block_error").style.display = 'block';
+            var elem = document.getElementById("block_error"); 
+            elem.innerHTML = '<div class="block_error">Ошибка! Вы должны быть автором первого фото</div>';
+        }
     } else {
-        document.getElementById("block_error").style.display = 'none';
-    }
-    } else {
-    document.getElementById("photo1_view").src = 'images/nofoto.png';
-    document.getElementById("checked1").src = 'images/fail.png';
+        document.getElementById("photo1_view").src = 'images/nofoto.png';
+        document.getElementById("checked1").src = 'images/fail.png';
     }
     });
 }
