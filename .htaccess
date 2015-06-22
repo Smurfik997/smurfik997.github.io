@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteCond %{HTTP} !on
+RewriteRule (.*) http://%{HTTP_HOST}%{REQUEST_URI}
