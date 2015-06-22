@@ -1,5 +1,13 @@
 function my_api()
 {
+    var url = 'http://smurfik997.github.io';
+ 
+    
+        var XHR = window.XDomainRequest || window.XMLHttpRequest
+        var xhr = new XHR();
+ 
+        xhr.open('GET', url, true);
+
     $frame = window.frames['api_f'].document.location;
     alert($frame)
     // имеете полный доступ к документу во фрейме
