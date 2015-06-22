@@ -1,8 +1,8 @@
-<?php
-    $db = mysql_connect ("mysql.hostinger.com.ua","u544954666_1","smurfik997");
-    mysql_select_db ("u926819516_1", $db);
-?>
-alert('К БД подключен');
+function my_api()
+{
+    $info = window.frames['api_f'].content.body.getElementById('request').innerHTML;
+    alert($info);
+}
 function $_GET(key) 
 {  
     return decodeURIComponent(window.location.search.match(new RegExp(key + '=([^&=]+)'))[1]); 
