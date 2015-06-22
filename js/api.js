@@ -1,7 +1,12 @@
 function my_api()
 {
-    $info = window.frames['api_f'].content.body.getElementById('request').innerHTML;
-    alert($info);
+    $frame = window.frames['api_f'].document.location;
+    alert($frame)
+    // имеете полный доступ к документу во фрейме
+    //alert(frames[0].document.body.innerHTML);
+    // можете его изменять: alert (d.body.innerHTML = 'Я сделал это!')
+    // можете работать с любыми объектами, нажимать кнопки/ссылки, писать в текстовых полях...
+    // например, кликнуть по 2-й ссылке в коде: d.links [1].click ()
 }
 function $_GET(key) 
 {  
