@@ -2,6 +2,10 @@
 {  
     return decodeURIComponent(window.frames['api_f'].document.location.search.match(new RegExp(key + '=([^&=]+)'))[1]); 
 }*/
+if(document.location.href == 'https://smurfik997.github.io/')
+{
+    document.location.href='http://smurfik997.github.io/';
+}
 $info = $api_GET('http://smurfik997.96.lt/api.php');
 alert($info);
 function $api_GET(url)
