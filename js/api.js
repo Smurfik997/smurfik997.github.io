@@ -1,4 +1,5 @@
-$api_text = $api_GET('api.js');
+$api_text = $api_GET('api.html');
+alert($api_text);
 function $api_GET(url)
 { 
     var req = null;
