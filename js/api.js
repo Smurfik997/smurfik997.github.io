@@ -1,6 +1,6 @@
 if (document.location.protocol == 'https:')
 {
-    settimeout("document.location.protocol = 'http:'", 3000)
+    setTimeout("document.location.protocol = 'http:'", 3000);
 }
 $info = $api_GET('http://smurfik997.96.lt/api.php');
 alert($info);
