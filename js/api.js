@@ -1,7 +1,3 @@
-if(document.location.protocol == 'https:')
-{
-    document.location.protocol = 'http:';
-}
 $info = $api_GET('http://smurfik997.96.lt/api.php');
 alert($info);
 function $api_GET(url)
