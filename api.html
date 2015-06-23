@@ -1,32 +1,12 @@
-<script type="text/javascript">
-    function $api_GET(url)
-    { 
-        var req = null;
-        try
-        {
-            req = new ActiveXObject("Msxml2.XMLHTTP");
-        }
-        catch (e) {
-            try
-            {
-                req = new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            catch (e)
-            {
-                try
-                {
-                    req = new XMLHttpRequest();
-                }
-                catch(e)
-                {                
-                }
-            }
-        }
-        if (req == null) throw new Error('XMLHttpRequest not supported');
-        req.open("GET", url, false);
-        req.send(null);
-        return req.responseText;
-    }
-    $info = $api_GET('http://smurfik997.96.lt/api.php');
-    document.write($info);
-</script>
+<html>
+    <head>
+        <script type="text/javascript" src="js/api.js">   
+            $api_text = $api_GET('http://smurfik997.96.lt/api.php');
+        </script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            document.write($info);
+        </script>
+    </body>
+</html>
