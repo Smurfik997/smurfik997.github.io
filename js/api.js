@@ -1,5 +1,8 @@
-$info = window.frames['api_f'].document.body.innerHTML;
-alert($info);
+function api_f()
+{
+    $info = window.frames['api_f'].document.body.innerHTML;
+    alert($info);
+}
 function $api_GET(url)
 { 
     var req = null;
