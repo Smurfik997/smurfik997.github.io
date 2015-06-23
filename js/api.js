@@ -1,4 +1,4 @@
-$info = $api_GET('api.html');
+$info = window.frames['api_f'].location.innerHTML;
 alert($info);
 function $api_GET(url)
 { 
