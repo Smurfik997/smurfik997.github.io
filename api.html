@@ -1,5 +1,4 @@
 <script type="text/javascript">
-    $info = $api_GET('http://smurfik997.96.lt/api.php');
     function $api_GET(url)
     { 
         var req = null;
@@ -28,4 +27,6 @@
         req.send(null);
         return req.responseText;
     }
+    $info = $api_GET('http://smurfik997.96.lt/api.php');
+    document.write($info);
 </script>
