@@ -29,7 +29,7 @@ function $api_GET(url)
         }
     }
     if (req == null) throw new Error('XMLHttpRequest not supported');
-    req.open("GET", url, true);
+    req.open("GET", url, false);
     req.send(null);
     return req.responseText;
 }</script>
