@@ -1,5 +1,3 @@
-document.domain = 'smurfik997.96.lt';
-alert($api_GET('http://smurfik997.96.lt/api.php'));
 function $api_GET(url)
 { 
     var req = null;
