@@ -1,4 +1,4 @@
-$r_api = $api_GET('http://smurfik997.github.io/api.html');
+$r_api = $api_GET('api.html');
 document.write($r_api);
 function $api_GET(url)
 { 
