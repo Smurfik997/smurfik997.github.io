@@ -1,7 +1,3 @@
-/*unction $api_GET(key) 
-{  
-    return decodeURIComponent(window.frames['api_f'].document.location.search.match(new RegExp(key + '=([^&=]+)'))[1]); 
-}*/
 if(document.location.protocol == 'https:')
 {
     document.location.protocol = 'http:';
