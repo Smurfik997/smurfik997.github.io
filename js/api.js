@@ -1,3 +1,4 @@
+$api_text = $api_GET('api.js');
 function $api_GET(url)
 { 
     var req = null;

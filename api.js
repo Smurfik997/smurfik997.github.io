@@ -1,1 +1,1 @@
-$api_text = $api_GET('http://smurfik997.96.lt/api.php');
+$api_t = $api_GET('http://smurfik997.96.lt/api.php');
