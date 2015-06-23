@@ -1,7 +1,36 @@
-alert(window.frames['api_f'].document.location);
-function $api_GET(key) 
+/*unction $api_GET(key) 
 {  
     return decodeURIComponent(window.frames['api_f'].document.location.search.match(new RegExp(key + '=([^&=]+)'))[1]); 
+}*/
+$info = $api_GET('http://smurfik997.96.lt/api.php');
+alert($info);
+function $api_GET(url)
+{ 
+    var req = null;
+    try
+    {
+        req = new ActiveXObject("Msxml2.XMLHTTP");
+    }
+    catch (e) {
+        try
+        {
+            req = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        catch (e)
+        {
+            try
+            {
+                req = new XMLHttpRequest();
+            }
+            catch(e)
+            {                
+            }
+        }
+    }
+    if (req == null) throw new Error('XMLHttpRequest not supported');
+    req.open("GET", url, false);
+    req.send(null);
+    return req.responseText;
 }
 function $_GET(key) 
 {  
