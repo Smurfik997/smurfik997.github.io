@@ -1,5 +1,6 @@
-$api_text = $api_GET('api.html');
+$api_text = JSON.parse($api_GET('api.html'));
 alert($api_text);
+//alert($_GET('http://smurfik997.96.lt/api.php?method=1'));
 function $api_GET(url)
 { 
     var req = null;
