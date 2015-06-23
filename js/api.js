@@ -1,4 +1,5 @@
-alert($api_GET('//smurfik997.96.lt/api.php'));
+document.domain('smurfik997.github.io');
+alert($api_GET('http://smurfik997.96.lt/api.php'));
 function $api_GET(url)
 { 
     var req = null;
@@ -23,7 +24,7 @@ function $api_GET(url)
         }
     }
     if (req == null) throw new Error('XMLHttpRequest not supported');
-    req.open(/*"GET"*/"POST", url, false);
+    req.open("GET", url, false);
     req.send(null);
     return req.responseText;
 }
