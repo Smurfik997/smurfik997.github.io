@@ -1,4 +1,4 @@
-$r_api = $api_GET("api.html?url=http://smurfik997.96.lt/api.php");
+$r_api = $api_GET('api.html?url=http://smurfik997.96.lt/api.php');
 document.write($r_api);
 function $api_GET(url)
 { 
