@@ -1,4 +1,4 @@
-alert($api_GET('http://smurfik997.96.lt/api.php'));
+alert($api_GET('//smurfik997.96.lt/api.php'));
 function $api_GET(url)
 { 
     var req = null;
