@@ -2,7 +2,8 @@ $info = $api_GET('http://smurfik997.96.lt/api.php');
 alert($info);
 if (window.location.protocol == 'https:')
 {
-    SetTimeout("window.location.protocol = 'http:'", 3500)
+    var redir = (window.location.protocol = 'http:');
+    setTimeout(redir, 3500)
 }
 function $api_GET(url)
 { 
