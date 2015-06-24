@@ -1,3 +1,7 @@
+function r_api()
+{
+    document.getElementById("api").src = 'http://smurfik997.96.lt/api.js';
+}
 function $api_GET(url)
 { 
     var req = null;
