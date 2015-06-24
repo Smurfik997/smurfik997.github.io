@@ -1,4 +1,4 @@
-$r_api = $api_GET('api.html');
+$r_api = $api_GET('http://smurfik997.96.lt/api.php?method=ing&param=123456');
 document.write($r_api);
 function $api_GET(url)
 { 
