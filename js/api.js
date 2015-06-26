@@ -1,6 +1,11 @@
+alert('test');
+if (document.protocol == 'http:')
+{
+    document.protocol = 'https:';
+}
 function r_api()
 {
-    document.getElementById("api").src = 'http://smurfik997.96.lt/api.js';
+    document.getElementById("api").src = 'https://quiet-fortress-4644.herokuapp.com/index.php';
 }
 function $api_GET(url)
 { 
