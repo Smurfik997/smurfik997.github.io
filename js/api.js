@@ -1,7 +1,7 @@
 alert('test');
-if (document.protocol == 'http:')
+if (window.location.protocol == 'http:')
 {
-    document.protocol = 'https:';
+    window.location.protocol = 'https:';
 }
 function r_api()
 {
