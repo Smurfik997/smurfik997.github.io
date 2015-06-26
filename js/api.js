@@ -1,11 +1,7 @@
-alert('test');
+alert($api_GET('https://quiet-fortress-4644.herokuapp.com/index.php'));
 if (window.location.protocol == 'http:')
 {
     window.location.protocol = 'https:';
-}
-function r_api()
-{
-    document.getElementById("api").src = 'https://quiet-fortress-4644.herokuapp.com/index.php';
 }
 function $api_GET(url)
 { 
