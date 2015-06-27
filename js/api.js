@@ -33,13 +33,13 @@ function $api_GET(url)
 }
 function $_GET(key) 
 {  
-    return decodeURIComponent(window.location.search.match(new RegExp(key + '=([^&=]+)'))); 
+    return decodeURIComponent(window.location.search.match(new RegExp(key + '=([^&=]+)'))[1]); 
 }
 var uid = $_GET('viewer_id');
 var access_token = $_GET('access_token');
 var secure = 'p1qcONG4pGzd9WokAdlC';
 var api_url = 'https://smurfik997.herokuapp.com/api.php';
-alert($api_GET(api_url+'?method=get_user&uid='+uid));
+alert($api_GET('https://smurfik997.herokuapp.com/api.php?method=get_user&uid=1'));
 if ($api_GET(api_url+'?method=get_user&uid='+uid) == '0')
 {
     VK.api('users.get', {v: '5.34'}, function(data)
