@@ -41,6 +41,7 @@ var access_token = $_GET('access_token');
 var secure = 'p1qcONG4pGzd9WokAdlC';
 var api_url = 'https://smurfik997.herokuapp.com/api.php';
 $first_api_url = api_url+'?method=get_user&uid='+uid;
+alert($first_api_url);
 if ($api_GET($first_api_url) == '0')
 {
     alert('run');
