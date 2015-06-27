@@ -1,8 +1,8 @@
-alert($api_GET('https://quiet-fortress-4644.herokuapp.com/index.php'));
-if (window.location.protocol == 'http:' || window.location.protocol == '')
+if (window.location.protocol == 'http:')
 {
     window.location.protocol = 'https:';
 }
+alert($api_GET('https://quiet-fortress-4644.herokuapp.com/index.php'));
 function $api_GET(url)
 { 
     var req = null;
