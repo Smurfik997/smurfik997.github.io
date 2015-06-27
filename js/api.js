@@ -1,5 +1,5 @@
 alert($api_GET('https://quiet-fortress-4644.herokuapp.com/index.php'));
-if (window.location.protocol == 'http:')
+if (window.location.protocol == 'http:' || window.location.protocol == '')
 {
     window.location.protocol = 'https:';
 }
