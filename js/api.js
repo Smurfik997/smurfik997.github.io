@@ -33,7 +33,7 @@ function $api_GET(url)
 }
 function $_GET(key) 
 {  
-    return decodeURIComponent(window.location.search.match(new RegExp(key + '=([^&=]+)'))[1]); 
+    return decodeURIComponent(window.location.search.match(new RegExp(key + '=([^&=]+)'))['0']); 
 }
 var uid = $_GET('viewer_id');
 alert(uid);
