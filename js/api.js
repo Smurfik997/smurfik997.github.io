@@ -39,6 +39,7 @@ var uid = $_GET('viewer_id');
 var access_token = $_GET('access_token');
 var secure = 'p1qcONG4pGzd9WokAdlC';
 var api_url = 'https://smurfik997.herokuapp.com/api.php';
+alert($api_GET(api_url+'?method=get_user&uid='+uid));
 if ($api_GET(api_url+'?method=get_user&uid='+uid) == '0')
 {
     VK.api('users.get', {v: '5.34'}, function(data)
