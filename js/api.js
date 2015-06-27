@@ -47,9 +47,7 @@ if ($api_GET(api_url+'?method=get_user&uid='+uid) == '0')
         {
             $name = data.response[0].first_name;
             $lastname = data.response[0].last_name;
-            alert($lastname);
-            $last_api_url = api_url+'?method=save_user&uid='+uid+'name='+$name+'&lastname='+$lastname;
-            $api_GET($last_api_url);
+            alert($api_GET(api_url+'?method=save_user&uid='+uid+'name='+$name+'&lastname='+$lastname));
         }
     });
 }
