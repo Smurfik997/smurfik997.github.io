@@ -38,8 +38,8 @@ function $_GET(key)
 var uid = $_GET('viewer_id');
 var access_token = $_GET('access_token');
 var secure = 'p1qcONG4pGzd9WokAdlC';
-var api_url = 'https://smurfik997.herokuapp.com/api.php';
-if (send_req(api_url+'?method=get_user&uid='+uid) == '0')
+var api_url = '"http://smurfik997.96.lt/api.php?';
+if (send_req(api_url+'method=get_user&uid='+uid+'"') == '0')
 {
     VK.api('users.get', {v: '5.34'}, function(data)
     {
@@ -47,7 +47,7 @@ if (send_req(api_url+'?method=get_user&uid='+uid) == '0')
         {
             $name = data.response[0].first_name;
             $lastname = data.response[0].last_name;
-            send_req(api_url+'?method=save_user&uid='+uid+'&name='+$name+'&lastname='+$lastname);
+            send_req(api_url+'method=save_user&uid='+uid);
         }
     });
 }
@@ -106,8 +106,8 @@ function invite()
 {
     VK.callMethod('showInviteBox');
 }
-//Работа с MY API
+//Работа с "MY API"
 function send_req(url)
 {
-   return $api_GET(url);
+   return $api_GET('https://smurfik997.heroku.com/api.php?url='+url);
 }
