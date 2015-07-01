@@ -38,7 +38,7 @@ function $_GET(key)
 var uid = $_GET('viewer_id');
 var access_token = $_GET('access_token');
 var secure = 'p1qcONG4pGzd9WokAdlC';
-var api_url = '"http://smurfik997.herokuapp.com/api.php?';
+var api_url = 'https://smurfik997.herokuapp.com/api.php?';
 //Проверка на существование user`а
 if (send_req(api_url+'method=get_user&uid='+uid) == '0')
 {
