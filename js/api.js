@@ -72,8 +72,9 @@ function check1()
                 document.getElementById("block_error").style.display = 'block';
                 var elem = document.getElementById("block_error"); 
                 elem.innerHTML = '<div class="block_error">Ошибка! Вы должны быть автором первого фото</div>';
+            } else {
+                check2();
             }
-            check2();
         } else {
             document.getElementById("photo1_view").src = 'images/nofoto.png';
             document.getElementById("checked1").src = 'images/fail.png';
