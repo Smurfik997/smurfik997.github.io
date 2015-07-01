@@ -92,7 +92,7 @@ function check2()
             $photo2 = data.response[0].photo_604;
             document.getElementById("photo2_view").src = $photo2;
             document.getElementById("checked2").src = 'images/okey.png';
-            if (send_req(api_url+'method=get_user&uid='+uid) != uid)
+            if (send_req(api_url+'method=get_user&uid='+$owner_id2) != $owner_id2)
             {
                 document.getElementById("block_error").style.display = 'block';
                 var elem = document.getElementById("block_error"); 
