@@ -73,7 +73,12 @@ function check1()
                 var elem = document.getElementById("block_error"); 
                 elem.innerHTML = '<div class="block_error">Ошибка! Вы должны быть автором первого фото</div>';
             } else {
-                check2();
+                if (send_req(api_url+'method=get_user&uid='+$owner_id2) != $owner_id2)
+                {
+                    document.getElementById("block_error").style.display = 'block';
+                    var elem = document.getElementById("block_error"); 
+                    elem.innerHTML = '<div class="block_error">Ошибка! Автор второго фото еще не воспользовался нашим приложением</div>';
+                }
             }
         } else {
             document.getElementById("photo1_view").src = 'images/nofoto.png';
@@ -100,7 +105,12 @@ function check2()
                 var elem = document.getElementById("block_error"); 
                 elem.innerHTML = '<div class="block_error">Ошибка! Автор второго фото еще не воспользовался нашим приложением</div>';
             } else {
-                check1();
+                if (uid != $owner_id1)
+                {
+                    document.getElementById("block_error").style.display = 'block';
+                    var elem = document.getElementById("block_error"); 
+                    elem.innerHTML = '<div class="block_error">Ошибка! Вы должны быть автором первого фото</div>';
+                }
             }
         } else {
             document.getElementById("photo2_view").src = 'images/nofoto.png';
