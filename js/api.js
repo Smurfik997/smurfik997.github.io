@@ -83,6 +83,7 @@ function check1()
 //Проверка второго фото
 function check2()
 {
+    document.getElementById("block_error").style.display = 'none';
     $url2 = document.getElementById("photo2_url").value;
     VK.api('photos.getById', {photos: $url2, https: '1', v: '5.34'}, function(data)
     {
