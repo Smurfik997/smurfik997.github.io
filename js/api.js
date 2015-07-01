@@ -73,6 +73,7 @@ function check1()
                 var elem = document.getElementById("block_error"); 
                 elem.innerHTML = '<div class="block_error">Ошибка! Вы должны быть автором первого фото</div>';
             }
+            check2();
         } else {
             document.getElementById("photo1_view").src = 'images/nofoto.png';
             document.getElementById("checked1").src = 'images/fail.png';
@@ -91,7 +92,7 @@ function check2()
             $photo2 = data.response[0].photo_604;
             document.getElementById("photo2_view").src = $photo2;
             document.getElementById("checked2").src = 'images/okey.png';
-            if (send_req(api_url+'method=get_user&uid='+uid) == uid)
+            if (send_req(api_url+'method=get_user&uid='+uid) != uid)
             {
                 document.getElementById("block_error").style.display = 'block';
                 var elem = document.getElementById("block_error"); 
