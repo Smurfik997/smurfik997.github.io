@@ -38,8 +38,9 @@ function $_GET(key)
 var uid = $_GET('viewer_id');
 var access_token = $_GET('access_token');
 var secure = 'p1qcONG4pGzd9WokAdlC';
-var api_url = '"http://smurfik997.96.lt/api.php?';
-if (send_req(api_url+'method=get_user&uid='+uid+'"') == '0')
+var api_url = '"http://smurfik997.herokuapp.com/api.php?';
+//Проверка на существование user`а
+if (send_req(api_url+'method=get_user&uid='+uid) == '0')
 {
     VK.api('users.get', {v: '5.34'}, function(data)
     {
@@ -90,7 +91,7 @@ function check2()
             $photo2 = data.response[0].photo_604;
             document.getElementById("photo2_view").src = $photo2;
             document.getElementById("checked2").src = 'images/okey.png';
-            if (uid != send_req('https://quiet-fortress-4644.herokuapp.com/api.php?method=get_user&uid='+uid))
+            if (send_req(api_url+'method=get_user&uid='+uid) == uid)
             {
                 document.getElementById("block_error").style.display = 'block';
                 var elem = document.getElementById("block_error"); 
@@ -109,5 +110,5 @@ function invite()
 //Работа с "MY API"
 function send_req(url)
 {
-   return $api_GET('https://smurfik997.heroku.com/api.php?url='+url);
+   return $api_GET(url);
 }
