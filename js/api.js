@@ -58,7 +58,7 @@ function check1()
 {
     document.getElementById("block_error").style.display = 'none';
     $url1 = document.getElementById("photo1_url").value;
-    VK.api('photos.getById', {photos: $url1, v: '5.34'}, function(data)
+    VK.api('photos.getById', {photos: $url1, https: '1', v: '5.34'}, function(data)
     {
         if (data.response && data.response.length > 0)
         {
@@ -84,7 +84,7 @@ function check1()
 function check2()
 {
     $url2 = document.getElementById("photo2_url").value;
-    VK.api('photos.getById', {photos: $url2, v: '5.34'}, function(data)
+    VK.api('photos.getById', {photos: $url2, https: '1', v: '5.34'}, function(data)
     {
         if (data.response && data.response.length > 0) {
             $id2 = data.response[0].id;
