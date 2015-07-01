@@ -97,6 +97,8 @@ function check2()
                 document.getElementById("block_error").style.display = 'block';
                 var elem = document.getElementById("block_error"); 
                 elem.innerHTML = '<div class="block_error">Ошибка! Автор второго фото еще не воспользовался нашим приложением</div>';
+            } else {
+                check1();
             }
         } else {
             document.getElementById("photo2_view").src = 'images/nofoto.png';
