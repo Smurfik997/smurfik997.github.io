@@ -65,8 +65,11 @@ function check1()
             $id1 = data.response[0].id;
             $owner_id1 = data.response[0].owner_id;
             $photo1 = data.response[0].photo_604;
-            document.getElementById("photo1_view").src = $photo1;
-            document.getElementById("checked1").src = 'images/okey.png';
+            while (document.getElementById("photo1_view").src != $photo1)
+            {
+                document.getElementById("photo1_view").src = $photo1;
+                document.getElementById("checked1").src = 'images/okey.png';
+            }
             if (uid != $owner_id1)
             {
                 document.getElementById("block_error").style.display = 'block';
@@ -97,8 +100,11 @@ function check2()
             $id2 = data.response[0].id;
             $owner_id2 = data.response[0].owner_id;
             $photo2 = data.response[0].photo_604;
-            document.getElementById("photo2_view").src = $photo2;
-            document.getElementById("checked2").src = 'images/okey.png';
+            while (document.getElementById("photo2_view").src != $photo2)
+            {
+                document.getElementById("photo2_view").src = $photo2;
+                document.getElementById("checked2").src = 'images/okey.png';
+            }
             if (send_req(api_url+'method=get_user&uid='+$owner_id2) != $owner_id2)
             {
                 document.getElementById("block_error").style.display = 'block';
