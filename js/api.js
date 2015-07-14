@@ -83,6 +83,16 @@ function check1()
                     elem.innerHTML = '<div class="block_error">Ошибка! Автор второго фото еще не воспользовался нашим приложением</div>';
                 }
             }
+            if ($owner_id1 == $owner_id2)
+            {
+                document.getElementById("block_error").style.display = 'block';
+                var elem = document.getElementById("block_error"); 
+                elem.innerHTML = '<div class="block_error">Ошибка! Вы не должны быть автором второго фото</div>';
+            }
+            if ($owner_id1 != $owner_id2 && document.getElementById("block_error").style.display != 'block')
+            {
+                alert('Okey');
+            }
         } else {
             document.getElementById("photo1_view").src = 'images/nofoto.png';
             document.getElementById("checked1").src = 'images/fail.png';
@@ -117,6 +127,16 @@ function check2()
                     var elem = document.getElementById("block_error"); 
                     elem.innerHTML = '<div class="block_error">Ошибка! Вы должны быть автором первого фото</div>';
                 }
+            }
+            if ($owner_id1 == $owner_id2)
+            {
+                document.getElementById("block_error").style.display = 'block';
+                var elem = document.getElementById("block_error"); 
+                elem.innerHTML = '<div class="block_error">Ошибка! Вы не должны быть автором второго фото</div>';
+            }
+            if ($owner_id1 != $owner_id2 && document.getElementById("block_error").style.display != 'block')
+            {
+                alert('Okey');
             }
         } else {
             document.getElementById("photo2_view").src = 'images/nofoto.png';
