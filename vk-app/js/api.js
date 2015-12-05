@@ -15,7 +15,7 @@ if (window.location.hash != "")
     var access_token = $_GET('access_token');
     var user_id = $_GET('user_id');
     
-    if (access_token == null)
+    if (access_token == "")
     {
         window.location.href = "https://oauth.vk.com/authorize?client_id=5175651&display=page&callback=auth&redirect_uri=https://smurfik997.github.io/vk-app/&revoke=1&response_type=token&v=5.40&scope=friends,wall,email,offline";
     } else {
