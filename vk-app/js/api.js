@@ -2,7 +2,7 @@ function $_GET(key)
 {
     key = decodeURIComponent(window.location.search.match(new RegExp(key + '=([^&=]+)')));
     var key_req = key.replace(new RegExp(key, "g"), "");
-    key_req = key_req.replace(new RegExp("=", "g"), "");
+    //key_req = key_req.replace(new RegExp("=", "g"), "");
     //key = key.split(',');
     return key_req;
 }
