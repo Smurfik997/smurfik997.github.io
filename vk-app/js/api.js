@@ -3,8 +3,8 @@ function $_GET(key)
     key = decodeURIComponent(window.location.search.match(new RegExp(key + '=([^&=]+)')));
     key = key.replace(new RegExp(key, "g"), "");
     key = key.replace(new RegExp("=", "g"), "");
-    key = key.replace(key, "$'")
-    return key;
+    key = key.split(',');
+    return key[0];
 }
     
 if (window.location.hash != "")
