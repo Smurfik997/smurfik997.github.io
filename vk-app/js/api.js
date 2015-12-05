@@ -4,7 +4,7 @@ function $_GET(key)
     key = key.replace(new RegExp(key, "g"), "");
     key = key.replace(new RegExp("=", "g"), "");
     key = key.split(',');
-    return key[0];
+    return key;
 }
     
 if (window.location.hash != "")
