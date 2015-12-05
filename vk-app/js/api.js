@@ -6,7 +6,7 @@ function $_GET(key)
 if (window.location.hash != "")
 {
     hash = window.location.hash.replace(new RegExp("#","g"),"");
-    window.location.href = window.location.protocol+"//"+window.location.hostname+"/?"+hash;
+    window.location.href = window.location.protocol+"//"+window.location.hostname+"/"+window.location.path+"?"+hash;
 } else {
     var access_token = $_GET('access_token');
     var user_id = $_GET('user_id');
