@@ -1,9 +1,10 @@
 function $_GET(key) 
 {
-    var key_req = decodeURIComponent(window.location.search.match(new RegExp(key + '=([^&=]+)')));
-    key_req = key_req.replace(new RegExp(key, "g"), "");
-    key_req = key_req.replace(new RegExp("=", "g"), "");
-    return key_req;
+    key = decodeURIComponent(window.location.search.match(new RegExp(key + '=([^&=]+)')));
+    key = key.replace(new RegExp(key, "g"), "");
+    key = key.replace(new RegExp("=", "g"), "");
+    key = key.replace(key, "$'")
+    return key;
 }
     
 if (window.location.hash != "")
