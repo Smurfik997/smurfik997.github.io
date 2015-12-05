@@ -1,8 +1,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>Main page</title>
+        <script src="js/api.js"></script>
     </head>
     <body>
-        Hello, world
+        <iframe id="iframe" onload="loaded()" src="http://oauth.vk.com/authorize?client_id=5173536&display=page&callback=auth&redirect_uri=http://api.vk.com/blank.html&revoke=1&response_type=token&v=5.40&scope=friends,wall,email,offline,nohttps">
+        </iframe>
     </body>
 </html>
