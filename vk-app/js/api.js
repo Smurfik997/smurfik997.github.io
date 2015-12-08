@@ -13,11 +13,15 @@ function $_GET(key)
     return key_req[0];
 }
 
-if ($_GET('access_token') == 'null')
+window.onload = function(){loaded("ok");};
+
+function loaded(status)
 {
-    document.getElementById("block_error").style.display = 'block';
-    var elem = document.getElementById("block_error"); 
-    elem.innerHTML = '<div>Ошибка! Автор второго фото еще не воспользовался нашим приложением</div>';
-} else {
+    if ($_GET('access_token') == 'null')
+    {    
+        var elem = document.getElementById("main"); 
+        elem.innerHTML = 'Error';
+    } else {
     
+    }
 }
