@@ -12,10 +12,10 @@ function $_GET(key)
     return key_req[0];
 }
 
-document.getElementById("meth").onclick = function()
+function click()
 {
    alert("test");
-};
+}
 
    /*for (var i=1; i<20; i++)
    {
@@ -27,6 +27,7 @@ document.getElementById("meth").onclick = function()
             } 
         });     
    }*/
+   
 /*window.onload = function()
 {
     if ($_GET('access_token') == 'null')
