@@ -28,7 +28,7 @@ function loaded(status)
 
 function click()
 {
-   for (var i=1; i<20; i++)
+   /*for (var i=1; i<20; i++)
    {
         VK.Api.call('fave.getPosts', {offset: 98, count: 1, extended: 0, access_token: $_GET('access_token')}, function(r)
         { 
@@ -37,5 +37,6 @@ function click()
                 alert('Привет, ' + r.response[0].id); 
             } 
         });     
-   }  
+   }*/
+   alert("test");
 }
