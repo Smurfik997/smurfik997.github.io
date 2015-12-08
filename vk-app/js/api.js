@@ -1,7 +1,6 @@
 if (window.location.protocol == 'http:')
 {
     window.location.protocol = 'https:';
-    //location.reload();
 }
 
 function $_GET(key) 
@@ -28,7 +27,7 @@ function click()
    alert("test");
 }
 
-/*window.onload = function()
+window.onload = function()
 {
     if ($_GET('access_token') == 'null')
     {    
@@ -37,4 +36,4 @@ function click()
     } else {
         document.getElementById("meth").style.display = 'block';
     }
-};*/
+};
