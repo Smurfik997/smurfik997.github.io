@@ -13,9 +13,7 @@ function $_GET(key)
     return key_req[0];
 }
 
-window.onload = function(){loaded("ok");};
-
-function loaded(status)
+window.onload = function()
 {
     if ($_GET('access_token') == 'null')
     {    
@@ -24,7 +22,7 @@ function loaded(status)
     } else {
         document.getElementById("meth").style.display = 'block';
     }
-}
+};
 
 function click()
 {
