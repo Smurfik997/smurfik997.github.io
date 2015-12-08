@@ -1,54 +1,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
-
-<head>
-    <meta charset="utf-8">
-    <title>Main page</title>
-    <script src="js/jquery-1.6.2.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        if (window.location.protocol == 'http:') {
-            window.location.protocol = 'https:';
-        }
-
-        function $_GET(key) {
-            var key_req = decodeURIComponent(window.location.search.match(new RegExp(key + '=([^&=]+)')));
-            key_req = key_req.replace(new RegExp(key, "g"), "");
-            key_req = key_req.replace(new RegExp("=", "g"), "");
-            key_req = key_req.split(',');
-            return key_req[0];
-        }
-
-        function click() {
-            alert("test");
-        }
-
-        /*for (var i=1; i<20; i++)
-        {
-             VK.Api.call('fave.getPosts', {offset: 98, count: 1, extended: 0, access_token: $_GET('access_token')}, function(r)
-             { 
-                 if(r.response)
-                 { 
-                     alert('Привет, ' + r.response[0].id); 
-                 } 
-             });     
-        }*/
-
-        /*window.onload = function()
-        {
-            if ($_GET('access_token') == 'null')
-            {    
-                var elem = document.getElementById("main"); 
-                elem.innerHTML = 'Error';
-            } else {
-                document.getElementById("meth").style.display = 'block';
-            }
-        };*/
-    </script>
-</head>
-
-<body>
-    <div id="main" align="center">
-        <input id="meth" type="button" value="Проверить" onclick="click()">
-    </div>
-</body>
-
+    <head>
+        <meta charset="utf-8">
+        <title>Main page</title>
+        <script src="js/jquery-1.6.2.js" type="text/javascript"></script>
+        <script src="js/api.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <div id="main" align="center">
+            <input id="meth" type="button" value="Проверить" onclick="click()">
+        </div>
+    </body>
 </html>
