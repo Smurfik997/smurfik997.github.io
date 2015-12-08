@@ -13,17 +13,6 @@ function $_GET(key)
     return key_req[0];
 }
 
-window.onload = function()
-{
-    if ($_GET('access_token') == 'null')
-    {    
-        var elem = document.getElementById("main"); 
-        elem.innerHTML = 'Error';
-    } else {
-        document.getElementById("meth").style.display = 'block';
-    }
-};
-
 function click()
 {
    /*for (var i=1; i<20; i++)
@@ -38,3 +27,14 @@ function click()
    }*/
    alert("test");
 }
+
+window.onload = function()
+{
+    if ($_GET('access_token') == 'null')
+    {    
+        var elem = document.getElementById("main"); 
+        elem.innerHTML = 'Error';
+    } else {
+        document.getElementById("meth").style.display = 'block';
+    }
+};
