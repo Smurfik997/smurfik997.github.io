@@ -12,8 +12,11 @@ function $_GET(key)
     return key_req[0];
 }
 
-document.getElementById("meth").onclick = function click()
+document.getElementById("meth").onclick = function()
 {
+   alert("test");
+};
+
    /*for (var i=1; i<20; i++)
    {
         VK.Api.call('fave.getPosts', {offset: 98, count: 1, extended: 0, access_token: $_GET('access_token')}, function(r)
@@ -24,9 +27,6 @@ document.getElementById("meth").onclick = function click()
             } 
         });     
    }*/
-   alert("test");
-};
-
 /*window.onload = function()
 {
     if ($_GET('access_token') == 'null')
