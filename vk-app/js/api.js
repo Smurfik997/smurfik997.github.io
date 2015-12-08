@@ -12,3 +12,10 @@ function $_GET(key)
     key_req = key_req.split(',');
     return key_req[0];
 }
+
+if ($_GET('access_token') == null)
+{
+    document.getElementById('1').innerHTML = "Error";
+} else {
+    
+}
