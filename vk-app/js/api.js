@@ -13,10 +13,4 @@ function $_GET(key)
     return key_req[0];
 }
 
-if ($_GET('access_token') == null)
-{
-    //document.getElementById('1').innerHTML = "Error";
-    alert("Null");
-} else {
-    
-}
+alert($_GET('access_token'));
