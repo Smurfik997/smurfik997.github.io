@@ -28,7 +28,7 @@ function click()
    alert("test");
 }
 
-window.onload = function()
+/*window.onload = function()
 {
     if ($_GET('access_token') == 'null')
     {    
@@ -37,4 +37,4 @@ window.onload = function()
     } else {
         document.getElementById("meth").style.display = 'block';
     }
-};
+};*/
