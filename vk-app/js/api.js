@@ -15,7 +15,8 @@ function $_GET(key)
 
 if ($_GET('access_token') == 'null')
 {
-    alert(document.getElementById("1").innerHTML);
+    test = document.getElementById('test');
+    alert(test.innerHTML);
 } else {
     
 }
