@@ -22,6 +22,20 @@ function loaded(status)
         var elem = document.getElementById("main"); 
         elem.innerHTML = 'Error';
     } else {
-    
+        document.getElementById("meth").style.display = 'block';
     }
+}
+
+function click()
+{
+   for (var i=1; i<20; i++)
+   {
+        VK.Api.call('fave.getPosts', {offset: 98, count: 1, extended: 0, access_token: $_GET('access_token')}, function(r)
+        { 
+            if(r.response)
+            { 
+                alert('Привет, ' + r.response[0].id); 
+            } 
+        });     
+   }  
 }
