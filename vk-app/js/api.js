@@ -15,8 +15,8 @@ function $_GET(key)
 
 if ($_GET('access_token') == 'null')
 {
-    test = document.getElementById("test");
-    alert(test.src);
+    var elem = document.getElementById("block_error"); 
+    elem.innerHTML = '<div>Ошибка! Автор второго фото еще не воспользовался нашим приложением</div>';
 } else {
     
 }
