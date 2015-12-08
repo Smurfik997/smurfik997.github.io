@@ -12,7 +12,7 @@ function $_GET(key)
     return key_req[0];
 }
 
-function click()
+document.getElementById("meth").onclick = function click()
 {
    /*for (var i=1; i<20; i++)
    {
@@ -25,7 +25,7 @@ function click()
         });     
    }*/
    alert("test");
-}
+};
 
 /*window.onload = function()
 {
