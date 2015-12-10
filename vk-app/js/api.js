@@ -3,6 +3,7 @@ if (window.location.protocol == 'http:')
     window.location.protocol = 'https:';
 }
 
+window.onload = function(){
 function $_GET(key) 
 {
     var key_req = decodeURIComponent(window.location.search.match(new RegExp(key + '=([^&=]+)')));
@@ -20,4 +21,4 @@ document.getElementsByTagName("head")[0].appendChild(script);
 
 function callbackFunc(result) { 
   alert(result); 
-} 
+} };
