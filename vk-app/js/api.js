@@ -12,16 +12,6 @@ function $_GET(key)
     return key_req[0];
 }
 
-for (var i=1; i<20; i++)
-{
-        VK.Api.call('fave.getPosts', {offset: 98, count: 1, extended: 0, access_token: $_GET('access_token')}, function(r) { 
-            if(r.response)
-            { 
-                alert('Привет, ' + r.response[0].id); 
-            } 
-        });     
-}
-
 var script = document.createElement('SCRIPT'); 
 
 script.src = "https://api.vk.com/method/fave.getPosts?&v=5.40&extended=0&count=1&offset=98&access_token="&$_GET('access_token')&"&callback=callbackFunc"; 
