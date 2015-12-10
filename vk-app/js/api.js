@@ -12,14 +12,10 @@ function $_GET(key)
     return key_req[0];
 }
 
-window.onload = function(){
-var script = document.createElement('SCRIPT'); 
-
-script.src = "https://api.vk.com/method/fave.getPosts?&v=5.40&extended=0&count=1&offset=98&access_token="&$_GET('access_token')&"&callback=callbackFunc"; 
-
-document.getElementsByTagName("head")[0].appendChild(script); 
-
-function callbackFunc(result) { 
-  alert(result); 
-}
-};
+VK.api('fave.getPosts', {v: '5.34', extended: 0, count:1, offset: 98, access_token: $_GET('access_token')}, function(data)
+{
+    if (data.response && data.response.length > 0)
+    {
+        alert(data.response[0].id);
+    }
+});
