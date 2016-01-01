@@ -1,6 +1,10 @@
 function $_GET(key) 
-{  
-    return decodeURIComponent(window.location.search.match(new RegExp(key + '=([^&=]+)'))['1']); 
+{
+    var key_req = decodeURIComponent(window.location.search.match(new RegExp(key + '=([^&=]+)')));
+    key_req = key_req.replace(new RegExp(key, "g"), "");
+    key_req = key_req.replace(new RegExp("=", "g"), "");
+    key_req = key_req.split(',');
+    return key_req[0];
 }
 
 var access_token = $_GET('access_token');
