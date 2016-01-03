@@ -42,9 +42,11 @@ function $_GET(key)
     return key_req[0];
 }
 
+$api_URL = 'https://smurfik997.herokuapp.com/api.php?';
+
 //Проверка на наличее user-а в БД
 $user_id = $_GET('viewer_id');
-if ($api_GET('http://smurfik997.96.lt/api.php?method=get_user&user_id='+$user_id) == 'null')
+if ($api_GET($api_URL+'method=get_user&user_id='+$user_id) == 'null')
 {
     alert('null');
 } else {
