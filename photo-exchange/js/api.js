@@ -43,4 +43,10 @@ function $_GET(key)
 }
 
 //Проверка на наличее user-а в БД
-alert($api_GET('http://smurfik997.96.lt/api.php?method=get_user&user_id=1'));
+$user_id = $_GET('viewer_id');
+if ($api_GET('http://smurfik997.96.lt/api.php?method=get_user&user_id='+$user_id) == 'null')
+{
+    alert('null');
+} else {
+    alert($user_id);
+}
