@@ -1,4 +1,5 @@
 @charset "utf-8";
+/*Главный стиль страницы*/
 .head
 {
     width: 800px;
@@ -6,11 +7,13 @@
     margin-right: auto;
     margin-left: auto;
 }
+/*Стиль текста*/
 a
 {
     text-decoration: none;
     color: white;
 }
+/*Стили для кнопки*/
 .button
 {
     border: 0px solid gray;
@@ -37,7 +40,8 @@ a
     font-size: 17px;
     color: gray;
     height: 400px;
-}                
+}
+/*Стиль inputa с url-ом*/
 .link
 {
     border: 0px solid gray;
@@ -63,6 +67,7 @@ a
     height: 22px;
     float: left;
 }
+/*Стиль для самого input-а*/
 input
 {
     outline: none;
@@ -76,6 +81,7 @@ input
     height: 34px;
     width: 190px;
 }
+/*Блок вывода ошибок*/
 .block_error
 {
     border: 4px solid gray;

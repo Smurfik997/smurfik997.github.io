@@ -3,40 +3,43 @@
         <meta charset="utf-8">
         <title>Фото Обмен</title>
         <link rel="shortcut icon" href="/images/icon.png">
-        <script src="https://vk.com/js/api/xd_connection.js?2" type="text/javascript"></script>
         <script scr="js/jquery-1.6.2.js" type="text/javascript"></script>
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <script src="js/api.js" type="text/javascript"></script>
     </head>
     <body>
-        <div id="Security">
-            <div id="head" class="head">
-                <a onClick="invite()" class="button">Пригласить друзей</a><br>
-                <div class="block_content" style="margin-top: 2px">
-                    <div id="photo1" style="float: left;">
-                        <a class="link">https://vk.com/photo</a>
-                        <input id="photo1_url" onkeyup="check1()" style="color: lightgray;" value="1_278184318" onblur="if(this.value==''){this.value='1_278184318';this.style.color ='lightgray';} check1()" onfocus="if(this.value=='1_278184318'){this.value='';this.style.color = 'gray'} check1()"></input>
-                        <div class="link_end"><img src="images/fail.png" width="22px" height="22px" id="checked1"></img></div>
-                    </div>
-                    <div id="photo2" style="float: right;">
-                        <a class="link">https://vk.com/photo</a>
-                        <input id="photo2_url" onkeyup="check2()" style="color: lightgray;" value="2_278184324" onblur="if(this.value==''){this.value='2_278184324';this.style.color ='lightgray';} check2()" onfocus="if(this.value=='2_278184324'){this.value='';this.style.color = 'gray'} check2()"></input>
-                        <div class="link_end"><img src="images/fail.png" width="22px" height="22px" id="checked2"></img></div>
-                    </div>
-                    <div id="photo1_block" style="float: left; height: 310px; width: 320px;">
-                      <img style="float: left; margin-top: 10px; border: 0px solid gray; border-radius: 10px;" height="300px" width="300px" src="images/nofoto.png" id="photo1_view"></img>
-                    </div>
-                    <div style="margin-top: 100px; float: left">
-                      <img src="images/revers.png" width="120px" height="120px">
-                    </div>
-                    <div id="photo2_block" style="float: right; height: 310px; width: 320px;">
-                      <img style="float: right; margin-top: 10px; border: 0px solid gray; border-radius: 10px;" height="300px" width="300px" src="images/nofoto.png" id="photo2_view"></img>
-                    </div>
-                    <div id="block_error" style="display: none;">
-                    </div>
-                    <div id="ok_button" class="ok_button">
+        <div id="head" class="head">
+            <a onClick="invite()" class="button">Пригласить друзей</a><br>
+            <!--Гл.блок-->
+            <div class="block_content" style="margin-top: 2px">
+                <!--Блок с первым фото-->
+                <div id="photo1" style="float: left;">
+                    <a class="link">https://vk.com/photo</a>
+                    <input id="photo1_url" onkeyup="check1()" style="color: lightgray;" value="1_278184318" onblur="if(this.value==''){this.value='1_278184318';this.style.color ='lightgray';} check1()" onfocus="if(this.value=='1_278184318'){this.value='';this.style.color = 'gray'} check1()"></input>
+                    <div class="link_end"><img src="images/fail.png" width="22px" height="22px" id="checked1"></img></div>
+                </div>
+                <div id="photo1_block" style="float: left; height: 310px; width: 320px;">
+                    <img style="float: left; margin-top: 10px; border: 0px solid gray; border-radius: 10px;" height="300px" width="300px" src="images/nofoto.png" id="photo1_view"></img>
+                </div>
+                <!--Блок со вторым фото-->
+                <div id="photo2" style="float: right;">
+                    <a class="link">https://vk.com/photo</a>
+                    <input id="photo2_url" onkeyup="check2()" style="color: lightgray;" value="2_278184324" onblur="if(this.value==''){this.value='2_278184324';this.style.color ='lightgray';} check2()" onfocus="if(this.value=='2_278184324'){this.value='';this.style.color = 'gray'} check2()"></input>
+                    <div class="link_end"><img src="images/fail.png" width="22px" height="22px" id="checked2"></img></div>
+                </div>
+                <div id="photo2_block" style="float: right; height: 310px; width: 320px;">
+                    <img style="float: right; margin-top: 10px; border: 0px solid gray; border-radius: 10px;" height="300px" width="300px" src="images/nofoto.png" id="photo2_view"></img>
+                </div>
+                <!--Блок картинки обмена-->
+                <div style="margin-top: 100px; float: left">
+                    <img src="images/revers.png" width="120px" height="120px">
+                </div>
+                <!--Блок вывода ошибок-->
+                <div id="block_error" style="display: none;">
+                </div>
+                <!--Блок кнопки окей-->
+                <div id="ok_button" class="ok_button">
                         
-                    </div>
                 </div>
             </div>
         </div>
