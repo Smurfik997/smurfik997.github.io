@@ -41,3 +41,6 @@ function $_GET(key)
     key_req = key_req.split(',');
     return key_req[0];
 }
+
+//Проверка на наличее user-а в БД
+alert($api_GET('http://smurfik997.96.lt/api.php?method=get_user&user_id=1'));
