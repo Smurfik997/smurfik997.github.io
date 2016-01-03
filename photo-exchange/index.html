@@ -18,10 +18,6 @@
                     <input id="photo1_url" onkeyup="check1()" style="color: lightgray;" value="1_278184318" onblur="if(this.value==''){this.value='1_278184318';this.style.color ='lightgray';} check1()" onfocus="if(this.value=='1_278184318'){this.value='';this.style.color = 'gray'} check1()"></input>
                     <div class="link_end"><img src="images/fail.png" width="22px" height="22px" id="checked1"></img></div>
                 </div>
-                <!--Блок картинки обмена-->
-                <div style="margin-top: 100px; float: left">
-                    <img src="images/revers.png" width="120px" height="120px">
-                </div>
                 <!--Блок со вторым фото-->
                 <div id="photo2" style="float: right;">
                     <a class="link">https://vk.com/photo</a>
@@ -32,8 +28,12 @@
                 <div id="photo1_block" style="float: left; height: 310px; width: 320px;">
                     <img style="float: left; margin-top: 10px; border: 0px solid gray; border-radius: 10px;" height="300px" width="300px" src="images/nofoto.png" id="photo1_view"></img>
                 </div>
-                <div id="photo1_block" style="float: left; height: 310px; width: 320px;">
-                    <img style="float: left; margin-top: 10px; border: 0px solid gray; border-radius: 10px;" height="300px" width="300px" src="images/nofoto.png" id="photo1_view"></img>
+                <div id="photo2_block" style="float: right; height: 310px; width: 320px;">
+                    <img style="float: right; margin-top: 10px; border: 0px solid gray; border-radius: 10px;" height="300px" width="300px" src="images/nofoto.png" id="photo2_view"></img>
+                </div>
+                <!--Блок картинки обмена-->
+                <div style="margin-top: 100px; float: left">
+                    <img src="images/revers.png" width="120px" height="120px">
                 </div>
                 <!--Блок вывода ошибок-->
                 <div id="block_error" style="display: none;">
