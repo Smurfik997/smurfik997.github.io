@@ -7,6 +7,14 @@
     margin-right: auto;
     margin-left: auto;
 }
+/*Стиль для бл. с карт.*/
+.block_img
+{
+    float: left;
+    margin-top: 10px;
+    border: 0px solid gray;
+    border-radius: 10px;
+}
 /*Стиль текста*/
 a
 {
