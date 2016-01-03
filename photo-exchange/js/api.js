@@ -61,13 +61,8 @@ if ($api_GET($api_URL+'method=get_user&user_id='+$user_id) == 'null')
 }
 
 //Фото и имя пользователя
-    VK.api('users.get', {user_ids: $user_id, fields: 'photo_50', v: 5.42}, function(r) { 
+    VK.Api.call('users.get', {user_ids: 6492}, function(r) { 
         if(r.response) { 
-        $first_name = r.response[0].first_name;
-        $last_name = r.response[0].last_name;
-        $photo_user = r.response[0].photo_50;
-        alert($first_name);
-        document.getElementById('ava').src = $photo_user;
-        document.getElementById('user_name').innerHTML = $first_name+' '+$last_name;
+            alert('Привет, ' + r.response[0].first_name); 
         } 
-    });
+    }); 
