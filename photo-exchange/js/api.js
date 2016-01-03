@@ -61,7 +61,8 @@ if ($api_GET($api_URL+'method=get_user&user_id='+$user_id) == 'null')
 }
 
 //Фото и имя пользователя
-if (document.readyState === "complete")
+alert($user_id);
+if (document.readyState == "complete")
 {
     alert($user_id);
     /*VK.api('users.get', {user_ids: $user_id, fields: 'photo_50', v: 5.42}, function(r) { 
