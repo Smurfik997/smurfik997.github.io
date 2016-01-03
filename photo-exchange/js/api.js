@@ -59,3 +59,12 @@ if ($api_GET($api_URL+'method=get_user&user_id='+$user_id) == 'null')
         $result = 'null';
     }
 }
+
+//Фото и имя пользователя
+VK.Api.call('users.get', {user_ids: $user_id, fields: 'photo_50'}, function(r) { 
+  if(r.response) { 
+    $first_name = r.response[0].first_name;
+    $last_name = r.response[0].last_name;
+    $photo_user = r.response[0].photo_50;
+  } 
+}); 
