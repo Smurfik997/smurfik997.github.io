@@ -11,7 +11,8 @@ function $api_GET(url)
     {
         req = new ActiveXObject("Msxml2.XMLHTTP");
     }
-    catch (e) {
+    catch (e)
+    {
         try
         {
             req = new ActiveXObject("Microsoft.XMLHTTP");
@@ -48,7 +49,8 @@ $api_URL = 'https://smurfik997.herokuapp.com/api.php?';
 $user_id = $_GET('viewer_id');
 if ($api_GET($api_URL+'method=get_user&user_id='+$user_id) == 'null')
 {
-    alert('null');
-} else {
-    alert($user_id);
-}
+    if ($api_GET($api_URL+'method=save_user&user_id='+$user_id) == 'null')
+    {
+        $result = 'null';
+    }
+} 
