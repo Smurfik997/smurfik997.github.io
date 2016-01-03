@@ -45,7 +45,7 @@ function $_GET(key)
 
 function invite()
 {
-    VK.callMethod("showInviteBox()");
+    VK.callMethod("showInviteBox");
 }
 
 $api_URL = 'https://smurfik997.herokuapp.com/api.php?';
