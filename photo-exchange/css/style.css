@@ -13,6 +13,18 @@ a
     text-decoration: none;
     color: white;
 }
+/*Стиль для инф. польз.*/
+.user_info
+{
+    border: 0px solid gray;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding: 6px 12px;
+    background-color: #337ab7;
+    outline: none;
+    font-size: 16px;
+    font-family: cursive;
+}
 /*Стили для кнопки*/
 .button
 {
