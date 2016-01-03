@@ -43,6 +43,11 @@ function $_GET(key)
     return key_req[0];
 }
 
+function invite()
+{
+    VK.callMethod(showInviteBox());
+}
+
 $api_URL = 'https://smurfik997.herokuapp.com/api.php?';
 
 //Проверка на наличее user-а в БД
@@ -53,4 +58,4 @@ if ($api_GET($api_URL+'method=get_user&user_id='+$user_id) == 'null')
     {
         $result = 'null';
     }
-} 
+}
