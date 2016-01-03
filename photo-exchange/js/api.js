@@ -67,6 +67,7 @@ window.onload = function (){
         $first_name = r.response[0].first_name;
         $last_name = r.response[0].last_name;
         $photo_user = r.response[0].photo_50;
+        alert($first_name);
         document.getElementById('ava').src = $photo_user;
         document.getElementById('user_name').innerHTML = $first_name+' '+$last_name;
         } 
