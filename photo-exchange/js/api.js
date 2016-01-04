@@ -96,7 +96,6 @@ function getPhotoInfo($photo_id)
     return res;
 }
 
-document.getElementById('photo1_url').onkeyup = document.getElementById('photo1_url').oninput = check1(); 
 function check1()
 {
     result = getPhotoInfo(document.getElementById('photo1_url').value);
