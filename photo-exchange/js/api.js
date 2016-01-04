@@ -86,10 +86,11 @@ function getPhotoInfo($photo_id)
     VK.api('photos.getById', {photos: $photo_id, v: 5.42}, function(r) {
         if(r.response) {
             $string = r.response[0].owner_id+','+r.response[0].photo_604;
-            return $string;
+            alert($string);
         } else {
             $string = '0,null';
         }
+        return $string;
     });
     result = $string.split(',');
     var res = new Object();
