@@ -91,13 +91,13 @@ function getPhotoInfo($photo_id)
     var res = new Object();
         res['owner_id'] = result[0];
         res['photo_604'] = result[1];
-    alert(res['owner_id']);
     return res;
 }
 
 function check1()
 {
-    var result = getPhotoInfo(document.getElementById('photo1_url').value);
+    result = getPhotoInfo(document.getElementById('photo1_url').value);
+    alert(result['owner_id']);
     if (result['owner_id'] == $user_id)
     {
         document.getElementById('checked1').src = 'images/okey.png';
