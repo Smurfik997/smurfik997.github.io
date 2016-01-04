@@ -83,7 +83,7 @@ function getPhotoInfo($photo_id)
 {
     VK.api('photos.getById', {photos: $photo_id, v: 5.42}, function(r) { 
         if(r.response) {
-            var res = new Object();
+            res = new Object();
                 res['owner_id'] = r.response[0].owner_id;
                 res['photo_604'] = r.response[0].photo_604;
         } 
