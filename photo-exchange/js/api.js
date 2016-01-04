@@ -89,7 +89,7 @@ function getPhotoInfo($photo_id)
         }
         return $string;
     });
-    if ($string != undefined)
+    if ($string != 'undefined')
     {
         result = $string.split(',');
         var res = new Object();
