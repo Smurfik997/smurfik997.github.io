@@ -79,23 +79,30 @@ VK.api('users.get', {user_ids: $user_id, fields: 'photo_50'}, function(r) {
 });
 
 //Проверка URL фоток
-function getPhotoInfo($photo_id)
+function getPhotoInfo($photo_id, $okey)
 {
-    alert($string);
-    VK.api('photos.getById', {photos: $photo_id, v: 5.42}, function(r) {
-        if(r.response) {
-            $string = r.response[0].owner_id+','+r.response[0].photo_604;
-        } else {
-            $string = 'null,null';
-        }
-        return $string;
-    });
-    setTimeout("result = $string.split(',');result = $string.split(','); var res = new Object(); res['owner_id'] = result[0]; res['photo_604'] = result[1]; return res;", 1500);
+    if ($okey == 'none')
+    {
+        VK.api('photos.getById', {photos: $photo_id, v: 5.42}, function(r) {
+            if(r.response) {
+                $string = r.response[0].owner_id+','+r.response[0].photo_604;
+            } else {
+                $string = 'null,null';
+            }
+            getPhotoInfo($string, '1');
+        });
+    } else {
+        result = $photo_id.split(',');
+        var res = new Object();
+            res['owner_id'] = result[0];
+            res['photo_604'] = result[1];
+        return res;
+    }
 }
 
 function check1($value)
 {
-    result = getPhotoInfo($value);
+    result = getPhotoInfo($value, 'none');
     alert(result['owner_id']+' '+result['photo_604']);
     if (result['owner_id'] == $user_id)
     {
