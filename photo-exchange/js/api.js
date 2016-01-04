@@ -87,8 +87,8 @@ function getPhotoInfo($photo_id)
             return $string;
         }
     });
-    alert($string);
-    result = $string.split(',');   
+    result = $string.split(',');
+    alert(result);
     var res = new Object();
         res['owner_id'] = result[0];
         res['photo_604'] = result[1];
