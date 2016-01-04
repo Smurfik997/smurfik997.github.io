@@ -92,6 +92,7 @@ function getPhotoInfo($photo_id)
 }
 function check1()
 {
+    alert(document.getElementById('photo1_url').value);
     var result = getPhotoInfo(document.getElementById('photo1_url').value);
     alert(result['owner_id']);
     if (result['owner_id'] == $user_id)
