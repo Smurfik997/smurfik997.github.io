@@ -88,6 +88,7 @@ VK.api('users.get', {user_ids: $user_id, fields: 'photo_50'}, function(r) {
 
 function check1()
 {
+    $photo_id = document.getElementById('photo1_url').value;
     VK.api('photos.getById', {photos: $photo_id, v: 5.42}, function(r) {
         if(r.response) {
             result['owner_id'] = r.response[0].owner_id;
