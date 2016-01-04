@@ -96,9 +96,9 @@ function getPhotoInfo($photo_id)
     return res;
 }
 
-function check1()
+function check1($value)
 {
-    result = getPhotoInfo(document.getElementById('photo1_url').value);
+    result = getPhotoInfo($value);
     if (result['owner_id'] == $user_id)
     {
         document.getElementById('checked1').src = 'images/okey.png';
