@@ -10,10 +10,16 @@
 /*Стиль для бл. с карт.*/
 .block_img
 {
-    float: left;
-    margin-top: 10px;
     border: 0px solid gray;
     border-radius: 10px;
+    max-height: 300px;
+    max-width: 300px;
+}
+.main_bl_img
+{
+    height: 300px;
+    width: 300px;
+    text-align: center;
 }
 /*Стиль текста*/
 a
