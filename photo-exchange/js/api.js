@@ -81,14 +81,11 @@ VK.api('users.get', {user_ids: $user_id, fields: 'photo_50'}, function(r) {
 //Проверка URL фоток
 function getPhotoInfo($photo_id)
 {
-    VK.api('photos.getById', {photos: $photo_id, v: 5.42}, function(r) {
-        if(r.response) {
-            $res = new Object();
-                $res['owner_id'] = r.response[0].owner_id;
-                $res['photo_604'] = r.response[0].photo_604;
-            return $res;
-        }
-    });
+    VK.api('photos.getById', {photos: $photo_id, v: 5.42}, callback(r));
+    function callback(r)
+    {
+        alert(r.response[0].owner_id);
+    }
     return $res['owner_id'];
 }
 
