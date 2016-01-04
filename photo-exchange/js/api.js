@@ -4,13 +4,6 @@ if (window.location.protocol == 'http:')
     window.location.protocol = 'https:';
 }
 
-$('input').live("keydown keypress", function(e)
-{
-    var e = e || event, k = e.which || e.button;
-    if(e.ctrlKey && k == 86) return false;
-});
-
-
 function $api_GET(url)
 { 
     var req = null;
