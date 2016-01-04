@@ -98,7 +98,7 @@ function getPhotoInfo($photo_id)
             res['owner_id'] = result[0];
             res['photo_604'] = result[1];
         return res;
-    });
+    }, 0);
 }
 
 function check1($value)
