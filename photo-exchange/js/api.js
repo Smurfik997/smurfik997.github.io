@@ -51,7 +51,7 @@ function invite()
 $api_URL = 'https://smurfik997.herokuapp.com/api.php?';
 $user_id = $_GET('viewer_id');
 $string = 'null,null';
-getPhotoInfo('null');
+alert(getPhotoInfo('null'));
 
 //Проверка на наличее user-а в БД
 /*
