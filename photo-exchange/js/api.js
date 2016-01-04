@@ -87,7 +87,7 @@ function getPhotoInfo($photo_id)
             return $string
         }
     });
-    return $string;
+    alert($string);
 }
 function response($ph_id)
 {
