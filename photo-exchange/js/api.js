@@ -98,8 +98,8 @@ function getPhotoInfo($photo_id)
 
 function check1($value)
 {
-    alert($value);
     result = getPhotoInfo($value);
+    alert(result['owner_id']+' '+result['photo_604']);
     if (result['owner_id'] == $user_id)
     {
         document.getElementById('checked1').src = 'images/okey.png';
