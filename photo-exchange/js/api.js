@@ -79,6 +79,18 @@ VK.api('users.get', {user_ids: $user_id, fields: 'photo_50'}, function(r) {
 });
 
 //Проверка URL фоток
+function BlockID() {
+    var IDs = new Object();
+        IDs['s'] = "Images/Block_01.png";
+        IDs['g'] = "Images/Block_02.png";
+        IDs['C'] = "Images/Block_03.png";
+        IDs['d'] = "Images/Block_04.png";
+    return IDs;
+}
+ 
+var images = BlockID();
+alert(images['s']);
+
 function getPhotoInfo()
 {
     VK.api('photos.getById', {photos: '336624592_393353278', v: 5.42}, function(r) { 
