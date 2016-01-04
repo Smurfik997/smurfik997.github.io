@@ -91,11 +91,14 @@ function getPhotoInfo($photo_id)
         }
         return $string;
     });
-    result = $string.split(',');
-    var res = new Object();
-        res['owner_id'] = result[0];
-        res['photo_604'] = result[1];
-    return res;
+    setTimeout(function()
+    {
+        result = $string.split(',');
+        var res = new Object();
+            res['owner_id'] = result[0];
+            res['photo_604'] = result[1];
+        return res;
+    });
 }
 
 function check1($value)
