@@ -84,7 +84,7 @@ function getPhotoInfo($photo_id)
     VK.api('photos.getById', {photos: $photo_id, v: 5.42}, function(r) { 
         if(r.response) {
             var res = new Object();
-                res['owner_id'] = r.response[0].owner_id;
+                res['s'] = r.response[0].owner_id;
                 res['photo_604'] = r.response[0].photo_604;
             return res;
         } 
@@ -94,8 +94,8 @@ function getPhotoInfo($photo_id)
 function check1()
 {
     var result = getPhotoInfo(document.getElementById('photo1_url').value);
-    alert(result['owner_id']);
-    if (result['owner_id'] == $user_id)
+    alert(result['s']);
+    if (result['s'] == $user_id)
     {
         document.getElementById('checked1').src = 'images/okey.png';
         document.getElementById('photo1_view').style = '';
