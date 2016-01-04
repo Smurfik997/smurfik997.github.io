@@ -98,6 +98,7 @@ function getPhotoInfo($photo_id)
 
 function check1($value)
 {
+    alert($value);
     result = getPhotoInfo($value);
     if (result['owner_id'] == $user_id)
     {
