@@ -50,8 +50,6 @@ function invite()
 
 $api_URL = 'https://smurfik997.herokuapp.com/api.php?';
 $user_id = $_GET('viewer_id');
-$string = 'null,null';
-alert(getPhotoInfo('null'));
 
 //Проверка на наличее user-а в БД
 /*
@@ -84,24 +82,16 @@ VK.api('users.get', {user_ids: $user_id, fields: 'photo_50'}, function(r) {
 function getPhotoInfo($photo_id)
 {
     VK.api('photos.getById', {photos: $photo_id, v: 5.42}, function(r) {
-        if(r.response) {
-            $string = r.response[0].owner_id+','+r.response[0].photo_604;
-        } else {
-            $string = 'null,null';
-        }
+        $string = r.response[0].owner_id+','+r.response[0].photo_604;         
+        return $string;
     });
-    result = $string.split(',');
-    var res = new Object();
-        res['owner_id'] = result[0];
-        res['photo_604'] = result[1];
-    return res;
 }
 
 function check1($value)
 {
     result = getPhotoInfo($value);
-    alert(result['owner_id']+' '+result['photo_604']);
-    if (result['owner_id'] == $user_id)
+    alert(result);
+    /*if (result['owner_id'] == $user_id)
     {
         document.getElementById('checked1').src = 'images/okey.png';
         document.getElementById('photo1_view').className = 'block_img';
@@ -110,7 +100,7 @@ function check1($value)
         document.getElementById('checked1').src = 'images/fail.png';
         document.getElementById('photo1_view').className = 'bl_none_img block_img';
         document.getElementById('photo1_view').src = 'images/nofoto.png';      
-    }
+    }*/
 }
 
 function check2()
