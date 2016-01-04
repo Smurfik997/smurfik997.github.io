@@ -102,7 +102,7 @@ function check1()
     if (result['owner_id'] == $user_id)
     {
         document.getElementById('checked1').src = 'images/okey.png';
-        document.getElementById('photo1_view').style = '';
+        document.getElementById('photo1_view').style = ' ';
         document.getElementById('photo1_view').src = result['photo_604'];
     } else {
         document.getElementById('checked1').src = 'images/fail.png';
