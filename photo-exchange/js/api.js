@@ -49,9 +49,10 @@ function invite()
 }
 
 $api_URL = 'https://smurfik997.herokuapp.com/api.php?';
+$user_id = $_GET('user_id');
 
 //Проверка на наличее user-а в БД
-/*$user_id = $_GET('viewer_id');
+/*
 if ($api_GET($api_URL+'method=get_user&user_id='+$user_id) == 'null')
 {
     if ($api_GET($api_URL+'method=save_user&user_id='+$user_id) == 'null')
@@ -60,11 +61,11 @@ if ($api_GET($api_URL+'method=get_user&user_id='+$user_id) == 'null')
     }
 }*/
 
-VK.api('users.isAppUser', {user_id: '336624592'}, function(r) { 
+/*VK.api('users.isAppUser', {user_id: '336624592'}, function(r) { 
     if(r.response) { 
         alert(r.response[0]);
     } 
-}); 
+}); */
 
 //Фото и имя пользователя
 VK.api('users.get', {user_ids: $user_id, fields: 'photo_50'}, function(r) { 
