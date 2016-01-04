@@ -89,7 +89,7 @@ function getPhotoInfo($photo_id, $okey)
             } else {
                 $string = 'null,null';
             }
-            getPhotoInfo($string, '1');
+            return getPhotoInfo($string, '1');
         });
     } else {
         result = $photo_id.split(',');
