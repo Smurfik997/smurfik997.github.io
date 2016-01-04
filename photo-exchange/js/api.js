@@ -88,6 +88,7 @@ function getPhotoInfo($photo_id)
         }
     });
     result = string.split(',');
+    alert(result[0]);
     return result;
 }
 
