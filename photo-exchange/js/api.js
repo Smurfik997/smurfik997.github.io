@@ -79,18 +79,18 @@ VK.api('users.get', {user_ids: $user_id, fields: 'photo_50'}, function(r) {
 });
 
 //Проверка URL фоток
-function getPhotoInfo()
+function getPhotoInfo($photo_id)
 {
-    VK.api('photos.getById', {photos: '336624592_393353278', v: 5.42}, function(r) {
+    VK.api('photos.getById', {photos: $photo_id, v: 5.42}, function(r) {
         if(r.response) { 
         
-            $owner_id = r.response[0].owner_id;
-            $photo_604 = r.response[0].photo_604;
+            owner_id = r.response[0].owner_id;
+            photo_604 = r.response[0].photo_604;
         }
     });
     res = new Object();
-        res['owner_id'] = $owner_id;
-        res['photo_604'] = $photo_604
+        res['owner_id'] = owner_id;
+        res['photo_604'] = photo_604
     return res;
 }
 
