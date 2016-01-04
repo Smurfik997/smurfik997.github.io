@@ -52,15 +52,6 @@ $api_URL = 'https://smurfik997.herokuapp.com/api.php?';
 $user_id = $_GET('viewer_id');
 
 //Проверка на наличее user-а в БД
-/*
-if ($api_GET($api_URL+'method=get_user&user_id='+$user_id) == 'null')
-{
-    if ($api_GET($api_URL+'method=save_user&user_id='+$user_id) == 'null')
-    {
-        $result = 'null';
-    }
-}*/
-
 /*VK.api('users.isAppUser', {user_id: '336624592'}, function(r) { 
     if(r.response) { 
         alert(r.response[0]);
@@ -88,7 +79,6 @@ VK.api('users.get', {user_ids: $user_id, fields: 'photo_50'}, function(r) {
 
 function check1()
 {
-    alert($api_GET('https://smurfik997.herokuapp.com/api.php'));
     $photo_id = document.getElementById('photo1_url').value;
     VK.api('photos.getById', {photos: $photo_id, v: 5.42}, function(r) {
         var result = new Object();
