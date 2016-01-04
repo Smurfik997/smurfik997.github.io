@@ -82,9 +82,9 @@ VK.api('users.get', {user_ids: $user_id, fields: 'photo_50'}, function(r) {
 function getPhotoInfo($photo_id)
 {
     alert($photo_id);
+    $string = 'null';
     VK.api('photos.getById', {photos: $photo_id, v: 5.42}, function(r) {
         if(r.response) {
-            $string = '0,null';
             $string = r.response[0].owner_id+','+r.response[0].photo_604;
             return $string;
         } else {
