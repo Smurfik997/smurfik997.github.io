@@ -85,6 +85,8 @@ function getPhotoInfo($photo_id)
         if(r.response) {
             $string = r.response[0].owner_id+','+r.response[0].photo_604;
             return $string;
+        } else {
+            $string = 'null,null';
         }
     });
     result = $string.split(',');
