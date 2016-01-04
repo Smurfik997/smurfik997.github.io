@@ -85,10 +85,9 @@ function getPhotoInfo($photo_id)
         if(r.response) { 
             $owner_id = r.response[0].owner_id;
             $photo_604 = r.response[0].photo_604;
+            return $owner_id;
         }
     });
-    
-    alert(r.response[0].owner_id);
     alert($owner_id);
     /*res = new Object();
         res['owner_id'] = r.response[0].owner_id;
