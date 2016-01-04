@@ -83,8 +83,8 @@ function getPhotoInfo($photo_id)
 {
     VK.api('photos.getById', {photos: $photo_id, v: 5.42}, function(r) {
         if(r.response) {
-            string = r.response[0].owner_id+','+r.response[0].photo_604;
-            return string;
+            $string = r.response[0].owner_id+','+r.response[0].photo_604;
+            return $string;
         }
     });
     result = string.split(',');   
