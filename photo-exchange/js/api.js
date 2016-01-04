@@ -82,15 +82,27 @@ VK.api('users.get', {user_ids: $user_id, fields: 'photo_50'}, function(r) {
 function getPhotoInfo($photo_id)
 {
     VK.api('photos.getById', {photos: $photo_id, v: 5.42}, function(r) {
-        $string = r.response[0].owner_id+','+r.response[0].photo_604;         
-        return $string;
+        if(r.response) {
+            $string = r.response[0].owner_id+','+r.response[0].photo_604;
+            return $string
+        }
     });
+    return $string;
+}
+function response($ph_id)
+{
+    var response = getPhotoInfo($ph_id);
+    var res = response.split(',');
+    var result = new Object();
+        result['owner_id'] = res[0];
+        result['photo_604'] = res[1];
+    return result;
 }
 
 function check1($value)
 {
-    result = getPhotoInfo($value);
-    alert(result);
+    result = response($value);
+    alert(result['owner_id']);
     /*if (result['owner_id'] == $user_id)
     {
         document.getElementById('checked1').src = 'images/okey.png';
