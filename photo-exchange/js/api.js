@@ -90,20 +90,18 @@ function check1()
 {
     $photo_id = document.getElementById('photo1_url').value;
     VK.api('photos.getById', {photos: $photo_id, v: 5.42}, function(r) {
-        if(r.response) {
-            var result = new Object();
-                result['owner_id'] = r.response[0].owner_id;
-                result['photo_604'] = r.response[0].photo_604;
-            if (result['owner_id'] == $user_id)
-            {
-                document.getElementById('checked1').src = 'images/okey.png';
-                document.getElementById('photo1_view').className = 'block_img';
-                document.getElementById('photo1_view').src = result['photo_604'];
-            } else {
-                document.getElementById('checked1').src = 'images/fail.png';
-                document.getElementById('photo1_view').className = 'bl_none_img block_img';
-                document.getElementById('photo1_view').src = 'images/nofoto.png';      
-            }
+        var result = new Object();
+            result['owner_id'] = r.response[0].owner_id;
+            result['photo_604'] = r.response[0].photo_604;
+        if (result['owner_id'] == $user_id)
+        {
+            document.getElementById('checked1').src = 'images/okey.png';
+            document.getElementById('photo1_view').className = 'block_img';
+            document.getElementById('photo1_view').src = result['photo_604'];
+        } else {
+            document.getElementById('checked1').src = 'images/fail.png';
+            document.getElementById('photo1_view').className = 'bl_none_img block_img';
+            document.getElementById('photo1_view').src = 'images/nofoto.png';      
         }
     });
 }
