@@ -79,9 +79,9 @@ VK.api('users.get', {user_ids: $user_id, fields: 'photo_50'}, function(r) {
 });
 
 //Проверка URL фоток
-function getPhotoInfo(photo_id)
+function getPhotoInfo($photo_id)
 {
-    VK.api('photos.getById', {photos: photo_id}, function(r) { 
+    VK.api('photos.getById', {photos: $photo_id, v: 5.42}, function(r) { 
         if(r.response) { 
             var res = new Object();
                 res['owner_id'] = r.response[0].owner_id;
@@ -93,6 +93,7 @@ function getPhotoInfo(photo_id)
 function check1()
 {
     var result = getPhotoInfo(document.getElementById('photo1_url').value);
+    alert(result['owner_id']);
     if (result['owner_id'] == $user_id)
     {
         document.getElementById('checked1').src = 'images/okey.png';
