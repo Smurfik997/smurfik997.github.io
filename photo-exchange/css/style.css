@@ -7,7 +7,7 @@
     margin-right: auto;
     margin-left: auto;
 }
-/*Стиль для бл. с карт.*/
+/*Стили для блоков с картинками*/
 .block_img
 {
     border: 0px solid gray;
@@ -74,7 +74,7 @@ a
     color: gray;
     height: 400px;
 }
-/*Стиль inputa с url-ом*/
+/*Стиль input-a с url-ом*/
 .link
 {
     border: 0px solid gray;
