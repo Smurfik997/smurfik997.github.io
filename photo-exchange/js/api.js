@@ -91,8 +91,9 @@ function check1()
     $photo_id = document.getElementById('photo1_url').value;
     VK.api('photos.getById', {photos: $photo_id, v: 5.42}, function(r) {
         if(r.response) {
-            result['owner_id'] = r.response[0].owner_id;
-            result['photo_604'] = r.response[0].photo_604;
+            var result = new Object();
+                result['owner_id'] = r.response[0].owner_id;
+                result['photo_604'] = r.response[0].photo_604;
             if (result['owner_id'] == $user_id)
             {
                 document.getElementById('checked1').src = 'images/okey.png';
