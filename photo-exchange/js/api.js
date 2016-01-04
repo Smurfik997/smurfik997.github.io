@@ -90,14 +90,7 @@ function getPhotoInfo($photo_id)
         }
         return $string;
     });
-    if ($string != 'undefined')
-    {
-        result = $string.split(',');
-        var res = new Object();
-            res['owner_id'] = result[0];
-            res['photo_604'] = result[1];
-        return res;
-    }      
+    setTimeout("result = $string.split(',');result = $string.split(','); var res = new Object(); res['owner_id'] = result[0]; res['photo_604'] = result[1]; return res;", 1500);
 }
 
 function check1($value)
