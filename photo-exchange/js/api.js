@@ -49,7 +49,7 @@ function invite()
 }
 
 $api_URL = 'https://smurfik997.herokuapp.com/api.php?';
-$user_id = $_GET('user_id');
+$user_id = $_GET('viewer_id');
 
 //Проверка на наличее user-а в БД
 /*
@@ -99,12 +99,10 @@ function check1()
     result = getPhotoInfo(document.getElementById('photo1_url').value);
     if (result['owner_id'] == $user_id)
     {
-        alert('okey');
         document.getElementById('checked1').src = 'images/okey.png';
         document.getElementById('photo1_view').style = '';
         document.getElementById('photo1_view').src = result['photo_604'];
     } else {
-        alert('fail');
         document.getElementById('checked1').src = 'images/fail.png';
         document.getElementById('photo1_view').style = 'height: 300px; width: 300px; background-image: url(//smurfik997.github.io/photo-exchange/images/nofoto.png); background-size: contain;';
         document.getElementById('photo1_view').src = 'images/nofoto.png';      
