@@ -51,6 +51,7 @@ function invite()
 $api_URL = 'https://smurfik997.herokuapp.com/api.php?';
 $user_id = $_GET('viewer_id');
 
+alert($_GET('api_result'));
 //Проверка на наличее user-а в БД
 /*VK.api('users.isAppUser', {user_id: '336624592'}, function(r) { 
     if(r.response) { 
