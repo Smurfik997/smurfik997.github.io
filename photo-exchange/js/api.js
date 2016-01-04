@@ -50,6 +50,7 @@ function invite()
 
 $api_URL = 'https://smurfik997.herokuapp.com/api.php?';
 $user_id = $_GET('viewer_id');
+$string = 'null,null';
 
 //Проверка на наличее user-а в БД
 /*
@@ -79,32 +80,25 @@ VK.api('users.get', {user_ids: $user_id, fields: 'photo_50'}, function(r) {
 });
 
 //Проверка URL фоток
-function getPhotoInfo($photo_id, $okey)
+function getPhotoInfo($photo_id)
 {
-    if ($okey == 'none')
-    {
-        VK.api('photos.getById', {photos: $photo_id, v: 5.42}, function(r) {
-            if(r.response) {
-                $string = r.response[0].owner_id+','+r.response[0].photo_604;
-            } else {
-                $string = 'null,null';
-            }
-            var result = getPhotoInfo($string, '1');
-            alert(result[0]);
-            return result;
-        });
-    } else {
-        result = $photo_id.split(',');
-        var res = new Object();
-            res['owner_id'] = result[0];
-            res['photo_604'] = result[1];
-        return res;
-    }
+    VK.api('photos.getById', {photos: $photo_id, v: 5.42}, function(r) {
+        if(r.response) {
+            $string = r.response[0].owner_id+','+r.response[0].photo_604;
+        } else {
+            $string = 'null,null';
+        }
+    });
+    result = $string.split(',');
+    var res = new Object();
+        res['owner_id'] = result[0];
+        res['photo_604'] = result[1];
+    return res;
 }
 
 function check1($value)
 {
-    result = getPhotoInfo($value, 'none');
+    result = getPhotoInfo($value);
     alert(result['owner_id']+' '+result['photo_604']);
     if (result['owner_id'] == $user_id)
     {
