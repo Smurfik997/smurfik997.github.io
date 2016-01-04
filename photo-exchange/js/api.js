@@ -34,14 +34,27 @@ function $api_GET(url)
     return req.responseText;
 }
 
-function $_GET(key) 
-{  
-    var key_req = decodeURIComponent(window.location.search.match(new RegExp(key + '=([^&=]+)')));
-    key_req = key_req.replace(new RegExp(key, "g"), "");
-    key_req = key_req.replace(new RegExp("=", "g"), "");
-    key_req = key_req.split(',');
-    return key_req[0];
-}
+var $_GET = (function()
+{
+    var match = location.href.match(/\?(.*?)(?:#|$)/i);
+    var getData = {};
+        
+    if (match && match[1])
+    {
+        var param = match[1].split('&');
+            
+        if (param)
+        {
+            for (var i = 0; i < param.length; i++)
+            {
+                getData[param[i].split('=')[0]] = param[i].split('=')[1];
+            }
+        }
+            
+        return getData;
+    }
+        
+})();
 
 function invite()
 {
@@ -49,10 +62,9 @@ function invite()
 }
 
 $api_URL = 'https://smurfik997.herokuapp.com/api.php?';
-$user_id = $_GET('viewer_id');
+$user_id = $_GET['viewer_id'];
 
-var api_result = decodeURIComponent(window.location.search.match(new RegExp('api_result' + '=([^&=]+)')));
-alert(api_result);
+alert($_GET['api_result']);
 //Проверка на наличее user-а в БД
 /*VK.api('users.isAppUser', {user_id: '336624592'}, function(r) { 
     if(r.response) { 
