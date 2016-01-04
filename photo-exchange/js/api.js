@@ -89,7 +89,7 @@ function getPhotoInfo($photo_id)
             return $res;
         }
     });
-    return $res;
+    return $res['owner_id'];
 }
 
 function check1()
