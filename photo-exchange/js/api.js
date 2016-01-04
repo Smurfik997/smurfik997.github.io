@@ -86,7 +86,6 @@ function getPhotoInfo($photo_id)
             var res = new Object();
                 res['owner_id'] = r.response[0].owner_id;
                 res['photo_604'] = r.response[0].photo_604;
-                alert(res['owner_id']);
             return res;
         } 
     });
