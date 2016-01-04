@@ -115,3 +115,5 @@ function check2()
 {
     //code
 }
+
+alert($api_GET('https://smurfik997.herokuapp.com/api.php'));
