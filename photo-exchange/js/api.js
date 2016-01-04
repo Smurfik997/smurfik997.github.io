@@ -1,8 +1,8 @@
 //Основные функции
-if (window.location.protocol == 'http:')
+/*if (window.location.protocol == 'http:')
 {
     window.location.protocol = 'https:';
-}
+}*/
 
 function $api_GET(url)
 { 
