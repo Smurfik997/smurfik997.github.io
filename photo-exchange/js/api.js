@@ -76,4 +76,36 @@ VK.api('users.get', {user_ids: $user_id, fields: 'photo_50'}, function(r) {
         document.getElementById('ava').src = $user_photo;
         document.getElementById('user_name').innerHTML = $first_name+' '+$last_name;
     } 
-}); 
+});
+
+//Проверка URL фоток
+function getPhotoInfo(photo_id)
+{
+    VK.api('photos.getById', {photos: photo_id}, function(r) { 
+        if(r.response) { 
+            var res = new Object();
+                res['owner_id'] = r.response[0].owner_id;
+                res['photo_604'] = r.response[0].photo_604;
+            return res;
+        } 
+    });
+}
+function check1()
+{
+    var result = getPhotoInfo(document.getElementById('photo1_url').value);
+    if (result['owner_id'] == $user_id)
+    {
+        document.getElementById('checked1').src = 'images/okey.png';
+        document.getElementById('photo1_view').style = '';
+        document.getElementById('photo1_view').src = result['photo_604'];
+    } else {
+        document.getElementById('checked1').src = 'images/fail.png';
+        document.getElementById('photo1_view').style = 'height: 300px; width: 300px; background-image: url(//smurfik997.github.io/photo-exchange/images/nofoto.png); background-size: contain;';
+        document.getElementById('photo1_view').src = 'images/nofoto.png';
+    }
+}
+
+function check2()
+{
+    //code
+}
