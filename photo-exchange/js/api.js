@@ -102,11 +102,11 @@ function check1()
     if (result['owner_id'] == $user_id)
     {
         document.getElementById('checked1').src = 'images/okey.png';
-        document.getElementById('photo1_view').class = 'block_img';
+        document.getElementById('photo1_view').className = 'block_img';
         document.getElementById('photo1_view').src = result['photo_604'];
     } else {
         document.getElementById('checked1').src = 'images/fail.png';
-        document.getElementById('photo1_view').class = 'bl_none_img block_img';
+        document.getElementById('photo1_view').className = 'bl_none_img block_img';
         document.getElementById('photo1_view').src = 'images/nofoto.png';      
     }
 }
