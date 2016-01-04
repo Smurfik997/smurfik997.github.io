@@ -81,7 +81,7 @@ VK.api('users.get', {user_ids: $user_id, fields: 'photo_50'}, function(r) {
 //Проверка URL фоток
 function getPhotoInfo($photo_id)
 {
-    VK.api('photos.getById', {photos: $photo_id, v: 5.42}, callback(r));
+    VK.api('photos.getById', {photos: $photo_id, v: 5.42}, callback());
     function callback(r)
     {
         alert(r.response[0].owner_id);
