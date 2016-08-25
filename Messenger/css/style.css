@@ -2,6 +2,7 @@
 
 body {
     margin: 0 auto;
+    background: #f9f9f9;
 }
 #user_name {
     float: left;
@@ -17,6 +18,16 @@ body {
     font: 600 17px Calibri;
     border-radius: 0px 0px 6px 6px;
     line-height: 46px;
+}
+.content {
+    padding: 0px 6px;
+}
+#messages {
+    background: #ffffff;
+    border-bottom: solid 1px #E5E5E5;
+    border-left: solid 1px #E5E5E5;
+    border-right: solid 1px #E5E5E5;
+    /*min-height: 425px;*/
 }
 .settings_button {
     margin: 11px 10px;

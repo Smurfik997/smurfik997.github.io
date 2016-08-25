@@ -10,11 +10,18 @@ function scroll_fix()
     document.body.removeChild(scroll_block);
             
     document.getElementById('scroll_fix').style.width = String(window.innerWidth - scrollWidth) + 'px';
+    document.getElementById('scroll_fix').style.height = String(document.documentElement.clientHeight) + 'px';
     document.getElementById('scroll_fix').style.marginLeft = String(scrollWidth/2) + 'px';
     document.getElementById('scroll_fix').style.marginRight = String(scrollWidth/2) + 'px';
+    
+    if (Number(document.getElementById('messages').style.height) >= 450)
+    {
+        document.getElementById('messages').style.height = String(document.documentElement.clientHeight - 66) + 'px';
+    }
 }
 
 $(document).ready(function() {
+    scroll_fix();
     block = [
         document.getElementsByClassName('settings_button')[0],
         document.getElementsByClassName('settings_button')[1]
