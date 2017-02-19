@@ -6,9 +6,9 @@ function get_file(file_name) {
 }
 get_file('index.tpl'); //load template
 
-/*var text = document.getElementsByName('text');
+var text = document.getElementsByName('text');
 
-/function resize_main(data) {
+function resize_main(data) {
     function resize() {
         text[0].style.height = text[0].scrollHeight + 'px';
         console.log(text[0].scrollHeight);
@@ -21,4 +21,3 @@ get_file('index.tpl'); //load template
         clearInterval(timer);
     }
 }
-resize_main();*/
