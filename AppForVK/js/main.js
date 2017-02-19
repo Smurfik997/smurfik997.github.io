@@ -7,6 +7,8 @@ function get_file(file_name) {
 get_file('index.tpl'); //load template
 
 var text = document.getElementsByName('text');
+height1 = text[0].style.height;
+height2 = text[0].style.height;
 
 function resize_main() {
     function resize() {
@@ -15,7 +17,6 @@ function resize_main() {
         height2 = text[0].style.height;
         console.log(text[0].scrollHeight);
     }
-    resize();
     if (height1 != height2) {
         timer = setInterval(function() {
             resize();
