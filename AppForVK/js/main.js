@@ -9,6 +9,7 @@ get_file('index.tpl'); //load template
 var text = document.getElementsByName('text');
 
 function resize_main() {
+    height1 = text[0].style.height;
     function resize() {
         height1 = text[0].style.height;
         text[0].style.height = text[0].scrollHeight + 'px';
