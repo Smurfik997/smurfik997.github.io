@@ -7,12 +7,15 @@ function get_file(file_name) {
 get_file('index.tpl'); //load template
 
 var text = document.getElementsByName('text');
-function resize_main(data) {   
+
+function resize_main() {
     function resize() {
+        height1 = text[0].style.height;
         text[0].style.height = text[0].scrollHeight + 'px';
+        height2 = text[0].style.height;
         console.log(text[0].scrollHeight);
     }
-    if (data == 1) {
+    if (height1 != height2) {
         timer = setInterval(function() {
             resize();
         }, 0);
@@ -20,4 +23,4 @@ function resize_main(data) {
         clearInterval(timer);
     }
 }
-resize_main(1);
+resize_main();
