@@ -6,11 +6,11 @@ function get_file(file_name) {
 }
 get_file('index.tpl'); //load template
 
-var text = document.getElementsByName('text');
+/*var text = document.getElementsByName('text');
 height1 = text[0].style.height;
 height2 = ' ';
 
-function resize_main() {
+/function resize_main() {
     function resize() {
         height1 = text[0].style.height;
         text[0].style.height = text[0].scrollHeight + 'px';
@@ -25,4 +25,4 @@ function resize_main() {
         clearInterval(timer);
     }
 }
-resize_main();
+resize_main();*/
