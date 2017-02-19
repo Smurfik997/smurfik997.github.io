@@ -8,16 +8,17 @@ get_file('index.tpl'); //load template
 
 var text = document.getElementsByName('text');
 
-function resize_main(data) {
-    function resize() {
-        text[0].style.height = text[0].scrollHeight + 'px';
-        console.log(text[0].scrollHeight);
-    }
-    if (data == 1) {
-        timer = setInterval(function() {
-            resize();
-        }, 0);
-    } else {
-        clearInterval(timer);
-    }
+function resizeArea(text_id, minHeight, maxHeight)
+{
+   var area = $(text_id);
+   var area_hidden = $(text_id + "_hidden");
+   var text = '';
+   area.value.replace(/[<>]/g, '_').split("\n").each( function(s) {
+           text = text + '<div>' + s.replace(/\s\s/g, ' &nbsp;') + '&nbsp;</div>'+"\n";
+   } );
+   area_hidden.innerHTML = text;
+   var height = area_hidden.offsetHeight + 15;
+   height = Math.max(minHeight, height);
+   height = Math.min(maxHeight, height);
+   area.style.height = height + 'px';
 }
