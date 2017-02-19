@@ -6,7 +6,7 @@ function get_file(file_name) {
 }
 get_file('index.tpl'); //load template
 
-var text = document.getElementById('text');
+var text = document.getElementsByName('text');;
 function resize () {
-    text.style.height = text.scrollHeight+'px';
+    text[0].style.height = text.scrollHeight+'px';
 }
