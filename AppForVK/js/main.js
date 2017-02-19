@@ -7,8 +7,17 @@ function get_file(file_name) {
 get_file('index.tpl'); //load template
 
 var text = document.getElementsByName('text');
-function resize () {
-    text[0].style.height = text[0].scrollHeight + 'px';
-    console.log(text[0].scrollHeight);
+function resize_main(data) {   
+    function resize() {
+        text[0].style.height = text[0].scrollHeight + 'px';
+        console.log(text[0].scrollHeight);
+    }
+    if (data == 1) {
+        timer = setInterval(function() {
+            resize();
+        }, 0);
+    } else {
+        clearInterval(timer);
+    }
 }
-resize();
+resize_main(1);
