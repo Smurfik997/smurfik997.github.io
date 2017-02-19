@@ -7,17 +7,13 @@ function get_file(file_name) {
 get_file('index.tpl'); //load template
 
 /*var text = document.getElementsByName('text');
-height1 = text[0].style.height;
-height2 = ' ';
 
-/function resize_main() {
+/function resize_main(data) {
     function resize() {
-        height1 = text[0].style.height;
         text[0].style.height = text[0].scrollHeight + 'px';
-        height2 = text[0].style.height;
         console.log(text[0].scrollHeight);
     }
-    if (height1 != height2) {
+    if (data == 1) {
         timer = setInterval(function() {
             resize();
         }, 0);
