@@ -6,8 +6,6 @@ function get_file(file_name) {
 }
 get_file('index.tpl'); //load template
 
-var text = document.getElementsByName('text');
-
 function resizeArea(text_id, minHeight, maxHeight)
 {
    var area = $(text_id);
