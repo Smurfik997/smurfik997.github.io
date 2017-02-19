@@ -8,7 +8,7 @@ get_file('index.tpl'); //load template
 
 var text = document.getElementsByName('text');
 height1 = text[0].style.height;
-height2 = '';
+height2 = ' ';
 
 function resize_main() {
     function resize() {
