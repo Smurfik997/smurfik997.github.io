@@ -6,8 +6,8 @@ body {
 }
 .main_block {
     background: #f9f9f9;
-    width: 400px;
-    height: 600px;
+    max-width: 400px;
+    max-height: 600px;
 }
 #h {
     height: 64px;
@@ -28,6 +28,8 @@ body {
     border: 0;
     border-radius: 4px;
     outline: 0;
+    padding-left: 4px;
+    padding-right: 4px;
 }
 #button:hover {
     background: #5aa4ff;

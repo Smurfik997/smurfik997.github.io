@@ -16,14 +16,26 @@ function file_func(files) {
 }
 
 function ver_align() {
+    var height = document.documentElement.clientHeight;
+    var width = document.documentElement.clientWidth;
+    if (height <= 600) {
+        document.getElementById('main_block').style.height = height;
+    } else {
+        document.getElementById('main_block').style.height = 600;
+    }
+    if (width <= 400) {
+        document.getElementById('main_block').style.width = width;
+    } else {
+        document.getElementById('main_block').style.width = 400;
+    }
+    
     var a = document.getElementById('main_block').clientHeight;
     var b = document.getElementById('h').clientHeight;
     var c = document.getElementById('text-file').clientHeight;
-    
-    document.getElementById('button').style.width = document.getElementById('button').clientWidth + 15;
+
     var a1 = document.getElementById('main_block').clientWidth;
     var b1 = document.getElementById('button').clientWidth;
-    
+
     document.getElementById('button').style.marginTop = (a - b - c)/2;
     document.getElementById('button').style.marginLeft = (a1 - b1)/2;
 }
