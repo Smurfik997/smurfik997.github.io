@@ -1,8 +1,8 @@
 @charset "utf-8";
 body {
     margin: 0 auto;
-    width: 400px;
-    height: 600px;
+    max-width: 400px;
+    max-height: 600px;
 }
 .main_block {
     background: #f9f9f9;
@@ -18,7 +18,8 @@ body {
     line-height: 64px;
 }
 #button {
-    display: block;
+    position: absolute;
+    text-align: center;
     height: 32px;
     background: #5ab5ff;
     color: white;

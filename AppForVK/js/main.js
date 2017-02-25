@@ -28,6 +28,6 @@ function ver_align() {
     document.getElementById('button').style.marginLeft = (a1 - b1)/2;
 }
 
-window.onload = function() {
+$(document).ready(function() {
     ver_align();
-};
+});
