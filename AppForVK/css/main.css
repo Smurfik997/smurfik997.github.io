@@ -1,13 +1,32 @@
 @charset "utf-8";
 body {
     margin: 0 auto;
-    background: #f9f9f9;
+    width: 400px;
+    height: 600px;
 }
-.H1 {
+.main_block {
+    background: #f9f9f9;
+    width: 400px;
+    height: 600px;
+}
+#h {
     height: 64px;
     background: #5ab5ff;
     color: white;
     font: 600 30px Calibri;
     text-align: center;
     line-height: 64px;
+}
+#button {
+    height: 32px;
+    background: #5ab5ff;
+    color: white;
+    font: 24px Calibri;
+    line-height: 32px;
+    border: 0;
+    border-radius: 4px;
+    outline: 0;
+}
+#button:hover {
+    background: #5aa4ff;
 }
