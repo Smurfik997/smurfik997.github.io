@@ -42,8 +42,7 @@ function ver_align() {
     
     var a = document.getElementById('main_block').clientHeight;
     var b = document.getElementById('h').clientHeight;
-    var c = document.getElementById('text-file').clientHeight;
-
+    var c = document.getElementById('button').clientHeight;
     var a1 = document.getElementById('main_block').clientWidth;
     var b1 = document.getElementById('button').clientWidth;
 
