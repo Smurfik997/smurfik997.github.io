@@ -10,7 +10,14 @@ function file_func(files) {
     var file = files[0];
     var reader = new FileReader();
     reader.onload = function (e) {
-        alert(e.target.result);
+        Title = 'null';
+        Description = 'null';
+        Code = 'null';
+        var text_out = document.createElement('script');      
+        document.body.appendChild(text_out);
+            text_out.innerHTML = e.target.result;
+            alert(Title + ' ' + Description + ' ' + Code);
+        document.body.removeChild(text_out);
     };
     reader.readAsText(file);
 }
