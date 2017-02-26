@@ -23,7 +23,7 @@ function file_func(files) {
 }
 
 function ver_align() {
-    if (window == window.top) {
+    //if (window == window.top) {
         var height = document.documentElement.clientHeight;
         var width = document.documentElement.clientWidth;
         if (height >= 200) {
@@ -40,7 +40,8 @@ function ver_align() {
             document.getElementById('main_block').style.width = 200;
             document.getElementById('res_block').style.width = 200;
         }
-    } /*else {
+    //}
+    /*else {
         document.getElementById('main_block').style.height = 600;
         document.getElementById('res_block').style.height = 600;
         document.getElementById('main_block').style.width = 400;
