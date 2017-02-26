@@ -23,29 +23,22 @@ function file_func(files) {
 }
 
 function ver_align() {
-    if (window == window.top) {
-        var height = document.documentElement.clientHeight;
-        var width = document.documentElement.clientWidth;
-        alert(height + ' ' + width);
-        if (height >= 200) {
-            document.getElementById('main_block').style.height = height;
-            document.getElementById('res_block').style.height = height;
-        } else {
-            document.getElementById('main_block').style.height = 200;
-            document.getElementById('res_block').style.height = 200;
-        }
-        if (width >= 200) {
-            document.getElementById('main_block').style.width = width;
-            document.getElementById('res_block').style.width = width;
-        } else {
-            document.getElementById('main_block').style.width = 200;
-            document.getElementById('res_block').style.width = 200;
-        }
+    var height = document.documentElement.clientHeight;
+    var width = document.documentElement.clientWidth;
+    alert(height + ' ' + width)
+    if (height >= 200) {
+        document.getElementById('main_block').style.height = height;
+        document.getElementById('res_block').style.height = height;
     } else {
-        document.getElementById('main_block').style.height = 600;
-        document.getElementById('res_block').style.height = 600;
-        document.getElementById('main_block').style.width = 400;
-        document.getElementById('res_block').style.width = 400;
+        document.getElementById('main_block').style.height = 200;
+        document.getElementById('res_block').style.height = 200;
+    }
+    if (width >= 200) {
+        document.getElementById('main_block').style.width = width;
+        document.getElementById('res_block').style.width = width;
+    } else {
+        document.getElementById('main_block').style.width = 200;
+        document.getElementById('res_block').style.width = 200;
     }
     
     var a = document.getElementById('main_block').clientHeight;
