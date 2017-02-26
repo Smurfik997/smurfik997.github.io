@@ -26,6 +26,7 @@ function ver_align() {
     //if (window == window.top) {
         var height = document.documentElement.clientHeight;
         var width = document.documentElement.clientWidth;
+        alert(height + ' ' + width);
         if (height >= 200) {
             document.getElementById('main_block').style.height = height;
             document.getElementById('res_block').style.height = height;
