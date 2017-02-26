@@ -1,13 +1,13 @@
 @charset "utf-8";
 body {
     margin: 0 auto;
-    max-width: 400px;
-    max-height: 600px;
+    min-width: 400px;
+    min-height: 200px;
 }
 .main_block {
     background: #f9f9f9;
-    max-width: 400px;
-    max-height: 600px;
+    min-width: 400px;
+    min-height: 200px;
 }
 #h {
     height: 64px;

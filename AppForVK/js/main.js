@@ -25,15 +25,15 @@ function file_func(files) {
 function ver_align() {
     var height = document.documentElement.clientHeight;
     var width = document.documentElement.clientWidth;
-    if (height <= 600) {
+    if (height >= 200) {
         document.getElementById('main_block').style.height = height;
     } else {
-        document.getElementById('main_block').style.height = 600;
+        document.getElementById('main_block').style.height = 200;
     }
-    if (width <= 400) {
+    if (width >= 200) {
         document.getElementById('main_block').style.width = width;
     } else {
-        document.getElementById('main_block').style.width = 400;
+        document.getElementById('main_block').style.width = 200;
     }
     
     var a = document.getElementById('main_block').clientHeight;
