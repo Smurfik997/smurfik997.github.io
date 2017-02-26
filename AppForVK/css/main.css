@@ -4,10 +4,18 @@ body {
     min-width: 400px;
     min-height: 200px;
 }
-.main_block {
+#main_block {
     background: #f9f9f9;
     min-width: 400px;
     min-height: 200px;
+    position: absolute;
+    z-index: 0;
+}
+#res_block {
+    background: rgba(0, 0, 0, 0.25);
+    position: absolute;
+    z-index: 1;
+    display: none;
 }
 #h {
     height: 64px;
