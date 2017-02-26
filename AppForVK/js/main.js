@@ -16,8 +16,12 @@ function file_func(files) {
         var text_out = document.createElement('script');      
         document.body.appendChild(text_out);
             text_out.innerHTML = e.target.result;
-            alert(Title + ' ' + Description + ' ' + Code);
-        document.body.removeChild(text_out);
+            document.getElementById('res_block').style.display = 'block';
+            Code = Code.replace('function (){/*',' ');
+            Code = Code.replace('*/}',' ');
+            document.getElementById('res_text').innerHTML = Title + ' ' + Description + ' '+ Code;
+            ver_align();
+        //document.body.removeChild(text_out);
     };
     reader.readAsText(file);
 }

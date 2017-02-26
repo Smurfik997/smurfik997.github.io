@@ -1,3 +1,11 @@
-﻿Title="Название";
-Description = "Описание";
-Code="LOLLOLOLOLOLOLOLO"
+﻿Title = "I love myself";
+Description = "Error 404";
+Code = function (){/*
+program lol;
+    var int: integer;
+begin
+    write('int: ');
+    readln(int);
+    writeln(int);
+end.
+*/}.toString();
