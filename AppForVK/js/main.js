@@ -1,10 +1,10 @@
-function get_file(file_name) {
+/*function get_file(file_name) {
     $.get(file_name, function(data) {
         $('body').html(data);
     });
     console.log('loaded');
 }
-get_file('index.tpl'); //load template
+get_file('index.tpl'); //load template*/
 
 function file_func(files) {
     var file = files[0];
@@ -40,6 +40,4 @@ function ver_align() {
     document.getElementById('button').style.marginLeft = (a1 - b1)/2;
 }
 
-$(document).ready(function() {
-    ver_align();
-});
+ver_align();
