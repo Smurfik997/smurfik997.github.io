@@ -48,6 +48,21 @@ function ver_align() {
 
     document.getElementById('button').style.marginTop = (a - b - c)/2;
     document.getElementById('button').style.marginLeft = (a1 - b1)/2;
+    
+    var res_content = document.getElementById('res_content');
+    
+    if (document.getElementById('res_block').style.display == 'block') {
+        c = res_content.clientHeight;
+        b1 = res_content.clientWidth;
+        res_content.style.marginTop = (a - c)/2;
+        res_content.style.marginLeft = (a1 - b1)/2;
+    }
 }
+
+function close() {
+    document.getElementById('res_block').style.display = 'none';
+}
+
+document.getElementById('close').onclick = function () {close();};
 
 ver_align();
