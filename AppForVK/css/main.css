@@ -1,12 +1,12 @@
 @charset "utf-8";
 body {
     margin: 0 auto;
-    min-width: 400px;
+    min-width: 200px;
     min-height: 200px;
 }
 #main_block {
     background: #f9f9f9;
-    min-width: 400px;
+    min-width: 200px;
     min-height: 200px;
     position: absolute;
     z-index: 0;
