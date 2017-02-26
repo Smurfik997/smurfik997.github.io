@@ -1,0 +1,15 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+    <body onresize="ver_align();">
+        <div id="main_block" class="main_block">
+            <div style="display: none;" id="text_hidden"></div>
+            <div id="h">New Post</div>
+            <label id="button" for="text-file" style="margin-top: 0;">Select Files</label>
+            <input type="file" id="text-file" accept="text/plain" style="display: none;" onchange="file_func(this.files);"> 
+        </div>
+        <script type="text/javascript" src="js/main.js"></script>
+    </body>
+</html>
