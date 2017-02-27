@@ -1,98 +1,98 @@
 ﻿Title = "I love myself";
 Description = "Error 404";
 Code = "<blockquote>" +
-"program d;%0A" +
-"  uses crt;%0A" +
-"  var w, k, x, y, side, side_count, work, steps, i_count, b: integer;%0A" +
-"      f_in, f_out: text;%0A" +
-"begin%0A" +
-"  TextColor(2);%0A" +
-"  work := 1;%0A" +
-"  side := 1;%0A" +
-"  i_count := 1;%0A" +
-"  %0A" +
-"  assign(f_in,'d.in');%0A" +
-"  assign(f_out,'d.out');%0A" +
-"  %0A" +
-"  reset(f_in);%0A" +
-"    readln(f_in,w,k);%0A" +
-"    readln(f_in,x,y);%0A" +
-"  close(f_in);%0A" +
-"  %0A" +
-"  while work = 1 do <gray><i>//whore </i></gray>%0A" +
-"  begin%0A" +
-"    if side = 1 then%0A" +
-"    begin%0A" +
-"      for b:=1 to i_count do%0A" +
-"      begin%0A" +
-"        x := x + 1;%0A" +
-"        if x > w then%0A" +
-"        begin%0A" +
-"          work := 0;%0A" +
-"          <gray><i>//break;</i></gray>%0A" +
-"        end else %0A" +
-"          steps := steps + 1;%0A" +
-"      end;%0A" +
-"      side_count := side_count + 1;%0A" +
-"      side := side + 1;%0A" +
-"      writeln(side_count,' ',i_count,' ',steps);%0A" +
-"      if side_count mod 2 = 0 then%0A" +
-"        i_count := i_count + 1;%0A" +
-"    end else if side = 2 then%0A" +
-"    begin%0A" +
-"      for b:=1 to i_count do%0A" +
-"      begin%0A" +
-"        y := y - 1;%0A" +
-"        if y < 1 then%0A" +
-"        begin%0A" +
-"          work := 0;%0A" +
-"          <gray><i>//break;</i></gray>%0A" +
-"        end else %0A" +
-"          steps := steps + 1;%0A" +
-"      end;%0A" +
-"      side_count := side_count + 1;%0A" +
-"      side := side + 1;%0A" +
-"      writeln(side_count,' ',i_count,' ',steps);%0A" +
-"      if side_count mod 2 = 0 then%0A" +
-"        i_count := i_count + 1;%0A" +
-"    end else if side = 3 then%0A" +
-"    begin%0A" +
-"      for b:=1 to i_count do%0A" +
-"      begin%0A" +
-"        x := x - 1;%0A" +
-"        if x < 1 then%0A" +
-"        begin%0A" +
-"          work := 0;%0A" +
-"          <gray><i>//break;</i></gray>%0A" +
-"        end else %0A" +
-"          steps := steps + 1;%0A" +
-"      end;%0A" +
-"      side_count := side_count + 1;%0A" +
-"      side := side + 1;%0A" +
-"      writeln(side_count,' ',i_count,' ',steps);%0A" +
-"      if side_count mod 2 = 0 then%0A" +
-"        i_count := i_count + 1;%0A" +
-"    end else if side = 4 then%0A" +
-"    begin%0A" +
-"      for b:=1 to i_count do%0A" +
-"      begin%0A" +
-"        y := y + 1;%0A" +
-"        if y > k then%0A" +
-"        begin%0A" +
-"          work := 0;%0A" +
-"          <gray><i>//break;</i></gray>%0A" +
-"        end else%0A" +
-"          steps := steps + 1;%0A" +
-"      end;%0A" +
-"      side_count := side_count + 1;%0A" +
-"      side := 1;%0A" +
-"      writeln(side_count,' ',i_count,' ',steps);%0A" +
-"      if side_count mod 2 = 0 then%0A" +
-"        i_count := i_count + 1;%0A" +
-"    end;%0A" +
-"  end;%0A" +
-"  %0A" +
-"  rewrite(f_out);%0A" +
-"    writeln(f_out,steps);%0A" +
-"  close(f_out);%0A" +
-"end.%0A</blockquote>";
+"program d;<br/>" +
+"  uses crt;<br/>" +
+"  var w, k, x, y, side, side_count, work, steps, i_count, b: integer;<br/>" +
+"      f_in, f_out: text;<br/>" +
+"begin<br/>" +
+"  TextColor(2);<br/>" +
+"  work := 1;<br/>" +
+"  side := 1;<br/>" +
+"  i_count := 1;<br/>" +
+"  <br/>" +
+"  assign(f_in,'d.in');<br/>" +
+"  assign(f_out,'d.out');<br/>" +
+"  <br/>" +
+"  reset(f_in);<br/>" +
+"    readln(f_in,w,k);<br/>" +
+"    readln(f_in,x,y);<br/>" +
+"  close(f_in);<br/>" +
+"  <br/>" +
+"  while work = 1 do <gray><i>//whore </i></gray><br/>" +
+"  begin<br/>" +
+"    if side = 1 then<br/>" +
+"    begin<br/>" +
+"      for b:=1 to i_count do<br/>" +
+"      begin<br/>" +
+"        x := x + 1;<br/>" +
+"        if x > w then<br/>" +
+"        begin<br/>" +
+"          work := 0;<br/>" +
+"          <gray><i>//break;</i></gray><br/>" +
+"        end else <br/>" +
+"          steps := steps + 1;<br/>" +
+"      end;<br/>" +
+"      side_count := side_count + 1;<br/>" +
+"      side := side + 1;<br/>" +
+"      writeln(side_count,' ',i_count,' ',steps);<br/>" +
+"      if side_count mod 2 = 0 then<br/>" +
+"        i_count := i_count + 1;<br/>" +
+"    end else if side = 2 then<br/>" +
+"    begin<br/>" +
+"      for b:=1 to i_count do<br/>" +
+"      begin<br/>" +
+"        y := y - 1;<br/>" +
+"        if y < 1 then<br/>" +
+"        begin<br/>" +
+"          work := 0;<br/>" +
+"          <gray><i>//break;</i></gray><br/>" +
+"        end else <br/>" +
+"          steps := steps + 1;<br/>" +
+"      end;<br/>" +
+"      side_count := side_count + 1;<br/>" +
+"      side := side + 1;<br/>" +
+"      writeln(side_count,' ',i_count,' ',steps);<br/>" +
+"      if side_count mod 2 = 0 then<br/>" +
+"        i_count := i_count + 1;<br/>" +
+"    end else if side = 3 then<br/>" +
+"    begin<br/>" +
+"      for b:=1 to i_count do<br/>" +
+"      begin<br/>" +
+"        x := x - 1;<br/>" +
+"        if x < 1 then<br/>" +
+"        begin<br/>" +
+"          work := 0;<br/>" +
+"          <gray><i>//break;</i></gray><br/>" +
+"        end else <br/>" +
+"          steps := steps + 1;<br/>" +
+"      end;<br/>" +
+"      side_count := side_count + 1;<br/>" +
+"      side := side + 1;<br/>" +
+"      writeln(side_count,' ',i_count,' ',steps);<br/>" +
+"      if side_count mod 2 = 0 then<br/>" +
+"        i_count := i_count + 1;<br/>" +
+"    end else if side = 4 then<br/>" +
+"    begin<br/>" +
+"      for b:=1 to i_count do<br/>" +
+"      begin<br/>" +
+"        y := y + 1;<br/>" +
+"        if y > k then<br/>" +
+"        begin<br/>" +
+"          work := 0;<br/>" +
+"          <gray><i>//break;</i></gray><br/>" +
+"        end else<br/>" +
+"          steps := steps + 1;<br/>" +
+"      end;<br/>" +
+"      side_count := side_count + 1;<br/>" +
+"      side := 1;<br/>" +
+"      writeln(side_count,' ',i_count,' ',steps);<br/>" +
+"      if side_count mod 2 = 0 then<br/>" +
+"        i_count := i_count + 1;<br/>" +
+"    end;<br/>" +
+"  end;<br/>" +
+"  <br/>" +
+"  rewrite(f_out);<br/>" +
+"    writeln(f_out,steps);<br/>" +
+"  close(f_out);<br/>" +
+"end.<br/></blockquote>";

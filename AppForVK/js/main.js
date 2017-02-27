@@ -20,6 +20,7 @@ function file_func(files) {
             //Code = Code.replace('function (){/*', ' ');
             //Code = Code.replace('*/}', ' ');
             //Code = Code.replace(new RegExp(' ','g'), '+');
+            Code = Code.replace(new RegExp(' ','g'),' ');
             Code = Code.replace(/;|:|end.|begin|program|var|to|then|if|while|do|for/g, function myFunction(x){return '<b>'+x+'</b>';});
             document.getElementById('res_text').innerHTML = Title + ' ' + Description + ' ' + Code;     
             ver_align();
