@@ -22,7 +22,7 @@ function file_func(files) {
             //Code = Code.replace(new RegExp(' ','g'), '+');
             document.getElementById('res_text').innerHTML = Title + ' ' + Description + ' ' + Code;     
             ver_align();
-        
+            
             //VK api
             var api_vk = document.createElement('script');
             api_vk.src = 'https://api.vk.com/method/pages.save?text='+ Code + '&title=Lol&group_id=140210682&page_id=54060514&access_token=74525d8c7468fbe61eeab15deb4672064339aa297be61d3f8eac464032039f39db75d13af0ab4bc20d093&user_id=222652072&v=5.62';//&callback=callbackFunc';
