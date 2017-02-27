@@ -1,10 +1,98 @@
 ﻿Title = "I love myself";
 Description = "Error 404";
 Code = "<blockquote>" +
-"program lol;%0A" +
-"   var a: int64;%0A" +
+"program d;%0A" +
+"  uses crt;%0A" +
+"  var w, k, x, y, side, side_count, work, steps, i_count, b: integer;%0A" +
+"      f_in, f_out: text;%0A" +
 "begin%0A" +
-"   write('Lol: '); <gray><i>//Loles</i></gray>%0A" +
-"   readln(a);%0A" +
-"   write('Lol*64: ', a*64);%0A" +
+"  TextColor(2);%0A" +
+"  work := 1;%0A" +
+"  side := 1;%0A" +
+"  i_count := 1;%0A" +
+"  %0A" +
+"  assign(f_in,'d.in');%0A" +
+"  assign(f_out,'d.out');%0A" +
+"  %0A" +
+"  reset(f_in);%0A" +
+"    readln(f_in,w,k);%0A" +
+"    readln(f_in,x,y);%0A" +
+"  close(f_in);%0A" +
+"  %0A" +
+"  while work = 1 do <gray><i>//whore </i></gray>%0A" +
+"  begin%0A" +
+"    if side = 1 then%0A" +
+"    begin%0A" +
+"      for b:=1 to i_count do%0A" +
+"      begin%0A" +
+"        x := x + 1;%0A" +
+"        if x > w then%0A" +
+"        begin%0A" +
+"          work := 0;%0A" +
+"          <gray><i>//break;</i></gray>%0A" +
+"        end else %0A" +
+"          steps := steps + 1;%0A" +
+"      end;%0A" +
+"      side_count := side_count + 1;%0A" +
+"      side := side + 1;%0A" +
+"      writeln(side_count,' ',i_count,' ',steps);%0A" +
+"      if side_count mod 2 = 0 then%0A" +
+"        i_count := i_count + 1;%0A" +
+"    end else if side = 2 then%0A" +
+"    begin%0A" +
+"      for b:=1 to i_count do%0A" +
+"      begin%0A" +
+"        y := y - 1;%0A" +
+"        if y < 1 then%0A" +
+"        begin%0A" +
+"          work := 0;%0A" +
+"          <gray><i>//break;</i></gray>%0A" +
+"        end else %0A" +
+"          steps := steps + 1;%0A" +
+"      end;%0A" +
+"      side_count := side_count + 1;%0A" +
+"      side := side + 1;%0A" +
+"      writeln(side_count,' ',i_count,' ',steps);%0A" +
+"      if side_count mod 2 = 0 then%0A" +
+"        i_count := i_count + 1;%0A" +
+"    end else if side = 3 then%0A" +
+"    begin%0A" +
+"      for b:=1 to i_count do%0A" +
+"      begin%0A" +
+"        x := x - 1;%0A" +
+"        if x < 1 then%0A" +
+"        begin%0A" +
+"          work := 0;%0A" +
+"          <gray><i>//break;</i></gray>%0A" +
+"        end else %0A" +
+"          steps := steps + 1;%0A" +
+"      end;%0A" +
+"      side_count := side_count + 1;%0A" +
+"      side := side + 1;%0A" +
+"      writeln(side_count,' ',i_count,' ',steps);%0A" +
+"      if side_count mod 2 = 0 then%0A" +
+"        i_count := i_count + 1;%0A" +
+"    end else if side = 4 then%0A" +
+"    begin%0A" +
+"      for b:=1 to i_count do%0A" +
+"      begin%0A" +
+"        y := y + 1;%0A" +
+"        if y > k then%0A" +
+"        begin%0A" +
+"          work := 0;%0A" +
+"          <gray><i>//break;</i></gray>%0A" +
+"        end else%0A" +
+"          steps := steps + 1;%0A" +
+"      end;%0A" +
+"      side_count := side_count + 1;%0A" +
+"      side := 1;%0A" +
+"      writeln(side_count,' ',i_count,' ',steps);%0A" +
+"      if side_count mod 2 = 0 then%0A" +
+"        i_count := i_count + 1;%0A" +
+"    end;%0A" +
+"  end;%0A" +
+"  %0A" +
+"  rewrite(f_out);%0A" +
+"    writeln(f_out,steps);%0A" +
+"  close(f_out);%0A" +
 "end.%0A</blockquote>";
