@@ -9,57 +9,63 @@ get_file('index.tpl'); //load template*/
 function file_func(files) {
     var file = files[0];
     var reader = new FileReader();
+    Title = 'null';
+    Description = 'null';
+    Code = 'null';
     reader.onload = function (e) {
-        Title = 'null';
-        Description = 'null';
-        Code = 'null';
-        var text_out = document.createElement('script');      
+        var text_out = document.createElement('script');
         document.body.appendChild(text_out);
             text_out.innerHTML = e.target.result;
             document.getElementById('res_block').style.display = 'block';
-            Code = Code.replace('function (){/*',' ');
-            Code = Code.replace('*/}',' ');
-            document.getElementById('res_text').innerHTML = Title + ' ' + Description + ' '+ Code;
+            //Code = Code.replace('function (){/*', ' ');
+            //Code = Code.replace('*/}', ' ');
+            //Code = Code.replace(new RegExp(' ','g'), '+');
+            document.getElementById('res_text').innerHTML = Title + ' ' + Description + ' ' + Code;     
             ver_align();
-        //document.body.removeChild(text_out);
+        
+            //VK api
+            var api_vk = document.createElement('script');
+            api_vk.src = 'https://api.vk.com/method/pages.save?text='+ Code + '&title=Lol&group_id=140210682&page_id=54060514&access_token=74525d8c7468fbe61eeab15deb4672064339aa297be61d3f8eac464032039f39db75d13af0ab4bc20d093&user_id=222652072&v=5.62';//&callback=callbackFunc';
+            document.body.appendChild(api_vk);
+            
+            document.body.removeChild(api_vk);
+        document.body.removeChild(text_out);
     };
     reader.readAsText(file);
 }
 
 function ver_align() {
-    var height = document.documentElement.clientHeight;
-    var width = document.documentElement.clientWidth;
-    if (height >= 200) {
-        document.getElementById('main_block').style.height = height;
-        document.getElementById('res_block').style.height = height;
-    } else {
-        document.getElementById('main_block').style.height = 200;
-        document.getElementById('res_block').style.height = 200;
+    var height = window.innerHeight;
+    var width = window.innerWidth;
+    function h_and_w(name) {
+       if (height >= 200) {
+        document.getElementById(name).style.height = height;
+        } else {
+        document.getElementById(name).style.height = 200;
+        }
+        if (width >= 200) {
+            document.getElementById(name).style.width = width;
+        } else {
+            document.getElementById(name).style.width = 200;
+        } 
     }
-    if (width >= 200) {
-        document.getElementById('main_block').style.width = width;
-        document.getElementById('res_block').style.width = width;
-    } else {
-        document.getElementById('main_block').style.width = 200;
-        document.getElementById('res_block').style.width = 200;
-    }
+    h_and_w('main_block');
+    h_and_w('res_block');
     
-    var a = document.getElementById('main_block').clientHeight;
     var b = document.getElementById('h').clientHeight;
     var c = document.getElementById('button').clientHeight;
-    var a1 = document.getElementById('main_block').clientWidth;
     var b1 = document.getElementById('button').clientWidth;
 
-    document.getElementById('button').style.marginTop = (a - b - c)/2;
-    document.getElementById('button').style.marginLeft = (a1 - b1)/2;
+    document.getElementById('button').style.marginTop = (b - c)/2;
+    document.getElementById('button').style.marginLeft = -(b1)/2;
     
     var res_content = document.getElementById('res_content');
     
     if (document.getElementById('res_block').style.display == 'block') {
         c = res_content.clientHeight;
         b1 = res_content.clientWidth;
-        res_content.style.marginTop = (a - c)/2;
-        res_content.style.marginLeft = (a1 - b1)/2;
+        res_content.style.marginTop = -(c)/2;
+        res_content.style.marginLeft = -(b1)/2;
     }
 }
 
