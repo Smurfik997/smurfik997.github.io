@@ -1,0 +1,54 @@
+<html>
+	<head>
+		<style type="text/css">
+			@charset "utf-8";
+			div {
+				text-align: center;
+				position: absolute;
+				cursor: pointer;
+				background-color: #F44336;
+				color: white;
+				padding: 10px;
+				border-radius: 5px;
+				border: solid 0px gray;
+				box-shadow: 0 0 10px rgba(0,0,0,0.5);
+				margin-top: 50px;
+				user-select: none;
+				width: 130px;
+			}
+			div:hover {
+				background-color: #f45936;
+			}
+		</style>
+	</head>
+	<body onresize="ver_align();">
+		<div onclick="random();">Хэлоу питушня</div>
+	</body>
+	<script type="text/javascript">
+		function getUrlVars()
+		{
+			var vars = [], hash;
+			var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+			for(var i = 0; i < hashes.length; i++)
+			{
+				hash = hashes[i].split('=');
+				vars.push(hash[0]);
+				vars[hash[0]] = hash[1];
+			}		
+			return vars;
+		}
+		function ver_align() {
+			var height = window.innerHeight;
+			var width = window.innerWidth;
+			block = document.getElementsByTagName('div')[0];
+			block.style.marginLeft = (width-block.clientWidth)/2;
+			block.style.marginTop = (height-block.clientHeight)/2;
+		}
+		ver_align();
+		function random() {
+			var num = Math.floor((Math.random() * getUrlVars()["max"]) + 1);
+			block.innerHTML = num;
+			console.log(num);
+		}
+	</script>
+</html>

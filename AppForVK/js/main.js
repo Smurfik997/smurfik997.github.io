@@ -17,9 +17,6 @@ function file_func(files) {
         document.body.appendChild(text_out);
             text_out.innerHTML = e.target.result;
             document.getElementById('res_block').style.display = 'block';
-            //Code = Code.replace('function (){/*', ' ');
-            //Code = Code.replace('*/}', ' ');
-            //Code = Code.replace(new RegExp(' ','g'), '+');
             Code = Code.replace(new RegExp(' ','g'),' ');
             Code = Code.replace(/;|:|end.|begin|program|var|to|then|if|while|do|for|break|function|procedure/g, function myFunction(x){return '<b>'+x+'</b>';});
             document.getElementById('res_text').innerHTML = Title + ' ' + Description + ' ' + Code;     
@@ -29,21 +26,6 @@ function file_func(files) {
             VK.api("pages.save", {"text": Code, "title": "Lol", group_id: 140210682, page_id: 54060514, access_token: "74525d8c7468fbe61eeab15deb4672064339aa297be61d3f8eac464032039f39db75d13af0ab4bc20d093", user_id: 222652072, v: "5.62"}, function (data) {
                 //alert("Post ID:" + data.response.post_id);
             });
-            /*$.ajax({
-                url: 'https://api.vk.com/method/pages.save?&title=Lol&group_id=140210682&page_id=54060514&access_token=74525d8c7468fbe61eeab15deb4672064339aa297be61d3f8eac464032039f39db75d13af0ab4bc20d093&user_id=222652072&v=5.62',
-                type:"post",
-                async: false,
-                data: {
-                    text: Code
-                },
-                success: function(response){                                       
-                }
-            });*/
-            /*var api_vk = document.createElement('script');
-            api_vk.src = 'https://api.vk.com/method/pages.save?text='+ Code + '&title=Lol&group_id=140210682&page_id=54060514&access_token=74525d8c7468fbe61eeab15deb4672064339aa297be61d3f8eac464032039f39db75d13af0ab4bc20d093&user_id=222652072&v=5.62';//&callback=callbackFunc';
-            document.body.appendChild(api_vk);
-            
-            document.body.removeChild(api_vk);*/
         document.body.removeChild(text_out);
     };
     reader.readAsText(file);
