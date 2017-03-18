@@ -82,6 +82,7 @@ function ver_align() {
 function close() {
     document.getElementById('button').style.display = 'block';
     document.getElementById('button1').style.display = 'none';
+    ver_align();
 }
 
 ver_align();
