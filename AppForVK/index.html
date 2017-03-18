@@ -2,13 +2,14 @@
     <head>
         <script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
         <script src="https://vk.com/js/api/xd_connection.js?2" type="text/javascript"></script>
+        <meta charset="utf-8">
         <link rel="stylesheet" href="css/main.css">
     </head>
     <body onresize="ver_align();">
         <div id="main_block">
             <div style="display: none;" id="text_hidden"></div>
             <div id="h">New Post</div>
-            <label id="button" for="text-file">Select Files</label>
+            <label id="button" class="button" for="text-file">Select Files</label>
             <input type="file" id="text-file" accept="text/plain" style="display: none;" onchange="file_func(this.files);"> 
         </div>
         <div id="res_block" style="display: none;">
@@ -17,7 +18,7 @@
                     <div id="close">+</div>
                 </div>
                 <div id="res_text">
-                    Lol
+                    <div id="button1" class="button" onclick="upload();">Continue</div>
                 </div>
             </div>
         </div>

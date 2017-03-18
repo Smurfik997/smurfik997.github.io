@@ -19,16 +19,19 @@ function file_func(files) {
             document.getElementById('res_block').style.display = 'block';
             Code = Code.replace(new RegExp(' ','g'),' ');
             Code = Code.replace(/;|:|end.|begin|program|var|to|then|if|while|do|for|break|function|procedure/g, function myFunction(x){return '<b>'+x+'</b>';});
-            document.getElementById('res_text').innerHTML = Title + ' ' + Description + ' ' + Code;     
+            //document.getElementById('res_text').innerHTML = Title + ' ' + Description + ' ' + Code;
             ver_align();
-            
-            //VK api
-            VK.api("pages.save", {"text": Code, "title": "Lol", group_id: 140210682, page_id: 54060514, access_token: "74525d8c7468fbe61eeab15deb4672064339aa297be61d3f8eac464032039f39db75d13af0ab4bc20d093", user_id: 222652072, v: "5.62"}, function (data) {
-                //alert("Post ID:" + data.response.post_id);
-            });
         document.body.removeChild(text_out);
     };
     reader.readAsText(file);
+}
+
+function upload() {
+    //VK api
+    VK.api("pages.save", {"text": Code, "title": "Lol", group_id: 140210682, access_token: "74525d8c7468fbe61eeab15deb4672064339aa297be61d3f8eac464032039f39db75d13af0ab4bc20d093", user_id: 222652072, v: "5.62"}, function (data) {
+        alert("Page ID:" + data.response);
+        close();
+    });
 }
 
 function ver_align() {
@@ -50,11 +53,18 @@ function ver_align() {
     h_and_w('res_block');
     
     var b = document.getElementById('h').clientHeight;
-    var c = document.getElementById('button').clientHeight;
-    var b1 = document.getElementById('button').clientWidth;
+    
+    function center_button(name) {
+        var c = document.getElementById(name).clientHeight;
+        var b1 = document.getElementById(name).clientWidth;
 
-    document.getElementById('button').style.marginTop = (b - c)/2;
-    document.getElementById('button').style.marginLeft = -(b1)/2;
+        document.getElementById(name).style.marginTop = (b - c)/2;
+        document.getElementById(name).style.marginLeft = -(b1)/2; 
+    }
+    
+    center_button('button');
+    center_button('button1');
+    
     
     var res_content = document.getElementById('res_content');
     
