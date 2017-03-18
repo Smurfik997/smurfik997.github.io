@@ -54,7 +54,6 @@ body {
     text-align: center;
     left: 50%;
     height: 32px;
-    background: #ff5a5a;
     color: white;
     font: 24px Calibri;
     line-height: 32px;
@@ -64,12 +63,13 @@ body {
     padding: 2px 10px;
     cursor: pointer;
     user-select: none;
+    top: 50%;
 }
-.button:hover {
+#button:hover {
     background: #ff695a;
 }
 #button {
-    top: 50%;
+    background: #ff5a5a;
 }
 #button1 {
     background: #00ff00;

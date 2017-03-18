@@ -1,4 +1,4 @@
-﻿Title = "I love mysel";
+﻿Title = "I love myself";
 Description = "Error 404";
 Code = "<blockquote>" +
 "program d;<br/>" +

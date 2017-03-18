@@ -15,10 +15,10 @@ function file_func(files) {
         var text_out = document.createElement('script');
         document.body.appendChild(text_out);
             text_out.innerHTML = e.target.result;
-            document.getElementById('res_block').style.display = 'block';
+            document.getElementById('button').style.display = 'none';
+            document.getElementById('button1').style.display = 'block';
             Code = Code.replace(new RegExp(' ','g'),' ');
             Code = Code.replace(/;|:|end.|begin|program|var|to|then|if|while|do|for|break|function|procedure/g, function myFunction(x){return '<b>'+x+'</b>';});
-            //document.getElementById('res_text').innerHTML = Title + ' ' + Description + ' ' + Code;
             ver_align();
         document.body.removeChild(text_out);
     };
@@ -54,7 +54,7 @@ function ver_align() {
         } 
     }
     h_and_w('main_block');
-    h_and_w('res_block');
+    //h_and_w('res_block');
     
     var b = document.getElementById('h').clientHeight;
     
@@ -69,7 +69,6 @@ function ver_align() {
     center_button('button');
     center_button('button1');
     
-    
     var res_content = document.getElementById('res_content');
     
     if (document.getElementById('res_block').style.display == 'block') {
@@ -81,9 +80,8 @@ function ver_align() {
 }
 
 function close() {
-    document.getElementById('res_block').style.display = 'none';
+    document.getElementById('button').style.display = 'block';
+    document.getElementById('button1').style.display = 'none';
 }
-
-document.getElementById('close').onclick = function () {close();};
 
 ver_align();
