@@ -10,7 +10,6 @@ var group_id = 140210682;
 var v = '5.63';
 
 function file_func(files) {
-    document.getElementById('first_step').style.background = '#008000';
     var file = files[0];
     var reader = new FileReader();
     Title = 'null';
@@ -28,6 +27,7 @@ function file_func(files) {
         document.body.removeChild(text_out);
     };
     reader.readAsText(file);
+    document.getElementById('first_step').style.background = '#008000';
 }
 
 function upload() {
