@@ -17,6 +17,7 @@ begin
     end;
   close(f_in);
   rewrite(f_out);
+    writeln(f_out,'Description = " " +');
     for i := 1 to 10000000 do
     begin
       if strings[i].Length > 0 then

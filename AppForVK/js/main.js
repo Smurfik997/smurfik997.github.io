@@ -43,7 +43,7 @@ function upload() {
         VK.api("pages.save", {"text": Code+'<br/><center><b>Download:</b> ['+Document_Url+'|'+data.response[0].title+']</center>', "title": Title, "group_id": group_id, "access_token": access_token, "user_id": user_id, v: "5.62"}, function (data) {
             var m_text = document.createElement('div');
             document.body.appendChild(m_text);
-            m_text.innerHTML = 'Title: '+Title+'<br/>Description: '+Description;
+            m_text.innerHTML = 'Title: '+Title+'<br/>Description:'+Description;
             message_text = m_text.innerText;
             Document_Url = Document_Url.replace(new RegExp('https://vk.com/','g'),'');
             VK.api("wall.post", {owner_id: '-'+group_id, from_group: 1, attachments: ["page-140210682_"+data.response,Document_Url], message: message_text, "access_token": access_token, v: "5.62"});

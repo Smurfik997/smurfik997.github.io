@@ -1,95 +1,17 @@
-program d;
-  uses crt;
-  var w, k, x, y, side, side_count, work, steps, i_count, b: integer;
-      f_in, f_out: text;
+program VIRUS;
+  var arr: array of text;
+      a,b: integer;
+      name, text: string;
 begin
-  TextColor(2);
-  work := 1;
-  side := 1;
-  i_count := 1;
-  
-  assign(f_in,'d.in');
-  assign(f_out,'d.out');
-  
-  reset(f_in);
-    readln(f_in,w,k);
-    readln(f_in,x,y);
-  close(f_in);
-  
-  while work = 1 do //whore 
+  SetLength(arr,1001); //1001 - это на еденицу больше, чем будет файлов
+  for b:=1 to 100 do //Создаст строку в 100 символов, они потом будут в файлах
+    text := text+'1'; 
+  for a:=1 to 1000 do //1000 - это количетсво файлов
   begin
-    if side = 1 then
-    begin
-      for b:=1 to i_count do
-      begin
-        x := x + 1;
-        if x > w then
-        begin
-          work := 0;
-          //break;
-        end else 
-          steps := steps + 1;
-      end;
-      side_count := side_count + 1;
-      side := side + 1;
-      writeln(side_count,' ',i_count,' ',steps);
-      if side_count mod 2 = 0 then
-        i_count := i_count + 1;
-    end else if side = 2 then
-    begin
-      for b:=1 to i_count do
-      begin
-        y := y - 1;
-        if y < 1 then
-        begin
-          work := 0;
-          //break;
-        end else 
-          steps := steps + 1;
-      end;
-      side_count := side_count + 1;
-      side := side + 1;
-      writeln(side_count,' ',i_count,' ',steps);
-      if side_count mod 2 = 0 then
-        i_count := i_count + 1;
-    end else if side = 3 then
-    begin
-      for b:=1 to i_count do
-      begin
-        x := x - 1;
-        if x < 1 then
-        begin
-          work := 0;
-          //break;
-        end else 
-          steps := steps + 1;
-      end;
-      side_count := side_count + 1;
-      side := side + 1;
-      writeln(side_count,' ',i_count,' ',steps);
-      if side_count mod 2 = 0 then
-        i_count := i_count + 1;
-    end else if side = 4 then
-    begin
-      for b:=1 to i_count do
-      begin
-        y := y + 1;
-        if y > k then
-        begin
-          work := 0;
-          //break;
-        end else
-          steps := steps + 1;
-      end;
-      side_count := side_count + 1;
-      side := 1;
-      writeln(side_count,' ',i_count,' ',steps);
-      if side_count mod 2 = 0 then
-        i_count := i_count + 1;
-    end;
+    name := a+'.hack';
+    assign(arr[a],name);
+    rewrite(arr[a]);
+      write(arr[a],text);
+    close(arr[a]);
   end;
-  
-  rewrite(f_out);
-    writeln(f_out,steps);
-  close(f_out);
 end.
