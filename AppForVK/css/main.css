@@ -50,9 +50,9 @@ body {
 }
 #status_bar {
     position: absolute;
-    width: 40%;
+    width: 80%;
     top: 100%;
-    left: 30%;
+    left: 10%;
 }
 .steps {
     background: #ffa500;

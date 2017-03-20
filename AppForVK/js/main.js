@@ -11,6 +11,7 @@ var user_id = 222652072;
 var group_id = 140210682;
 
 function file_func(files) {
+    document.getElementById('first_step').style.background = '#008000';
     var file = files[0];
     var reader = new FileReader();
     Title = 'null';
@@ -30,53 +31,22 @@ function file_func(files) {
     reader.readAsText(file);
 }
 
-function file_upload(files) {
-    var file = files[0];
-    
-    VK.api("docs.getUploadServer", {"group_id": group_id, "access_token": access_token, v: "5.62"}, function (data) {
-        alert(data.response.upload_url);
-        
-        /*xmlhttp = new XMLHttpRequest();
-        xmlhttp.open('POST', data.response.upload_url, true);
-        xmlhttp.setRequestHeader('Content-Type', 'multipart/form-data');
-        xmlhttp.send("file=" + file); 
-        xmlhttp.onreadystatechange = function() { 
-            if (xmlhttp.readyState == 4) {
-                if(xmlhttp.status == 200) { 
-                    alert(xmlhttp.responseText);
-                }
-            }
-        };*/
-    
-        $.ajax({
-        url: data.response.upload_url,
-        data: file,
-        processData: false,
-        contentType: "multipart/form-data",
-        type: 'POST',
-        success: function (data) {
-                alert(data);
-            }
-        });
-        /*$.post(data.response.upload_url, {"file":file}, function (data) {
-            alert('ok');
-            VK.api("docs.save", {"file": data.response.file, "title": 'lol', "access_token": access_token, v: "5.62"}, function (data) {
-                alert(data.response.url);
-            });
-        });*/
-    });  
-}
-
 function upload() {
     //VK api
-    VK.api("pages.save", {"text": Code+'<br/><center><b>Download:</b> [http://v.com/doc|program.pas]</center>', "title": Title, "group_id": group_id, "access_token": access_token, "user_id": user_id, v: "5.62"}, function (data) {
-        var m_text = document.createElement('div');
-        document.body.appendChild(m_text);
+    Document_Id = Document_Url.replace(new RegExp('https://vk.com/doc','g'),'');
+    alert(Document_Id);
+    VK.api("docs.getById", {docs: Document_Id, "access_token": access_token, v: "5.62"}, function (data) {
+        VK.api("pages.save", {"text": Code+'<br/><center><b>Download:</b> ['+Document_Url+'|'+data.response[0].title+']</center>', "title": Title, "group_id": group_id, "access_token": access_token, "user_id": user_id, v: "5.62"}, function (data) {
+            var m_text = document.createElement('div');
+            document.body.appendChild(m_text);
             m_text.innerHTML = 'Title: '+Title+'<br/>Description: '+Description;
             message_text = m_text.innerText;
-            VK.api("wall.post", {owner_id: '-'+group_id, from_group: 1, attachments: "page-140210682_"+data.response, message: message_text, "access_token": access_token, v: "5.62"});
-        document.body.removeChild(m_text);
-        close();
+            Document_Url = Document_Url.replace(new RegExp('https://vk.com/','g'),'');
+            VK.api("wall.post", {owner_id: '-'+group_id, from_group: 1, attachments: ["page-140210682_"+data.response,Document_Url], message: message_text, "access_token": access_token, v: "5.62"});
+                document.body.removeChild(m_text);
+                document.getElementById('second_step').style.background = '#008000';
+                close();
+            });
     });
 }
 
@@ -122,11 +92,18 @@ function ver_align() {
 }
 
 function close() {
-    document.getElementById('button').innerText = 'Select Program File';
-    document.getElementById('text-file').onchange = function() {file_upload(this.files);};
-    document.getElementById('button').style.display = 'block';
+    document.getElementById('button1').innerText = 'Close';
+    document.getElementById('button1').onclick = function() {close_and_next();};
+    ver_align();
+}
+
+function close_and_next() {
+    document.getElementById('first_step').style.background = '#ffa500';
+    document.getElementById('second_step').style.background = '#ffa500';
+    document.getElementById('button1').innerText = 'Continue';
+    document.getElementById('button1').onclick = function() {upload();};
     document.getElementById('button1').style.display = 'none';
-    document.getElementById('first_step').style.background = '#008000';
+    document.getElementById('button').style.display = 'block';
     ver_align();
 }
 
