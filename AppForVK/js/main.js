@@ -7,6 +7,7 @@ function $_GET(key) {
 var access_token = $_GET('access_token');//'71f2e6a94f0f3f759d39aae0fbaf0a48e8160d29d607db4c3ecca75dfe7bc0a86ceb2756e3ba169133876';
 var user_id = $_GET('viewer_id');
 var group_id = 140210682;
+alert(access_token);
 var v = '5.63';
 //https://oauth.vk.com/authorize?client_id=5884220&display=page&redirect_uri=https://oauth.vk.com/blank.html&scope=467072&response_type=token&v=5.63
 function file_func(files) {
