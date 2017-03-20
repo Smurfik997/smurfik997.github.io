@@ -1,0 +1,96 @@
+Code = "<blockquote>" +
+"program d;<br/>" +
+"  uses crt;<br/>" +
+"  var w, k, x, y, side, side_count, work, steps, i_count, b: integer;<br/>" +
+"      f_in, f_out: text;<br/>" +
+"begin<br/>" +
+"  TextColor(2);<br/>" +
+"  work := 1;<br/>" +
+"  side := 1;<br/>" +
+"  i_count := 1;<br/>" +
+"  <br/>" +
+"  assign(f_in,'d.in');<br/>" +
+"  assign(f_out,'d.out');<br/>" +
+"  <br/>" +
+"  reset(f_in);<br/>" +
+"    readln(f_in,w,k);<br/>" +
+"    readln(f_in,x,y);<br/>" +
+"  close(f_in);<br/>" +
+"  <br/>" +
+"  while work = 1 do <gray><i>//whore </i></gray><br/>" +
+"  begin<br/>" +
+"    if side = 1 then<br/>" +
+"    begin<br/>" +
+"      for b:=1 to i_count do<br/>" +
+"      begin<br/>" +
+"        x := x + 1;<br/>" +
+"        if x > w then<br/>" +
+"        begin<br/>" +
+"          work := 0;<br/>" +
+"          <gray><i>//break;</i></gray><br/>" +
+"        end else <br/>" +
+"          steps := steps + 1;<br/>" +
+"      end;<br/>" +
+"      side_count := side_count + 1;<br/>" +
+"      side := side + 1;<br/>" +
+"      writeln(side_count,' ',i_count,' ',steps);<br/>" +
+"      if side_count mod 2 = 0 then<br/>" +
+"        i_count := i_count + 1;<br/>" +
+"    end else if side = 2 then<br/>" +
+"    begin<br/>" +
+"      for b:=1 to i_count do<br/>" +
+"      begin<br/>" +
+"        y := y - 1;<br/>" +
+"        if y < 1 then<br/>" +
+"        begin<br/>" +
+"          work := 0;<br/>" +
+"          <gray><i>//break;</i></gray><br/>" +
+"        end else <br/>" +
+"          steps := steps + 1;<br/>" +
+"      end;<br/>" +
+"      side_count := side_count + 1;<br/>" +
+"      side := side + 1;<br/>" +
+"      writeln(side_count,' ',i_count,' ',steps);<br/>" +
+"      if side_count mod 2 = 0 then<br/>" +
+"        i_count := i_count + 1;<br/>" +
+"    end else if side = 3 then<br/>" +
+"    begin<br/>" +
+"      for b:=1 to i_count do<br/>" +
+"      begin<br/>" +
+"        x := x - 1;<br/>" +
+"        if x < 1 then<br/>" +
+"        begin<br/>" +
+"          work := 0;<br/>" +
+"          <gray><i>//break;</i></gray><br/>" +
+"        end else <br/>" +
+"          steps := steps + 1;<br/>" +
+"      end;<br/>" +
+"      side_count := side_count + 1;<br/>" +
+"      side := side + 1;<br/>" +
+"      writeln(side_count,' ',i_count,' ',steps);<br/>" +
+"      if side_count mod 2 = 0 then<br/>" +
+"        i_count := i_count + 1;<br/>" +
+"    end else if side = 4 then<br/>" +
+"    begin<br/>" +
+"      for b:=1 to i_count do<br/>" +
+"      begin<br/>" +
+"        y := y + 1;<br/>" +
+"        if y > k then<br/>" +
+"        begin<br/>" +
+"          work := 0;<br/>" +
+"          <gray><i>//break;</i></gray><br/>" +
+"        end else<br/>" +
+"          steps := steps + 1;<br/>" +
+"      end;<br/>" +
+"      side_count := side_count + 1;<br/>" +
+"      side := 1;<br/>" +
+"      writeln(side_count,' ',i_count,' ',steps);<br/>" +
+"      if side_count mod 2 = 0 then<br/>" +
+"        i_count := i_count + 1;<br/>" +
+"    end;<br/>" +
+"  end;<br/>" +
+"  <br/>" +
+"  rewrite(f_out);<br/>" +
+"    writeln(f_out,steps);<br/>" +
+"  close(f_out);<br/>" +
+"end.<br/></blockquote>";
