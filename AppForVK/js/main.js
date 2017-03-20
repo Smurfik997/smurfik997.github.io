@@ -1,10 +1,3 @@
-/*function get_file(file_name) {
-    $.get(file_name, function(data) {
-        $('body').html(data);
-    });
-    console.log('loaded');
-}
-get_file('index.tpl'); //load template*/
 function $_GET(key) {
     var s = window.location.search;
     s = s.match(new RegExp(key + '=([^&=]+)'));
@@ -14,6 +7,7 @@ function $_GET(key) {
 var access_token = $_GET('access_token');
 var user_id = $_GET('viewer_id');
 var group_id = 140210682;
+var v = '5.63';
 
 function file_func(files) {
     document.getElementById('first_step').style.background = '#008000';
@@ -39,14 +33,14 @@ function file_func(files) {
 function upload() {
     //VK api
     Document_Id = Document_Url.replace(new RegExp('https://vk.com/doc','g'),'');
-    VK.api("docs.getById", {docs: Document_Id, "access_token": access_token, v: "5.62"}, function (data) {
-        VK.api("pages.save", {"text": Code+'<br/><center><b>Download:</b> ['+Document_Url+'|'+data.response[0].title+']</center>', "title": Title, "group_id": group_id, "access_token": access_token, "user_id": user_id, v: "5.62"}, function (data) {
+    VK.api('docs.getById', {'docs': Document_Id, 'access_token': access_token, 'v': v}, function (data) {
+        VK.api('pages.save', {'text': Code+'<br/><center><b>Download:</b> ['+Document_Url+'|'+data.response[0].title+']</center>', 'title': Title, 'group_id': group_id, 'access_token': access_token, 'user_id': user_id, 'v': v}, function (data) {
             var m_text = document.createElement('div');
             document.body.appendChild(m_text);
             m_text.innerHTML = 'Title: '+Title+'<br/>Description:'+Description;
             message_text = m_text.innerText;
             Document_Url = Document_Url.replace(new RegExp('https://vk.com/','g'),'');
-            VK.api("wall.post", {owner_id: '-'+group_id, from_group: 1, attachments: ["page-140210682_"+data.response,Document_Url], message: message_text, "access_token": access_token, v: "5.62"});
+            VK.api('wall.post', {'owner_id': '-'+group_id, 'from_group': 1, 'attachments': ['page-'+group_id+'_'+data.response,Document_Url], 'message': message_text, 'access_token': access_token, 'v': v});
                 document.body.removeChild(m_text);
                 document.getElementById('second_step').style.background = '#008000';
                 close();
