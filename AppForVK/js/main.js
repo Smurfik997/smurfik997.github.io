@@ -9,6 +9,10 @@ var user_id = $_GET('viewer_id');
 var group_id = 140210682;
 var v = '5.63';
 
+VK.api('account.getAppPermissions', {'user_id': user_id, 'access_token': access_token}, function (data) {
+    alert(data.response);
+});
+
 function file_func(files) {
     var file = files[0];
     var reader = new FileReader();
@@ -34,7 +38,7 @@ function upload() {
     //VK api
     Document_Id = Document_Url.replace(new RegExp('https://vk.com/doc','g'),'');
     console.log(Document_Id);
-    VK.api('docs.getById', {'docs': Document_Id, 'access_token': access_token, 'v': v}, function (data) {
+    VK.api('docs.getById', {'docs': '-140210682_443314230', 'access_token': access_token, 'v': '5.62'}, function (data) {
         try {
             alert(data.error.error_code);
         } catch (err) {
