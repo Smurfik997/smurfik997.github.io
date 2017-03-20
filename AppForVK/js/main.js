@@ -5,8 +5,13 @@
     console.log('loaded');
 }
 get_file('index.tpl'); //load template*/
+function $_GET(key) {
+    var s = window.location.search;
+    s = s.match(new RegExp(key + '=([^&=]+)'));
+    return s ? s[1] : false;
+}
 
-var access_token = "74525d8c7468fbe61eeab15deb4672064339aa297be61d3f8eac464032039f39db75d13af0ab4bc20d093";
+var access_token = $_GET('access_token');
 var user_id = 222652072;
 var group_id = 140210682;
 
@@ -34,7 +39,6 @@ function file_func(files) {
 function upload() {
     //VK api
     Document_Id = Document_Url.replace(new RegExp('https://vk.com/doc','g'),'');
-    alert(Document_Id);
     VK.api("docs.getById", {docs: Document_Id, "access_token": access_token, v: "5.62"}, function (data) {
         VK.api("pages.save", {"text": Code+'<br/><center><b>Download:</b> ['+Document_Url+'|'+data.response[0].title+']</center>', "title": Title, "group_id": group_id, "access_token": access_token, "user_id": user_id, v: "5.62"}, function (data) {
             var m_text = document.createElement('div');

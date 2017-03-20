@@ -7,7 +7,7 @@ body {
 }
 #main_block {
     background: #f9f9f9;
-    min-width: 200px;
+    min-width: 250px;
     min-height: 200px;
     position: absolute;
     z-index: 0;
