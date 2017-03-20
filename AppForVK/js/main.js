@@ -4,12 +4,11 @@ function $_GET(key) {
     return s ? s[1] : false;
 }
 
-var access_token = $_GET('access_token');//'71f2e6a94f0f3f759d39aae0fbaf0a48e8160d29d607db4c3ecca75dfe7bc0a86ceb2756e3ba169133876';
+var access_token =  $_GET('acccess_token');
 var user_id = $_GET('viewer_id');
 var group_id = 140210682;
-alert(access_token);
 var v = '5.63';
-//https://oauth.vk.com/authorize?client_id=5884220&display=page&redirect_uri=https://oauth.vk.com/blank.html&scope=467072&response_type=token&v=5.63
+
 function file_func(files) {
     var file = files[0];
     var reader = new FileReader();
@@ -36,7 +35,11 @@ function upload() {
     Document_Id = Document_Url.replace(new RegExp('https://vk.com/doc','g'),'');
     console.log(Document_Id);
     VK.api('docs.getById', {'docs': Document_Id, 'access_token': access_token, 'v': v}, function (data) {
-        alert(data.response[0].title);
+        try {
+            alert(data.error.error_code);
+        } catch (err) {
+            alert(data.response[0].title);
+        }
         VK.api('pages.save', {'text': Code+'<br/><center><b>Download:</b> ['+Document_Url+'|'+data.response[0].title+']</center>', 'title': Title, 'group_id': group_id, 'access_token': access_token, 'user_id': user_id, 'v': v}, function (data) {
             var m_text = document.createElement('div');
             document.body.appendChild(m_text);
