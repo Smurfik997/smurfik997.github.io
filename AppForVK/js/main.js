@@ -11,7 +11,7 @@ var v = '5.63';
 
 VK.api('account.getAppPermissions', {'user_id': user_id, 'access_token': access_token}, function (data) {
     if (data.response === 0) {
-        alert('hello');
+        VK.callMethod("showSettingsBox", 467072);
     }
 });
 
