@@ -39,7 +39,7 @@ function file_func(files) {
 function upload() {
     //VK api
     Document_Id = Document_Url.replace(new RegExp('https://vk.com/doc','g'),'');
-    VK.api('docs.getById', {'docs': '-140210682_443314230', 'access_token': access_token, 'v': '5.62'}, function (data) {
+    VK.api('docs.getById', {'docs': Document_Id, 'access_token': access_token, 'v': v}, function (data) {
         VK.api('pages.save', {'text': Code+'<br/><center><b>Download:</b> ['+Document_Url+'|'+data.response[0].title+']</center>', 'title': Title, 'group_id': group_id, 'access_token': access_token, 'user_id': user_id, 'v': v}, function (data) {
             var m_text = document.createElement('div');
             document.body.appendChild(m_text);
