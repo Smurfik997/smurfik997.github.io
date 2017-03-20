@@ -12,6 +12,7 @@ function $_GET(key) {
 }
 
 var access_token = $_GET('access_token');
+var user_id = $_GET('viewer_id');
 var group_id = 140210682;
 
 function file_func(files) {
