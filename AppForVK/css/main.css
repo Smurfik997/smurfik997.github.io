@@ -13,12 +13,12 @@ body {
     z-index: 0;
 }
 #h {
-    height: 64px;
+    height: 60px;
     background: #5ab5ff;
     color: white;
-    font: 600 30px Calibri;
+    font: 600 28px Calibri;
     text-align: center;
-    line-height: 64px;
+    line-height: 60px;
 }
 .button {
     position: absolute;
@@ -43,10 +43,10 @@ body {
     background: #ff5a5a;
 }
 #button1 {
-    background: #00ff00;
+    background: #15cc5e;
 }
 #button1:hover {
-    background: #00ff66;
+    background: #1dad56;
 }
 #status_bar {
     position: absolute;
@@ -55,36 +55,8 @@ body {
     left: 10%;
 }
 .steps {
-    background: #ffa500;
+    background: #ffeb00;
     width: 49%;
     height: 10px;
     margin-top: -30px;
 }
-/*#res_block {
-    background: rgba(0, 0, 0, 0.25);
-    position: absolute;
-    z-index: 1;
-#close {
-    color: red;
-    padding: 0px 10px;
-    float: right;
-    font: 30px Calibri;
-    line-height: 30px;
-    transform: rotate(-45deg);
-    -webkit-user-select: none;
-    cursor: pointer;
-}
-#panel {
-    border-bottom: solid gray 1px;
-    width: 150px;
-    height: 30px;
-}
-#res_content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 150px;
-    height: 100px;
-    background: white;
-    border-radius: 5px;
-}*/

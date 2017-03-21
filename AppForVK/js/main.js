@@ -9,11 +9,16 @@ var user_id = $_GET('viewer_id');
 var group_id = 140210682;
 var v = '5.63';
 
-VK.api('account.getAppPermissions', {'user_id': user_id, 'access_token': access_token}, function (data) {
-    if (data.response === 0) {
-        VK.callMethod("showSettingsBox", 467072);
-    }
-});
+try {
+    VK.api('account.getAppPermissions', {'user_id': user_id, 'access_token': access_token}, function (data) {
+        if (data.response < 401536) {
+            VK.callMethod("showSettingsBox", 401536);
+        }
+        ver_align();
+    });
+} catch (err) {
+    ver_align();
+}
 
 function file_func(files) {
     var file = files[0];
@@ -33,7 +38,7 @@ function file_func(files) {
         document.body.removeChild(text_out);
     };
     reader.readAsText(file);
-    document.getElementById('first_step').style.background = '#008000';
+    document.getElementById('first_step').style.background = '#3bbd06';
 }
 
 function upload() {
@@ -48,7 +53,7 @@ function upload() {
             Document_Url = Document_Url.replace(new RegExp('https://vk.com/','g'),'');
             VK.api('wall.post', {'owner_id': '-'+group_id, 'from_group': 1, 'attachments': ['page-'+group_id+'_'+data.response,Document_Url], 'message': message_text, 'access_token': access_token, 'v': v});
                 document.body.removeChild(m_text);
-                document.getElementById('second_step').style.background = '#008000';
+                document.getElementById('second_step').style.background = '#3bbd06';
                 close();
             });
     });
@@ -58,10 +63,10 @@ function ver_align() {
     var height = window.innerHeight;
     var width = window.innerWidth;
     function h_and_w(name) {
-       if (height >= 200) {
-        document.getElementById(name).style.height = height;
+        if (height >= 200) {
+            document.getElementById(name).style.height = height;
         } else {
-        document.getElementById(name).style.height = 200;
+            document.getElementById(name).style.height = 200;
         }
         if (width >= 250) {
             document.getElementById(name).style.width = width;
@@ -70,29 +75,19 @@ function ver_align() {
         } 
     }
     h_and_w('main_block');
-    //h_and_w('res_block');
-    
-    var b = document.getElementById('h').clientHeight;
-    
-    function center_button(name) {
-        var c = document.getElementById(name).clientHeight;
-        var b1 = document.getElementById(name).clientWidth;
 
-        document.getElementById(name).style.marginTop = (b - c - 30)/2;
-        document.getElementById(name).style.marginLeft = -(b1)/2; 
+    function center_button(name) {
+        var a = document.getElementById('h').clientHeight;
+        var c = document.getElementById('status_bar').clientHeight;
+        var b = document.getElementById(name).clientHeight;
+        var d = document.getElementById(name).clientWidth;
+
+        document.getElementById(name).style.marginTop = (a - b - c)/2;
+        document.getElementById(name).style.marginLeft = -(d)/2; 
     }
     
     center_button('button');
     center_button('button1');
-    
-    /*var res_content = document.getElementById('res_content');
-    
-    if (document.getElementById('res_block').style.display == 'block') {
-        c = res_content.clientHeight;
-        b1 = res_content.clientWidth;
-        res_content.style.marginTop = -(c)/2;
-        res_content.style.marginLeft = -(b1)/2;
-    }*/
 }
 
 function close() {
@@ -102,13 +97,11 @@ function close() {
 }
 
 function close_and_next() {
-    document.getElementById('first_step').style.background = '#ffa500';
-    document.getElementById('second_step').style.background = '#ffa500';
+    document.getElementById('first_step').style.background = '#ffeb00';
+    document.getElementById('second_step').style.background = '#ffeb00';
     document.getElementById('button1').innerText = 'Continue';
     document.getElementById('button1').onclick = function() {upload();};
     document.getElementById('button1').style.display = 'none';
     document.getElementById('button').style.display = 'block';
     ver_align();
 }
-
-ver_align();
