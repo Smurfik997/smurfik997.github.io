@@ -9,16 +9,13 @@ var user_id = $_GET('viewer_id');
 var group_id = 140210682;
 var v = '5.63';
 
-try {
-    VK.api('account.getAppPermissions', {'user_id': user_id, 'access_token': access_token}, function (data) {
-        if (data.response < 401536) {
-            VK.callMethod("showSettingsBox", 401536);
-        }
-        ver_align();
-    });
-} catch (err) {
-    ver_align();
-}
+ver_align();
+
+VK.api('account.getAppPermissions', {'user_id': user_id, 'access_token': access_token}, function (data) {
+    if (data.response < 401536) {
+        VK.callMethod("showSettingsBox", 401536);
+    }
+});
 
 function file_func(files) {
     var file = files[0];
@@ -78,11 +75,10 @@ function ver_align() {
 
     function center_button(name) {
         var a = document.getElementById('h').clientHeight;
-        var c = document.getElementById('status_bar').style.marginTop;
         var b = document.getElementById(name).clientHeight;
         var d = document.getElementById(name).clientWidth;
 
-        document.getElementById(name).style.marginTop = (a - b + c)/2;
+        document.getElementById(name).style.marginTop = (a - b - 30)/2;
         document.getElementById(name).style.marginLeft = -(d)/2; 
     }
     
