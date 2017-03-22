@@ -78,11 +78,11 @@ function ver_align() {
 
     function center_button(name) {
         var a = document.getElementById('h').clientHeight;
-        var c = document.getElementById('status_bar').clientHeight;
+        var c = document.getElementById('status_bar').style.marginTop;
         var b = document.getElementById(name).clientHeight;
         var d = document.getElementById(name).clientWidth;
 
-        document.getElementById(name).style.marginTop = (a - b - c)/2;
+        document.getElementById(name).style.marginTop = (a - b + c)/2;
         document.getElementById(name).style.marginLeft = -(d)/2; 
     }
     
