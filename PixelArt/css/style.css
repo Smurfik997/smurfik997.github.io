@@ -1,0 +1,18 @@
+@charset "utf-8";
+
+body {
+    background-color: #e9ebee;
+    margin: 0;
+}
+
+#main_block {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 1%;
+}
