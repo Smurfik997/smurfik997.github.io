@@ -26,7 +26,6 @@ function draw(x_size, y_size, x_count, y_count, padding, block, color) {
 
 function draw_plates(plates, count, color) {
     for (var i = 1; i <= count; i++) {
-        console.log(plates[i]);
         var pos = plates[i].split(' ');
         doc('x'+pos[0]+'y'+pos[1]).style.backgroundColor = color;
     }
