@@ -16,3 +16,18 @@ body {
     border-radius: 8px;
     padding: 1%;
 }
+
+#save {
+    height: 24px; 
+    background-color: #03d403; 
+    margin-top:2; 
+    border: 0; 
+    color: white;
+    outline: 0;
+    border-radius: 5px;
+    font: 16px sans-serif;
+}
+
+#save:hover {
+    background-color: #03bd03; 
+}
