@@ -63,3 +63,22 @@ function draw(auto, width, height, x_count, y_count, padding, block, color, type
         }
     }
 }
+
+
+
+//!!!!!!!!!!!!!!! EXPERIMENTAL
+function draw_plates(plates, count, color) {
+    for (var i = 1; i <= count; i++) {
+        var pos = plates[i].split(' ');
+        doc(pos[0]+' '+pos[1]).style.backgroundColor = color;
+    }
+}
+
+function clear(x_count, y_count, color) {
+    for (var y = 1; y <= y_count; y++)
+    {
+        for (var x = 1; x <= x_count; x++) {
+            doc(x+' '+y).style.backgroundColor = color;
+        }
+    }
+}
