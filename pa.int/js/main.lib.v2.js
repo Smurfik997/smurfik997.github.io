@@ -17,7 +17,7 @@ function draw(auto, width, height, x_count, y_count, padding, block, color, type
             width_sum = width_b + padding_main * 2 + elem.clientWidth * 0.04;
             height_sum = height_b + padding_main * 2 + elem.clientHeight * 0.04;
 
-            if (elem.clientWidth / elem.clientHeight > 1) {
+            if (elem.clientWidth / elem.clientHeight > 0) {
                 if (elem.clientWidth / elem.clientHeight > width_b / height_b) {
                     ratio = elem.clientHeight / height_sum; 
                 } else if (elem.clientWidth / elem.clientHeight < width_b / height_b) {
