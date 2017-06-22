@@ -1,4 +1,4 @@
-draw(30, 30, 15, 15, 2, document.getElementById('main_block'), '#e9ebee');
+draw(30, 30, 15, 15, 0, document.getElementById('main_block'), '#e9ebee');
 var pl1 = {
     1: "8 3",
     2: "7 4",
