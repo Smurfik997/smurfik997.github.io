@@ -1,0 +1,32 @@
+@charset "utf-8";
+
+body {
+    background-color: #e9ebee;
+    margin: 0;
+}
+
+#main_block {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-color: #ffffff;
+    border-radius: 8px;
+}
+
+#save {
+    height: 24px; 
+    background-color: #03d403; 
+    margin-top:2; 
+    border: 0; 
+    color: white;
+    outline: 0;
+    border-radius: 5px;
+    font: 16px sans-serif;
+}
+
+#save:hover {
+    background-color: #03bd03; 
+}
