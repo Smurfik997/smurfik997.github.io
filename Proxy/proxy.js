@@ -1,4 +1,6 @@
 function FindProxyForURL(url, host)
 {
-  return "212.192.120.42:8080";
+  if (dnsDomainIs(host, "vk.com")) {
+   return "185.88.127.113:53281";
+  }
 }
