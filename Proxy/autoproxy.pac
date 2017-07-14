@@ -3,6 +3,7 @@ function FindProxyForURL(url, host) {
   var DEFAULT = "DIRECT";
   
   if (shExpMatch(host, "vk.com")) return PROXY;
+  if (shExpMatch(host, "2ip.ru")) return PROXY;
   
   return DEFAULT;
 }
