@@ -1,7 +1,0 @@
-Code = "<blockquote>" +
-"program lol;<br/>" +
-"  var int: integer;<br/>" +
-"begin<br/>" +
-"  int := 1;<br/>" +
-"  write(int);<br/>" +
-"end.<br/></blockquote>";
