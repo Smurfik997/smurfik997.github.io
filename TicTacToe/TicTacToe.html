@@ -1,0 +1,118 @@
+<html>
+    <head>
+        <title>Tic Tac Toe</title>
+        <style>
+            #mainBlock {
+                width: 340px;
+                height: 340px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                margin-top: -180px;
+                margin-left: -180px;
+                border: 10px solid #546e7a;
+            }
+            #header {
+                height: 40px;
+                text-align: center;
+                font: 22px/40px sans-serif;
+                color: white;
+                background-color: #29b6f6;
+                box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.5);
+            }
+            #lineV {
+                height: 282px;
+                width: 9px;
+                background-color: #f44336;
+                box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.5);
+            }
+            #lineH {
+                margin-top: 88px;
+                height: 9px;
+                width: 282px;
+                background-color: #f44336;
+                box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.5);
+            }
+            #gameSpace {
+                margin: 9px 30px;
+                width: 282px;
+                height: 282px;
+            }
+            #hor {
+                position: absolute;
+            }
+            #buttons {
+                position: absolute;
+            }
+            .button {
+                width: 88px;
+                height: 88px;
+                margin-left: 9px;
+                /* background: gray; */
+                float: left; 
+            }
+            .first {
+                margin: 0px !important;
+            }
+            .line {
+                margin-top: 9px;
+                height: 88px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="mainBlock">
+            <div id="header">
+                Tic Tac Toe
+            </div>
+            <div id="gameSpace">
+                <div id="ver">
+                    <div id="lineV" name="1" style="float: left; margin-left: 88px;">
+                    </div>
+                    <div id="lineV" name="2" style="float: right; margin-right: 88px;">
+                    </div>
+                </div>
+                <div id="hor">
+                    <div id="lineH" name="1">
+                    </div>
+                    <div id="lineH" name="2">
+                    </div>
+                </div> 
+                <div id="buttons">
+                    <div id="line1" class="line first">
+                        <div id="button1" class="button first"></div>
+                        <div id="button2" class="button"></div>
+                        <div id="button3" class="button"></div>
+                    </div>
+                    <div id="line2" class="line">
+                        <div id="button4" class="button first"></div>
+                        <div id="button5" class="button"></div>
+                        <div id="button6" class="button"></div>
+                    </div>
+                    <div id="line3" class="line">
+                        <div id="button7" class="button first"></div>
+                        <div id="button8" class="button"></div>
+                        <div id="button9" class="button"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            function doc(val, num) {
+                if (num != undefined) {
+                    return document.getElementsByClassName(val)[num];
+                } else {
+                    return document.getElementById(val);
+                }
+            }
+
+            var bCount = 9;
+
+            for (i = 1; i <= bCount; i++) {
+                doc('button' + i).onclick = function(e) {
+                    console.log(e.target.id);
+                }
+            }
+        </script>
+    </body>       
+</html>
