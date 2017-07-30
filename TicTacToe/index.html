@@ -55,11 +55,11 @@
                 float: left; 
                 transition: opacity 2s;
                 opacity: 0;
-                color: rgb(0, 0, 0);
+                color: rgb(76, 76, 76);
                 text-align: center;
                 font: 88px/88px sans-serif;
                 cursor: pointer;
-                /* user-select: none; */
+                text-shadow: 0px 3px 5px rgba(0, 0, 0, 0.5);
             }
             .first {
                 margin: 0px !important;
@@ -116,8 +116,17 @@
                 }
             }
 
+            function blockGameSpace(count) {
+                for (i = 1; i <= count; i++) {
+                    doc('button' + i).onclick = function(e) {
+                        console.log(name + 'Game space is blocked');
+                    };
+                }
+            }
+
             var bCount = 9;
             var filledButtons = 'filledButtons: ';
+            var name = 'Tic Tac Toe: ';
 
             for (i = 1; i <= bCount; i++) {
                 doc('button' + i).onclick = function(e) {
@@ -127,7 +136,9 @@
                         doc(e.target.id).style.opacity = 1;
                         doc(e.target.id).style.cursor = 'no-drop';
                         filledButtons += e.target.id + ' ';
-                        console.log(e.target.id, filledButtons);
+                        console.log(name + e.target.id, filledButtons);
+                    } else {
+                        console.log(name + 'Button is already pressed');
                     }
                 }
             }
