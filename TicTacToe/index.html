@@ -119,26 +119,61 @@
             }
 
             function blockGameSpace(count) {
-                for (var i = 1; i <= count; i++) {
-                    doc('button' + i).onclick = function(e) {
+                for (var n = 1; n <= count; n++) {
+                    doc('button' + n).onclick = function(e) {
                         console.log(name + 'Game space is blocked');
                     };
                 }
             }
 
+            function searchInArr(arr, val) {
+                for (var n = 1; n <= arr.length; n++) {
+                    if (arr[n - 1] == val) {
+                        return n - 1;
+                    }
+                }
+
+                return -1;
+            }
+
+            function botMotion(arr) {
+                blockGameSpace();
+
+                var freePlatesArr = [];
+                var num;
+
+                for (var n = 1; n <= arr.length; n++) {
+                    if (arr[n - 1] != undefined) {
+                        freePlatesArr.push(arr[n - 1]);
+                    }
+                }
+
+                num = Math.floor(Math.random() * freePlatesArr.length)
+                doc('button' + freePlatesArr[num]).innerHTML = 'O';
+                doc('button' + freePlatesArr[num]).style.opacity = 1;
+                doc('button' + freePlatesArr[num]).style.cursor = 'no-drop';
+                delete unFilledPlates[freePlatesArr[num] - 1];
+                console.log('DebugSys:', freePlatesArr, num);
+            } 
+
             var bCount = 9;
-            var filledButtons = 'filledButtons: ';
+            var unFilledPlates = [];
+            for (var n = 1; n <= bCount; n++) {
+                unFilledPlates[n - 1] = n;
+            }
             var name = 'Tic Tac Toe: ';
 
-            for (var i = 1; i <= bCount; i++) {
-                doc('button' + i).onclick = function(e) {
-                    if (filledButtons.search(e.target.id) <= 0) 
+            for (var n = 1; n <= bCount; n++) {
+                doc('button' + n).onclick = function(e) {
+                    var pos = parseInt(e.target.id.split('button')[1]);
+                    if (searchInArr(unFilledPlates, pos) != -1) 
                     {
                         doc(e.target.id).innerHTML = 'X';
                         doc(e.target.id).style.opacity = 1;
                         doc(e.target.id).style.cursor = 'no-drop';
-                        filledButtons += e.target.id + ' ';
-                        console.log(name + e.target.id, filledButtons);
+                        delete unFilledPlates[pos - 1];
+                        botMotion(unFilledPlates);
+                        console.log(name + e.target.id, unFilledPlates);
                     } else {
                         console.log(name + 'Button is already pressed');
                     }
