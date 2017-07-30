@@ -181,8 +181,8 @@
                         doc(e.target.id).style.opacity = 1;
                         doc(e.target.id).style.cursor = 'no-drop';
                         delete unFilledPlates[pos - 1];
-                        botMotion(unFilledPlates);
                         debug({'ID': e.target.id, 'Array': unFilledPlates});
+                        botMotion(unFilledPlates);
                     } else {
                         debug('Button is already pressed');
                     }
