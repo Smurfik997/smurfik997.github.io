@@ -8,6 +8,7 @@
                 max-height: 340px;
                 max-width: 340px;
                 position: absolute;
+                z-index: 0;
                 top: 50%;
                 left: 50%;
                 margin-top: -180px;
@@ -45,6 +46,7 @@
                 position: absolute;
             }
             #buttons {
+                z-index: 1;
                 position: absolute;
             }
             .button {
@@ -180,7 +182,7 @@
                         doc(e.target.id).style.cursor = 'no-drop';
                         delete unFilledPlates[pos - 1];
                         botMotion(unFilledPlates);
-                        debug({'ID: ': e.target.id, 'Array': unFilledPlates});
+                        debug({'ID': e.target.id, 'Array': unFilledPlates});
                     } else {
                         debug('Button is already pressed');
                     }
