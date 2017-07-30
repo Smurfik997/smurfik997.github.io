@@ -148,12 +148,16 @@
                     }
                 }
 
-                num = Math.floor(Math.random() * freePlatesArr.length)
-                doc('button' + freePlatesArr[num]).innerHTML = 'O';
-                doc('button' + freePlatesArr[num]).style.opacity = 1;
-                doc('button' + freePlatesArr[num]).style.cursor = 'no-drop';
-                delete unFilledPlates[freePlatesArr[num] - 1];
-                console.log('DebugSys:', freePlatesArr, num);
+                if (freePlatesArr.length != 0)
+                {
+                    num = Math.floor(Math.random() * freePlatesArr.length)
+                    doc('button' + freePlatesArr[num]).innerHTML = 'O';
+                    doc('button' + freePlatesArr[num]).style.opacity = 1;
+                    doc('button' + freePlatesArr[num]).style.cursor = 'no-drop';
+                    delete unFilledPlates[freePlatesArr[num] - 1];
+                }
+
+                console.log(name, freePlatesArr, num);
             } 
 
             var bCount = 9;
@@ -161,7 +165,7 @@
             for (var n = 1; n <= bCount; n++) {
                 unFilledPlates[n - 1] = n;
             }
-            var name = 'Tic Tac Toe: ';
+            var name = 'Tic Tac Toe:';
 
             for (var n = 1; n <= bCount; n++) {
                 doc('button' + n).onclick = function(e) {
@@ -173,9 +177,9 @@
                         doc(e.target.id).style.cursor = 'no-drop';
                         delete unFilledPlates[pos - 1];
                         botMotion(unFilledPlates);
-                        console.log(name + e.target.id, unFilledPlates);
+                        console.log(name, e.target.id, unFilledPlates);
                     } else {
-                        console.log(name + 'Button is already pressed');
+                        console.log(name, 'Button is already pressed');
                     }
                 }
             }
