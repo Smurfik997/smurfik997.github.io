@@ -111,6 +111,23 @@
         </div>
         <script>
             'use strict';
+            var bCount = 9;
+            var unFilledPlates = [];
+            var winningCombinations = [
+                [1, 5, 9],
+                [3, 5, 7],
+                [1, 2, 3],
+                [4, 5, 6],
+                [7, 8, 9],
+                [1, 4, 7],
+                [2, 5, 8],
+                [3, 6, 9]
+            ]
+            var playerMotion = 'playerMotion: ';
+            var botMotion;
+            for (var n = 1; n <= bCount; n++) {
+                unFilledPlates[n - 1] = n;
+            }
 
             function doc(val, num) {
                 if (num != undefined) {
@@ -124,6 +141,14 @@
                 console.log('Tic Tac Toe (Debug Sys):', val);
             }
 
+            function checkWinner(str) {
+                for (var n = 0; n < winningCombinations.length; n++) {
+                    if (str.search(winningCombinations[n][0]) > 0 && str.search(winningCombinations[n][1]) > 0 && str.search(winningCombinations[n][2]) > 0) {
+                        return 1;
+                    }
+                }
+            }
+
             function searchInArr(arr, val) {
                 for (var n = 1; n <= arr.length; n++) {
                     if (arr[n - 1] == val) {
@@ -134,8 +159,8 @@
                 return -1;
             }
 
-            function blockGameSpace(count) {
-                for (var n = 1; n <= count; n++) {
+            function blockGameSpace() {
+                for (var n = 1; n <= bCount; n++) {
                     doc('button' + n).onclick = function(e) {
                         debug('Game space is blocked');
                     };
@@ -163,31 +188,32 @@
                     delete unFilledPlates[freePlatesArr[num] - 1];
                 }
 
+                unblockGameSpace();
                 debug({'Array': freePlatesArr, 'Random': num});
             } 
 
-            var bCount = 9;
-            var unFilledPlates = [];
-            for (var n = 1; n <= bCount; n++) {
-                unFilledPlates[n - 1] = n;
-            }
-
-            for (var n = 1; n <= bCount; n++) {
-                doc('button' + n).onclick = function(e) {
-                    var pos = parseInt(e.target.id.split('button')[1]);
-                    if (searchInArr(unFilledPlates, pos) != -1) 
-                    {
-                        doc(e.target.id).innerHTML = 'X';
-                        doc(e.target.id).style.opacity = 1;
-                        doc(e.target.id).style.cursor = 'no-drop';
-                        delete unFilledPlates[pos - 1];
-                        debug({'ID': e.target.id, 'Array': unFilledPlates});
-                        botMotion(unFilledPlates);
-                    } else {
-                        debug('Button is already pressed');
+            function unblockGameSpace() {
+                for (var n = 1; n <= bCount; n++) {
+                    doc('button' + n).onclick = function(e) {
+                        var pos = parseInt(e.target.id.split('button')[1]);
+                        if (searchInArr(unFilledPlates, pos) != -1) 
+                        {
+                            doc(e.target.id).innerHTML = 'X';
+                            doc(e.target.id).style.opacity = 1;
+                            doc(e.target.id).style.cursor = 'no-drop';
+                            playerMotion += unFilledPlates[pos - 1];
+                            delete unFilledPlates[pos - 1];
+                            debug({'ID': e.target.id, 'Array': unFilledPlates, 'Player Motion': playerMotion, 'Win': checkWinner(playerMotion)});
+                            botMotion(unFilledPlates);
+                        } else {
+                            debug('Button is already pressed');
+                        }
                     }
                 }
             }
+            
+            //init
+            unblockGameSpace();
         </script>
     </body>       
 </html>
