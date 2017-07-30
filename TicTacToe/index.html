@@ -13,6 +13,7 @@
                 margin-top: -180px;
                 margin-left: -180px;
                 border: 10px solid #546e7a;
+                user-select: none;
             }
             #header {
                 height: 40px;
@@ -57,6 +58,8 @@
                 color: rgb(0, 0, 0);
                 text-align: center;
                 font: 88px/88px sans-serif;
+                cursor: pointer;
+                /* user-select: none; */
             }
             .first {
                 margin: 0px !important;
@@ -122,6 +125,7 @@
                     {
                         doc(e.target.id).innerHTML = 'X';
                         doc(e.target.id).style.opacity = 1;
+                        doc(e.target.id).style.cursor = 'no-drop';
                         filledButtons += e.target.id + ' ';
                         console.log(e.target.id, filledButtons);
                     }
