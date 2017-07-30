@@ -52,6 +52,11 @@
                 margin-left: 9px;
                 /* background: gray; */
                 float: left; 
+                transition: opacity 2s;
+                opacity: 0;
+                color: rgb(0, 0, 0);
+                text-align: center;
+                font: 88px/88px sans-serif;
             }
             .first {
                 margin: 0px !important;
@@ -109,10 +114,17 @@
             }
 
             var bCount = 9;
+            var filledButtons = 'filledButtons: ';
 
             for (i = 1; i <= bCount; i++) {
                 doc('button' + i).onclick = function(e) {
-                    console.log(e.target.id);
+                    if (filledButtons.search(e.target.id) <= 0) 
+                    {
+                        doc(e.target.id).innerHTML = 'X';
+                        doc(e.target.id).style.opacity = 1;
+                        filledButtons += e.target.id + ' ';
+                        console.log(e.target.id, filledButtons);
+                    }
                 }
             }
         </script>
