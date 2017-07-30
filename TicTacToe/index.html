@@ -108,6 +108,8 @@
             </div>
         </div>
         <script>
+            'use strict';
+
             function doc(val, num) {
                 if (num != undefined) {
                     return document.getElementsByClassName(val)[num];
@@ -117,7 +119,7 @@
             }
 
             function blockGameSpace(count) {
-                for (i = 1; i <= count; i++) {
+                for (var i = 1; i <= count; i++) {
                     doc('button' + i).onclick = function(e) {
                         console.log(name + 'Game space is blocked');
                     };
@@ -128,7 +130,7 @@
             var filledButtons = 'filledButtons: ';
             var name = 'Tic Tac Toe: ';
 
-            for (i = 1; i <= bCount; i++) {
+            for (var i = 1; i <= bCount; i++) {
                 doc('button' + i).onclick = function(e) {
                     if (filledButtons.search(e.target.id) <= 0) 
                     {
