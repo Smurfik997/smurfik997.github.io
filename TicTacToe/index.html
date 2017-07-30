@@ -157,7 +157,7 @@
                     delete unFilledPlates[freePlatesArr[num] - 1];
                 }
 
-                console.log(name, freePlatesArr, num);
+                console.log(name, {'Array': freePlatesArr, 'Random': num});
             } 
 
             var bCount = 9;
@@ -177,7 +177,7 @@
                         doc(e.target.id).style.cursor = 'no-drop';
                         delete unFilledPlates[pos - 1];
                         botMotion(unFilledPlates);
-                        console.log(name, e.target.id, unFilledPlates);
+                        console.log(name, {'ID: ': e.target.id, 'Array': unFilledPlates});
                     } else {
                         console.log(name, 'Button is already pressed');
                     }
