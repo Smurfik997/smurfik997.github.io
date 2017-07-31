@@ -220,7 +220,7 @@
                     if (str.search(winningCombinations[n][0]) > 0 && str.search(winningCombinations[n][1]) > 0 && str.search(winningCombinations[n][2]) > 0) {
                         for (var k = 1; k <= winningCombinations[n].length; k++) 
                         {
-                            doc('button' + winningCombinations[n][k - 1]).style.color = '#f44336';
+                            doc('button' + winningCombinations[n][k - 1]).style.color = '#00e676';
                         }
                         return 1;
                     }
@@ -251,7 +251,7 @@
                 blockGameSpace();
                 doc(res).style.display = 'block';
                 animate(function(timePassed) {
-                    doc(res).style.opacity = timePassed*(0.99/1000);
+                    doc(res).style.opacity = timePassed*(0.999/1000);
                 }, 1000);
             }
 
@@ -269,7 +269,7 @@
 
                 if (freePlatesArr.length != 0)
                 {
-                    num = Math.floor(Math.random() * freePlatesArr.length)
+                    num = Math.floor(Math.random() * freePlatesArr.length);
                     doc('button' + freePlatesArr[num]).innerHTML = 'O';
                     animate(function(timePassed, id) {
                         doc(id).style.opacity = timePassed*(1/1000);
