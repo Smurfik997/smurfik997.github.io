@@ -251,7 +251,7 @@
                 blockGameSpace();
                 doc(res).style.display = 'block';
                 animate(function(timePassed) {
-                    doc(res).style.opacity = timePassed*(1/1000);
+                    doc(res).style.opacity = timePassed*(0.99/1000);
                 }, 1000);
             }
 
@@ -341,7 +341,7 @@
 
                 clear(doc('buttons'));
                 doc('buttons').style.opacity = 1;
-                
+
                 playerMotions = 'playerMotions: ';
                 botMotions = 'botMotions: ';
                 for (var n = 1; n <= bCount; n++) {
