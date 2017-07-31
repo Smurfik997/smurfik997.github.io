@@ -2,6 +2,10 @@
     <head>
         <title>Tic Tac Toe</title>
         <style>
+            @font-face {
+                font-family: TicTacToe;
+                src: url('TicTacToe.ttf');
+            }
             #mainBlock {
                 width: 340px;
                 height: 340px;
@@ -88,9 +92,10 @@
                 opacity: 0;
                 color: rgb(76, 76, 76);
                 text-align: center;
-                font: 88px/88px sans-serif;
+                font: 88px/88px TicTacToe;
                 cursor: pointer;
                 text-shadow: 0px 3px 5px rgba(0, 0, 0, 0.5);
+                font-weight: 900;
             }
             .text {
                 z-index: 4; 
