@@ -38,6 +38,8 @@
                 box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.5);
             }
             #gameSpace {
+                position: absolute;
+                z-index: 1;
                 margin: 9px 30px;
                 width: 282px;
                 height: 282px;
@@ -46,8 +48,34 @@
                 position: absolute;
             }
             #buttons {
-                z-index: 1;
+                z-index: 2;
                 position: absolute;
+            }
+            #win {
+                z-index: 3;
+                position: absolute;
+                width: 340px;
+                height: 300px;
+                background: rgba(0, 0, 0, 0.6);
+                color: white;
+                text-align: center;
+                font: 42px/300px sans-serif;
+                display: none;
+            }
+            #restartButton {
+                z-index: 5;
+                position: absolute;
+                width: 43px;
+                height: 44px;
+                top: 180px;
+                left: 50%;
+                margin-left: -22px;
+                background: url('restart.png');
+                background-size: cover;
+            }
+            #restartButton:hover {
+                background: url('restartHover.png');
+                background-size: cover;
             }
             .button {
                 width: 88px;
@@ -62,6 +90,12 @@
                 font: 88px/88px sans-serif;
                 cursor: pointer;
                 text-shadow: 0px 3px 5px rgba(0, 0, 0, 0.5);
+            }
+            .text {
+                z-index: 4; 
+                position: absolute; 
+                width: inherit; 
+                height: inherit;
             }
             .first {
                 margin: 0px !important;
@@ -108,6 +142,12 @@
                     </div>
                 </div>
             </div>
+            <div id="win">
+                <div class="text"> 
+                    > You're winner
+                </div>
+                <div id="restartButton"></div>
+            </div>
         </div>
         <script>
             'use strict';
@@ -135,6 +175,24 @@
                 } else {
                     return document.getElementById(val);
                 }
+            }
+
+            function animate(func, duration) {
+                var start = performance.now();
+
+                requestAnimationFrame(function animate(time) {
+                    var timePassed = time - start;
+
+                    if (timePassed >= duration) {
+                        timePassed = duration;
+                    }
+
+                    func(timePassed);
+
+                    if (timePassed < duration) {
+                        requestAnimationFrame(animate);
+                    }
+                });
             }
 
             function debug(val) {
@@ -203,8 +261,16 @@
                             doc(e.target.id).style.cursor = 'no-drop';
                             playerMotion += unFilledPlates[pos - 1];
                             delete unFilledPlates[pos - 1];
+                            if (checkWinner(playerMotion) == 1) {
+                                blockGameSpace();
+                                doc('win').style.display = 'block';
+                                animate(function(timePassed) {
+                                    doc('win').style.opacity = timePassed*(1/1000);
+                                }, 1000);
+                            } else {
+                                botMotion(unFilledPlates);
+                            }
                             debug({'ID': e.target.id, 'Array': unFilledPlates, 'Player Motion': playerMotion, 'Win': checkWinner(playerMotion)});
-                            botMotion(unFilledPlates);
                         } else {
                             debug('Button is already pressed');
                         }
