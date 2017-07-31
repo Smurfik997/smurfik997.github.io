@@ -74,12 +74,6 @@
                 top: 180px;
                 left: 50%;
                 margin-left: -22px;
-                background: url('restart2.0.png');
-                background-size: cover;
-            }
-            .restartButton:hover {
-                background: url('restartHover2.0.png');
-                background-size: cover;
             }
             .button {
                 width: 88px;
@@ -136,19 +130,19 @@
                 <div class="text"> 
                     > You're winner
                 </div>
-                <div class="restartButton"></div>
+                <img class="restartButton"></img>
             </div>
             <div id="lose" class="result">
                 <div class="text"> 
                     > You're a loser
                 </div>
-                <div class="restartButton"></div>
+                <img class="restartButton"></img>
             </div>
             <div id="draw" class="result">
                 <div class="text"> 
                     > Draw
                 </div>
-                <div class="restartButton"></div>
+                <img class="restartButton"></img>
             </div>
         </div>
         <script>
@@ -323,6 +317,13 @@
             function restartGame() {
                 for (var n = 1; n <= restartButtonsCount; n++)
                 {
+                    doc('restartButton', n - 1).src = 'restart.png';
+                    doc('restartButton', n - 1).onmouseover = function(e) {
+                        e.target.src = 'restartHover.png';
+                    }
+                    doc('restartButton', n - 1).onmouseout = function(e) {
+                        e.target.src = 'restart.png';
+                    }
                     doc('restartButton', n - 1).onclick = function(e) {
                         animate(function(timePassed, e) {
                             doc(e.path[1].id).style.opacity = 1 - timePassed*(1/1000);
