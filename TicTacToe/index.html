@@ -51,7 +51,7 @@
                 z-index: 2;
                 position: absolute;
             }
-            #win {
+            .result {
                 z-index: 3;
                 position: absolute;
                 width: 340px;
@@ -126,11 +126,17 @@
                 </div> 
                 <div id="buttons"></div>
             </div>
-            <div id="win">
+            <div id="win" class="result">
                 <div class="text"> 
                     > You're winner
                 </div>
-                <div id="restartButton"></div>
+                <div id="restartButton1"></div>
+            </div>
+            <div id="lose" class="result">
+                <div class="text"> 
+                    > You're a loser
+                </div>
+                <div id="restartButton2"></div>
             </div>
         </div>
         <script>
@@ -154,8 +160,8 @@
                 ]}
             ];
             var unFilledPlates = [];
-            var playerMotion;
-            var botMotion;
+            var playerMotions;
+            var botMotions;
             var winningCombinations = [
                 [1, 5, 9],
                 [3, 5, 7],
@@ -207,6 +213,8 @@
                         return 1;
                     }
                 }
+
+                return 0;
             }
 
             function searchInArr(arr, val) {
@@ -245,11 +253,20 @@
                     doc('button' + freePlatesArr[num]).innerHTML = 'O';
                     doc('button' + freePlatesArr[num]).style.opacity = 1;
                     doc('button' + freePlatesArr[num]).style.cursor = 'no-drop';
+                    botMotions += unFilledPlates[freePlatesArr[num] - 1];
                     delete unFilledPlates[freePlatesArr[num] - 1];
+                    if (checkWinner(botMotions) == 1) {
+                        blockGameSpace();
+                        doc('lose').style.display = 'block';
+                        animate(function(timePassed) {
+                            doc('lose').style.opacity = timePassed*(1/1000);
+                        }, 1000);
+                    } else {
+                        unblockGameSpace();
+                    }
                 }
 
-                unblockGameSpace();
-                debug({'Array': freePlatesArr, 'Random': num});
+                debug({'Array': freePlatesArr, 'Random': num, 'Bot Motions': botMotions, 'Win': checkWinner(botMotions)});
             } 
 
             function unblockGameSpace() {
@@ -261,9 +278,9 @@
                             doc(e.target.id).innerHTML = 'X';
                             doc(e.target.id).style.opacity = 1;
                             doc(e.target.id).style.cursor = 'no-drop';
-                            playerMotion += unFilledPlates[pos - 1];
+                            playerMotions += unFilledPlates[pos - 1];
                             delete unFilledPlates[pos - 1];
-                            if (checkWinner(playerMotion) == 1) {
+                            if (checkWinner(playerMotions) == 1) {
                                 blockGameSpace();
                                 doc('win').style.display = 'block';
                                 animate(function(timePassed) {
@@ -272,7 +289,7 @@
                             } else {
                                 botMotion(unFilledPlates);
                             }
-                            debug({'ID': e.target.id, 'Array': unFilledPlates, 'Player Motion': playerMotion, 'Win': checkWinner(playerMotion)});
+                            debug({'ID': e.target.id, 'Array': unFilledPlates, 'Player Motions': playerMotions, 'Win': checkWinner(playerMotions)});
                         } else {
                             debug('Button is already pressed');
                         }
@@ -284,20 +301,26 @@
                 debug('func init()');
 
                 if (val == 'first') {
-                    doc('restartButton').onclick = function(e) {
-                        animate(function(timePassed) {
-                            doc('win').style.opacity = 1 - timePassed*(1/1000);
-                            
-                            if (doc('win').style.opacity == 0) {
-                                doc('win').style.display = 'none';
-                                init();
-                            }
-                        }, 1000);
-                    };
+                    var res = ['win', 'lose'];
+
+                    for (var n = 1; n <= 2; n++)
+                    {
+                        doc('restartButton' + n).onclick = function(e) {
+                            animate(function(timePassed) {
+                                doc(res[n - 1]).style.opacity = 1 - timePassed*(1/1000);
+
+                                if (doc(res[n - 1]).style.opacity == 0) {
+                                    doc(res[n - 1]).style.display = 'none';
+                                    init();
+                                }
+                            }, 1000);
+                        };
+                    }
                 }
 
                 clear(doc('buttons'));
-                playerMotion = 'playerMotion: ';
+                playerMotions = 'playerMotions: ';
+                botMotions = 'botMotions: ';
                 for (var n = 1; n <= bCount; n++) {
                     unFilledPlates[n - 1] = n;
                 }
