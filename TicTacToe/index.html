@@ -142,6 +142,7 @@
         <script>
             'use strict';
             var bCount = 9;
+            var restartButtonsCount = 2;
             var buttons = [
                 {'lineClass': 'line first', 'arr': [
                     'button first',
@@ -181,7 +182,7 @@
                 }
             }
 
-            function animate(func, duration) {
+            function animate(func, duration, e) {
                 var start = performance.now();
 
                 requestAnimationFrame(function animate(time) {
@@ -191,7 +192,7 @@
                         timePassed = duration;
                     }
 
-                    func(timePassed);
+                    func(timePassed, e);
 
                     if (timePassed < duration) {
                         requestAnimationFrame(animate);
@@ -235,6 +236,14 @@
                 }
             }
 
+            function gameResult(res) {
+                blockGameSpace();
+                doc(res).style.display = 'block';
+                animate(function(timePassed) {
+                    doc(res).style.opacity = timePassed*(1/1000);
+                }, 1000);
+            }
+
             function botMotion(arr) {
                 blockGameSpace();
 
@@ -256,11 +265,7 @@
                     botMotions += unFilledPlates[freePlatesArr[num] - 1];
                     delete unFilledPlates[freePlatesArr[num] - 1];
                     if (checkWinner(botMotions) == 1) {
-                        blockGameSpace();
-                        doc('lose').style.display = 'block';
-                        animate(function(timePassed) {
-                            doc('lose').style.opacity = timePassed*(1/1000);
-                        }, 1000);
+                        gameResult('lose');
                     } else {
                         unblockGameSpace();
                     }
@@ -281,11 +286,7 @@
                             playerMotions += unFilledPlates[pos - 1];
                             delete unFilledPlates[pos - 1];
                             if (checkWinner(playerMotions) == 1) {
-                                blockGameSpace();
-                                doc('win').style.display = 'block';
-                                animate(function(timePassed) {
-                                    doc('win').style.opacity = timePassed*(1/1000);
-                                }, 1000);
+                                gameResult('win');
                             } else {
                                 botMotion(unFilledPlates);
                             }
@@ -297,31 +298,27 @@
                 }
             }
 
+            function restartGame() {
+                for (var n = 1; n <= restartButtonsCount; n++)
+                {
+                    doc('restartButton', n - 1).onclick = function(e) {
+                        animate(function(timePassed, e) {
+                            doc(e.path[1].id).style.opacity = 1 - timePassed*(1/1000);
+
+                            if (doc(e.path[1].id).style.opacity == 0) {
+                                doc(e.path[1].id).style.display = 'none';
+                                init();
+                            }
+                        }, 1000, e);
+                    };
+                }
+            }
+
             function init(val) {
                 debug('func init()');
 
                 if (val == 'first') {
-                    doc('restartButton', 0).onclick = function(e) {
-                        animate(function(timePassed) {
-                            doc('win').style.opacity = 1 - timePassed*(1/1000);
-
-                            if (doc('win').style.opacity == 0) {
-                                doc('win').style.display = 'none';
-                                init();
-                            }
-                        }, 1000);
-                    };
-
-                    doc('restartButton', 1).onclick = function(e) {
-                        animate(function(timePassed) {
-                            doc('lose').style.opacity = 1 - timePassed*(1/1000);
-
-                            if (doc('lose').style.opacity == 0) {
-                                doc('lose').style.display = 'none';
-                                init();
-                            }
-                        }, 1000);
-                    };
+                    restartGame();
                 }
 
                 clear(doc('buttons'));
