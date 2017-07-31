@@ -321,6 +321,7 @@
                     doc('restartButton', n - 1).onclick = function(e) {
                         animate(function(timePassed, e) {
                             doc(e.path[1].id).style.opacity = 1 - timePassed*(1/1000);
+                            doc('buttons').style.opacity = 1 - timePassed*(1/1000);
 
                             if (doc(e.path[1].id).style.opacity == 0) {
                                 doc(e.path[1].id).style.display = 'none';
@@ -339,6 +340,8 @@
                 }
 
                 clear(doc('buttons'));
+                doc('buttons').style.opacity = 1;
+                
                 playerMotions = 'playerMotions: ';
                 botMotions = 'botMotions: ';
                 for (var n = 1; n <= bCount; n++) {
