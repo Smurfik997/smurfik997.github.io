@@ -281,12 +281,18 @@
             }
 
             function init(val) {
-                debug('init');
+                debug('func init()');
 
                 if (val == 'first') {
                     doc('restartButton').onclick = function(e) {
-                        doc('win').style.display = 'none';
-                        init();
+                        animate(function(timePassed) {
+                            doc('win').style.opacity = 1 - timePassed*(1/1000);
+                            
+                            if (doc('win').style.opacity == 0) {
+                                doc('win').style.display = 'none';
+                                init();
+                            }
+                        }, 1000);
                     };
                 }
 
