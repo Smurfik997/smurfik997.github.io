@@ -217,6 +217,10 @@
             function checkWinner(str) {
                 for (var n = 0; n < winningCombinations.length; n++) {
                     if (str.search(winningCombinations[n][0]) > 0 && str.search(winningCombinations[n][1]) > 0 && str.search(winningCombinations[n][2]) > 0) {
+                        for (var k = 1; k <= winningCombinations[n].length; k++) 
+                        {
+                            doc('button' + winningCombinations[n][k - 1]).style.color = '#f44336';
+                        }
                         return 1;
                     }
                 }
