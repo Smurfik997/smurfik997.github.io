@@ -138,11 +138,17 @@
                 </div>
                 <div class="restartButton"></div>
             </div>
+            <div id="draw" class="result">
+                <div class="text"> 
+                    > Draw
+                </div>
+                <div class="restartButton"></div>
+            </div>
         </div>
         <script>
             'use strict';
             var bCount = 9;
-            var restartButtonsCount = 2;
+            var restartButtonsCount = 3;
             var buttons = [
                 {'lineClass': 'line first', 'arr': [
                     'button first',
@@ -269,6 +275,8 @@
                     } else {
                         unblockGameSpace();
                     }
+                } else {
+                    gameResult('draw');
                 }
 
                 debug({'Array': freePlatesArr, 'Random': num, 'Bot Motions': botMotions, 'Win': checkWinner(botMotions)});
