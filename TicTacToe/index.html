@@ -86,7 +86,7 @@
                 opacity: 0;
                 color: rgb(76, 76, 76);
                 text-align: center;
-                font: 88px/94px TicTacToe;
+                font: 60px/88px TicTacToe;
                 cursor: pointer;
                 text-shadow: 0px 3px 5px rgba(0, 0, 0, 0.5);
                 font-weight: 900;
@@ -269,7 +269,7 @@
                 if (freePlatesArr.length != 0)
                 {
                     num = Math.floor(Math.random() * freePlatesArr.length);
-                    doc('button' + freePlatesArr[num]).innerHTML = 'O';
+                    doc('button' + freePlatesArr[num]).innerHTML = 'o';
                     animate(function(timePassed, id) {
                         doc(id).style.opacity = timePassed*(1/1000);
                     }, 1000, 'button' + freePlatesArr[num]);
@@ -294,7 +294,7 @@
                         var pos = parseInt(e.target.id.split('button')[1]);
                         if (searchInArr(unFilledPlates, pos) != -1) 
                         {
-                            doc(e.target.id).innerHTML = 'X';
+                            doc(e.target.id).innerHTML = 'x';
                             animate(function(timePassed, e) {
                                 doc(e.target.id).style.opacity = timePassed*(1/1000);
                             }, 1000, e);
