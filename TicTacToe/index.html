@@ -84,7 +84,7 @@
                 /* background: gray; */
                 float: left; 
                 /* transition: opacity 2s; */
-                transition: color 2s;
+                transition: color 1s;
                 opacity: 0;
                 color: rgb(76, 76, 76);
                 text-align: center;
@@ -273,7 +273,7 @@
                     doc('button' + freePlatesArr[num]).innerHTML = 'O';
                     animate(function(timePassed, id) {
                         doc(id).style.opacity = timePassed*(1/1000);
-                    }, 2000, 'button' + freePlatesArr[num]);
+                    }, 1000, 'button' + freePlatesArr[num]);
                     doc('button' + freePlatesArr[num]).style.cursor = 'no-drop';
                     botMotions += unFilledPlates[freePlatesArr[num] - 1];
                     delete unFilledPlates[freePlatesArr[num] - 1];
@@ -298,7 +298,7 @@
                             doc(e.target.id).innerHTML = 'X';
                             animate(function(timePassed, e) {
                                 doc(e.target.id).style.opacity = timePassed*(1/1000);
-                            }, 2000, e);
+                            }, 1000, e);
                             doc(e.target.id).style.cursor = 'no-drop';
                             playerMotions += unFilledPlates[pos - 1];
                             delete unFilledPlates[pos - 1];
