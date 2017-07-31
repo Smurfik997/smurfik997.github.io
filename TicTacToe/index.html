@@ -62,7 +62,7 @@
                 font: 42px/300px sans-serif;
                 display: none;
             }
-            #restartButton {
+            .restartButton {
                 z-index: 5;
                 position: absolute;
                 width: 43px;
@@ -73,7 +73,7 @@
                 background: url('restart.png');
                 background-size: cover;
             }
-            #restartButton:hover {
+            .restartButton:hover {
                 background: url('restartHover.png');
                 background-size: cover;
             }
@@ -130,13 +130,13 @@
                 <div class="text"> 
                     > You're winner
                 </div>
-                <div id="restartButton1"></div>
+                <div class="restartButton"></div>
             </div>
             <div id="lose" class="result">
                 <div class="text"> 
                     > You're a loser
                 </div>
-                <div id="restartButton2"></div>
+                <div class="restartButton"></div>
             </div>
         </div>
         <script>
@@ -301,21 +301,27 @@
                 debug('func init()');
 
                 if (val == 'first') {
-                    var res = ['win', 'lose'];
+                    doc('restartButton', 0).onclick = function(e) {
+                        animate(function(timePassed) {
+                            doc('win').style.opacity = 1 - timePassed*(1/1000);
 
-                    for (var n = 1; n <= 2; n++)
-                    {
-                        doc('restartButton' + n).onclick = function(e) {
-                            animate(function(timePassed) {
-                                doc(res[n - 1]).style.opacity = 1 - timePassed*(1/1000);
+                            if (doc('win').style.opacity == 0) {
+                                doc('win').style.display = 'none';
+                                init();
+                            }
+                        }, 1000);
+                    };
 
-                                if (doc(res[n - 1]).style.opacity == 0) {
-                                    doc(res[n - 1]).style.display = 'none';
-                                    init();
-                                }
-                            }, 1000);
-                        };
-                    }
+                    doc('restartButton', 1).onclick = function(e) {
+                        animate(function(timePassed) {
+                            doc('lose').style.opacity = 1 - timePassed*(1/1000);
+
+                            if (doc('lose').style.opacity == 0) {
+                                doc('lose').style.display = 'none';
+                                init();
+                            }
+                        }, 1000);
+                    };
                 }
 
                 clear(doc('buttons'));
