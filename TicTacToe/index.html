@@ -83,7 +83,8 @@
                 margin-left: 9px;
                 /* background: gray; */
                 float: left; 
-                transition: opacity 2s;
+                /* transition: opacity 2s; */
+                transition: color 2s;
                 opacity: 0;
                 color: rgb(76, 76, 76);
                 text-align: center;
@@ -270,7 +271,9 @@
                 {
                     num = Math.floor(Math.random() * freePlatesArr.length)
                     doc('button' + freePlatesArr[num]).innerHTML = 'O';
-                    doc('button' + freePlatesArr[num]).style.opacity = 1;
+                    animate(function(timePassed, id) {
+                        doc(id).style.opacity = timePassed*(1/1000);
+                    }, 2000, 'button' + freePlatesArr[num]);
                     doc('button' + freePlatesArr[num]).style.cursor = 'no-drop';
                     botMotions += unFilledPlates[freePlatesArr[num] - 1];
                     delete unFilledPlates[freePlatesArr[num] - 1];
@@ -293,7 +296,9 @@
                         if (searchInArr(unFilledPlates, pos) != -1) 
                         {
                             doc(e.target.id).innerHTML = 'X';
-                            doc(e.target.id).style.opacity = 1;
+                            animate(function(timePassed, e) {
+                                doc(e.target.id).style.opacity = timePassed*(1/1000);
+                            }, 2000, e);
                             doc(e.target.id).style.cursor = 'no-drop';
                             playerMotions += unFilledPlates[pos - 1];
                             delete unFilledPlates[pos - 1];
