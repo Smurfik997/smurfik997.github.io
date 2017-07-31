@@ -124,23 +124,7 @@
                     <div id="lineH" name="2">
                     </div>
                 </div> 
-                <div id="buttons">
-                    <div id="line1" class="line first">
-                        <div id="button1" class="button first"></div>
-                        <div id="button2" class="button"></div>
-                        <div id="button3" class="button"></div>
-                    </div>
-                    <div id="line2" class="line">
-                        <div id="button4" class="button first"></div>
-                        <div id="button5" class="button"></div>
-                        <div id="button6" class="button"></div>
-                    </div>
-                    <div id="line3" class="line">
-                        <div id="button7" class="button first"></div>
-                        <div id="button8" class="button"></div>
-                        <div id="button9" class="button"></div>
-                    </div>
-                </div>
+                <div id="buttons"></div>
             </div>
             <div id="win">
                 <div class="text"> 
@@ -152,7 +136,26 @@
         <script>
             'use strict';
             var bCount = 9;
+            var buttons = [
+                {'lineClass': 'line first', 'arr': [
+                    'button first',
+                    'button',
+                    'button'
+                ]},
+                {'lineClass': 'line', 'arr': [
+                    'button first',
+                    'button',
+                    'button'
+                ]},
+                {'lineClass': 'line', 'arr': [
+                    'button first',
+                    'button',
+                    'button'
+                ]}
+            ];
             var unFilledPlates = [];
+            var playerMotion;
+            var botMotion;
             var winningCombinations = [
                 [1, 5, 9],
                 [3, 5, 7],
@@ -163,11 +166,6 @@
                 [2, 5, 8],
                 [3, 6, 9]
             ]
-            var playerMotion = 'playerMotion: ';
-            var botMotion;
-            for (var n = 1; n <= bCount; n++) {
-                unFilledPlates[n - 1] = n;
-            }
 
             function doc(val, num) {
                 if (num != undefined) {
@@ -197,6 +195,10 @@
 
             function debug(val) {
                 console.log('Tic Tac Toe (Debug Sys):', val);
+            }
+
+            function clear(elem) {
+                elem.innerHTML = '';
             }
 
             function checkWinner(str) {
@@ -277,9 +279,39 @@
                     }
                 }
             }
-            
-            //init
-            unblockGameSpace();
+
+            function init(val) {
+                debug('init');
+
+                if (val == 'first') {
+                    doc('restartButton').onclick = function(e) {
+                        doc('win').style.display = 'none';
+                        init();
+                    };
+                }
+
+                clear(doc('buttons'));
+                playerMotion = 'playerMotion: ';
+                for (var n = 1; n <= bCount; n++) {
+                    unFilledPlates[n - 1] = n;
+                }
+                var id = [0, 3, 6];
+                for (var n = 1; n <= buttons.length; n++) {
+                    var line = document.createElement('div');
+                    line.id = 'line' + n;
+                    line.classList = buttons[n - 1].lineClass;  
+                    doc('buttons').appendChild(line);
+                    for (var k = 1; k <= buttons[n - 1].arr.length; k++) {
+                        var button = document.createElement('div');
+                        button.id = 'button' + String(k + id[n - 1]);
+                        button.classList = buttons[n - 1].arr[k - 1];
+                        doc('line' + n).appendChild(button);
+                    }
+                }
+                unblockGameSpace();
+            }
+
+            init('first');
         </script>
     </body>       
 </html>
