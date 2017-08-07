@@ -1,0 +1,21 @@
+{
+    "cats": [
+        {
+            "url": "images/cats/91615172-find-a-lump-on-cats-skin-632x475.jpg",
+            "width": "632px",
+            "height": "475px"
+        }
+        ,
+        {
+            "url": "images/cats/c64f76dc20c246ca88ee180fe4b4b781.jpg",
+            "width": "640px",
+            "height": "427px"
+        }
+        ,
+        {
+            "url": "images/cats/grief-and-loss.jpg",
+            "width": "582px",
+            "height": "328px"
+        }  
+    ]
+}
