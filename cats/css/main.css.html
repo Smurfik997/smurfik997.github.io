@@ -14,10 +14,6 @@
         }
 
         var heightCSS =  {
-            "#content": {
-                "height": 350,
-                "top": 80
-            },
             ".browserIcon": {
                 "width": 12,
                 "height": 12,
@@ -37,20 +33,29 @@
                 "width": 720
             },
             "#content": {
-                "width": 500,
-                "border-radius": 3,
-                "left": 110
+                "border-radius": 3
             }
         };
 
-        if (GET('priority') == 'height') {
+        if (GET('orientation') == 'height') {
             heightCSS["#browserPanel"] = new Object;
             heightCSS["#browserPanel"]["left"] = 6;
+            widthCSS["#content"]["width"] = 612;
+            widthCSS["#content"]["height"] = widthCSS["#content"]["width"] / parseFloat(GET('width')) * parseFloat(GET('height'));
+            widthCSS["#content"]["margin-left"] = 0 - widthCSS["#content"]["width"] / 2;
+            widthCSS["#content"]["margin-top"] = (heightCSS["#header"]["height"] * parseFloat(GET('scaleY')) - widthCSS["#content"]["height"]) / 2;
         } else {
             widthCSS["#browserPanel"] = new Object;
             widthCSS["#browserPanel"]["left"] = 6;
+            heightCSS["#content"] = new Object;
+            heightCSS["#content"]["height"] = 350;
+            heightCSS["#content"]["width"] = heightCSS["#content"]["height"] / parseFloat(GET('height')) * parseFloat(GET('width'));
+            heightCSS["#content"]["margin-left"] = 0 - heightCSS["#content"]["width"] / 2;
+            heightCSS["#content"]["margin-top"] = (heightCSS["#header"]["height"] - heightCSS["#content"]["height"]) / 2;
         }
 
-        document.body.innerText = JSON.stringify(eval(GET('file')), null, 4);
+        if (GET('orientation') != 'Invalid Key' && GET('width') != 'Invalid Key' && GET('height') != 'Invalid Key' && GET('scaleX') != 'Invalid Key' && GET('scaleY') != 'Invalid Key') {
+            document.body.innerText = JSON.stringify(eval(GET('file')), null, 4);
+        }
     </script>
 </html>

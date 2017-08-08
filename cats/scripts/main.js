@@ -10,18 +10,23 @@ Math.sRandom = function(min, max) {
     return Math.floor(Math.random() * (max + 1 - min)) + min;
 };
 
-var client = new XMLHttpRequest();
+var client = document.createElement('iframe'); 
 
-client.open("GET", "scripts/cats.json", true);
-client.send();
+client.src = 'scripts/cats.json';
+client.setAttribute('enctype', 'application/json');
+client.style.display = 'none';
 client.onload = function(e) {
-    if (client.readyState === 4 && client.status === 200) {
-        var data = JSON.parse(client.responseText, {});
+    var data = JSON.parse(client.contentWindow.document.body.innerText);
 
-        var random = Math.sRandom(0, data.cats.length - 1);
-        debug(data.cats[random].url); 
-    }
+    var random = Math.sRandom(0, data.cats.length - 1);
+    doc('content').style.backgroundImage = 'url(' + data.cats[random].url + ')';
+    doc('contentSizes').style.width = data.cats[random].width;
+    doc('contentSizes').style.height = data.cats[random].height;
+
+    document.body.removeChild(client);
 }
+
+document.body.appendChild(client);
 
 var title = 'Cats Finder';
 
