@@ -31,16 +31,15 @@
         var widthCSS =  {
             "#mainBlock": {
                 "width": 720
-            },
-            "#content": {
-                "border-radius": 3
             }
         };
 
         if (GET('orientation') == 'height') {
             heightCSS["#browserPanel"] = new Object;
             heightCSS["#browserPanel"]["left"] = 6;
+            widthCSS["#content"] = new Object;
             widthCSS["#content"]["width"] = 612;
+            widthCSS["#content"]["border-radius"] = 3;
             widthCSS["#content"]["height"] = widthCSS["#content"]["width"] / parseFloat(GET('width')) * parseFloat(GET('height'));
             widthCSS["#content"]["margin-left"] = 0 - widthCSS["#content"]["width"] / 2;
             widthCSS["#content"]["margin-top"] = (heightCSS["#header"]["height"] * parseFloat(GET('scaleY')) - widthCSS["#content"]["height"]) / 2;
@@ -49,6 +48,7 @@
             widthCSS["#browserPanel"]["left"] = 6;
             heightCSS["#content"] = new Object;
             heightCSS["#content"]["height"] = 350;
+            heightCSS["#content"]["border-radius"] = 3;
             heightCSS["#content"]["width"] = heightCSS["#content"]["height"] / parseFloat(GET('height')) * parseFloat(GET('width'));
             heightCSS["#content"]["margin-left"] = 0 - heightCSS["#content"]["width"] / 2;
             heightCSS["#content"]["margin-top"] = (heightCSS["#header"]["height"] - heightCSS["#content"]["height"]) / 2;
