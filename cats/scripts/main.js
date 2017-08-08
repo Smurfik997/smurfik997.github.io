@@ -31,6 +31,10 @@ client.style.display = 'none';
 client.onload = function(e) {
     var data = JSON.parse(client.contentWindow.document.body.innerText);
 
+    if (data.cats == undefined) {
+        window.location.reload();
+    }
+
     var random = Math.sRandom(0, data.cats.length - 1);
     
     doc('content').setAttribute('imageURL', data.cats[random].url)
