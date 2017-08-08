@@ -29,8 +29,6 @@ function preloader() {
 }
 
 function resize() {
-    preloader();
-
     var width = document.documentElement.clientWidth;
     var height = window.innerHeight;
     var orientation = new String;
@@ -116,9 +114,18 @@ function resize() {
 }
 
 document.body.onresize = function() {
+    preloader();
     resize();
 };
 
 document.body.onload = function() {
+    preloader();
     resize();
+
+    var cat = new Image()
+    cat.src = doc('content').getAttribute('imageURL');
+    doc('content').removeAttribute('imageURL');
+    cat.onload = function(e) {
+        doc('content').style.backgroundImage = 'url(' + cat.src + ')';
+    }
 };

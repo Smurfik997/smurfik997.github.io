@@ -19,11 +19,8 @@ client.onload = function(e) {
     var data = JSON.parse(client.contentWindow.document.body.innerText);
 
     var random = Math.sRandom(0, data.cats.length - 1);
-    var cat = new Image()
-    cat.src = data.cats[random].url;
-    cat.onload = function(e) {
-        doc('content').style.backgroundImage = 'url(' + cat.src + ')';
-    }
+    
+    doc('content').setAttribute('imageURL', data.cats[random].url)
     doc('contentSizes').style.width = data.cats[random].width;
     doc('contentSizes').style.height = data.cats[random].height;
 
