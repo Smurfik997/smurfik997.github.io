@@ -1,13 +1,31 @@
-function changeSizes(name, cssStr) {
-    if (name.split('#')[1] != undefined) {
-        doc(name.split('#')[1]).style.cssText += cssStr;
-    } else if (name.split('.')[1] != undefined) {
-        [].forEach.call(document.getElementsByClassName(name.split('.')[1]), function(e) {
-            e.style.cssText += cssStr;
-        });
-    } else {
-        document.getElementsByTagName(name)[0].style.cssText += cssStr;
+function changeSizes(dataObj, scale) {
+    for (name in dataObj) {
+        var cssStr = new String;
+        
+        for (styleName in dataObj[name]) {
+            cssStr += String(styleName + ': ' + dataObj[name][styleName] * scale + 'px; ');
+        }
+
+        if (name.split('#')[1] != undefined) {
+            doc(name.split('#')[1]).style.cssText += cssStr;
+        } else if (name.split('.')[1] != undefined) {
+            [].forEach.call(document.getElementsByClassName(name.split('.')[1]), function(e) {
+                e.style.cssText += cssStr;
+            });
+        } else {
+            document.getElementsByTagName(name)[0].style.cssText += cssStr;
+        }
     }
+}
+
+function removePreloader() {
+    var frames = [];
+    frames = document.querySelectorAll('iframe');
+
+    if (frames.length == 0) {
+        doc('pagePreloader').remove();
+        doc('mainBlock').style.display = 'block';
+    } 
 }
 
 function resize() {
@@ -36,42 +54,26 @@ function resize() {
     scales = 'scaleX=' + scaleX + '&scaleY=' + scaleY;
 
     var clientX = document.createElement('iframe');    
-
+    var clientY = document.createElement('iframe');    
     clientX.src = 'css/main.css.html?file=widthCSS' + '&' + orientation + '&' + sizes + '&' + scales;
     clientX.style.display = 'none';
+    clientY.src = 'css/main.css.html?file=heightCSS' + '&' + orientation + '&' + sizes + '&' + scales;
+    clientY.style.display = 'none';
+
     clientX.onload = function(e) {
         var dataObj = JSON.parse(clientX.contentWindow.document.body.innerText);
 
-        for (name in dataObj) {
-            var cssStr = new String;
-            
-            for (styleName in dataObj[name]) {
-                cssStr += String(styleName + ': ' + dataObj[name][styleName] * scaleX + 'px; ');
-            }
-
-            changeSizes(name, cssStr);
-        }    
+        changeSizes(dataObj, scaleX);
 
         document.body.removeChild(clientX);
         document.body.appendChild(clientY); 
     }
 
-    var clientY = document.createElement('iframe');    
-
-    clientY.src = 'css/main.css.html?file=heightCSS' + '&' + orientation + '&' + sizes + '&' + scales;
-    clientY.style.display = 'none';
+    
     clientY.onload = function(e) {
         var dataObj = JSON.parse(clientY.contentWindow.document.body.innerText);
 
-        for (name in dataObj) {
-            var cssStr = new String;
-            
-            for (styleName in dataObj[name]) {
-                cssStr += String(styleName + ': ' + dataObj[name][styleName] * scaleY + 'px; ');
-            }
-
-            changeSizes(name, cssStr);
-        }
+        changeSizes(dataObj, scaleY);
 
         doc('mainBlock').style.height = height + 'px';
 
@@ -83,13 +85,7 @@ function resize() {
 
         document.body.removeChild(clientY);
 
-        var frames = [];
-        frames = document.querySelectorAll('iframe');
-    
-        if (frames.length == 0) {
-            doc('pagePreloader').remove();
-            doc('mainBlock').style.display = 'block';
-        } 
+        removePreloader();
     }
 
     document.body.appendChild(clientX); 

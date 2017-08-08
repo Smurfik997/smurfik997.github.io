@@ -27,7 +27,6 @@ function preloader() {
 var client = document.createElement('iframe'); 
 
 client.src = 'scripts/cats.json';
-client.setAttribute('enctype', 'application/json');
 client.style.display = 'none';
 client.onload = function(e) {
     var data = JSON.parse(client.contentWindow.document.body.innerText);
@@ -45,9 +44,10 @@ client.onload = function(e) {
     document.body.appendChild(script).onload = function() {
         preloader();
         
-        var cat = new Image()
+        var cat = new Image();
         cat.src = doc('content').getAttribute('imageURL');
         doc('content').removeAttribute('imageURL');
+        
         cat.onload = function(e) {
             doc('content').style.backgroundImage = 'url(' + cat.src + ')';
             resize();
