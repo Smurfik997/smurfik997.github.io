@@ -34,6 +34,10 @@
             }
         };
 
+        var error = {
+            "error": 1
+        }
+
         heightCSS["#content"] = new Object;
         widthCSS["#content"] = new Object;
         heightCSS["#browserPanel"] = new Object;
@@ -57,6 +61,8 @@
 
         if (GET('orientation') != 'Invalid Key' && GET('width') != 'Invalid Key' && GET('height') != 'Invalid Key' && GET('scaleX') != 'Invalid Key' && GET('scaleY') != 'Invalid Key') {
             document.body.innerText = JSON.stringify(eval(GET('file')), null, 4);
+        } else {
+            document.body.innerText = JSON.stringify(error, null, 4);
         }
     </script>
 </html>
