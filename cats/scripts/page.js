@@ -120,12 +120,12 @@ document.body.onresize = function() {
 
 document.body.onload = function() {
     preloader();
-    resize();
 
     var cat = new Image()
     cat.src = doc('content').getAttribute('imageURL');
     doc('content').removeAttribute('imageURL');
     cat.onload = function(e) {
         doc('content').style.backgroundImage = 'url(' + cat.src + ')';
+        resize();
     }
 };
