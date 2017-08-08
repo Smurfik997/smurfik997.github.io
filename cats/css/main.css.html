@@ -1,0 +1,56 @@
+<html>
+    <body></body>
+    <script>
+        function GET(key) {
+            var url = document.URL;
+            var items = url.split('?')[1].split('&');   
+            var res = {};
+
+            items.forEach(function(val) {
+                res[String(val.split('=')[0])] = String(val.split('=')[1]);
+            });
+
+            return res[key] ? res[key] : 'Invalid Key';
+        }
+
+        var heightCSS =  {
+            "#content": {
+                "height": 350,
+                "top": 80
+            },
+            ".browserIcon": {
+                "width": 12,
+                "height": 12,
+                "margin-top": 9
+            },
+            "#header": {
+                "height": 30,
+                "font-size": 16
+            },
+            "#pageName": {
+                "line-height": 30
+            }
+        };
+
+        var widthCSS =  {
+            "#mainBlock": {
+                "width": 720
+            },
+            "#content": {
+                "width": 500,
+                "border-radius": 3,
+                "left": 110
+            }
+        };
+
+        if (GET('priority') == 'height') {
+            heightCSS["#browserPanel"] = new Object;
+            heightCSS["#browserPanel"]["left"] = 6;
+        } else {
+            widthCSS["#browserPanel"] = new Object;
+            widthCSS["#browserPanel"]["left"] = 6;
+        }
+
+        document.body.innerText = JSON.stringify(eval(GET('file')), null, 4);
+    </script>
+</html>
