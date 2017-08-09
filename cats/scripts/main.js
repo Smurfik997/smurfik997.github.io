@@ -36,25 +36,20 @@ client.onload = function(e) {
     }
 
     var random = Math.sRandom(0, data.cats.length - 1);
-    
-    doc('content').setAttribute('imageURL', data.cats[random].url)
-    doc('contentSizes').style.width = data.cats[random].width;
-    doc('contentSizes').style.height = data.cats[random].height;
-
-    document.body.removeChild(client);
-
     var script = document.createElement('script');
     script.src = 'scripts/page.js';
-    document.body.appendChild(script).onload = function() {
+    document.body.appendChild(script).onload = function(e) {
         preloader();
         
         var cat = new Image();
-        cat.src = doc('content').getAttribute('imageURL');
-        doc('content').removeAttribute('imageURL');
+        cat.src = data.cats[random].url;  
         
         cat.onload = function(e) {
+            doc('contentSizes').style.width = cat.width;
+            doc('contentSizes').style.height = cat.height;
             doc('content').style.backgroundImage = 'url(' + cat.src + ')';
             resize();
+            document.body.removeChild(client);
         }
     }
 }
