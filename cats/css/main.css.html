@@ -46,15 +46,15 @@
         if (GET('orientation') == 'height') {
             heightCSS["#browserPanel"]["left"] = 6;
             widthCSS["#content"]["width"] = 612;
-            heightCSS["#content"]["border-radius"] = 3;
-            widthCSS["#content"]["height"] = widthCSS["#content"]["width"] / parseFloat(GET('width')) * parseFloat(GET('height'));
+            heightCSS["#content"]["border-radius"] = 5;
+            widthCSS["#content"]["height"] = widthCSS["#content"]["width"] / parseInt(GET('width')) * parseFloat(GET('height'));
             widthCSS["#content"]["margin-left"] = 0 - widthCSS["#content"]["width"] / 2;
             widthCSS["#content"]["margin-top"] = (heightCSS["#header"]["height"] * parseFloat(GET('scaleY')) - widthCSS["#content"]["height"]) / 2;
         } else {
             widthCSS["#browserPanel"]["left"] = 6;
             heightCSS["#content"]["height"] = 350;
-            widthCSS["#content"]["border-radius"] = 3;
-            heightCSS["#content"]["width"] = heightCSS["#content"]["height"] / parseFloat(GET('height')) * parseFloat(GET('width'));
+            widthCSS["#content"]["border-radius"] = 5;
+            heightCSS["#content"]["width"] = heightCSS["#content"]["height"] / parseInt(GET('height')) * parseFloat(GET('width'));
             heightCSS["#content"]["margin-left"] = 0 - heightCSS["#content"]["width"] / 2;
             heightCSS["#content"]["margin-top"] = (heightCSS["#header"]["height"] - heightCSS["#content"]["height"]) / 2;
         }
