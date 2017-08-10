@@ -88,14 +88,16 @@ function resize(params) {
             doc('mainBlock').style.height = height + 'px';
             
             if (doc('content').style.height.split('px')[0] > 350 * scaleY) {
-                resize({"orientation": "orientation=width"})
+                resize({"orientation": "orientation=width"});
             } else if (doc('content').style.width.split('px')[0] > 612 * scaleX) {
-                resize({"orientation": "orientation=height"})
+                resize({"orientation": "orientation=height"});
             }
 
             if (width != document.documentElement.clientWidth) {
+                console.log(width, document.documentElement.clientWidth);
                 resize();
             } else if (height != window.innerHeight) {
+                console.log(height, window.innerHeight);
                 resize();
             }
 
