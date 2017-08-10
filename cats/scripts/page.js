@@ -91,9 +91,9 @@ function resize(params) {
             var currentScale;
 
             if (orientation == 'width') {
-                currentScale = scaleX;
-            } else {
                 currentScale = scaleY;
+            } else {
+                currentScale = scaleX;
             }
 
             if (doc('content').style.height.split('px')[0] > 350 * currentScale) {
