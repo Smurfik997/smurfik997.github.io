@@ -90,6 +90,7 @@ function resize(params) {
             console.log(dataObj);
         } else {
             changeSizes(dataObj, scaleY);
+            document.body.removeChild(clientY);
             doc('mainBlock').style.height = height + 'px';
             
             if (doc('content').style.height.split('px')[0] > 350 * scaleY) {
@@ -107,8 +108,7 @@ function resize(params) {
             } else if (height != window.innerHeight) {
                 resize();
             }
-
-            document.body.removeChild(clientY);
+            
             removePreloader();
         }
     }
