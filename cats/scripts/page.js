@@ -48,6 +48,7 @@ function resize(params) {
     if (params == undefined) {
         content = 'content=' + orientation.split('=')[1];
     } else {
+        console.log(params);
         content = params.content;
     }
     console.log(content);
@@ -108,7 +109,7 @@ function resize(params) {
             } else if (height != window.innerHeight) {
                 resize();
             }
-            
+
             removePreloader();
         }
     }
