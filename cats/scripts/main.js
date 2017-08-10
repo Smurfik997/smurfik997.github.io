@@ -1,3 +1,15 @@
+/* function GET(key) {
+    var url = document.URL;
+    var items = url.split('?')[1].split('&');   
+    var res = {};
+
+    items.forEach(function(val) {
+        res[String(val.split('=')[0])] = String(val.split('=')[1]);
+    });
+
+    return res[key] ? res[key] : 'Invalid Key';
+} */
+
 function doc(val, num) {
     return num != undefined ? document.getElementsByClassName(val)[num] : document.getElementById(val);
 }
@@ -23,7 +35,7 @@ function preloader() {
 function init() {
     var title = 'Cats Finder';
     var client = document.createElement('iframe'); 
-    client.src = 'scripts/cats.json';
+    client.src = 'images/cats/cats.json';
     client.style.display = 'none';
     client.onload = function(e) {
         var data = JSON.parse(client.contentWindow.document.body.innerText);
@@ -31,7 +43,7 @@ function init() {
         if (data.cats == undefined) {
             window.location.reload();
         } else {
-            var num = randomNum(0, data.cats.length - 1);
+            var num = /*GET('num');*/randomNum(0, data.cats.length - 1);
             var script = document.createElement('script');
             script.src = 'scripts/page.js';
             document.body.appendChild(script).onload = function(e) {
