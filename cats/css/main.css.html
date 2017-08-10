@@ -28,14 +28,12 @@
             GET('width'),
             GET('height'),
             GET('scaleX'),
-            GET('scaleY'),
-            GET('confOrientation')
+            GET('scaleY')
         ]
 
         var error = {
             "errorCode": "135",
             "orientation": params[0],
-            "confOrientation": params[5],
             "width": params[1],
             "height": params[2],
             "scaleX": params[3],
@@ -47,27 +45,23 @@
         heightCSS["#browserPanel"] = new Object;
         widthCSS["#browserPanel"] = new Object;
 
-        if (params[5] == 'height') {
+        if (params[0] == 'height') {
             heightCSS["#browserPanel"]["left"] = 6;
             widthCSS["#content"]["width"] = 612;
+            heightCSS["#content"]["border-radius"] = 5;
             widthCSS["#content"]["height"] = widthCSS["#content"]["width"] / parseFloat(params[1]) * parseFloat(params[2]) - 1;
             widthCSS["#content"]["margin-left"] = 0 - widthCSS["#content"]["width"] / 2;
             widthCSS["#content"]["margin-top"] = (heightCSS["#header"]["height"] * parseFloat(params[4]) - widthCSS["#content"]["height"]) / 2;
         } else {
             widthCSS["#browserPanel"]["left"] = 6;
             heightCSS["#content"]["height"] = 350;
+            widthCSS["#content"]["border-radius"] = 5;
             heightCSS["#content"]["width"] = heightCSS["#content"]["height"] / parseFloat(params[2]) * parseFloat(params[1]) - 1;
             heightCSS["#content"]["margin-left"] = 0 - heightCSS["#content"]["width"] / 2;
             heightCSS["#content"]["margin-top"] = (heightCSS["#header"]["height"] - heightCSS["#content"]["height"]) / 2;
         }
 
-        if (params[0] == 'height') {
-            heightCSS["#content"]["border-radius"] = 5;
-        } else {
-            widthCSS["#content"]["border-radius"] = 5;
-        }
-
-        if (params[0] != 'Invalid Key' && params[1] != 'Invalid Key' && params[2] != 'Invalid Key' && params[3] != 'Invalid Key' && params[4] != 'Invalid Key' && params[5] != 'Invalid Key') {
+        if (params[0] != 'Invalid Key' && params[1] != 'Invalid Key' && params[2] != 'Invalid Key' && params[3] != 'Invalid Key' && params[4] != 'Invalid Key') {
             document.body.innerText = JSON.stringify(eval(GET('file')), null, 4);
         } else {
             document.body.innerText = JSON.stringify(error, null, 4);

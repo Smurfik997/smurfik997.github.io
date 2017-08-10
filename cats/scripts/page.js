@@ -31,26 +31,23 @@ function removePreloader() {
 function resize(params) {
     var width = document.documentElement.clientWidth;
     var height = window.innerHeight;
+    console.log(height, width);
     var orientation = new String;
     var sizes = 'height=' + doc('content').getAttribute('height').split('px')[0] + '&width=' + doc('content').getAttribute('width').split('px')[0];
     var scales = new String;
     var scaleX = 1;
     var scaleY = 1;
 
-    if (width > height) {
-        orientation = 'orientation=width';
-        confOrientation = 'confOrientation=width';
-    } else if (width < height) {
-        orientation = 'orientation=height';
-        confOrientation = 'confOrientation=height';
-    }
-
-    if (params != undefined)
+    if (params == undefined)
     {
-        confOrientation = params["orientation"];
+        if (width > height) {
+            orientation = 'orientation=width';
+        } else if (width < height) {
+            orientation = 'orientation=height';
+        }
+    } else {
+        orientation = params.orientation;
     }
-
-    console.log(orientation, confOrientation);
 
     if (width/720 > 1) {
         scaleX = width/720;
@@ -61,12 +58,13 @@ function resize(params) {
     }
 
     scales = 'scaleX=' + scaleX + '&scaleY=' + scaleY;
+    console.log(scales);
 
     var clientX = document.createElement('iframe');    
     var clientY = document.createElement('iframe');    
-    clientX.src = 'css/main.css.html?file=widthCSS' + '&' + orientation + '&' + confOrientation + '&' + sizes + '&' + scales;
+    clientX.src = 'css/main.css.html?file=widthCSS' + '&' + orientation + '&' + sizes + '&' + scales;
     clientX.style.display = 'none';
-    clientY.src = 'css/main.css.html?file=heightCSS' + '&' + orientation + '&' + confOrientation + '&' + sizes + '&' + scales;
+    clientY.src = 'css/main.css.html?file=heightCSS' + '&' + orientation + '&' + sizes + '&' + scales;
     clientY.style.display = 'none';
 
     clientX.onload = function(e) {
@@ -91,27 +89,19 @@ function resize(params) {
             changeSizes(dataObj, scaleY);
             doc('mainBlock').style.height = height + 'px';
             
-            var currentScale;
+            /* if (doc('content').style.height.split('px')[0] > 350 * scaleY) {
+                console.log(doc('content').style.height.split('px')[0], 350 * scaleY);
+                resize({"orientation": "orientation=width"});
+            } else if (doc('content').style.width.split('px')[0] > 612 * scaleX) {
+                console.log(doc('content').style.width.split('px')[0], 612 * scaleX);
+                resize({"orientation": "orientation=height"});
+            } */
 
-            if (confOrientation == 'width') {
-                currentScale = scaleY;
-            } else {
-                currentScale = scaleX;
-            }
-
-            if (doc('content').style.height.split('px')[0] > 350 * currentScale) {
-                console.log(doc('content').style.height.split('px')[0], 350 * currentScale);
-                resize({"orientation": "confOrientation=width"});
-            } else if (doc('content').style.width.split('px')[0] > 612 * currentScale) {
-                console.log(doc('content').style.width.split('px')[0], 612 * currentScale);
-                resize({"orientation": "confOrientation=height"});
-            }
+            console.log(orientation);
 
             if (width != document.documentElement.clientWidth) {
-                console.log(width, document.documentElement.clientWidth);
                 resize();
             } else if (height != window.innerHeight) {
-                console.log(height, window.innerHeight);
                 resize();
             }
 
