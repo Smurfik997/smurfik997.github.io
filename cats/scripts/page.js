@@ -46,8 +46,9 @@ function resize(params) {
         }
     } else {
         orientation = params["orientation"];
-        console.log(orientation);
     }
+
+    console.log(orientation);
 
     if (width/720 > 1) {
         scaleX = width/720;
