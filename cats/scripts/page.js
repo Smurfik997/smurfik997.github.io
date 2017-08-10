@@ -37,18 +37,20 @@ function resize(params) {
     var scaleX = 1;
     var scaleY = 1;
 
-    if (params == undefined)
-    {
-        if (width > height) {
-            orientation = 'orientation=width';
-        } else if (width < height) {
-            orientation = 'orientation=height';
-        }
-    } else {
-        orientation = params["orientation"];
+    if (width > height) {
+        orientation = 'orientation=width';
+        confOrientation = 'confOrientation=width';
+    } else if (width < height) {
+        orientation = 'orientation=height';
+        confOrientation = 'confOrientation=height';
     }
 
-    console.log(orientation);
+    if (params != undefined)
+    {
+        confOrientation = params["orientation"];
+    }
+
+    console.log(orientation, confOrientation);
 
     if (width/720 > 1) {
         scaleX = width/720;
@@ -62,9 +64,9 @@ function resize(params) {
 
     var clientX = document.createElement('iframe');    
     var clientY = document.createElement('iframe');    
-    clientX.src = 'css/main.css.html?file=widthCSS' + '&' + orientation + '&' + sizes + '&' + scales;
+    clientX.src = 'css/main.css.html?file=widthCSS' + '&' + orientation + '&' + confOrientation + '&' + sizes + '&' + scales;
     clientX.style.display = 'none';
-    clientY.src = 'css/main.css.html?file=heightCSS' + '&' + orientation + '&' + sizes + '&' + scales;
+    clientY.src = 'css/main.css.html?file=heightCSS' + '&' + orientation + '&' + confOrientation + '&' + sizes + '&' + scales;
     clientY.style.display = 'none';
 
     clientX.onload = function(e) {
@@ -91,7 +93,7 @@ function resize(params) {
             
             var currentScale;
 
-            if (orientation == 'width') {
+            if (confOrientation == 'width') {
                 currentScale = scaleY;
             } else {
                 currentScale = scaleX;
@@ -99,10 +101,10 @@ function resize(params) {
 
             if (doc('content').style.height.split('px')[0] > 350 * currentScale) {
                 console.log(doc('content').style.height.split('px')[0], 350 * currentScale);
-                resize({"orientation": "orientation=width"});
+                resize({"orientation": "confOrientation=width"});
             } else if (doc('content').style.width.split('px')[0] > 612 * currentScale) {
                 console.log(doc('content').style.width.split('px')[0], 612 * currentScale);
-                resize({"orientation": "orientation=height"});
+                resize({"orientation": "confOrientation=height"});
             }
 
             if (width != document.documentElement.clientWidth) {
