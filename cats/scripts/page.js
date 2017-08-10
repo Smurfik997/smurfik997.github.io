@@ -94,13 +94,16 @@ function resize(params) {
             document.body.removeChild(clientY);
             doc('mainBlock').style.height = height + 'px';
             
-            if (doc('content').style.height.split('px')[0] > 350 * scaleY) {
+            if (doc('content').style.height.split('px')[0] > 350 * scaleY || doc('content').style.width.split('px')[0] > 612 * scaleX) {
                 console.log(doc('content').style.height.split('px')[0], 350 * scaleY);
-                resize({"content": "content=width"});
-            } else if (doc('content').style.width.split('px')[0] > 612 * scaleX) {
                 console.log(doc('content').style.width.split('px')[0], 612 * scaleX);
-                resize({"content": "content=height"});
-            } 
+                if (orientation == 'width') 
+                {
+                    resize({"content": "content=height"});
+                } else {
+                    resize({"content": "content=width"});
+                }
+            }
 
             console.log(orientation);
 
