@@ -32,7 +32,7 @@ function resize() {
     var width = document.documentElement.clientWidth;
     var height = window.innerHeight;
     var orientation = new String;
-    var sizes = 'height=' + doc('contentSizes').style.height.split('px')[0] + '&width=' + doc('contentSizes').style.width.split('px')[0];
+    var sizes = 'height=' + doc('content').getAttribute('height').split('px')[0] + '&width=' + doc('content').getAttribute('width').split('px')[0];
     var scales = new String;
     var scaleX = 1;
     var scaleY = 1;
@@ -63,35 +63,40 @@ function resize() {
     clientX.onload = function(e) {
         var dataObj = JSON.parse(clientX.contentWindow.document.body.innerText);
 
-        changeSizes(dataObj, scaleX);
-
-        document.body.removeChild(clientX);
-        document.body.appendChild(clientY); 
+        if (dataObj.errorCode != undefined) {
+            console.log(dataObj);
+        } else {
+            changeSizes(dataObj, scaleX);
+            document.body.removeChild(clientX);
+            document.body.appendChild(clientY); 
+        }
     }
 
     
     clientY.onload = function(e) {
         var dataObj = JSON.parse(clientY.contentWindow.document.body.innerText);
 
-        changeSizes(dataObj, scaleY);
+        if (dataObj.errorCode != undefined) {
+            console.log(dataObj);
+        } else {
+            changeSizes(dataObj, scaleY);
+            doc('mainBlock').style.height = height + 'px';
 
-        doc('mainBlock').style.height = height + 'px';
+            if (width != document.documentElement.clientWidth) {
+                resize();
+            } else if (height != window.innerHeight) {
+                resize();
+            }
 
-        if (width != document.documentElement.clientWidth) {
-            resize();
-        } else if (height != window.innerHeight) {
-            resize();
+            document.body.removeChild(clientY);
+            removePreloader();
         }
-
-        document.body.removeChild(clientY);
-
-        removePreloader();
     }
 
     document.body.appendChild(clientX); 
 }
 
-document.body.onresize = function() {
-    preloader()
+document.body.onresize = function(e) {
+    preloader();
     resize();
 };
