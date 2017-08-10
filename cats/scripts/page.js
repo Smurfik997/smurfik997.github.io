@@ -88,11 +88,11 @@ function resize(params) {
             changeSizes(dataObj, scaleY);
             doc('mainBlock').style.height = height + 'px';
             
-            if (doc('content').style.height.split('px')[0] > 350 * scaleY) {
-                console.log(doc('content').style.height.split('px')[0], 350 * scaleY);
+            if (doc('content').style.height.split('px')[0] > 350 * scaleX) {
+                console.log(doc('content').style.height.split('px')[0], 350 * scaleX);
                 resize({"orientation": "orientation=width"});
-            } else if (doc('content').style.width.split('px')[0] > 612 * scaleX) {
-                console.log(doc('content').style.width.split('px')[0], 612 * scaleX);
+            } else if (doc('content').style.width.split('px')[0] > 612 * scaleY) {
+                console.log(doc('content').style.width.split('px')[0], 612 * scaleY);
                 resize({"orientation": "orientation=height"});
             }
 
