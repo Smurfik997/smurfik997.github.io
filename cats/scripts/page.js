@@ -63,10 +63,20 @@ function resize(params) {
     scales = 'scaleX=' + scaleX + '&scaleY=' + scaleY;
     console.log(scales);
 
+    if (doc('clientX') != undefined) {
+        doc('clientX').remove();
+    }
+
+    if (doc('clientY') != undefined) {
+        doc('clientY').remove();
+    }
+
     var clientX = document.createElement('iframe');    
     var clientY = document.createElement('iframe');    
+    clientX.id = 'clientX';
     clientX.src = 'css/main.css.html?file=widthCSS' + '&' + orientation + '&' + sizes + '&' + scales + '&' + content;
     clientX.style.display = 'none';
+    clientY.id = 'clientY';
     clientY.src = 'css/main.css.html?file=heightCSS' + '&' + orientation + '&' + sizes + '&' + scales + '&' + content;
     clientY.style.display = 'none';
 
