@@ -48,7 +48,6 @@ function resize(params) {
     if (params == undefined) {
         content = 'content=' + orientation.split('=')[1];
     } else {
-        console.log(params);
         content = params.content;
     }
     console.log(content);
@@ -97,7 +96,7 @@ function resize(params) {
             if (doc('content').style.height.split('px')[0] > 350 * scaleY || doc('content').style.width.split('px')[0] > 612 * scaleX) {
                 console.log(doc('content').style.height.split('px')[0], 350 * scaleY);
                 console.log(doc('content').style.width.split('px')[0], 612 * scaleX);
-                if (orientation == 'width') 
+                if (orientation.split('=')[1] == 'width') 
                 {
                     resize({"content": "content=height"});
                 } else {
