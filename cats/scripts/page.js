@@ -45,7 +45,7 @@ function resize(params) {
             orientation = 'orientation=height';
         }
     } else {
-        orientation = params.orientation;
+        orientation = params["orientation"];
     }
 
     if (width/720 > 1) {
