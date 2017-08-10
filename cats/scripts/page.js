@@ -31,6 +31,7 @@ function removePreloader() {
 function resize(params) {
     var width = document.documentElement.clientWidth;
     var height = window.innerHeight;
+    var content;
     console.log(height, width);
     var orientation = new String;
     var sizes = 'height=' + doc('content').getAttribute('height').split('px')[0] + '&width=' + doc('content').getAttribute('width').split('px')[0];
@@ -38,16 +39,18 @@ function resize(params) {
     var scaleX = 1;
     var scaleY = 1;
 
-    if (params == undefined)
-    {
-        if (width > height) {
-            orientation = 'orientation=width';
-        } else if (width < height) {
-            orientation = 'orientation=height';
-        }
-    } else {
-        orientation = params.orientation;
+    if (width > height) {
+        orientation = 'orientation=width';
+    } else if (width < height) {
+        orientation = 'orientation=height';
     }
+
+    if (params == undefined) {
+        content = 'content=' + orientation.split('=')[1];
+    } else {
+        content = params.content;
+    }
+    console.log(content);
 
     if (width/720 > 1) {
         scaleX = width/720;
@@ -62,9 +65,9 @@ function resize(params) {
 
     var clientX = document.createElement('iframe');    
     var clientY = document.createElement('iframe');    
-    clientX.src = 'css/main.css.html?file=widthCSS' + '&' + orientation + '&' + sizes + '&' + scales;
+    clientX.src = 'css/main.css.html?file=widthCSS' + '&' + orientation + '&' + sizes + '&' + scales + '&' + content;
     clientX.style.display = 'none';
-    clientY.src = 'css/main.css.html?file=heightCSS' + '&' + orientation + '&' + sizes + '&' + scales;
+    clientY.src = 'css/main.css.html?file=heightCSS' + '&' + orientation + '&' + sizes + '&' + scales + '&' + content;
     clientY.style.display = 'none';
 
     clientX.onload = function(e) {
@@ -89,13 +92,13 @@ function resize(params) {
             changeSizes(dataObj, scaleY);
             doc('mainBlock').style.height = height + 'px';
             
-            /* if (doc('content').style.height.split('px')[0] > 350 * scaleY) {
+            if (doc('content').style.height.split('px')[0] > 350 * scaleY) {
                 console.log(doc('content').style.height.split('px')[0], 350 * scaleY);
-                resize({"orientation": "orientation=width"});
+                resize({"content": "content=width"});
             } else if (doc('content').style.width.split('px')[0] > 612 * scaleX) {
                 console.log(doc('content').style.width.split('px')[0], 612 * scaleX);
-                resize({"orientation": "orientation=height"});
-            } */
+                resize({"content": "content=height"});
+            } 
 
             console.log(orientation);
 
