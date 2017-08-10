@@ -1,6 +1,12 @@
 {
     "cats": [
         {
+            "url": "images/cats/test1.png"
+        },
+        {
+            "url": "images/cats/test2.png"
+        },
+        {
             "url": "images/cats/91615172-find-a-lump-on-cats-skin-632x475.jpg"
         },
         {

@@ -28,7 +28,7 @@ function removePreloader() {
     } 
 }
 
-function resize() {
+function resize(params) {
     var width = document.documentElement.clientWidth;
     var height = window.innerHeight;
     var orientation = new String;
@@ -37,10 +37,15 @@ function resize() {
     var scaleX = 1;
     var scaleY = 1;
 
-    if (width > height) {
-        orientation = 'orientation=width';
-    } else if (width < height) {
-        orientation = 'orientation=height';
+    if (params == undefined)
+    {
+        if (width > height) {
+            orientation = 'orientation=width';
+        } else if (width < height) {
+            orientation = 'orientation=height';
+        }
+    } else {
+        orientation = params.orientation;
     }
 
     if (width/720 > 1) {
@@ -81,6 +86,12 @@ function resize() {
         } else {
             changeSizes(dataObj, scaleY);
             doc('mainBlock').style.height = height + 'px';
+            
+            if (doc('content').style.height.split('px')[0] > 350 * scaleY) {
+                resize({"orientation": "orientation=width"})
+            } else if (doc('content').style.width.split('px')[0] > 612 * scaleX) {
+                resize({"orientation": "orientation=height"})
+            }
 
             if (width != document.documentElement.clientWidth) {
                 resize();

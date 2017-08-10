@@ -1,18 +1,7 @@
 <html>
     <body></body>
+    <script src="../scripts/get.addon"></script>
     <script>
-        function GET(key) {
-            var url = document.URL;
-            var items = url.split('?')[1].split('&');   
-            var res = {};
-
-            items.forEach(function(val) {
-                res[String(val.split('=')[0])] = String(val.split('=')[1]);
-            });
-
-            return res[key] ? res[key] : 'Invalid Key';
-        }
-
         var heightCSS =  {
             ".browserIcon": {
                 "width": 12,

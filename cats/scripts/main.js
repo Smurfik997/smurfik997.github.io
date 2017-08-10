@@ -1,15 +1,3 @@
-/* function GET(key) {
-    var url = document.URL;
-    var items = url.split('?')[1].split('&');   
-    var res = {};
-
-    items.forEach(function(val) {
-        res[String(val.split('=')[0])] = String(val.split('=')[1]);
-    });
-
-    return res[key] ? res[key] : 'Invalid Key';
-} */
-
 function doc(val, num) {
     return num != undefined ? document.getElementsByClassName(val)[num] : document.getElementById(val);
 }
@@ -43,7 +31,12 @@ function init() {
         if (data.cats == undefined) {
             window.location.reload();
         } else {
-            var num = /*GET('num');*/randomNum(0, data.cats.length - 1);
+            var num;
+            if (GET('num') != 'Invalid Key') {
+                num = parseInt(GET('num')) - 1;
+            } else {
+                num = randomNum(2, data.cats.length - 1);
+            }
             var script = document.createElement('script');
             script.src = 'scripts/page.js';
             document.body.appendChild(script).onload = function(e) {
