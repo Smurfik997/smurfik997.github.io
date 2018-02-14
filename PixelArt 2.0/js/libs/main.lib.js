@@ -38,4 +38,3 @@ function resize() {
 
 //events
 document.body.onresize = resize();
-windows.onresize = resize();
