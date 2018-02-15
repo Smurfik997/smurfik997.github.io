@@ -1,11 +1,14 @@
 body {
     margin: 0 auto;
+    text-align: center;
     min-width: 300px;
     min-height: 300px;
     background: rgb(220, 220, 220);
 }
 
 #main {
+    text-align: inherit;
     border-radius: 1.5%;
     background: white;
+    padding: 2%;
 }
