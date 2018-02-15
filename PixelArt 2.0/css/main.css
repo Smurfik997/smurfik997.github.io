@@ -1,9 +1,10 @@
 body {
+    --gray: rgb(220, 220, 220);
     margin: 0 auto;
     text-align: center;
     min-width: 300px;
     min-height: 300px;
-    background: rgb(220, 220, 220);
+    background: var(--gray);
 }
 
 #main {
@@ -11,4 +12,14 @@ body {
     border-radius: 1.5%;
     background: white;
     padding: 2%;
+}
+
+.yL {
+    width: 100%;
+}
+
+.xB {
+    float: left;
+    background: var(--gray);
+    /*border-radius: 50%;*/
 }

@@ -38,34 +38,39 @@ function resize() {
 
 //drawFunc-s
 function setPlates(count) {
-    var setB = function(x, y) {
-        var xB = document.createElement('div')
-        xB.id = 'B' + x
-        xB.style.width = Math.trunc(100 / count) - 2 + '%'
-        xB.style.float = 'left'
-        xB.style.margin = '1%'
-        xB.style.height = '80%'
-        xB.style.background = 'rgb(0, 0, 0)'
-        doc('L' + y).appendChild(xB)
-        
-        x < count? setTimeout(() => setB(x + 1, y)) :  setTimeout(() => setL(y + 1))
-    }
+    if (count > 10 || count < 2) {
+        console.error('#002')
+    } else {
+        var setB = function(x, y) {
+            var xB = document.createElement('div')
+            var margin = Math.trunc(10000 / (count * 20)) / 100
+            xB.id = 'B' + x
+            xB.classList.add('xB')
+            xB.style.margin = margin + '%'
+            xB.style.width = Math.trunc(10000 / count) / 100 - margin * 2 + '%'
+            xB.style.height = 100 - count * margin * 2 + '%'
+            //xB.style.background = 'rgb(220, 220, 220)'
+            doc('L' + y).appendChild(xB)
+            
+            x < count? setTimeout(() => setB(x + 1, y)) :  y < count? setTimeout(() => setL(y + 1)) : null
+        }
 
-    var setL = function(y) {
-        var yL = document.createElement('div')
-        yL.id = 'L' + y
-        yL.style.width = '100%'
-        yL.style.height = Math.trunc(100 / count) + '%'
-        doc('main').appendChild(yL)
-        
-        y <= count? setTimeout(() => setB(1, y)) : null
-    }
+        var setL = function(y) {
+            var yL = document.createElement('div')
+            yL.id = 'L' + y
+            yL.classList.add('yL')
+            yL.style.height = Math.trunc(10000 / count) / 100 + '%'
+            doc('main').appendChild(yL)
+            
+            y <= count? setTimeout(() => setB(1, y)) : null
+        }
 
-    setL(1)
+        setL(1)
+    }
 }
 
 //events
 document.addEventListener('DOMContentLoaded', (e) => {
     resize()
-    setPlates(10, 10)
+    setPlates(10)
 })
