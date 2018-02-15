@@ -12,19 +12,23 @@ function doc(p1, p2) {
 }
 
 function resize() {
-    winW = window.innerWidth
-    winH = window.innerHeight
+    winW = (window.innerWidth || document.documentElement.clientWidth)
+    winH = (window.innerHeight || document.documentElement.clientHeight)
     var title = doc('title').style;
+    var titleH;
 
-    if (winW / winH >= 1) {
-        title.cssText = 'font-size: 30px; line-height: 60px;'
-        winH -= 60 
-    } else if (winH / winW >= 1.35) {
-        title.cssText = 'font-size: 90px; line-height: 180px;'
+    if (winH <= 800) {
+        title.cssText = 'font-size: 30px; line-height: 60px; height: 60px;'
+        winH -= 60
+        titleH = 60
+    } else if (winW / winH >= 1 || winH / winW < 1.35) {
+        title.cssText = 'font-size: 60px; line-height: 120px; height: 120px;'
+        winH -= 120 
+        titleH = 120
+    } else if (winH / winW >= 1.35 || winW / winH > 1) {
+        title.cssText = 'font-size: 90px; line-height: 180px; height: 180px;'
         winH -= 180
-    } else {
-        title.cssText = 'font-size: 60px; line-height: 120px;'
-        winH -= 120
+        titleH = 180
     }
 
     if (winH == undefined || winW == undefined) {
@@ -41,8 +45,9 @@ function resize() {
             })
         }
 
-        winW >= 300? null : winW = 300
-        winH >= 300? null : winH = 300
+        winW >= 400? null : winW = 400
+        winH + titleH >= 400? null : winH = 400 - titleH
+        doc('title').style.width = winW + 'px'
 
         winW >= winH? css(Math.trunc(winH * 0.9)) : css(Math.trunc(winW * 0.9))
     }
