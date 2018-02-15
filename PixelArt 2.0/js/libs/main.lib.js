@@ -13,7 +13,19 @@ function doc(p1, p2) {
 
 function resize() {
     winW = window.innerWidth
-    winH = window.innerHeight - 60
+    winH = window.innerHeight
+    var title = doc('title').style;
+
+    if (winW / winH >= 1) {
+        title.cssText = 'font-size: 30px; line-height: 60px;'
+        winH -= 60 
+    } else if (winH / winW >= 1.35) {
+        title.cssText = 'font-size: 90px; line-height: 180px;'
+        winH -= 180
+    } else {
+        title.cssText = 'font-size: 60px; line-height: 120px;'
+        winH -= 120
+    }
 
     if (winH == undefined || winW == undefined) {
         console.error('#001')
@@ -72,5 +84,5 @@ function setPlates(count) {
 //events
 document.addEventListener('DOMContentLoaded', (e) => {
     resize()
-    setPlates(2)
+    setPlates(10)
 })
