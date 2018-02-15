@@ -7,6 +7,13 @@ body {
     background: var(--gray);
 }
 
+#title {
+    font: 400 35px/60px Arial;
+    background: white;
+    color: rgb(100, 100, 100);
+    box-shadow: 0px 0px 40px rgba(120, 120, 120, 0.5);
+}
+
 #main {
     text-align: inherit;
     border-radius: 1.5%;

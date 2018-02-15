@@ -13,7 +13,7 @@ function doc(p1, p2) {
 
 function resize() {
     winW = window.innerWidth
-    winH = window.innerHeight
+    winH = window.innerHeight - 60
 
     if (winH == undefined || winW == undefined) {
         console.error('#001')
@@ -72,5 +72,5 @@ function setPlates(count) {
 //events
 document.addEventListener('DOMContentLoaded', (e) => {
     resize()
-    setPlates(10)
+    setPlates(2)
 })
