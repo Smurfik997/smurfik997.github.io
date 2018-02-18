@@ -1,7 +1,15 @@
 'use strict'
 
 //vars
-var winW, winH
+var winW, winH, err
+var colorP = {
+    a: 'rgb(255, 255, 255)', //white
+    b: 'rgb(120, 120, 120)', //gray
+    c: 'rgb(80, 180, 230)', //blue
+    d: 'rgb(255, 100, 120)', //red
+    e: 'rgb(160, 255, 200)', //green
+    f: 'rgb(244, 255, 142)' //yellow
+}
 
 //warn
 console.warn('Script has injected')
@@ -43,6 +51,8 @@ function resize() {
             ]).forEach(function(val, key) {
                 doc('main').style[key] = val;
             })
+
+            doc('title').querySelectorAll('div')[0].style.width = len + 'px';
         }
 
         winW >= 400? null : winW = 400
@@ -54,40 +64,56 @@ function resize() {
 }
 
 //drawFunc-s
-function setPlates(count) {
-    if (count > 10 || count < 2) {
-        console.error('#002')
+function setPlates(block, count, customS) {
+    err = undefined
+
+    if (count > 10 || count < 2 || block == undefined) {
+        err = '#002'
     } else {
-        var setB = function(x, y) {
-            var xB = document.createElement('div')
-            var margin = Math.trunc(10000 / (count * 20)) / 100
-            xB.id = 'B' + x
-            xB.classList.add('xB')
-            xB.style.margin = margin + '%'
-            xB.style.width = Math.trunc(10000 / count) / 100 - margin * 2 + '%'
-            xB.style.height = 100 - count * margin * 2 + '%'
-            //xB.style.background = 'rgb(220, 220, 220)'
-            doc('L' + y).appendChild(xB)
-            
-            x < count? setTimeout(() => setB(x + 1, y)) :  y < count? setTimeout(() => setL(y + 1)) : null
-        }
+        if (String(block.innerHTML).length > 0) {
+            err = '#004'
+        } else {
+            var setB = function(x, y) {
+                var xB = document.createElement('div')
+                var margin = Math.trunc(10000 / (count * 20)) / 100
+                xB.id = 'B' + x
+                xB.classList.add('xB')
+                xB.style.margin = margin + '%'
+                xB.style.width = Math.trunc(10000 / count) / 100 - margin * 2 + '%'
+                xB.style.height = 100 - count * margin * 2 + '%'
 
-        var setL = function(y) {
-            var yL = document.createElement('div')
-            yL.id = 'L' + y
-            yL.classList.add('yL')
-            yL.style.height = Math.trunc(10000 / count) / 100 + '%'
-            doc('main').appendChild(yL)
-            
-            y <= count? setTimeout(() => setB(1, y)) : null
-        }
+                if (customS != undefined) {
+                    customS.color != undefined? xB.style.background = customS.color : null
+                    customS.bRadius != undefined? xB.style.borderRadius = customS.bRadius : null
+                }
 
-        setL(1)
+                doc('L' + y).appendChild(xB)
+                x < count? setTimeout(() => setB(x + 1, y)) :  y < count? setTimeout(() => setL(y + 1)) : null
+            }
+
+            var setL = function(y) {
+                var yL = document.createElement('div')
+                yL.id = 'L' + y
+                yL.classList.add('yL')
+                yL.style.height = Math.trunc(10000 / count) / 100 + '%'
+                block.appendChild(yL)
+                
+                y <= count? setTimeout(() => setB(1, y)) : null
+            }
+
+            setL(1)
+        }
     }
+
+    return err = 'undefined'? null : console.error(err)
+}
+
+function delPlot() {
+    return doc('main') != undefined? doc('main').innerHTML = null : console.error('#003')
 }
 
 //events
 document.addEventListener('DOMContentLoaded', (e) => {
     resize()
-    setPlates(10)
+    setPlates(doc('main'), 10, {bRadius: '50%'})
 })
