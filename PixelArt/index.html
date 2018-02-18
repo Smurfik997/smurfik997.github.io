@@ -1,19 +1,22 @@
 <html>
     <head>
-        <title>Paint</title>
-        <meta charset="utf-8">
-        <!--<script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>-->
-        <!--<script type="text/javascript" src="js/main.lib.js"></script>-->
-        <script type="text/javascript" src="js/libs/main.lib.v2.js"></script>
-        <link type="text/css" rel="stylesheet" href="css/style.css">
+        <title>PixelArt 2.0</title>
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+        <link rel="icon" type="image/png" href="images/icon.png">
+        <script type="text/javascript" src="js/libs/main.lib.js"></script>
     </head>
-    <body>
-        <div id="main_block">
-        </div>   
+    <body onresize="resize()">
+        <div id="title">
+            <div style="height: 100%; margin: 0 auto;">
+                <div class="iconB">
+                    <img src="images/new.svg" id="newA" class="icon hover"/>
+                </div>
+                <div id="tText">PixelArt<!-- 2.0--></div>
+                <div class="iconB">
+                    <img src="images/icon160.svg" class="icon r"/>
+                </div>
+            </div>
+        </div>
+        <div id="main"></div>
     </body>
-    <!--<script type="text/javascript" src="js/heart.js"></script>-->
-    <script type="text/javascript" src="js/animations/heart1.js"></script>
-    <!--<script type="text/javascript">
-        draw(1, 30, 30, 15, 15, 2, doc('main_block'), 'green', 'div', 'border-radius: 4px;', 8);
-    </script>-->
 </html>
