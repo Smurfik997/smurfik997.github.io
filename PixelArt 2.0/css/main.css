@@ -8,17 +8,14 @@ body {
 }
 
 #title {
-    height: 180px;
+    height: 10%;
     width: 100%;
     font-weight: 400;
-    font-size: 90px;
-    line-height: 180px;
     font-family: Arial;
     background-color: white;
     color: rgb(130, 130, 130);
     --grayShadow: 0px 0px 40px rgba(120, 120, 120, 0.5);
     box-shadow: var(--grayShadow);
-    transition: line-height 0.25s, font-size 0.25s, height 0.25s;
 }
 
 #tText {

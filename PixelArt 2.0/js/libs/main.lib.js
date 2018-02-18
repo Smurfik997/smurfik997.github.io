@@ -22,22 +22,10 @@ function doc(p1, p2) {
 function resize() {
     winW = (window.innerWidth || document.documentElement.clientWidth)
     winH = (window.innerHeight || document.documentElement.clientHeight)
-    var title = doc('title').style;
-    var titleH;
-
-    if (winH <= 800) {
-        title.cssText = 'font-size: 30px; line-height: 60px; height: 60px;'
-        winH -= 60
-        titleH = 60
-    } else if (winW / winH >= 1 || winH / winW < 1.35) {
-        title.cssText = 'font-size: 60px; line-height: 120px; height: 120px;'
-        winH -= 120 
-        titleH = 120
-    } else if (winH / winW >= 1.35 || winW / winH > 1) {
-        title.cssText = 'font-size: 90px; line-height: 180px; height: 180px;'
-        winH -= 180
-        titleH = 180
-    }
+    
+    var titleH = doc('title').clientHeight;
+    doc('title').style.cssText = 'font-size: ' + titleH / 2 + 'px; line-height: ' + titleH + 'px;'
+    winH -= titleH;
 
     if (winH == undefined || winW == undefined) {
         console.error('#001')
