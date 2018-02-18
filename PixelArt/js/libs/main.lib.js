@@ -8,8 +8,45 @@ var colorP = {
     c: 'rgb(80, 180, 230)', //blue
     d: 'rgb(255, 100, 120)', //red
     e: 'rgb(160, 255, 200)', //green
-    f: 'rgb(244, 255, 142)' //yellow
+    f: 'rgb(244, 255, 142)', //yellow
+    g: 'rgb(220, 220, 220)', //light-gray
 }
+
+var anim = {framesC: 3, fDispTime: 1, plotPlates: 9, customS: {bRadius: '50%'}, frames: [
+    [
+        ['g' /*x1*/, 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g'], //y1
+        ['g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g'], //y2
+        ['g', 'g', 'g', 'd', 'g', 'd', 'g', 'g', 'g'],
+        ['g', 'g', 'd', 'd', 'd', 'd', 'd', 'g', 'g'],
+        ['g', 'g', 'd', 'd', 'd', 'd', 'd', 'g', 'g'],
+        ['g', 'g', 'g', 'd', 'd', 'd', 'g', 'g', 'g'],
+        ['g', 'g', 'g', 'g', 'd', 'g', 'g', 'g', 'g'],
+        ['g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g'],
+        ['g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g']
+    ],
+    [
+        ['g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g'],
+        ['g', 'g', 'd', 'd', 'g', 'd', 'd', 'g', 'g'],
+        ['g', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'g'],
+        ['g', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'g'],
+        ['g', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'g'],
+        ['g', 'g', 'd', 'd', 'd', 'd', 'd', 'g', 'g'],
+        ['g', 'g', 'g', 'd', 'd', 'd', 'g', 'g', 'g'],
+        ['g', 'g', 'g', 'g', 'd', 'g', 'g', 'g', 'g'],
+        ['g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g']
+    ],
+    [
+        ['g', 'g', 'd', 'd', 'g', 'd', 'd', 'g', 'g'],
+        ['g', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'g'],
+        ['d', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd'],
+        ['d', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd'],
+        ['d', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd'],
+        ['g', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'g'],
+        ['g', 'g', 'd', 'd', 'd', 'd', 'd', 'g', 'g'],
+        ['g', 'g', 'g', 'd', 'd', 'd', 'g', 'g', 'g'],
+        ['g', 'g', 'g', 'g', 'd', 'g', 'g', 'g', 'g']
+    ]
+]}
 
 //warn
 console.warn('Script has injected')
@@ -55,7 +92,7 @@ function resize() {
 function setPlates(block, count, customS) {
     err = undefined
 
-    if (count > 10 || count < 2 || block == undefined) {
+    if (count > 10 || count < 2 || count == undefined || block == undefined) {
         err = '#002'
     } else {
         if (String(block.innerHTML).length > 0) {
@@ -93,7 +130,46 @@ function setPlates(block, count, customS) {
         }
     }
 
-    return err = 'undefined'? null : console.error(err)
+    return err == undefined? null : console.error(err)
+}
+
+function prepareFrames(block, animConf) {
+    var err = undefined
+
+    if (animConf.framesC && animConf.fDispTime && animConf.plotPlates && animConf.frames != undefined) {
+        delPlot()
+        setPlates(block, animConf.plotPlates, animConf.customS)
+        block.addEventListener('DOMSubtreeModified', (e) => {
+            if (e.target.lastChild.id == 'B' + animConf.plotPlates && e.target.id == 'L' + animConf.plotPlates) {
+                //var block = e.path[1]
+
+                var setF = function(fNum, block) {
+                    var frame = block.cloneNode(true)
+                    frame.id = 'frame' + fNum
+                    frame.style.display = 'none'
+                    document.body.appendChild(frame)
+
+                    var setB = function(x, y, fNum, block) {
+                        doc('frame' + fNum).querySelector('div[id=L' + y + ']').querySelector('div[id=B' + x + ']').style.backgroundColor = colorP[animConf.frames[fNum - 1][y - 1][x - 1]]
+
+                        x < animConf.plotPlates? setTimeout(() => setB(x + 1, y, fNum, block)) :  y < animConf.plotPlates? setTimeout(() => setL(y + 1, fNum, block)) : fNum < animConf.framesC? setTimeout(() => setF(fNum + 1, block)) : null
+                    }
+
+                    var setL = function(y, fNum, block) {
+                        y <= animConf.plotPlates? setTimeout(() => setB(1, y, fNum, block)) : null
+                    }
+
+                    setL(1, fNum, block)
+                }
+
+                setF(1, block)
+            }
+        })
+    } else {
+        err = '#005'
+    }
+
+    return err == undefined? null : console.error(err)
 }
 
 function delPlot() {
@@ -103,5 +179,5 @@ function delPlot() {
 //events
 document.addEventListener('DOMContentLoaded', (e) => {
     resize()
-    setPlates(doc('main'), 10, {bRadius: '50%'})
+    setPlates(doc('main'), 10/*, {bRadius: '50%'}*/)
 })
