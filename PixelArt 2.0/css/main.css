@@ -4,7 +4,7 @@ body {
     text-align: center;
     min-width: 400px;
     min-height: 400px;
-    background: var(--gray);
+    background-color: var(--gray);
 }
 
 #title {
@@ -14,7 +14,7 @@ body {
     font-size: 90px;
     line-height: 180px;
     font-family: Arial;
-    background: white;
+    background-color: white;
     color: rgb(100, 100, 100);
     box-shadow: 0px 0px 40px rgba(120, 120, 120, 0.5);
     transition: line-height 0.5s, font-size 0.5s, height 0.5s;
@@ -37,13 +37,13 @@ body {
 
 .hover:active {
     box-shadow: 0px 0px 40px rgba(120, 120, 120, 0.5);
-    background: rgba(120, 120, 120, 0.1);
+    background-color: rgba(120, 120, 120, 0.1);
     transform: rotate(360deg);
 }
 
 .hover:hover {
     box-shadow: 0px 0px 40px rgba(120, 120, 120, 0.5);
-    background: rgba(120, 120, 120, 0.1);
+    background-color: rgba(120, 120, 120, 0.1);
     transform: rotate(360deg);
 }
 
@@ -52,7 +52,7 @@ body {
 }
 
 .icon {
-    transition: box-shadow 0.5s, transform 0.5s;
+    transition: box-shadow 0.5s, transform 0.5s, background-color 0.5s;
     height: 100%;
     border-radius: 50%;
     float: left;
@@ -61,7 +61,7 @@ body {
 #main {
     text-align: inherit;
     border-radius: 1.5%;
-    background: white;
+    background-color: white;
     padding: 2%;
 }
 
@@ -71,6 +71,6 @@ body {
 
 .xB {
     float: left;
-    background: var(--gray);
+    background-color: var(--gray);
     /*border-radius: 50%;*/
 }
