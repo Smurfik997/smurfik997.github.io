@@ -15,8 +15,9 @@ body {
     line-height: 180px;
     font-family: Arial;
     background-color: white;
-    color: rgb(100, 100, 100);
-    box-shadow: 0px 0px 40px rgba(120, 120, 120, 0.5);
+    color: rgb(130, 130, 130);
+    --grayShadow: 0px 0px 40px rgba(120, 120, 120, 0.5);
+    box-shadow: var(--grayShadow);
     transition: line-height 0.5s, font-size 0.5s, height 0.5s;
 }
 
@@ -36,13 +37,13 @@ body {
 }
 
 .hover:active {
-    box-shadow: 0px 0px 40px rgba(120, 120, 120, 0.5);
+    box-shadow: var(--grayShadow);
     background-color: rgba(120, 120, 120, 0.1);
     transform: rotate(360deg);
 }
 
 .hover:hover {
-    box-shadow: 0px 0px 40px rgba(120, 120, 120, 0.5);
+    box-shadow: var(--grayShadow);
     background-color: rgba(120, 120, 120, 0.1);
     transform: rotate(360deg);
 }
