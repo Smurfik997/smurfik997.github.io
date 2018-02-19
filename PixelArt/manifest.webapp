@@ -1,4 +1,15 @@
 {
   "name": "PixerArt",
-  "start_url": "."
+  "start_url": ".",
+  "theme_color": "#dcdcdc",
+  "background_color": "#dcdcdc",
+  "icons": [{
+    "src": "images/icon192.png",
+    "sizes": "192x192",
+    "type": "image/png"
+  }, {
+    "src": "images/icon512.png",
+    "sizes": "512x512",
+    "type": "image/png"
+  }]
 }
