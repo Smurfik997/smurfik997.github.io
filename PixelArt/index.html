@@ -8,14 +8,14 @@
     </head>
     <body onresize="resize()">
         <div id="error">
-            Ваш "кирпич" не підтримує деякі технології, які використовує ця веб-сторінка.
+            <div class="errorText">Ваш "кирпич" не підтримує деякі технології, які використовує ця веб-сторінка.</div>
         </div>
         <script id="script" type="text/javascript">
-            () => {
+            setTimeout(() => {
                 document.getElementById('error').remove()
                 resize()
                 document.getElementById('script').remove()
-            }
+            })
         </script>
         <div id="title">
             <div style="height: 100%; margin: 0 auto;">
