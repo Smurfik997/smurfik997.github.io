@@ -141,28 +141,33 @@ function prepareFrames(block, animConf) {
         setPlates(block, animConf.plotPlates, animConf.customS)
         block.addEventListener('DOMSubtreeModified', (e) => {
             if (e.target.lastChild.id == 'B' + animConf.plotPlates && e.target.id == 'L' + animConf.plotPlates) {
-                //var block = e.path[1]
-
-                var setF = function(fNum, block) {
+                var setF = function(fNum) {
                     var frame = block.cloneNode(true)
                     frame.id = 'frame' + fNum
                     frame.style.display = 'none'
                     document.body.appendChild(frame)
 
-                    var setB = function(x, y, fNum, block) {
-                        doc('frame' + fNum).querySelector('div[id=L' + y + ']').querySelector('div[id=B' + x + ']').style.backgroundColor = colorP[animConf.frames[fNum - 1][y - 1][x - 1]]
+                    var setB = function(x, y, fNum) {
+                        var pixB = doc('frame' + fNum).querySelector('div#L' + y + ' div#B' + x)
+                        pixB.style.backgroundColor = colorP[animConf.frames[fNum - 1][y - 1][x - 1]]
 
-                        x < animConf.plotPlates? setTimeout(() => setB(x + 1, y, fNum, block)) :  y < animConf.plotPlates? setTimeout(() => setL(y + 1, fNum, block)) : fNum < animConf.framesC? setTimeout(() => setF(fNum + 1, block)) : null
+                        if (x < animConf.plotPlates) {
+                            setTimeout(() => setB(x + 1, y, fNum))
+                        } else if (y < animConf.plotPlates) {
+                            setTimeout(() => setL(y + 1, fNum))
+                        } else if (fNum < animConf.framesC) {
+                            setTimeout(() => setF(fNum + 1))
+                        }
                     }
 
-                    var setL = function(y, fNum, block) {
-                        y <= animConf.plotPlates? setTimeout(() => setB(1, y, fNum, block)) : null
+                    var setL = function(y, fNum) {
+                        y <= animConf.plotPlates? setTimeout(() => setB(1, y, fNum)) : null
                     }
 
-                    setL(1, fNum, block)
+                    setL(1, fNum)
                 }
 
-                setF(1, block)
+                setF(1)
             }
         })
     } else {
@@ -179,5 +184,5 @@ function delPlot() {
 //events
 document.addEventListener('DOMContentLoaded', (e) => {
     resize()
-    setPlates(doc('main'), 10/*, {bRadius: '50%'}*/)
+    setPlates(doc('main'), 9, {bRadius: '50%'})
 })

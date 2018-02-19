@@ -1,5 +1,8 @@
 body {
+    /*var-s*/
     --gray: rgb(220, 220, 220);
+    --grayShadow: 0px 0px 40px rgba(120, 120, 120, 0.5);
+
     margin: 0 auto;
     text-align: center;
     min-width: 400px;
@@ -14,7 +17,6 @@ body {
     font-family: Arial;
     background-color: white;
     color: rgb(130, 130, 130);
-    --grayShadow: 0px 0px 40px rgba(120, 120, 120, 0.5);
     box-shadow: var(--grayShadow);
 }
 
