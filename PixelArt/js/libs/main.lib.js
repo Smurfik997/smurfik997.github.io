@@ -60,9 +60,9 @@ function resize() {
     winW = (window.innerWidth || document.documentElement.clientWidth)
     winH = (window.innerHeight || document.documentElement.clientHeight)
     
-    var titleH = doc('title').clientHeight;
+    var titleH = doc('title').clientHeight
     doc('title').style.cssText = 'font-size: ' + titleH / 2 + 'px; line-height: ' + titleH + 'px;'
-    winH -= titleH;
+    winH -= titleH
 
     if (winH == undefined || winW == undefined) {
         console.error('#001')
@@ -74,14 +74,18 @@ function resize() {
                 ['padding', Math.trunc(len * 0.02) + 'px'],
                 ['margin', Math.trunc((winH - len) / 2) + 'px ' + Math.trunc((winW - len) / 2) + 'px']
             ]).forEach(function(val, key) {
-                doc('main').style[key] = val;
+                if (doc('main').getAttribute('anim') == 'ready') {
+                    document.body.querySelectorAll('div.plot').forEach((currVal, i, arr) => {
+                        arr[i].style[key] = val
+                    })
+                } else {
+                    doc('main').style[key] = val
+                }
             })
 
-            doc('title').querySelectorAll('div')[0].style.width = len + 'px';
+            doc('title').querySelectorAll('div')[0].style.width = len + 'px'
         }
 
-        winW >= 400? null : winW = 400
-        winH + titleH >= 400? null : winH = 400 - titleH
         doc('title').style.width = winW + 'px'
 
         winW >= winH? css(Math.trunc(winH * 0.9)) : css(Math.trunc(winW * 0.9))
