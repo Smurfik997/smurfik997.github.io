@@ -1,8 +1,10 @@
 {
   "name": "PixerArt",
+  "short_name": "PixerArt",
   "start_url": ".",
   "theme_color": "#dcdcdc",
   "background_color": "#dcdcdc",
+  "display": "fullscreen",
   "icons": [{
     "src": "images/icon192.png",
     "sizes": "192x192",
