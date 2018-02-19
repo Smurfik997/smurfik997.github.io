@@ -10,10 +10,19 @@
         <div id="error">
             <div class="errorText">Ваш "кирпич" не підтримує деякі технології, які використовує ця веб-сторінка.</div>
         </div>
+        <script id="windowE">
+            window.addEventListener('error', function(e) {
+                if (e.error == undefined) {
+                    document.getElementById('error').style.display = 'block'
+                }
+            })
+        </script>
         <script id="script" type="text/javascript">
             setTimeout(() => {
                 document.getElementById('error').remove()
+                err = 0
                 resize()
+                document.getElementById('windowE').remove()
                 document.getElementById('script').remove()
             })
         </script>
