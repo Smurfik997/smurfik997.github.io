@@ -230,7 +230,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
         } else {
             e.target.setAttribute('active', 'true')
             doc('contentBlock').style.left = '100%'
-            e.target.style.cssText = 'transform: rotate(45deg); box-shadow: var(--grayShadow); background-color: rgba(120, 120, 120, 0.1);'
+            e.target.style.cssText = 'transform: rotate(405deg); box-shadow: var(--grayShadow); background-color: rgba(120, 120, 120, 0.1);'
         }
     })
 })
