@@ -226,11 +226,11 @@ document.addEventListener('DOMContentLoaded', (e) => {
         if (e.target.getAttribute('active') == 'true') {
             e.target.setAttribute('active', 'false')
             doc('contentBlock').style.left = '0%'
-            e.target.style.removeProperty('transform')
+            e.target.style.cssText = null
         } else {
             e.target.setAttribute('active', 'true')
             doc('contentBlock').style.left = '100%'
-            e.target.style.transform = 'rotate(45deg)'
+            e.target.style.cssText = 'transform: rotate(45deg); box-shadow: var(--grayShadow); background-color: rgba(120, 120, 120, 0.1);'
         }
     })
 })

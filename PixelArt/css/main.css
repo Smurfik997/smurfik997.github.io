@@ -43,7 +43,7 @@ body {
     top: 10%;
     width: 100%;
     height: 90%;
-    transition: left 2s;
+    transition: ease-in-out left 1.25s;
     left: 0%;
 }
 
@@ -72,16 +72,14 @@ body {
     float: left;  
 }
 
-.hover:active {
+.hover:hover {
     box-shadow: var(--grayShadow);
     background-color: rgba(120, 120, 120, 0.1);
     transform: rotate(360deg);
 }
 
-.hover:hover {
-    box-shadow: var(--grayShadow);
-    background-color: rgba(120, 120, 120, 0.1);
-    transform: rotate(360deg);
+.hover {
+    transition: box-shadow 1.25s, transform 0.5s, background-color 1.25s;
 }
 
 .r {
@@ -89,7 +87,6 @@ body {
 }
 
 .icon {
-    transition: box-shadow 0.5s, transform 0.5s, background-color 0.5s;
     height: 100%;
     border-radius: 50%;
     float: left;
