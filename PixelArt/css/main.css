@@ -1,13 +1,20 @@
 body {
     /*var-s*/
-    --gray: rgb(220, 220, 220);
+    --light-gray: rgb(220, 220, 220);
+    --white: rgb(255, 255, 255);
+    --gray: rgb(120, 120, 120);
+    --blue: rgb(80, 180, 230); 
+    --red: rgb(255, 100, 120);
+    --green: rgb(160, 255, 200);
+    --yellow: rgb(244, 255, 142);
     --grayShadow: 0px 0px 40px rgba(120, 120, 120, 0.5);
 
     margin: 0 auto;
     text-align: center;
     min-width: 400px;
     min-height: 400px;
-    background-color: var(--gray);
+    background-color: var(--light-gray);
+    user-select: none;
 }
 
 #title {
@@ -71,6 +78,6 @@ body {
 
 .xB {
     float: left;
-    background-color: var(--gray);
+    background-color: var(--light-gray);
     /*border-radius: 50%;*/
 }

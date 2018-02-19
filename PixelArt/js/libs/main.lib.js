@@ -12,7 +12,7 @@ var colorP = {
     g: 'rgb(220, 220, 220)', //light-gray
 }
 
-var anim = {framesC: 3, fDispTime: 1, plotPlates: 9, customS: {bRadius: '50%'}, frames: [
+var anim = {framesC: 3, fDispTime: 1000, plotPlates: 9, customS: {bRadius: '50%'}, frames: [
     [
         ['g' /*x1*/, 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g'], //y1
         ['g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g'], //y2
@@ -113,7 +113,7 @@ function setPlates(block, count, customS) {
                 }
 
                 doc('L' + y).appendChild(xB)
-                x < count? setTimeout(() => setB(x + 1, y)) :  y < count? setTimeout(() => setL(y + 1)) : null
+                x < count? setTimeout(() => setB(x + 1, y)) :  y < count? setTimeout(() => setL(y + 1)) : block.setAttribute('status', 'ready')
             }
 
             var setL = function(y) {
@@ -126,7 +126,7 @@ function setPlates(block, count, customS) {
                 y <= count? setTimeout(() => setB(1, y)) : null
             }
 
-            setL(1)
+            setTimeout(() => setL(1))
         }
     }
 
@@ -136,7 +136,7 @@ function setPlates(block, count, customS) {
 function prepareFrames(block, animConf) {
     var err = undefined
 
-    if (animConf.framesC && animConf.fDispTime && animConf.plotPlates && animConf.frames != undefined) {
+    if (animConf.framesC && animConf.fDispTime && animConf.plotPlates && animConf.frames != undefined && block.getAttribute('anim') == undefined) {
         delPlot()
         setPlates(block, animConf.plotPlates, animConf.customS)
         block.addEventListener('DOMSubtreeModified', (e) => {
@@ -157,6 +157,9 @@ function prepareFrames(block, animConf) {
                             setTimeout(() => setL(y + 1, fNum))
                         } else if (fNum < animConf.framesC) {
                             setTimeout(() => setF(fNum + 1))
+                        } else if (fNum == animConf.framesC && x == animConf.plotPlates) {
+                            block.setAttribute('anim', 'ready')
+                            playAnim(block, animConf.framesC, animConf.fDispTime)
                         }
                     }
 
@@ -164,10 +167,10 @@ function prepareFrames(block, animConf) {
                         y <= animConf.plotPlates? setTimeout(() => setB(1, y, fNum)) : null
                     }
 
-                    setL(1, fNum)
+                    setTimeout(() => setL(1, fNum))
                 }
 
-                setF(1)
+                setTimeout(() => setF(1))
             }
         })
     } else {
@@ -177,12 +180,39 @@ function prepareFrames(block, animConf) {
     return err == undefined? null : console.error(err)
 }
 
+function playAnim(block, framesC, fDispTime) {
+    block.style.display = 'none'
+    doc('frame1').style.display = 'block'
+    var currF = 0
+    console.log('currF: ' + currF)
+
+    var dispF = function(currF, prevF) {
+        currF++
+        console.log('currF: ' + currF)
+        var currFN
+        if (currF % (framesC * 2 - 2) + 1 > framesC) {
+            currFN = framesC * 2 - currF % (framesC * 2 - 2) - 1
+        } else {
+            //currFN = currF % framesC + 1
+            currFN = currF % (framesC * 2 - 2) + 1
+        }
+        doc('frame' + prevF).style.display = 'none'
+        doc('frame' + currFN).style.display = 'block'
+        setTimeout(() => dispF(currF, currFN), fDispTime)       
+    }
+
+    setTimeout(() => dispF(currF, 1), fDispTime)
+}
+
 function delPlot() {
-    return doc('main') != undefined? doc('main').innerHTML = null : console.error('#003')
+    document.body.querySelectorAll('div.plot').length == 0? console.error('#003') : document.body.querySelectorAll('div.plot').forEach((currVal, i, arr) => {
+        arr[i].id.split('frame')[0] == ''? arr[i].remove() : arr[i].innerHTML = null
+    })
 }
 
 //events
 document.addEventListener('DOMContentLoaded', (e) => {
     resize()
-    setPlates(doc('main'), 9, {bRadius: '50%'})
+    //setPlates(doc('main'), 9, {bRadius: '50%'})
+    prepareFrames(doc('main'), anim) //test
 })
