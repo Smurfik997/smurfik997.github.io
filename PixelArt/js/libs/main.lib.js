@@ -199,9 +199,10 @@ function playAnim(block, framesC, fDispTime) {
         if (currF % (framesC * 2 - 2) + 1 > framesC) {
             currFN = framesC * 2 - currF % (framesC * 2 - 2) - 1
         } else {
-            //currFN = currF % framesC + 1
+            
             currFN = currF % (framesC * 2 - 2) + 1
         }
+        //currFN = currF % framesC + 1
         doc('frame' + prevF).style.display = 'none'
         doc('frame' + currFN).style.display = 'block'
         setTimeout(() => dispF(currF, currFN), fDispTime)       
@@ -212,7 +213,7 @@ function playAnim(block, framesC, fDispTime) {
 
 function delPlot() {
     doc('contentBlock').querySelectorAll('div.plot').length == 0? console.error('#003') : doc('contentBlock').querySelectorAll('div.plot').forEach((currVal, i, arr) => {
-        arr[i].id.split('frame')[0] == ''? arr[i].remove() : arr[i].innerHTML = null
+        arr[i].id.split('frame')[0] == ''? arr[i].remove() : arr[i].innerHTML = ''
     })
 }
 
