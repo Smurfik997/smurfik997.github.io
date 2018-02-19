@@ -3,13 +3,24 @@
         <title>PixelArt 2.0</title>
         <link rel="stylesheet" type="text/css" href="css/main.css">
         <link rel="icon" type="image/png" href="images/icon.png">
+        <meta charset="utf-8">
         <script type="text/javascript" src="js/libs/main.lib.js"></script>
     </head>
     <body onresize="resize()">
+        <div id="error">
+            Ваш "кирпич" не підтримує деякі технології, які використовує ця веб-сторінка.
+        </div>
+        <script id="script" type="text/javascript">
+            () => {
+                document.getElementById('error').remove()
+                resize()
+                document.getElementById('script').remove()
+            }
+        </script>
         <div id="title">
             <div style="height: 100%; margin: 0 auto;">
                 <div class="iconB">
-                    <img src="images/new.svg" id="newA" class="icon hover"/>
+                    <img src="images/new.svg" id="newA" class="icon hover" active="false"/>
                 </div>
                 <div id="tText">
                     <div style="color: var(--gray); display: inline-block">P</div>
@@ -26,6 +37,11 @@
                 </div>
             </div>
         </div>
-        <div id="main" class="plot"></div>
+        <div id="contentBlock" class="content">
+            <div id="main" class="plot"></div>
+        </div>
+        <div id="block" class="content">
+            <div id="createM"></div>
+        </div>
     </body>
 </html>

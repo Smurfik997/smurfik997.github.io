@@ -73,14 +73,16 @@ function resize() {
                 ['width', Math.trunc(len * 0.96) + 'px'],
                 ['padding', Math.trunc(len * 0.02) + 'px'],
                 ['margin', Math.trunc((winH - len) / 2) + 'px ' + Math.trunc((winW - len) / 2) + 'px']
-            ]).forEach(function(val, key) {
+            ]).forEach((val, key) => {
                 if (doc('main').getAttribute('anim') == 'ready') {
-                    document.body.querySelectorAll('div.plot').forEach((currVal, i, arr) => {
+                    doc('contentBlock').querySelectorAll('div.plot').forEach((currVal, i, arr) => {
                         arr[i].style[key] = val
                     })
                 } else {
                     doc('main').style[key] = val
                 }
+                
+                doc('createM').style[key] = val
             })
 
             doc('title').querySelectorAll('div')[0].style.width = len + 'px'
@@ -149,7 +151,7 @@ function prepareFrames(block, animConf) {
                     var frame = block.cloneNode(true)
                     frame.id = 'frame' + fNum
                     frame.style.display = 'none'
-                    document.body.appendChild(frame)
+                    doc('contentBlock').appendChild(frame)
 
                     var setB = function(x, y, fNum) {
                         var pixB = doc('frame' + fNum).querySelector('div#L' + y + ' div#B' + x)
@@ -209,7 +211,7 @@ function playAnim(block, framesC, fDispTime) {
 }
 
 function delPlot() {
-    document.body.querySelectorAll('div.plot').length == 0? console.error('#003') : document.body.querySelectorAll('div.plot').forEach((currVal, i, arr) => {
+    doc('contentBlock').querySelectorAll('div.plot').length == 0? console.error('#003') : doc('contentBlock').querySelectorAll('div.plot').forEach((currVal, i, arr) => {
         arr[i].id.split('frame')[0] == ''? arr[i].remove() : arr[i].innerHTML = null
     })
 }
@@ -219,4 +221,15 @@ document.addEventListener('DOMContentLoaded', (e) => {
     resize()
     //setPlates(doc('main'), 9, {bRadius: '50%'})
     prepareFrames(doc('main'), anim) //test
+    doc('newA').addEventListener('click', (e) => {
+        if (e.target.getAttribute('active') == 'true') {
+            e.target.setAttribute('active', 'false')
+            doc('contentBlock').style.left = '0%'
+            e.target.style.removeProperty('transform')
+        } else {
+            e.target.setAttribute('active', 'true')
+            doc('contentBlock').style.left = '100%'
+            e.target.style.transform = 'rotate(45deg)'
+        }
+    })
 })
