@@ -12,7 +12,9 @@ var colorP = {
     g: 'rgb(220, 220, 220)', //light-gray
 }
 
-var anim = {framesC: 3, fDispTime: 1000, plotPlates: 9, customS: {bRadius: '50%'}, frames: [
+var anim = {framesC: 3, fDispTime: 1000, plotPlates: 9, customS: {
+        bRadius: '50%'
+    }, frames: [
     [
         ['g' /*x1*/, 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g'], //y1
         ['g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g'], //y2
@@ -95,7 +97,7 @@ function resize() {
 }
 
 //drawFunc-s
-function setPlates(block, count, customS) {
+function setPlates(block, count, customS, callback) {
     err = undefined
 
     if (count > 10 || count < 2 || count == undefined || block == undefined) {
@@ -119,7 +121,7 @@ function setPlates(block, count, customS) {
                 }
 
                 doc('L' + y).appendChild(xB)
-                x < count? setTimeout(() => setB(x + 1, y)) :  y < count? setTimeout(() => setL(y + 1)) : block.setAttribute('status', 'ready')
+                x < count? setTimeout(() => setB(x + 1, y)) :  y < count? setTimeout(() => setL(y + 1)) : setTimeout(() => callback())
             }
 
             var setL = function(y) {
@@ -144,40 +146,37 @@ function prepareFrames(block, animConf) {
 
     if (animConf.framesC && animConf.fDispTime && animConf.plotPlates && animConf.frames != undefined && block.getAttribute('anim') == undefined) {
         delPlot()
-        setPlates(block, animConf.plotPlates, animConf.customS)
-        block.addEventListener('DOMSubtreeModified', (e) => {
-            if (e.target.lastChild.id == 'B' + animConf.plotPlates && e.target.id == 'L' + animConf.plotPlates) {
-                var setF = function(fNum) {
-                    var frame = block.cloneNode(true)
-                    frame.id = 'frame' + fNum
-                    frame.style.display = 'none'
-                    doc('contentBlock').appendChild(frame)
+        setPlates(block, animConf.plotPlates, animConf.customS, () => {
+            var setF = function(fNum) {
+                var frame = block.cloneNode(true)
+                frame.id = 'frame' + fNum
+                frame.style.display = 'none'
+                doc('contentBlock').appendChild(frame)
 
-                    var setB = function(x, y, fNum) {
-                        var pixB = doc('frame' + fNum).querySelector('div#L' + y + ' div#B' + x)
-                        pixB.style.backgroundColor = colorP[animConf.frames[fNum - 1][y - 1][x - 1]]
+                var setB = function(x, y, fNum) {
+                    var pixB = doc('frame' + fNum).querySelector('div#L' + y + ' div#B' + x)
+                    pixB.style.backgroundColor = colorP[animConf.frames[fNum - 1][y - 1][x - 1]]
 
-                        if (x < animConf.plotPlates) {
-                            setTimeout(() => setB(x + 1, y, fNum))
-                        } else if (y < animConf.plotPlates) {
-                            setTimeout(() => setL(y + 1, fNum))
-                        } else if (fNum < animConf.framesC) {
-                            setTimeout(() => setF(fNum + 1))
-                        } else if (fNum == animConf.framesC && x == animConf.plotPlates) {
-                            block.setAttribute('anim', 'ready')
-                            playAnim(block, animConf.framesC, animConf.fDispTime)
-                        }
+                    if (x < animConf.plotPlates) {
+                        setTimeout(() => setB(x + 1, y, fNum))
+                    } else if (y < animConf.plotPlates) {
+                        setTimeout(() => setL(y + 1, fNum))
+                    } else if (fNum < animConf.framesC) {
+                        setTimeout(() => setF(fNum + 1))
+                    } else if (fNum == animConf.framesC && x == animConf.plotPlates) {
+                        block.setAttribute('anim', 'ready')
+                        playAnim(block, animConf.framesC, animConf.fDispTime)
                     }
-
-                    var setL = function(y, fNum) {
-                        y <= animConf.plotPlates? setTimeout(() => setB(1, y, fNum)) : null
-                    }
-
-                    setTimeout(() => setL(1, fNum))
                 }
 
-                setTimeout(() => setF(1))
+                var setL = function(y, fNum) {
+                    y <= animConf.plotPlates? setTimeout(() => setB(1, y, fNum)) : null
+                }
+
+                setTimeout(() => setL(1, fNum))
             }
+
+            setTimeout(() => setF(1))
         })
     } else {
         err = '#005'
@@ -227,7 +226,7 @@ function arrToStr(arr, callback) {
     var response = new String
 
     if (arr.framesC && arr.fDispTime && arr.plotPlates && arr.frames != undefined) {
-        response = arr.framesC + '-' + arr.fDispTime + '-' + arr.plotPlates
+        response = arr.framesC + '-' + arr.fDispTime + '-' + arr.plotPlates + '-' + arr.customS['bRadius'].split('%')[0]
 
         var str = new String
         var framesToStrFirst = function(currF, currL) {
@@ -260,15 +259,89 @@ function arrToStr(arr, callback) {
             currPos <= str.length? setTimeout(() => framesToStr(str, currPos, stack)) : setTimeout(() => callback(response))
         }
 
-        framesToStrFirst(1, 1)
+        setTimeout(() => framesToStrFirst(1, 1))
     }
+}
+
+function strToArr(str, callback) {
+    var response = {
+        framesC: parseInt(str.split('-')[0]), 
+        fDispTime: parseInt(str.split('-')[1]), 
+        plotPlates: parseInt(str.split('-')[2]), 
+        customS: {
+            bRadius: str.split('-')[3] + '%'
+        },
+        frames: []
+    }
+
+    var parseLine = function(line, currPos, arr, callback) {
+        if (isNaN(parseInt(line[currPos])) == true) {
+            if (currPos < line.length) {
+                arr[arr.length] = line[currPos]
+                currPos++
+                setTimeout(() => parseLine(line, currPos, arr, callback))
+            } else {
+                callback[0](arr, callback[1])
+            } 
+        } else {
+            if (isNaN(parseInt(line[currPos + 1])) == false) {
+                var count = parseInt(line[currPos]) * 10 + parseInt(line[currPos + 1])
+                var char = line[currPos + 2]
+                currPos += 3
+            } else {
+                var count = parseInt(line[currPos])
+                var char = line[currPos + 1]
+                currPos += 2
+            }
+
+            var fillA = function(line, currPos, arr, curr, char, count, callback) {
+                arr[arr.length] = char 
+                curr++ 
+                if (curr <= count) { 
+                    setTimeout(() => fillA(line, currPos, arr, curr, char, count, callback)) 
+                } else { 
+                    setTimeout(() => parseLine(line, currPos, arr, callback))
+                }
+            }
+
+            setTimeout(() => fillA(line, currPos, arr, 1, char, count, callback))
+        }
+    }
+
+    var addFrames = function(currF, currL, strP) {
+        setTimeout(() => parseLine(str.split('-')[strP], 0, [], [(arr, data) => {
+            currF = data[0]
+            currL = data[1]
+            strP = data[2]
+            response.frames[currF - 1][currL - 1] = arr
+            strP++
+            currL++
+            if (currL > response.plotPlates) {
+                currL = 1
+                currF++
+                if (currF > response.framesC) { 
+                    callback(response) 
+                } else {
+                    response.frames[currF - 1] = new Array()
+                    setTimeout(() => addFrames(currF, currL, strP))
+                }
+            } else {
+                setTimeout(() => addFrames(currF, currL, strP))
+            }
+        }, [currF, currL, strP]]))
+    }
+
+    response.frames[0] = new Array()
+    setTimeout(() => addFrames(1, 1, 4, callback))
 }
 
 //events
 document.addEventListener('DOMContentLoaded', (e) => {
     resize()
     //setPlates(doc('main'), 9, {bRadius: '50%'})
-    prepareFrames(doc('main'), anim) //test
+    strToArr('3-1000-9-50-9g-9g-3gdgd3g-2g5d2g-2g5d2g-3g3d3g-4gd4g-9g-9g-9g-2g2dg2d2g-g7dg-g7dg-g7dg-2g5d2g-3g3d3g-4gd4g-9g-2g2dg2d2g-g7dg-9d-9d-9d-g7dg-2g5d2g-3g3d3g-4gd4g', (r) => {
+        console.log(prepareFrames(doc('main'), r))
+    })//test
     doc('newA').addEventListener('click', (e) => {
         if (e.target.getAttribute('active') == 'true') {
             e.target.setAttribute('active', 'false')
