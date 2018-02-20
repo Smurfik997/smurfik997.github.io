@@ -187,25 +187,29 @@ function prepareFrames(block, animConf) {
 }
 
 function playAnim(block, framesC, fDispTime) {
+    doc('title').style.display = 'block'
     doc('preload').style.display = 'none'
     block.style.display = 'none'
     doc('frame1').style.display = 'block'
     var currF = 0
-    console.log('currF: ' + currF)
+    console.log('%ccurrF: %c' + currF, 'color: rgb(80, 180, 230)', 'color: rgb(255, 100, 120)')
 
     var dispF = function(currF, prevF) {
-        currF++
-        console.log('currF: ' + currF)
+        block.getAttribute('pause') != 'true'? currF++ : null
         var currFN
         if (currF % (framesC * 2 - 2) + 1 > framesC) {
             currFN = framesC * 2 - currF % (framesC * 2 - 2) - 1
         } else {
-            
             currFN = currF % (framesC * 2 - 2) + 1
         }
         //currFN = currF % framesC + 1
-        doc('frame' + prevF).style.display = 'none'
-        doc('frame' + currFN).style.display = 'block'
+
+        if (block.getAttribute('pause') != 'true') {
+            console.log('%ccurrF: %c' + currF, 'color: rgb(80, 180, 230)', 'color: rgb(255, 100, 120)')
+            doc('frame' + prevF).style.display = 'none'
+            doc('frame' + currFN).style.display = 'block'
+        }
+
         setTimeout(() => dispF(currF, currFN), fDispTime)       
     }
 
@@ -226,10 +230,14 @@ document.addEventListener('DOMContentLoaded', (e) => {
     doc('newA').addEventListener('click', (e) => {
         if (e.target.getAttribute('active') == 'true') {
             e.target.setAttribute('active', 'false')
+            setTimeout(() => doc('main').setAttribute('pause', 'false'), 1250)
+            console.warn('Continue')
             doc('contentBlock').className = 'content'
             e.target.className = 'icon'
         } else {
             e.target.setAttribute('active', 'true')
+            doc('main').setAttribute('pause', 'true')
+            console.warn('Pause')
             doc('contentBlock').className = 'content toRight'
             e.target.className = 'icon iconR'
         }

@@ -23,9 +23,11 @@
             </div>
         </div>
         <script id="windowE">
+            document.getElementById('preload').style.display = 'table'
             window.addEventListener('error', function(e) {
                 if (e.error == undefined) {
                     document.getElementById('error').style.display = 'table'
+                    document.getElementById('preload').style.display = 'none'
                 }
             })
         </script>
@@ -38,7 +40,7 @@
                 document.getElementById('script').remove()
             })
         </script>
-        <div id="title">
+        <div id="title" style="display: none">
             <div style="height: 100%; margin: 0 auto;">
                 <div class="iconB">
                     <img src="images/new.svg" id="newA" alt="Створити" class="icon" active="false"/>
