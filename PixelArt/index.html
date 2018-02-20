@@ -24,6 +24,9 @@
         </div>
         <script id="windowE">
             document.getElementById('preload').style.display = 'table'
+            if (document.getElementById('preload').querySelector('img').clientHeight > (window.innerHeight || document.documentElement.clientHeight)) {
+                document.getElementById('preload').querySelector('img').style.display = 'none'
+            }
             window.addEventListener('error', function(e) {
                 if (e.error == undefined) {
                     document.getElementById('error').style.display = 'table'

@@ -222,6 +222,48 @@ function delPlot() {
     })
 }
 
+//sys ***arrToStr(anim, (e) => {console.log(e)})
+function arrToStr(arr, callback) {
+    var response = new String
+
+    if (arr.framesC && arr.fDispTime && arr.plotPlates && arr.frames != undefined) {
+        response = arr.framesC + '-' + arr.fDispTime + '-' + arr.plotPlates
+
+        var str = new String
+        var framesToStrFirst = function(currF, currL) {
+            //currL == 1? str += '-' : null
+
+            if (currL <= arr.plotPlates) {
+                str += '-' + arr.frames[currF - 1][currL - 1].join('')
+                currL++
+            }
+
+            if (currL > arr.plotPlates) {
+                currF++
+                currL = 1
+            }
+
+            currF <= arr.framesC? setTimeout(() => framesToStrFirst(currF, currL)) : setTimeout(() => framesToStr(str, 0, ''))
+        }
+
+        var framesToStr = function(str, currPos, stack) {
+            if (str[currPos] == stack[0]) {
+                stack += str[currPos] 
+            } else {
+                stack.length == 1? response += stack[0] : null
+                stack.length > 1? response += stack.length + stack[0] : null
+                stack = str[currPos]
+            }
+
+            currPos++
+
+            currPos <= str.length? setTimeout(() => framesToStr(str, currPos, stack)) : setTimeout(() => callback(response))
+        }
+
+        framesToStrFirst(1, 1)
+    }
+}
+
 //events
 document.addEventListener('DOMContentLoaded', (e) => {
     resize()
