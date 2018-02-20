@@ -46,7 +46,7 @@ body {
     --red: rgb(255, 100, 120);
     --green: rgb(160, 255, 200);
     --yellow: rgb(244, 255, 142);
-    --grayShadow: 0px 0px 40px rgba(120, 120, 120, 0.5);
+    --grayShadow: 0px 0px 40px rgba(120, 120, 120, .5);
 
     margin: 0 auto;
     text-align: center;
@@ -59,7 +59,7 @@ body {
     top: 10%;
     width: 100%;
     height: 90%;
-    transition: ease-in-out left .7s;
+    transition: ease-in-out left .5s;
     left: 0;
 }
 
@@ -93,7 +93,7 @@ body {
 }
 
 .iconR {
-    transform: rotate(405deg); 
+    transform: rotate(225deg); 
     box-shadow: var(--grayShadow); 
     background-color: rgba(120, 120, 120, .1);
 }
@@ -106,7 +106,7 @@ body {
     height: 100%;
     border-radius: 50%;
     float: left;
-    transition: ease-in-out box-shadow .7s, transform .7s, background-color .7s;
+    transition: ease-in-out box-shadow .5s, transform .5s, background-color .5s;
 }
 
 .plot {
