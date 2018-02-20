@@ -21,6 +21,22 @@
 }
 /*error class end*/
 
+#preload {
+    background-color: white; 
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 120;
+    display: table;
+}
+
+.preloadI {
+    height: 100%; 
+    display: table-cell; 
+    vertical-align: middle;
+    text-align: center;
+}
+
 body {
     /*var-s*/
     --light-gray: rgb(220, 220, 220);
@@ -76,7 +92,7 @@ body {
     float: left;  
 }
 
-.iRotate {
+.iconR {
     transform: rotate(405deg); 
     box-shadow: var(--grayShadow); 
     background-color: rgba(120, 120, 120, 0.1);

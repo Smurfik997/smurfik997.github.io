@@ -187,6 +187,7 @@ function prepareFrames(block, animConf) {
 }
 
 function playAnim(block, framesC, fDispTime) {
+    doc('preload').style.display = 'none'
     block.style.display = 'none'
     doc('frame1').style.display = 'block'
     var currF = 0
@@ -230,7 +231,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
         } else {
             e.target.setAttribute('active', 'true')
             doc('contentBlock').className = 'content toRight'
-            e.target.className = 'icon iRotate'
+            e.target.className = 'icon iconR'
         }
     })
 })
