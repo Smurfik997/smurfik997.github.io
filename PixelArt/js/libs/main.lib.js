@@ -230,7 +230,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
     doc('newA').addEventListener('click', (e) => {
         if (e.target.getAttribute('active') == 'true') {
             e.target.setAttribute('active', 'false')
-            setTimeout(() => doc('main').setAttribute('pause', 'false'), 1250)
+            setTimeout(() => doc('main').setAttribute('pause', 'false'), 700)
             console.warn('Continue')
             doc('contentBlock').className = 'content'
             e.target.className = 'icon'

@@ -59,8 +59,8 @@ body {
     top: 10%;
     width: 100%;
     height: 90%;
-    transition: ease-in-out left 1.25s;
-    left: 0%;
+    transition: ease-in-out left .7s;
+    left: 0;
 }
 
 .toRight {
@@ -95,7 +95,7 @@ body {
 .iconR {
     transform: rotate(405deg); 
     box-shadow: var(--grayShadow); 
-    background-color: rgba(120, 120, 120, 0.1);
+    background-color: rgba(120, 120, 120, .1);
 }
 
 .r {
@@ -106,7 +106,7 @@ body {
     height: 100%;
     border-radius: 50%;
     float: left;
-    transition: ease-in-out box-shadow 1.25s, transform 1.25s, background-color 1.25s;
+    transition: ease-in-out box-shadow .7s, transform .7s, background-color .7s;
 }
 
 .plot {
