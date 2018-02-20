@@ -56,9 +56,9 @@ body {
 
 .content {
     position: fixed;
-    top: 10%;
+    top: 12%;
     width: 100%;
-    height: 90%;
+    height: 88%;
     transition: ease-in-out left .5s;
     left: 0;
 }
@@ -68,7 +68,7 @@ body {
 }
 
 #title {
-    height: 10%;
+    height: 12%;
     width: 100%;
     font-weight: 400;
     font-family: Arial;
