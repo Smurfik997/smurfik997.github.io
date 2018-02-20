@@ -225,12 +225,12 @@ document.addEventListener('DOMContentLoaded', (e) => {
     doc('newA').addEventListener('click', (e) => {
         if (e.target.getAttribute('active') == 'true') {
             e.target.setAttribute('active', 'false')
-            doc('contentBlock').style.left = '0%'
-            e.target.style.cssText = null
+            doc('contentBlock').className = 'content'
+            e.target.className = 'icon'
         } else {
             e.target.setAttribute('active', 'true')
-            doc('contentBlock').style.left = '100%'
-            e.target.style.cssText = 'transform: rotate(405deg); box-shadow: var(--grayShadow); background-color: rgba(120, 120, 120, 0.1);'
+            doc('contentBlock').className = 'content toRight'
+            e.target.className = 'icon iRotate'
         }
     })
 })

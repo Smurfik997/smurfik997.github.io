@@ -47,6 +47,10 @@ body {
     left: 0%;
 }
 
+.toRight {
+    left: 100%;
+}
+
 #title {
     height: 10%;
     width: 100%;
@@ -70,6 +74,12 @@ body {
     width: 20%;
     left: 0;
     float: left;  
+}
+
+.iRotate {
+    transform: rotate(405deg); 
+    box-shadow: var(--grayShadow); 
+    background-color: rgba(120, 120, 120, 0.1);
 }
 
 .r {
