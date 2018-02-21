@@ -26,12 +26,6 @@
             if (document.getElementById('preload').querySelector('img').clientHeight < window.innerHeight) {
                 document.getElementById('preload').querySelector('img').style.visibility = 'unset'
             }
-            /*if (window.innerHeight < 400 || window.innerWidth < 400) {
-                document.getElementById('error').querySelector('div').innerHTML = 'Розміри дисплею занадто малі.'
-                document.getElementById('error').style.display = 'table'
-                document.getElementById('preload').style.display = 'none'
-                err = 1
-            }*/
             window.addEventListener('error', function(e) {
                 if (e.error == undefined && document.getElementById('error') != undefined) {
                     document.getElementById('error').style.display = 'table'

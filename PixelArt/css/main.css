@@ -49,8 +49,6 @@ body {
 
     margin: 0 auto;
     text-align: center;
-    min-width: 400px;
-    min-height: 400px;
     background-color: var(--light-gray);
     user-select: none;
 }
@@ -89,6 +87,7 @@ body {
     float: left;
     width: 70%;
     height: 100%;
+    display: table;
 }
 
 .iconB {
