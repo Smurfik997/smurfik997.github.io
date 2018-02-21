@@ -64,15 +64,18 @@ function resize() {
                     doc('main').style[key] = val
                 }
                 
-                doc('createM').style[key] = val
+                key != 'padding'? doc('createM').style[key] = val : doc('settingsItems').style[key] = val
             })
 
+            doc('createM').style.fontSize = len * 0.07 + 'px'
+            doc('createM').style.lineHeight = len * 0.2 + 'px'
+            doc('createM').querySelector('div#continueB').style.borderRadius = len * 0.03 + 'px'
             doc('title').querySelectorAll('div')[0].style.width = len + 'px'
             doc('title').querySelectorAll('div')[0].style.marginLeft = Math.trunc((winW - len) / 2) + 'px'
         }
 
-        winH >= 308? null : winH = 308
-        winW >= 350? null : winW = 350
+        winH >= 352? null : winH = 352
+        winW >= 400? null : winW = 400
         winW >= winH? css(Math.trunc(winH * 0.9)) : css(Math.trunc(winW * 0.9))
     }
 }

@@ -26,8 +26,14 @@
             if (document.getElementById('preload').querySelector('img').clientHeight < window.innerHeight) {
                 document.getElementById('preload').querySelector('img').style.visibility = 'unset'
             }
+            if (window.innerHeight < 400 || window.innerWidth < 400) {
+                document.getElementById('error').querySelector('div').innerHTML = 'Розміри дисплею занадто малі.'
+                document.getElementById('error').style.display = 'table'
+                document.getElementById('preload').style.display = 'none'
+                err = 1
+            }
             window.addEventListener('error', function(e) {
-                if (e.error == undefined) {
+                if (e.error == undefined && document.getElementById('error') != undefined) {
                     document.getElementById('error').style.display = 'table'
                     document.getElementById('preload').style.display = 'none'
                 }
@@ -36,7 +42,7 @@
         <script id="script" type="text/javascript">
             setTimeout(() => {
                 document.getElementById('windowE').remove()
-                document.getElementById('error').remove()
+                err != 1? document.getElementById('error').remove() : null
                 resize()
                 document.getElementById('script').remove()
             })
@@ -66,10 +72,21 @@
         </div>
         <div id="settingsBlock" class="content settings">
             <div id="createM" class="plot">
-                <div id="plotPlatesS" class="sItem"></div>
-                <div id="framesCountS" class="sItem"></div>
-                <div id="borderRadiudS" class="sItem"></div>
-                <div id="continueB"></div>
+                <div id="settingsItems">
+                    <div id="plotPlatesS" class="sItem">
+                        <div>Розмір кадру</div>
+                    </div>
+                    <div id="framesCountS" class="sItem">
+                        <div>Кількість кадрів</div>
+                    </div>
+                    <div id="borderRadiudS" class="sItem">
+                        <div>Скруглення плиток</div>
+                    </div>
+                    <div id="replayS" class="sItem">
+                        <div>Режим (1 - 2 - 3)</div>
+                    </div>
+                </div>
+                <div id="continueB" class="sItem"><!--Продовжити--></div>
             </div>
         </div>
     </body>
