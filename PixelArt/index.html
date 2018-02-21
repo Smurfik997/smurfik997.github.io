@@ -19,13 +19,12 @@
         </div>
         <div id="preload">
             <div class="preloadI">
-                <img src="images/icon160.svg" alt="Логотип" style="height: 50%;"/>
+                <img src="images/icon160.svg" alt="Логотип" style="height: 50%; visibility: hidden"/>
             </div>
         </div>
         <script id="windowE">
-            document.getElementById('preload').style.display = 'table'
-            if (document.getElementById('preload').querySelector('img').clientHeight > (window.innerHeight || document.documentElement.clientHeight)) {
-                document.getElementById('preload').querySelector('img').style.display = 'none'
+            if (document.getElementById('preload').querySelector('img').clientHeight < window.innerHeight) {
+                document.getElementById('preload').querySelector('img').style.visibility = 'unset'
             }
             window.addEventListener('error', function(e) {
                 if (e.error == undefined) {
@@ -42,7 +41,7 @@
                 document.getElementById('script').remove()
             })
         </script>
-        <div id="title" style="display: none">
+        <div id="title">
             <div style="height: 100%; margin: 0 auto;">
                 <div class="iconB">
                     <img src="images/new.svg" id="newA" alt="Створити" class="icon" active="false"/>
@@ -65,8 +64,13 @@
         <div id="contentBlock" class="content">
             <div id="main" class="plot"></div>
         </div>
-        <div id="block" class="content">
-            <div id="createM"></div>
+        <div id="settingsBlock" class="content settings">
+            <div id="createM" class="plot">
+                <div id="plotPlatesS" class="sItem"></div>
+                <div id="framesCountS" class="sItem"></div>
+                <div id="borderRadiudS" class="sItem"></div>
+                <div id="continueB"></div>
+            </div>
         </div>
     </body>
 </html>

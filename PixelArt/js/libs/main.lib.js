@@ -41,12 +41,10 @@ function doc(p1, p2) {
 }
 
 function resize() {
-    winW = (window.innerWidth || document.documentElement.clientWidth)
-    winH = (window.innerHeight || document.documentElement.clientHeight)
+    winW = window.innerWidth
+    winH = window.innerHeight
     
-    var titleH = doc('title').clientHeight
-    doc('title').style.cssText = 'font-size: ' + titleH / 2 + 'px; line-height: ' + titleH + 'px;'
-    winH -= titleH
+    winH -= doc('title').clientHeight
 
     if (winH == undefined || winW == undefined) {
         console.error('#001')
@@ -70,10 +68,11 @@ function resize() {
             })
 
             doc('title').querySelectorAll('div')[0].style.width = len + 'px'
+            doc('title').querySelectorAll('div')[0].style.marginLeft = Math.trunc((winW - len) / 2) + 'px'
         }
 
-        doc('title').style.width = winW + 'px'
-
+        winH >= 308? null : winH = 308
+        winW >= 350? null : winW = 350
         winW >= winH? css(Math.trunc(winH * 0.9)) : css(Math.trunc(winW * 0.9))
     }
 }
@@ -168,7 +167,6 @@ function prepareFrames(block, animConf) {
 }
 
 function playAnim(block, framesC, fDispTime, replay) {
-    doc('title').style.display = 'block'
     doc('preload').style.display = 'none'
     block.style.display = 'none'
     doc('frame1').style.display = 'block'
@@ -338,12 +336,14 @@ document.addEventListener('DOMContentLoaded', (e) => {
             e.target.setAttribute('active', 'false')
             setTimeout(() => doc('main').setAttribute('pause', 'false'), 500)
             console.warn('Continue')
+            doc('settingsBlock').className = 'content settings'
             doc('contentBlock').className = 'content'
             e.target.className = 'icon'
         } else {
             e.target.setAttribute('active', 'true')
             doc('main').setAttribute('pause', 'true')
             console.warn('Pause')
+            doc('settingsBlock').className = 'content'
             doc('contentBlock').className = 'content toRight'
             e.target.className = 'icon iconR'
         }

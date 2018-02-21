@@ -27,7 +27,7 @@
     width: 100%;
     height: 100%;
     z-index: 120;
-    display: none;
+    display: table;
 }
 
 .preloadI {
@@ -40,7 +40,6 @@
 body {
     /*var-s*/
     --light-gray: rgb(220, 220, 220);
-    --white: rgb(255, 255, 255);
     --gray: rgb(120, 120, 120);
     --blue: rgb(80, 180, 230); 
     --red: rgb(255, 100, 120);
@@ -50,6 +49,8 @@ body {
 
     margin: 0 auto;
     text-align: center;
+    min-width: 350px;
+    min-height: 350px;
     background-color: var(--light-gray);
     user-select: none;
 }
@@ -59,8 +60,13 @@ body {
     top: 12%;
     width: 100%;
     height: 88%;
+    z-index: 1;
     transition: ease-in-out left .5s;
     left: 0;
+}
+
+.settings {
+    left: -100%;
 }
 
 .toRight {
@@ -71,6 +77,8 @@ body {
     height: 12%;
     width: 100%;
     font-weight: 400;
+    font-size: 6vh;
+    line-height: 12vh;
     font-family: Arial;
     background-color: white;
     color: rgb(130, 130, 130);
@@ -79,7 +87,7 @@ body {
 
 #tText {
     float: left;
-    width: 60%;
+    width: 70%;
     height: 100%;
 }
 
@@ -87,7 +95,7 @@ body {
     position: relative;
     height: 60%;
     top: 20%;
-    width: 20%;
+    width: 15%;
     left: 0;
     float: left;  
 }
@@ -124,4 +132,8 @@ body {
     float: left;
     background-color: var(--light-gray);
     /*border-radius: 50%;*/
+}
+
+.sItem {
+    height: 29%;
 }
