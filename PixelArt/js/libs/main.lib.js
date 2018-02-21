@@ -50,10 +50,13 @@ function resize() {
         console.error('#001')
     } else { 
         var css = function(len) {
+            var padding = Math.trunc(len * 0.02) + 'px'
+            var size = Math.trunc(len * 0.96) + 'px'
+            var sSize = Math.trunc(len * 0.96) + 2 * Math.trunc(len * 0.02)
             new Map([
-                ['height', Math.trunc(len * 0.96) + 'px'],
-                ['width', Math.trunc(len * 0.96) + 'px'],
-                ['padding', Math.trunc(len * 0.02) + 'px'],
+                ['height', size],
+                ['width', size],
+                ['padding', padding],
                 ['margin', Math.trunc((winH - len) / 2) + 'px ' + Math.trunc((winW - len) / 2) + 'px']
             ]).forEach((val, key) => {
                 if (doc('main').getAttribute('anim') == 'ready') {
@@ -65,7 +68,7 @@ function resize() {
                 }
                 
                 if (key != 'padding') {
-                    key == 'width' || key == 'height'? doc('createM').style[key] = len : doc('createM').style[key] = val
+                    key == 'width' || key == 'height'? doc('createM').style[key] = sSize + 'px' : doc('createM').style[key] = val
                 }
             })
 
