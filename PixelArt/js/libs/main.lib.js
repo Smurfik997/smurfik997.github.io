@@ -12,43 +12,25 @@ var colorP = {
     g: 'rgb(220, 220, 220)', //light-gray
 }
 
-var anim = {framesC: 3, fDispTime: 1000, plotPlates: 9, customS: {
-        bRadius: '50%'
-    }, frames: [
+/*var anim = {framesC: 3, fDispTime: 1000, plotPlates: 3, replay: 0, customS: {
+    bRadius: '50%',
+}, frames: [
     [
-        ['g' /*x1*/, 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g'], //y1
-        ['g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g'], //y2
-        ['g', 'g', 'g', 'd', 'g', 'd', 'g', 'g', 'g'],
-        ['g', 'g', 'd', 'd', 'd', 'd', 'd', 'g', 'g'],
-        ['g', 'g', 'd', 'd', 'd', 'd', 'd', 'g', 'g'],
-        ['g', 'g', 'g', 'd', 'd', 'd', 'g', 'g', 'g'],
-        ['g', 'g', 'g', 'g', 'd', 'g', 'g', 'g', 'g'],
-        ['g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g'],
-        ['g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g']
+        ['d', 'g', 'g'],
+        ['g', 'f', 'g'], 
+        ['g', 'g', 'e']
     ],
     [
-        ['g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g'],
-        ['g', 'g', 'd', 'd', 'g', 'd', 'd', 'g', 'g'],
-        ['g', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'g'],
-        ['g', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'g'],
-        ['g', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'g'],
-        ['g', 'g', 'd', 'd', 'd', 'd', 'd', 'g', 'g'],
-        ['g', 'g', 'g', 'd', 'd', 'd', 'g', 'g', 'g'],
-        ['g', 'g', 'g', 'g', 'd', 'g', 'g', 'g', 'g'],
-        ['g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g']
+        ['e', 'g', 'g'],
+        ['g', 'd', 'g'], 
+        ['g', 'g', 'f']
     ],
     [
-        ['g', 'g', 'd', 'd', 'g', 'd', 'd', 'g', 'g'],
-        ['g', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'g'],
-        ['d', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd'],
-        ['d', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd'],
-        ['d', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd'],
-        ['g', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'g'],
-        ['g', 'g', 'd', 'd', 'd', 'd', 'd', 'g', 'g'],
-        ['g', 'g', 'g', 'd', 'd', 'd', 'g', 'g', 'g'],
-        ['g', 'g', 'g', 'g', 'd', 'g', 'g', 'g', 'g']
+        ['f', 'g', 'g'],
+        ['g', 'e', 'g'], 
+        ['g', 'g', 'd']
     ]
-]}
+]}*/
 
 //warn
 console.warn('Script has injected')
@@ -144,7 +126,7 @@ function setPlates(block, count, customS, callback) {
 function prepareFrames(block, animConf) {
     var err = undefined
 
-    if (animConf.framesC && animConf.fDispTime && animConf.plotPlates && animConf.frames != undefined && block.getAttribute('anim') == undefined) {
+    if (animConf.framesC && animConf.fDispTime && animConf.plotPlates && animConf.replay && animConf.frames != undefined && block.getAttribute('anim') == undefined) {
         delPlot()
         setPlates(block, animConf.plotPlates, animConf.customS, () => {
             var setF = function(fNum) {
@@ -165,7 +147,7 @@ function prepareFrames(block, animConf) {
                         setTimeout(() => setF(fNum + 1))
                     } else if (fNum == animConf.framesC && x == animConf.plotPlates) {
                         block.setAttribute('anim', 'ready')
-                        playAnim(block, animConf.framesC, animConf.fDispTime)
+                        playAnim(block, animConf.framesC, animConf.fDispTime, animConf.replay)
                     }
                 }
 
@@ -185,23 +167,27 @@ function prepareFrames(block, animConf) {
     return err == undefined? null : console.error(err)
 }
 
-function playAnim(block, framesC, fDispTime) {
+function playAnim(block, framesC, fDispTime, replay) {
     doc('title').style.display = 'block'
     doc('preload').style.display = 'none'
     block.style.display = 'none'
     doc('frame1').style.display = 'block'
     var currF = 0
+    console.log('%creplayMode: %c' + replay, 'color: rgb(80, 180, 230)', 'color: rgb(255, 100, 120)')
     console.log('%ccurrF: %c' + currF, 'color: rgb(80, 180, 230)', 'color: rgb(255, 100, 120)')
 
     var dispF = function(currF, prevF) {
         block.getAttribute('pause') != 'true'? currF++ : null
         var currFN
-        if (currF % (framesC * 2 - 2) + 1 > framesC) {
-            currFN = framesC * 2 - currF % (framesC * 2 - 2) - 1
+        if (replay == 1) {
+            if (currF % (framesC * 2 - 2) + 1 > framesC) {
+                currFN = framesC * 2 - currF % (framesC * 2 - 2) - 1
+            } else {
+                currFN = currF % (framesC * 2 - 2) + 1
+            }
         } else {
-            currFN = currF % (framesC * 2 - 2) + 1
+            currFN = currF % framesC + 1
         }
-        //currFN = currF % framesC + 1
 
         if (block.getAttribute('pause') != 'true') {
             console.log('%ccurrF: %c' + currF, 'color: rgb(80, 180, 230)', 'color: rgb(255, 100, 120)')
@@ -226,7 +212,7 @@ function arrToStr(arr, callback) {
     var response = new String
 
     if (arr.framesC && arr.fDispTime && arr.plotPlates && arr.frames != undefined) {
-        response = arr.framesC + '-' + arr.fDispTime + '-' + arr.plotPlates + '-' + arr.customS['bRadius'].split('%')[0]
+        response = arr.framesC + '-' + arr.fDispTime + '-' + arr.plotPlates + '-' + arr.customS['bRadius'].split('%')[0] + '-' + arr.replay
 
         var str = new String
         var framesToStrFirst = function(currF, currL) {
@@ -268,8 +254,9 @@ function strToArr(str, callback) {
         framesC: parseInt(str.split('-')[0]), 
         fDispTime: parseInt(str.split('-')[1]), 
         plotPlates: parseInt(str.split('-')[2]), 
+        replay: str.split('-')[4],
         customS: {
-            bRadius: str.split('-')[3] + '%'
+            bRadius: str.split('-')[3] + '%',
         },
         frames: []
     }
@@ -332,16 +319,20 @@ function strToArr(str, callback) {
     }
 
     response.frames[0] = new Array()
-    setTimeout(() => addFrames(1, 1, 4, callback))
+    setTimeout(() => addFrames(1, 1, 5, callback))
 }
 
 //events
 document.addEventListener('DOMContentLoaded', (e) => {
     resize()
     //setPlates(doc('main'), 9, {bRadius: '50%'})
-    strToArr('3-1000-9-50-9g-9g-3gdgd3g-2g5d2g-2g5d2g-3g3d3g-4gd4g-9g-9g-9g-2g2dg2d2g-g7dg-g7dg-g7dg-2g5d2g-3g3d3g-4gd4g-9g-2g2dg2d2g-g7dg-9d-9d-9d-g7dg-2g5d2g-3g3d3g-4gd4g', (r) => {
-        console.log(prepareFrames(doc('main'), r))
+    var animStr = '3-1000-9-50-1-9g-9g-3gdgd3g-2g5d2g-2g5d2g-3g3d3g-4gd4g-9g-9g-9g-2g2dg2d2g-g7dg-g7dg-g7dg-2g5d2g-3g3d3g-4gd4g-9g-2g2dg2d2g-g7dg-9d-9d-9d-g7dg-2g5d2g-3g3d3g-4gd4g'
+    location.search.split('?')[1] != undefined? animStr = location.search.split('?')[1] : null
+
+    strToArr(animStr, (r) => {
+        prepareFrames(doc('main'), r)
     })//test
+
     doc('newA').addEventListener('click', (e) => {
         if (e.target.getAttribute('active') == 'true') {
             e.target.setAttribute('active', 'false')
