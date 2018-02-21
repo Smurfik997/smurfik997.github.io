@@ -64,7 +64,9 @@ function resize() {
                     doc('main').style[key] = val
                 }
                 
-                key != 'padding'? doc('createM').style[key] = val : doc('settingsItems').style[key] = val
+                if (key != 'padding') {
+                    key == 'width' || key == 'height'? doc('createM').style[key] = len : doc('createM').style[key] = val
+                }
             })
 
             doc('createM').style.fontSize = len * 0.07 + 'px'
