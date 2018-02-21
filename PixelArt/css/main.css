@@ -139,8 +139,10 @@ body {
 }
 
 .sText {
+    height: 30%;
+    line-height: 100%;
     width: 65%;
-    margin: 7% 5% 0 10%;
+    margin: 7% 5% 7% 10%;
     text-align: left;
     float: left;
 }
