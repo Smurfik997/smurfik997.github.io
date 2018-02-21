@@ -74,8 +74,8 @@ function resize() {
             doc('title').querySelectorAll('div')[0].style.marginLeft = Math.trunc((winW - len) / 2) + 'px'
         }
 
-        winH >= 352? null : winH = 352
-        winW >= 400? null : winW = 400
+        /*winH >= 352? null : winH = 352
+        winW >= 400? null : winW = 400*/
         winW >= winH? css(Math.trunc(winH * 0.9)) : css(Math.trunc(winW * 0.9))
     }
 }
