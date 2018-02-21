@@ -72,7 +72,7 @@ function resize() {
                 }
             })
 
-            doc('createM').style.fontSize = Math.trunc(len * 0.06) + 'px'
+            doc('createM').style.fontSize = len * 0.06 + 'px'
             var bR = Math.trunc(len * 0.03)
             doc('createM').querySelectorAll('div.sItem')[0].style.borderRadius = bR + 'px ' + bR + 'px 0 0'
             doc('createM').querySelector('div#continueB').style.borderRadius = '0 0 ' + bR + 'px ' + bR + 'px'
