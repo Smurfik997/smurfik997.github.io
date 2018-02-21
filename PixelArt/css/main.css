@@ -139,18 +139,28 @@ body {
 }
 
 .sText {
-    height: 100%;
-    width: 70%;
-    margin-left: 10%; 
+    width: 65%;
+    margin: 7% 5% 0 10%;
     text-align: left;
     float: left;
+}
+
+.counter {
+    width: 30%;
+    height: 35%;
+
 }
 
 #continueB {
     background-color: var(--green);
     color: white;
+    width: 100%; 
+}
+
+.continue {
     width: 100%;
-    
+    text-align: center;
+    margin: 7% 0
 }
 
 #createM {
