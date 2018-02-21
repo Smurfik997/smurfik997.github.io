@@ -135,16 +135,17 @@ body {
 .sItem {
     height: 20%;
     width: 100%;
+    display: table;
     background-color: white;
 }
 
 .sText {
-    height: 30%;
-    line-height: 100%;
+    display: table-cell;
+    vertical-align: middle;
     width: 65%;
-    margin: 7% 5% 7% 10%;
+    padding: 7% 5% 7% 10%;
     text-align: left;
-    float: left;
+    /*float: left;*/
 }
 
 .counter {
@@ -160,9 +161,12 @@ body {
 }
 
 .continue {
+    height: 30%;
+    line-height: 100%;
     width: 100%;
     text-align: center;
-    margin: 7% 0
+    margin: 7% 0;
+    font-size: 100%;
 }
 
 #createM {
@@ -174,4 +178,9 @@ body {
 .gray {
     background-color: rgb(200, 200, 200);
     color: white
+}
+
+.b {
+    display: block;
+    padding: 0;
 }
