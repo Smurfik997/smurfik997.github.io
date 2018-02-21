@@ -134,14 +134,19 @@ body {
 
 .sItem {
     height: 20%;
-    width: 80%;
+    width: 100%;
+}
+
+.sText {
+    height: 100%;
+    width: 70%;
+    margin-left: 10%; 
+    text-align: left;
     float: left;
 }
 
 #continueB {
-    background-color: var(--red);
-    border-top-left-radius: 0 !important;
-    border-top-right-radius: 0 !important; 
+    background-color: var(--green);
     color: white;
     width: 100%;
     
@@ -151,4 +156,9 @@ body {
     font-weight: 400;
     font-family: Arial;
     color: var(--gray)
+}
+
+.gray {
+    background-color: rgb(200, 200, 200);
+    color: white
 }

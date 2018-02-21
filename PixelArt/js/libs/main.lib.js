@@ -72,9 +72,11 @@ function resize() {
                 }
             })
 
-            doc('createM').style.fontSize = len * 0.07 + 'px'
-            doc('createM').style.lineHeight = len * 0.2 + 'px'
-            doc('createM').querySelector('div#continueB').style.borderRadius = len * 0.03 + 'px'
+            doc('createM').style.fontSize = Math.trunc(len * 0.07) + 'px'
+            doc('createM').style.lineHeight = Math.trunc(len * 0.2) + 'px'
+            var bR = Math.trunc(len * 0.03)
+            doc('createM').querySelectorAll('div.sItem')[0].style.borderRadius = bR + 'px ' + bR + 'px 0 0'
+            doc('createM').querySelector('div#continueB').style.borderRadius = '0 0 ' + bR + 'px ' + bR + 'px'
             doc('title').querySelectorAll('div')[0].style.width = len + 'px'
             doc('title').querySelectorAll('div')[0].style.marginLeft = Math.trunc((winW - len) / 2) + 'px'
         }
