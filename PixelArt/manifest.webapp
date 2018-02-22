@@ -2,7 +2,7 @@
   "name": "PixerArt",
   "short_name": "PixerArt",
   "start_url": "https://smurfik997.github.io/PixelArt/index.html",
-  "theme_color": "#50b4e6",
+  "theme_color": "#ffffff",
   "background_color": "#dcdcdc",
   "display": "fullscreen",
   "icons": [{
