@@ -142,7 +142,7 @@ body {
 .sText {
     display: table-cell;
     vertical-align: middle;
-    width: 70%;
+    width: 65%;
     padding: 0 5% 0 5%;
     text-align: left;
     /*float: left;*/
@@ -150,10 +150,9 @@ body {
 
 .counter {
     display: table;
-    width: 80%;
-    height: 44%;
-    margin-top: 18%;
-    margin-left: 3%;
+    width: 84%;
+    height: 54%;
+    margin-top: 12%;
 }
 
 .counterB {
