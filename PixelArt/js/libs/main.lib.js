@@ -79,6 +79,8 @@ function resize() {
             var bR = Math.trunc(len * 0.03)
             doc('createM').querySelectorAll('div.sItem')[0].style.borderRadius = bR + 'px ' + bR + 'px 0 0'
             doc('createM').querySelector('div#continueB').style.borderRadius = '0 0 ' + bR + 'px ' + bR + 'px'
+            var counterB = doc('createM').querySelector('div.counterB')
+            doc('createM').querySelector('div.switch').style.borderRadius = counterB.clientHeight * 0.2 + 'px'
             doc('title').querySelectorAll('div')[0].style.width = len + 'px'
             doc('title').querySelectorAll('div')[0].style.marginLeft = Math.trunc((winW - len) / 2) + 'px'
         }
@@ -359,6 +361,17 @@ function sButtonClick(block, operation, min, max, numPerClick) {
 
             button[0].style.opacity = 1
         }
+    }
+}
+
+function switchB() {
+    var switchBlock = doc('replayS').querySelector('div.switch')
+    if (switchBlock.innerHTML == '1 - 2 - 3 - 1 - ...') {
+        switchBlock.innerHTML = '1 - 2 - 3 - 2 - ...'
+        switchBlock.style.backgroundColor = 'var(--red)'
+    } else {
+        switchBlock.innerHTML = '1 - 2 - 3 - 1 - ...'
+        switchBlock.style.backgroundColor = 'var(--green)'
     }
 }
 

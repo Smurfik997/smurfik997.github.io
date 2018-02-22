@@ -178,6 +178,12 @@ body {
     vertical-align: middle;
 }
 
+.switch {
+    width: 100%;
+    color: white;
+    background-color: var(--green)
+}
+
 .plus {
     border-radius: 0 20% 20% 0;
     padding: 0 1% 0 0;
