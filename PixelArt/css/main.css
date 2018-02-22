@@ -142,22 +142,22 @@ body {
 .sText {
     display: table-cell;
     vertical-align: middle;
-    width: 65%;
-    padding: 0 5% 0 5%;
+    width: 61%;
+    padding: 0 2% 0 4%;
     text-align: left;
     /*float: left;*/
 }
 
 .counter {
     display: table;
-    width: 84%;
-    height: 54%;
-    margin-top: 12%;
+    width: 92%;
+    height: 70%;
+    margin-top: 7.5%;
 }
 
 .counterB {
     height: 100%;
-    width: 31%;
+    width: 33%;
     display: table-cell;
     background-color: var(--red);
     opacity: 0.7;
@@ -169,7 +169,7 @@ body {
 
 .counterT {
     height: 100%;
-    width: 38%;
+    width: 34%;
     padding: 0 0 0 1%;
     display: table-cell;
     color: var(--gray);
