@@ -330,6 +330,38 @@ function strToArr(str, callback) {
     setTimeout(() => addFrames(1, 1, 5, callback))
 }
 
+//sButtons 
+function sButtonClick(block, operation, min, max, numPerClick) {
+    var numB = doc(block).querySelector('div.counterT')
+    var button = doc(block).querySelectorAll('div.counterB')
+    var currN = parseInt(numB.innerHTML)
+    if (operation == '-') {
+        if (currN > min) {
+            numB.innerHTML = currN - numPerClick
+
+            if (currN - numPerClick == min) {
+                button[0].style.opacity = .2
+            } else {
+                button[0].style.opacity = 1
+            }
+
+            button[1].style.opacity = 1
+        }
+    } else {
+        if (currN < max) {
+            numB.innerHTML = currN + numPerClick
+
+            if (currN + numPerClick == max) {
+                button[1].style.opacity = .2
+            } else {
+                button[1].style.opacity = 1
+            }
+
+            button[0].style.opacity = 1
+        }
+    }
+}
+
 //events
 document.addEventListener('DOMContentLoaded', (e) => {
     resize()
