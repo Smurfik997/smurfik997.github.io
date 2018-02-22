@@ -43,7 +43,7 @@ body {
     --gray: rgb(120, 120, 120);
     --blue: rgb(80, 180, 230); 
     --red: rgb(255, 100, 120);
-    --green: rgb(160, 255, 200);
+    --green: rgb(100, 255, 200);
     --yellow: rgb(244, 255, 142);
     --grayShadow: 0px 0px 40px rgba(120, 120, 120, .5);
 
@@ -142,15 +142,47 @@ body {
 .sText {
     display: table-cell;
     vertical-align: middle;
-    width: 65%;
-    padding: 0 5% 0 10%;
+    width: 70%;
+    padding: 0 5% 0 5%;
     text-align: left;
     /*float: left;*/
 }
 
 .counter {
-    width: 30%;
-    height: 35%;
+    display: table;
+    width: 80%;
+    height: 44%;
+    margin-top: 18%;
+    margin-left: 3%;
+}
+
+.counterB {
+    height: 100%;
+    width: 31%;
+    display: table-cell;
+    background-color: var(--red);
+    opacity: 0.7;
+    color: white;
+    border-radius: 20% 0 0 20%;
+    padding: 0 3%;
+    vertical-align: middle;
+}
+
+.counterT {
+    height: 100%;
+    width: 38%;
+    padding: 0 0 0 1%;
+    display: table-cell;
+    color: var(--gray);
+    background-color: white;
+    vertical-align: middle;
+}
+
+.plus {
+    border-radius: 0 20% 20% 0;
+    padding: 0 1% 0 0;
+    background-color: var(--green);
+    opacity: 1;
 }
 
 #continueB {
