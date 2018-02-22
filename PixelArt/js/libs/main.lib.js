@@ -340,7 +340,7 @@ function sButtonClick(block, operation, min, max, numPerClick) {
             numB.innerHTML = currN - numPerClick
 
             if (currN - numPerClick == min) {
-                button[0].style.opacity = .2
+                button[0].style.opacity = .4
             } else {
                 button[0].style.opacity = 1
             }
@@ -352,7 +352,7 @@ function sButtonClick(block, operation, min, max, numPerClick) {
             numB.innerHTML = currN + numPerClick
 
             if (currN + numPerClick == max) {
-                button[1].style.opacity = .2
+                button[1].style.opacity = .4
             } else {
                 button[1].style.opacity = 1
             }
