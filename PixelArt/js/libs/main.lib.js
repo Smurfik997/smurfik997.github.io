@@ -12,8 +12,10 @@ var colorP = {
     g: 'rgb(220, 220, 220)', //light-gray
 }
 
+var anim = {framesC: 2, fDispTime: 100, plotPlates: 2, replay: 1, customS: {bRadius: 0}, frames: []}
+
 /*var anim = {framesC: 3, fDispTime: 1000, plotPlates: 3, replay: 0, customS: {
-    bRadius: '50%',
+    bRadius: 50,
 }, frames: [
     [
         ['d', 'g', 'g'],
@@ -109,8 +111,7 @@ function setPlates(block, count, customS, callback) {
                 xB.style.height = 100 - count * margin * 2 + '%'
 
                 if (customS != undefined) {
-                    customS.color != undefined? xB.style.background = customS.color : null
-                    customS.bRadius != undefined? xB.style.borderRadius = customS.bRadius : null
+                    customS.bRadius != undefined? xB.style.borderRadius = customS.bRadius + '%': null
                 }
 
                 doc('L' + y).appendChild(xB)
@@ -222,7 +223,7 @@ function arrToStr(arr, callback) {
     var response = new String
 
     if (arr.framesC && arr.fDispTime && arr.plotPlates && arr.frames != undefined) {
-        response = arr.framesC + '-' + arr.fDispTime + '-' + arr.plotPlates + '-' + arr.customS['bRadius'].split('%')[0] + '-' + arr.replay
+        response = arr.framesC + '-' + arr.fDispTime + '-' + arr.plotPlates + '-' + arr.customS['bRadius'] + '-' + arr.replay
 
         var str = new String
         var framesToStrFirst = function(currF, currL) {
@@ -266,7 +267,7 @@ function strToArr(str, callback) {
         plotPlates: parseInt(str.split('-')[2]), 
         replay: str.split('-')[4],
         customS: {
-            bRadius: str.split('-')[3] + '%',
+            bRadius: str.split('-')[3],
         },
         frames: []
     }
@@ -333,15 +334,16 @@ function strToArr(str, callback) {
 }
 
 //sButtons 
-function sButtonClick(block, operation, min, max, numPerClick) {
+function sButtonClick(block, operation, min, max, numPerClick, param) {
     var numB = doc(block).querySelector('div.counterT')
     var button = doc(block).querySelectorAll('div.counterB')
     var currN = parseInt(numB.innerHTML)
     if (operation == '-') {
         if (currN > min) {
-            numB.innerHTML = currN - numPerClick
+            var currNModified = currN - numPerClick
+            numB.innerHTML = currNModified
 
-            if (currN - numPerClick == min) {
+            if (currNModified == min) {
                 button[0].style.opacity = .4
             } else {
                 button[0].style.opacity = 1
@@ -351,9 +353,10 @@ function sButtonClick(block, operation, min, max, numPerClick) {
         }
     } else {
         if (currN < max) {
-            numB.innerHTML = currN + numPerClick
-
-            if (currN + numPerClick == max) {
+            var currNModified = currN + numPerClick
+            numB.innerHTML = currNModified
+        
+            if (currNModified == max) {
                 button[1].style.opacity = .4
             } else {
                 button[1].style.opacity = 1
@@ -362,15 +365,19 @@ function sButtonClick(block, operation, min, max, numPerClick) {
             button[0].style.opacity = 1
         }
     }
+
+    param.split('.')[1] != undefined? anim[param.split('.')[0]][param.split('.')[1]] = currNModified : anim[param] = currNModified
 }
 
 function switchB() {
     var switchBlock = doc('replayS').querySelector('div.switch')
-    if (switchBlock.innerHTML == '1 - 2 - 3 - 1 - ...') {
-        switchBlock.innerHTML = '1 - 2 - 3 - 2 - ...'
+    if (switchBlock.innerHTML == '1 - 2 - 3 - 2 - ...') {
+        switchBlock.innerHTML = '1 - 2 - 3 - 1 - ...'
+        anim.replay = 0
         switchBlock.style.backgroundColor = 'var(--red)'
     } else {
-        switchBlock.innerHTML = '1 - 2 - 3 - 1 - ...'
+        switchBlock.innerHTML = '1 - 2 - 3 - 2 - ...'
+        anim.replay = 1
         switchBlock.style.backgroundColor = 'var(--green)'
     }
 }
