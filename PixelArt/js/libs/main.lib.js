@@ -7,7 +7,7 @@ var colorP = {
     b: 'rgb(120, 120, 120)', //gray
     c: 'rgb(80, 180, 230)', //blue
     d: 'rgb(255, 100, 120)', //red
-    e: 'rgb(160, 255, 200)', //green
+    e: 'rgb(100, 255, 200)', //green
     f: 'rgb(244, 255, 142)', //yellow
     g: 'rgb(220, 220, 220)', //light-gray
 }
