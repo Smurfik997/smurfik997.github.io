@@ -45,7 +45,7 @@ body {
     --red: rgb(255, 100, 120);
     --green: rgb(0, 255, 200);
     --yellow: rgb(244, 255, 142);
-    --grayShadow: 0px 0px 40px rgba(150, 150, 150, .4);
+    --grayShadow: 0px 0px 40px rgba(150, 150, 150, .7);
 
     margin: 0 auto;
     text-align: center;
