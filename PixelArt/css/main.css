@@ -75,8 +75,7 @@ body {
     height: 12%;
     width: 100%;
     font-weight: 400;
-    font-size: 8vh;
-    line-height: 12vh;
+    font-size: 7.2vh;
     font-family: sans-serif;
     background-color: white;
     color: var(--gray);
@@ -88,6 +87,8 @@ body {
     width: 70%;
     height: 100%;
     display: table;
+    position: relative;
+    top: 1.8vh;
 }
 
 .iconB {
