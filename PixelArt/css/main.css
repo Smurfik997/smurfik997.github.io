@@ -1,7 +1,7 @@
 /*error class start*/
 #error {
     font-weight: 400; 
-    font-family: Arial; 
+    font-family: sans-serif; 
     background-color: white; 
     color: rgb(130, 130, 130); 
     position: fixed;
@@ -75,9 +75,9 @@ body {
     height: 12%;
     width: 100%;
     font-weight: 400;
-    font-size: 6.5vh;
-    line-height: 11.75vh;
-    font-family: Arial;
+    font-size: 7.2vh;
+    line-height: 12vh;
+    font-family: sans-serif;
     background-color: white;
     color: var(--gray);
     box-shadow: var(--grayShadow);
@@ -201,7 +201,7 @@ body {
 
 #createM {
     font-weight: 400;
-    font-family: Arial;
+    font-family: sans-serif;
     color: var(--gray);
 }
 
