@@ -39,13 +39,13 @@
 
 body {
     /*var-s*/
-    --light-gray: rgb(220, 220, 220);
-    --gray: rgb(120, 120, 120);
-    --blue: rgb(80, 180, 230); 
+    --light-gray: rgb(235, 235, 235);
+    --gray: rgb(150, 150, 150);
+    --blue: rgb(0, 180, 230); 
     --red: rgb(255, 100, 120);
-    --green: rgb(100, 255, 200);
+    --green: rgb(0, 255, 200);
     --yellow: rgb(244, 255, 142);
-    --grayShadow: 0px 0px 40px rgba(120, 120, 120, .5);
+    --grayShadow: 0px 0px 40px rgba(150, 150, 150, .4);
 
     margin: 0 auto;
     text-align: center;
@@ -75,11 +75,11 @@ body {
     height: 12%;
     width: 100%;
     font-weight: 400;
-    font-size: 6.2vh;
+    font-size: 6.5vh;
     line-height: 12vh;
     font-family: Arial;
     background-color: white;
-    color: rgb(130, 130, 130);
+    color: var(--gray);
     box-shadow: var(--grayShadow);
 }
 
@@ -208,6 +208,6 @@ body {
 }
 
 .gray {
-    background-color: rgb(200, 200, 200);
+    background-color: var(--light-gray);
     color: white
 }

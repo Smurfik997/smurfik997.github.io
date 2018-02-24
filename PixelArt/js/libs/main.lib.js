@@ -4,12 +4,12 @@
 var winW, winH, err
 var colorP = {
     a: 'rgb(255, 255, 255)', //white
-    b: 'rgb(120, 120, 120)', //gray
-    c: 'rgb(80, 180, 230)', //blue
+    b: 'rgb(150, 150, 150)', //gray
+    c: 'rgb(0, 180, 230)', //blue
     d: 'rgb(255, 100, 120)', //red
-    e: 'rgb(100, 255, 200)', //green
+    e: 'rgb(0, 255, 200)', //green
     f: 'rgb(244, 255, 142)', //yellow
-    g: 'rgb(220, 220, 220)', //light-gray
+    g: 'rgb(235, 235, 235)', //light-gray
 }
 
 var anim = {framesC: 2, fDispTime: 100, plotPlates: 2, replay: 1, customS: {bRadius: 0}, frames: []}
