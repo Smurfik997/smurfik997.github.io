@@ -100,9 +100,7 @@ body {
 }
 
 .iconR {
-    transform: rotate(225deg); 
-    box-shadow: var(--grayShadow); 
-    background-color: rgba(120, 120, 120, .1);
+    transform: rotate(45deg); 
 }
 
 .r {
