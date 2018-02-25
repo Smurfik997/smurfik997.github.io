@@ -81,7 +81,6 @@ body {
     width: 100%;
     font-weight: 400;
     font-size: 9vh;
-    line-height: 12.5vh;
     font-family: Habel;
     background-color: white;
     color: var(--gray);
@@ -93,6 +92,8 @@ body {
     width: 70%;
     height: 100%;
     display: table;
+    position: relative;
+    top: 20%;
 }
 
 .iconB {
