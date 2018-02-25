@@ -74,6 +74,9 @@ function resize() {
                 }
             })
 
+            var fCurrNumW = Math.trunc(window.innerHeight * 0.072 * 3.5)
+            doc('fCurrNum').querySelector('div.counter').style.width = fCurrNumW
+            doc('fCurrNum').querySelector('div.counter').style.marginLeft = Math.trunc((len * 0.7 - fCurrNumW) / 2)
             doc('createM').style.fontSize = len * 0.06 + 'px'
             doc('createM').querySelectorAll('div.counter').forEach((e) => {
                 e.style.fontSize = len * 0.05 + 'px'
