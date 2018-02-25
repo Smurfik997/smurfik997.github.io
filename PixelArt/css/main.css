@@ -106,7 +106,7 @@ body {
 }
 
 .iconR {
-    transform: rotate(45deg) translate(-1px, 0px); 
+    transform: rotate(45deg) translate(-1px, 1px); 
 }
 
 .r {
