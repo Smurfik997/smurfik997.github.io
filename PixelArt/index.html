@@ -2,7 +2,7 @@
     <head>
         <title>PixelArt 2.0</title>
         <link rel="stylesheet" type="text/css" href="css/main.css">
-        <link rel="icon" type="image/png" href="images/icon.png">
+        <link rel="icon" type="image/png" href="images/png/icon.png">
         <link rel="canonical" href="https://smurfik997.github.io/PixelArt/"/>
         <link rel="manifest" href="manifest.webapp">
         <meta charset="utf-8">
@@ -19,7 +19,7 @@
         </div>
         <div id="preload">
             <div class="preloadI">
-                <img src="images/icon160.svg" alt="Логотип" style="height: 50%; visibility: hidden"/>
+                <img src="images/svg/icon160.svg" alt="Логотип" style="height: 50%; visibility: hidden"/>
             </div>
         </div>
         <script id="windowE">
@@ -29,7 +29,7 @@
             window.addEventListener('error', function(e) {
                 if (e.error == undefined && document.getElementById('error') != undefined) {
                     document.getElementById('error').style.display = 'table'
-                    document.getElementById('preload').style.display = 'none'
+                    document.getElementById('preload').className = 'noDisp'
                 }
             })
         </script>
@@ -44,7 +44,10 @@
         <div id="title">
             <div style="height: 100%; margin: 0 auto;">
                 <div class="iconB">
-                    <img src="images/new.svg" id="newA" alt="Створити" class="icon" active="false"/>
+                    <img src="images/svg/new.svg" id="newA" alt="Створити" class="icon" active="false"/>
+                </div>
+                <div class="iconB noDisp">
+                    <img src="images/svg/palette.svg" id="palette" alt="Палітра" class="icon" active="false"/>
                 </div>
                 <div id="tText">
                     <div style="color: var(--blue); display: inline-block">P</div>
@@ -57,7 +60,10 @@
                     <div style="color: var(--green); display: inline-block">t</div>
                 <!-- 2.0--></div>
                 <div class="iconB">
-                    <img src="images/icon160.svg" alt="Логотип" class="icon r"/>
+                    <img src="images/svg/icon160.svg" alt="Логотип" id="logo" class="icon r"/>
+                </div>
+                <div class="iconB noDisp">
+                    <img src="images/svg/share.svg" id="share" alt="Поділитися" class="icon r"/>
                 </div>
             </div>
         </div>

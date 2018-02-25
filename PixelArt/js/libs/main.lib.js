@@ -410,4 +410,13 @@ document.addEventListener('DOMContentLoaded', (e) => {
             e.target.className = 'icon iconR'
         }
     })
+
+    doc('continueB').addEventListener('click', (e) => {
+        doc('iconB', 0).className = 'noDisp'
+        doc('iconB', 0).className = 'iconB'
+        doc('iconB', 1).className = 'noDisp'
+        doc('iconB', 1).className = 'iconB'
+        //doc('iconB', 3).className = 'iconB'
+        doc('settingsBlock').className = 'content toRight'
+    })
 })
