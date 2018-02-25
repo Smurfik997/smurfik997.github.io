@@ -111,6 +111,7 @@ body {
     display: table;
     position: relative;
     top: 20%;
+    font-weight: 600;
 }
 
 .iconB {
