@@ -85,6 +85,23 @@ body {
     background-color: white;
     color: var(--gray);
     box-shadow: var(--grayShadow);
+    position: fixed;
+}
+
+.titleC {
+    animation: titleC .5s;
+}
+
+@keyframes titleC {
+    0% {
+        top: 0;
+    }
+    50% {
+        top: -12%;
+    }
+    100% {
+        top: 0;
+    }
 }
 
 #tText {
