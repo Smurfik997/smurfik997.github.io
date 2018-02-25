@@ -416,15 +416,14 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
     doc('continueB').addEventListener('click', (e) => {
         doc('title').className = 'titleC'
+        doc('settingsBlock').className = 'content toRight'
         setTimeout(() => {
             doc('tText').className = 'noDisp'
             doc('fCurrNum').className = ''
             doc('iconB', 0).className = 'noDisp'
             doc('iconB', 0).className = 'iconB'
             doc('iconB', 1).className = 'noDisp'
-            doc('iconB', 1).className = 'iconB'
-            //doc('iconB', 3).className = 'iconB'
-            doc('settingsBlock').className = 'content toRight'
+            doc('iconB', 1).className = 'iconB' 
         }, 250)
     })
 })
