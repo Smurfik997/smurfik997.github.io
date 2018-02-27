@@ -191,31 +191,35 @@ function playAnim(block, framesC, fDispTime, replay) {
     console.log('%ccurrF: %c' + currF, 'color: rgb(80, 180, 230)', 'color: rgb(255, 100, 120)')
 
     var dispF = function(currF, prevF) {
-        block.getAttribute('pause') != 'true'? currF++ : null
-        var currFN
-        if (replay == 1) {
-            if (currF % (framesC * 2 - 2) + 1 > framesC) {
-                currFN = framesC * 2 - currF % (framesC * 2 - 2) - 1
+        if (block.getAttribute('anim') == 'ready') {
+            block.getAttribute('pause') != 'true'? currF++ : null
+            var currFN
+            if (replay == 1) {
+                if (currF % (framesC * 2 - 2) + 1 > framesC) {
+                    currFN = framesC * 2 - currF % (framesC * 2 - 2) - 1
+                } else {
+                    currFN = currF % (framesC * 2 - 2) + 1
+                }
             } else {
-                currFN = currF % (framesC * 2 - 2) + 1
+                currFN = currF % framesC + 1
             }
-        } else {
-            currFN = currF % framesC + 1
-        }
 
-        if (block.getAttribute('pause') != 'true') {
-            console.log('%ccurrF: %c' + currF, 'color: rgb(80, 180, 230)', 'color: rgb(255, 100, 120)')
-            doc('frame' + prevF).style.display = 'none'
-            doc('frame' + currFN).style.display = 'block'
-        }
+            if (block.getAttribute('pause') != 'true') {
+                console.log('%ccurrF: %c' + currF, 'color: rgb(80, 180, 230)', 'color: rgb(255, 100, 120)')
+                doc('frame' + prevF).style.display = 'none'
+                doc('frame' + currFN).style.display = 'block'
+            }
 
-        setTimeout(() => dispF(currF, currFN), fDispTime)       
+            setTimeout(() => dispF(currF, currFN), fDispTime)       
+        }
     }
 
     setTimeout(() => dispF(currF, 1), fDispTime)
 }
 
 function delPlot() {
+    doc('main').removeAttribute('anim')
+    doc('main').removeAttribute('pause')
     doc('contentBlock').querySelectorAll('div.plot').length == 0? console.error('#003') : doc('contentBlock').querySelectorAll('div.plot').forEach((currVal, i, arr) => {
         arr[i].id.split('frame')[0] == ''? arr[i].remove() : arr[i].innerHTML = ''
     })
@@ -334,6 +338,30 @@ function strToArr(str, callback) {
 
     response.frames[0] = new Array()
     setTimeout(() => addFrames(1, 1, 5, callback))
+}
+
+function fillFrames(color, arr, callback) {
+    var addFrames = function(currF, currL, currP) {
+        if (currF <= arr.framesC) {
+            arr.frames[currF - 1] == undefined? arr.frames[currF - 1] = new Array() : null
+            arr.frames[currF - 1][currL - 1] == undefined? arr.frames[currF - 1][currL - 1] = new Array() : null
+            arr.frames[currF - 1][currL - 1][currP - 1] = color 
+            currP++
+            if (currP > arr.plotPlates) {
+                currL++
+                currP = 1
+            }
+            if (currL > arr.plotPlates) {
+                currF++
+                currL = 1
+            }
+            setTimeout(() => addFrames(currF, currL, currP))
+        } else {
+            callback()
+        }
+    }
+
+    setTimeout(() => addFrames(1, 1, 1))
 }
 
 //sButtons 
