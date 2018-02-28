@@ -236,6 +236,10 @@ body {
     display: none !important;
 }
 
+.noVA {
+    vertical-align: unset;
+}
+
 #fCurrNum {
     float: left; 
     width: 70%; 
