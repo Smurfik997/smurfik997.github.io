@@ -80,6 +80,17 @@
         <div id="createBlock" class="content settings">
             <div id="create" class="plot"></div>
         </div>
+        <div id="paletteBlock" class="content settings">
+            <div id="colors" class="plot">
+                <div class="colorB" color="a" style="background-color: var(--white);" onclick="changeColor(this);"></div>
+                <div class="colorB currC" color="g" style="background-color: var(--light-gray);" onclick="changeColor(this);"></div>
+                <div class="colorB" color="b" style="background-color: var(--gray);" onclick="changeColor(this);"></div>
+                <div class="colorB" color="e" style="background-color: var(--green);" onclick="changeColor(this);"></div>
+                <div class="colorB" color="f" style="background-color: var(--yellow);" onclick="changeColor(this);"></div>
+                <div class="colorB" color="d" style="background-color: var(--red);" onclick="changeColor(this);"></div>
+                <div class="colorB" color="c" style="background-color: var(--blue);"onclick="changeColor(this);"></div>
+            </div>
+        </div>
         <div id="settingsBlock" class="content settings">
             <div id="createM">
                 <div id="settingsItems">
@@ -102,17 +113,17 @@
                     <div id="borderRadiudS" class="sItem">
                         <div class="sText">Скруглення плиток</div>
                         <div class="counter"> 
-                            <div class="counterB" onclick="sButtonClick('borderRadiudS', '-', 0, 50, 5, 'customS.bRadius')">&minus;</div>
+                            <div class="counterB" onclick="sButtonClick('borderRadiudS', '-', 0, 50, 10, 'customS.bRadius')">&minus;</div>
                             <div class="counterT">0</div>
-                            <div class="counterB plus" onclick="sButtonClick('borderRadiudS', '+', 0, 50, 5, 'customS.bRadius')">+</div>
+                            <div class="counterB plus" onclick="sButtonClick('borderRadiudS', '+', 0, 50, 10, 'customS.bRadius')">+</div>
                         </div>
                     </div>
                     <div id="fDispTimeS" class="sItem">
                         <div class="sText">Час показу кадру</div>
                         <div class="counter"> 
-                            <div class="counterB" onclick="sButtonClick('fDispTimeS', '-', 100, 1000, 50, 'fDispTime')">&minus;</div>
-                            <div class="counterT">100</div>
-                            <div class="counterB plus" onclick="sButtonClick('fDispTimeS', '+', 100, 1000, 50, 'fDispTime')">+</div>
+                            <div class="counterB" onclick="sButtonClick('fDispTimeS', '-', 300, 1000, 100, 'fDispTime')">&minus;</div>
+                            <div class="counterT">300</div>
+                            <div class="counterB plus" onclick="sButtonClick('fDispTimeS', '+', 300, 1000, 100, 'fDispTime')">+</div>
                         </div>
                     </div>
                     <div id="replayS" class="sItem">

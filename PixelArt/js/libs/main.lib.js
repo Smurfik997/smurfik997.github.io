@@ -11,7 +11,7 @@ var colorP = {
     f: 'rgb(244, 255, 142)', //yellow
     g: 'rgb(235, 235, 235)', //light-gray
 }
-
+var currColor = 'g'
 var anim = {framesC: 2, fDispTime: 100, plotPlates: 2, replay: 1, customS: {bRadius: 0}, frames: []}
 
 /*var anim = {framesC: 3, fDispTime: 1000, plotPlates: 3, replay: 0, customS: {
@@ -73,6 +73,7 @@ function resize() {
 
                 if (key != 'padding') {
                     key == 'width' || key == 'height'? doc('createM').style[key] = sSize + 'px' : doc('createM').style[key] = val
+                    key == 'width' || key == 'height'? doc('colors').style[key] = sSize + 'px' : doc('colors').style[key] = val
                 }
             })
 
@@ -84,6 +85,8 @@ function resize() {
                 e.style.fontSize = len * 0.05 + 'px'
             })
             var bR = Math.trunc(len * 0.03)
+            doc('colors').querySelectorAll('div.colorB')[0].style.borderRadius = bR + 'px ' + bR + 'px 0 0'
+            doc('colors').querySelectorAll('div.colorB')[6].style.borderRadius = '0 0 ' + bR + 'px ' + bR + 'px'
             doc('createM').querySelectorAll('div.sItem')[0].style.borderRadius = bR + 'px ' + bR + 'px 0 0'
             doc('createM').querySelector('div#continueB').style.borderRadius = '0 0 ' + bR + 'px ' + bR + 'px'
             var counterB = doc('createM').querySelector('div.counterB')
@@ -144,7 +147,7 @@ function setPlates(block, count, customS, create, callback) {
 function prepareFrames(parrentB, block, animConf, create, callback) {
     var err = undefined
 
-    if (animConf.framesC && animConf.fDispTime && animConf.plotPlates && animConf.replay && animConf.frames != undefined && block.getAttribute('anim') == undefined) {
+    if (animConf.framesC && animConf.fDispTime && animConf.plotPlates && animConf.frames != undefined && block.getAttribute('anim') == undefined) {
         delPlot()
         setPlates(block, animConf.plotPlates, animConf.customS, create, () => {
             var setF = function(fNum) {
@@ -375,6 +378,15 @@ function sButtonClick(block, operation, min, max, numPerClick, param) {
     var numB = doc(block).querySelector('div.counterT')
     var button = doc(block).querySelectorAll('div.counterB')
     var currN = parseInt(numB.innerHTML)
+    var conf = function(currN, currNModified, param) {
+        if (param == '') {
+            doc('createBlock').querySelector('#frame' + currN).style.display = 'none'
+            doc('createBlock').querySelector('#frame' + currNModified).style.display = 'block'
+        } else {
+            param.split('.')[1] != undefined? anim[param.split('.')[0]][param.split('.')[1]] = currNModified : anim[param] = currNModified
+        }
+    }
+
     if (operation == '-') {
         if (currN > min) {
             var currNModified = currN - numPerClick
@@ -387,7 +399,7 @@ function sButtonClick(block, operation, min, max, numPerClick, param) {
             }
 
             button[1].style.opacity = 1
-            param.split('.')[1] != undefined? anim[param.split('.')[0]][param.split('.')[1]] = currNModified : anim[param] = currNModified
+            conf(currN, currNModified, param)
         }
     } else {
         if (currN < max) {
@@ -401,7 +413,7 @@ function sButtonClick(block, operation, min, max, numPerClick, param) {
             }
 
             button[0].style.opacity = 1
-            param.split('.')[1] != undefined? anim[param.split('.')[0]][param.split('.')[1]] = currNModified : anim[param] = currNModified
+            conf(currN, currNModified, param)
         }
     }
 }
@@ -421,7 +433,20 @@ function switchB() {
 
 //create
 function changePixColor(block) {
-    console.log(block)
+    if (block.style.backgroundColor != colorP[currColor]) {
+        block.style.backgroundColor = colorP[currColor]
+        var currF = parseInt(block.parentElement.parentElement.id.split('frame')[1]) - 1
+        var currL = parseInt(block.parentElement.id.split('L')[1]) - 1
+        var currB = parseInt(block.id.split('B')[1]) - 1
+        anim.frames[currF][currL][currB] = currColor
+    }
+}
+
+function changeColor(block) {
+    currColor = block.getAttribute('color')
+    doc('palette').className = 'icon'
+    doc('paletteBlock').className = 'content settings'
+    doc('createBlock').className = 'content'
 }
 
 //events
@@ -453,24 +478,35 @@ document.addEventListener('DOMContentLoaded', (e) => {
         }
     })
 
+    doc('palette').addEventListener('click', (e) => {
+        e.target.className = 'icon iconR90'
+        doc('paletteBlock').className = 'content'
+        doc('createBlock').className = 'content toRight'
+    })
+
     doc('continueB').addEventListener('click', () => {
         doc('preload').style.display = 'table'
-        fillFrames('g', anim, () => prepareFrames(doc('createBlock'), doc('create'), anim, 0, () => {
-            doc('preload').style.display = 'none'
-            setTimeout(() => {
-                doc('title').className = 'titleC'
-                doc('settingsBlock').className = 'content toRight'
-                doc('createBlock').className = 'content'
-                doc('create').style.display = 'none'
+        doc('settingsBlock').className = 'content toRight'
+        doc('createBlock').className = 'content'
+        doc('create').style.display = 'none'
+        doc('tText').className = 'noDisp'
+        doc('fCurrNum').className = ''
+        doc('iconB', 0).className = 'noDisp'
+        doc('iconB', 0).className = 'iconB'
+        doc('iconB', 1).className = 'noDisp'
+        doc('iconB', 1).className = 'iconB' 
+        setTimeout(() => {
+            fillFrames('g', anim, () => prepareFrames(doc('createBlock'), doc('create'), anim, 0, () => {
                 doc('createBlock').querySelector('#frame1').style.display = 'block'
-                setTimeout(() => {
-                    doc('tText').className = 'noDisp'
-                    doc('fCurrNum').className = ''
-                    doc('iconB', 0).className = 'noDisp'
-                    doc('iconB', 0).className = 'iconB'
-                    doc('iconB', 1).className = 'noDisp'
-                    doc('iconB', 1).className = 'iconB' 
-                }, 250)
-            }, 250)
-    }))})
+                doc('preload').style.display = 'none'
+            }))
+        }, 500)
+    })
+
+    doc('share').addEventListener('click', () => {
+        doc('preload').style.display = 'table'
+        arrToStr(anim, (e) => {
+            location.search = '?' + e
+        })
+    })
 })
