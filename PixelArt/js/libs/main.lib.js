@@ -69,6 +69,8 @@ function resize() {
                     doc('main').style[key] = val
                 }
                 
+                doc('create').style[key] = val
+
                 if (key != 'padding') {
                     key == 'width' || key == 'height'? doc('createM').style[key] = sSize + 'px' : doc('createM').style[key] = val
                 }
@@ -95,7 +97,7 @@ function resize() {
 }
 
 //drawFunc-s
-function setPlates(block, count, customS, callback) {
+function setPlates(block, count, customS, create, callback) {
     err = undefined
 
     if (count > 10 || count < 2 || count == undefined || block == undefined) {
@@ -112,6 +114,7 @@ function setPlates(block, count, customS, callback) {
                 xB.style.margin = margin + '%'
                 xB.style.width = Math.trunc(10000 / count) / 100 - margin * 2 + '%'
                 xB.style.height = 100 - count * margin * 2 + '%'
+                create == 0? xB.setAttribute('onclick', 'changePixColor(this);') : null
 
                 if (customS != undefined) {
                     customS.bRadius != undefined? xB.style.borderRadius = customS.bRadius + '%': null
@@ -138,17 +141,20 @@ function setPlates(block, count, customS, callback) {
     return err == undefined? null : console.error(err)
 }
 
-function prepareFrames(block, animConf) {
+function prepareFrames(parrentB, block, animConf, create, callback) {
     var err = undefined
 
     if (animConf.framesC && animConf.fDispTime && animConf.plotPlates && animConf.replay && animConf.frames != undefined && block.getAttribute('anim') == undefined) {
         delPlot()
-        setPlates(block, animConf.plotPlates, animConf.customS, () => {
+        setPlates(block, animConf.plotPlates, animConf.customS, create, () => {
             var setF = function(fNum) {
                 var frame = block.cloneNode(true)
                 frame.id = 'frame' + fNum
                 frame.style.display = 'none'
-                doc('contentBlock').appendChild(frame)
+                if (fNum == 1 && create == 1) {
+                    frame.style.display = 'block'
+                }
+                parrentB.appendChild(frame)
 
                 var setB = function(x, y, fNum) {
                     var pixB = doc('frame' + fNum).querySelector('div#L' + y + ' div#B' + x)
@@ -162,7 +168,7 @@ function prepareFrames(block, animConf) {
                         setTimeout(() => setF(fNum + 1))
                     } else if (fNum == animConf.framesC && x == animConf.plotPlates) {
                         block.setAttribute('anim', 'ready')
-                        playAnim(block, animConf.framesC, animConf.fDispTime, animConf.replay)
+                        setTimeout(() => callback(block, animConf.framesC, animConf.fDispTime, animConf.replay))
                     }
                 }
 
@@ -381,6 +387,7 @@ function sButtonClick(block, operation, min, max, numPerClick, param) {
             }
 
             button[1].style.opacity = 1
+            param.split('.')[1] != undefined? anim[param.split('.')[0]][param.split('.')[1]] = currNModified : anim[param] = currNModified
         }
     } else {
         if (currN < max) {
@@ -394,10 +401,9 @@ function sButtonClick(block, operation, min, max, numPerClick, param) {
             }
 
             button[0].style.opacity = 1
+            param.split('.')[1] != undefined? anim[param.split('.')[0]][param.split('.')[1]] = currNModified : anim[param] = currNModified
         }
     }
-
-    param.split('.')[1] != undefined? anim[param.split('.')[0]][param.split('.')[1]] = currNModified : anim[param] = currNModified
 }
 
 function switchB() {
@@ -413,6 +419,11 @@ function switchB() {
     }
 }
 
+//create
+function changePixColor(block) {
+    console.log(block)
+}
+
 //events
 document.addEventListener('DOMContentLoaded', (e) => {
     resize()
@@ -421,7 +432,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
     location.search.split('?')[1] != undefined? animStr = location.search.split('?')[1] : null
 
     strToArr(animStr, (r) => {
-        prepareFrames(doc('main'), r)
+        prepareFrames(doc('contentBlock'), doc('main'), r, 1, (block, framesC, fDispTime, replay) => playAnim(block, framesC, fDispTime, replay))
     })//test
 
     doc('newA').addEventListener('click', (e) => {
@@ -442,16 +453,24 @@ document.addEventListener('DOMContentLoaded', (e) => {
         }
     })
 
-    doc('continueB').addEventListener('click', (e) => {
-        doc('title').className = 'titleC'
-        doc('settingsBlock').className = 'content toRight'
-        setTimeout(() => {
-            doc('tText').className = 'noDisp'
-            doc('fCurrNum').className = ''
-            doc('iconB', 0).className = 'noDisp'
-            doc('iconB', 0).className = 'iconB'
-            doc('iconB', 1).className = 'noDisp'
-            doc('iconB', 1).className = 'iconB' 
-        }, 250)
-    })
+    doc('continueB').addEventListener('click', () => {
+        doc('preload').style.display = 'table'
+        fillFrames('g', anim, () => prepareFrames(doc('createBlock'), doc('create'), anim, 0, () => {
+            doc('preload').style.display = 'none'
+            setTimeout(() => {
+                doc('title').className = 'titleC'
+                doc('settingsBlock').className = 'content toRight'
+                doc('createBlock').className = 'content'
+                doc('create').style.display = 'none'
+                doc('createBlock').querySelector('#frame1').style.display = 'block'
+                setTimeout(() => {
+                    doc('tText').className = 'noDisp'
+                    doc('fCurrNum').className = ''
+                    doc('iconB', 0).className = 'noDisp'
+                    doc('iconB', 0).className = 'iconB'
+                    doc('iconB', 1).className = 'noDisp'
+                    doc('iconB', 1).className = 'iconB' 
+                }, 250)
+            }, 250)
+    }))})
 })
