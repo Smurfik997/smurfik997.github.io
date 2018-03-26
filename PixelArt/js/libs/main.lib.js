@@ -464,8 +464,8 @@ document.addEventListener('DOMContentLoaded', (e) => {
     resize()
     //setPlates(doc('main'), 9, {bRadius: '50%'})
     var animStr = '4-700-3-40-0-3g-3d-3g-f2g-gfg-2gf-geg-geg-geg-2gc-gcg-c2g'
-    //var animStr = '3-1000-9-50-1-9g-9g-3gdgd3g-2g5d2g-2g5d2g-3g3d3g-4gd4g-9g-9g-9g-2g2dg2d2g-g7dg-g7dg-g7dg-2g5d2g-3g3d3g-4gd4g-9g-2g2dg2d2g-g7dg-9d-9d-9d-g7dg-2g5d2g-3g3d3g-4gd4g'
     location.search.split('?')[1] != undefined? animStr = location.search.split('?')[1] : null
+    animStr == 'heart'? animStr = '3-1000-9-50-1-9g-9g-3gdgd3g-2g5d2g-2g5d2g-3g3d3g-4gd4g-9g-9g-9g-2g2dg2d2g-g7dg-g7dg-g7dg-2g5d2g-3g3d3g-4gd4g-9g-2g2dg2d2g-g7dg-9d-9d-9d-g7dg-2g5d2g-3g3d3g-4gd4g' : null
 
     strToArr(animStr, (r) => {
         animEdit = r
