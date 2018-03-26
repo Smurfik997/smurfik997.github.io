@@ -69,6 +69,9 @@ function resize() {
                     doc('main').style[key] = val
                 }
                 
+                doc('createBlock').querySelectorAll('div.plot').forEach((currVal, i, arr) => {
+                    arr[i].style[key] = val
+                })
                 doc('create').style[key] = val
 
                 if (key != 'padding') {
@@ -453,13 +456,15 @@ function changeColor(block) {
     doc('palette').className = 'icon'
     doc('paletteBlock').className = 'content settings'
     doc('createBlock').className = 'content'
+    doc('palette').setAttribute('active', 'false')
 }
 
 //events
 document.addEventListener('DOMContentLoaded', (e) => {
     resize()
     //setPlates(doc('main'), 9, {bRadius: '50%'})
-    var animStr = '3-1000-9-50-1-9g-9g-3gdgd3g-2g5d2g-2g5d2g-3g3d3g-4gd4g-9g-9g-9g-2g2dg2d2g-g7dg-g7dg-g7dg-2g5d2g-3g3d3g-4gd4g-9g-2g2dg2d2g-g7dg-9d-9d-9d-g7dg-2g5d2g-3g3d3g-4gd4g'
+    var animStr = '4-700-3-40-0-3g-3d-3g-f2g-gfg-2gf-geg-geg-geg-2gc-gcg-c2g'
+    //var animStr = '3-1000-9-50-1-9g-9g-3gdgd3g-2g5d2g-2g5d2g-3g3d3g-4gd4g-9g-9g-9g-2g2dg2d2g-g7dg-g7dg-g7dg-2g5d2g-3g3d3g-4gd4g-9g-2g2dg2d2g-g7dg-9d-9d-9d-g7dg-2g5d2g-3g3d3g-4gd4g'
     location.search.split('?')[1] != undefined? animStr = location.search.split('?')[1] : null
 
     strToArr(animStr, (r) => {
@@ -541,9 +546,17 @@ document.addEventListener('DOMContentLoaded', (e) => {
     doc('edit').addEventListener('click', (e) => animSettings(e))
 
     doc('palette').addEventListener('click', (e) => {
-        e.target.className = 'icon iconR90'
-        doc('paletteBlock').className = 'content'
-        doc('createBlock').className = 'content toRight'
+        if (e.target.getAttribute('active') == 'true') {
+            e.target.className = 'icon'
+            doc('paletteBlock').className = 'content settings'
+            doc('createBlock').className = 'content'
+            e.target.setAttribute('active', 'false')
+        } else {
+            e.target.className = 'icon iconR90'
+            doc('paletteBlock').className = 'content'
+            doc('createBlock').className = 'content toRight'
+            e.target.setAttribute('active', 'true')
+        }
     })
 
     doc('continueB').addEventListener('click', () => {
