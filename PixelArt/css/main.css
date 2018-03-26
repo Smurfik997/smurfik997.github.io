@@ -40,6 +40,16 @@
     vertical-align: middle;
     text-align: center;
     height: 100%;
+    animation: preloadA .75s infinite;
+}
+
+@keyframes preloadA {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 body {
