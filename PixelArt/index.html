@@ -23,8 +23,8 @@
             </div>
         </div>
         <script id="windowE">
-            if (document.getElementById('preload').querySelector('img').clientHeight < window.innerHeight) {
-                document.getElementById('preload').querySelector('img').style.visibility = 'unset'
+            if (document.querySelector('div#preload img').clientHeight < window.innerHeight) {
+                document.querySelector('div#preload img').style.visibility = 'unset'
             }
             window.addEventListener('error', function(e) {
                 if (e.error == undefined && document.getElementById('error') != undefined) {
@@ -67,7 +67,7 @@
                     </div>
                 </div>
                 <div class="iconB">
-                    <img src="images/svg/icon160.svg" alt="Логотип" id="logo" class="icon r"/>
+                    <img src="images/svg/edit.svg" alt="Редагувати" id="edit" class="icon r"/>
                 </div>
                 <div class="iconB noDisp">
                     <img src="images/svg/share.svg" id="share" alt="Поділитися" class="icon r"/>

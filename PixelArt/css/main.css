@@ -138,7 +138,7 @@ body {
     height: 100%;
     border-radius: 50%;
     float: left;
-    transition: ease-in-out box-shadow .5s, transform .5s, background-color .5s;
+    transition: ease-in-out box-shadow .5s, transform .5s, background-color .5s, opacity .5s;
 }
 
 .plot {

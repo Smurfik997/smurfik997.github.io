@@ -1,8 +1,8 @@
 'use strict'
 
 //vars
-var winW, winH, err
-var colorP = {
+var winW, winH, err, animEdit,
+    colorP = {
     a: 'rgb(255, 255, 255)', //white
     b: 'rgb(150, 150, 150)', //gray
     c: 'rgb(0, 180, 230)', //blue
@@ -10,9 +10,9 @@ var colorP = {
     e: 'rgb(0, 255, 200)', //green
     f: 'rgb(244, 255, 142)', //yellow
     g: 'rgb(235, 235, 235)', //light-gray
-}
-var currColor = 'g'
-var anim = {framesC: 2, fDispTime: 100, plotPlates: 2, replay: 1, customS: {bRadius: 0}, frames: []}
+},
+    currColor = 'g',
+    anim = {framesC: 2, fDispTime: 300, plotPlates: 2, replay: 1, customS: {bRadius: 0}, frames: []}
 
 /*var anim = {framesC: 3, fDispTime: 1000, plotPlates: 3, replay: 0, customS: {
     bRadius: 50,
@@ -52,9 +52,9 @@ function resize() {
         console.error('#001')
     } else { 
         var css = function(len) {
-            var padding = Math.trunc(len * 0.02) + 'px'
-            var size = Math.trunc(len * 0.96) + 'px'
-            var sSize = Math.trunc(len * 0.96) + 2 * Math.trunc(len * 0.02)
+            var padding = Math.trunc(len * 0.02) + 'px',
+                size = Math.trunc(len * 0.96) + 'px',
+                sSize = Math.trunc(len * 0.96) + 2 * Math.trunc(len * 0.02)
             new Map([
                 ['height', size],
                 ['width', size],
@@ -110,8 +110,8 @@ function setPlates(block, count, customS, create, callback) {
             err = '#004'
         } else {
             var setB = function(x, y) {
-                var xB = document.createElement('div')
-                var margin = Math.trunc(10000 / (count * 20)) / 100
+                var xB = document.createElement('div'),
+                    margin = Math.trunc(10000 / (count * 20)) / 100
                 xB.id = 'B' + x
                 xB.classList.add('xB')
                 xB.style.margin = margin + '%'
@@ -241,8 +241,8 @@ function arrToStr(arr, callback) {
     if (arr.framesC && arr.fDispTime && arr.plotPlates && arr.frames != undefined) {
         response = arr.framesC + '-' + arr.fDispTime + '-' + arr.plotPlates + '-' + arr.customS['bRadius'] + '-' + arr.replay
 
-        var str = new String
-        var framesToStrFirst = function(currF, currL) {
+        var str = new String,
+            framesToStrFirst = function(currF, currL) {
             //currL == 1? str += '-' : null
 
             if (currL <= arr.plotPlates) {
@@ -299,12 +299,12 @@ function strToArr(str, callback) {
             } 
         } else {
             if (isNaN(parseInt(line[currPos + 1])) == false) {
-                var count = parseInt(line[currPos]) * 10 + parseInt(line[currPos + 1])
-                var char = line[currPos + 2]
+                var count = parseInt(line[currPos]) * 10 + parseInt(line[currPos + 1]),
+                    char = line[currPos + 2]
                 currPos += 3
             } else {
-                var count = parseInt(line[currPos])
-                var char = line[currPos + 1]
+                var count = parseInt(line[currPos]),
+                    char = line[currPos + 1]
                 currPos += 2
             }
 
@@ -375,45 +375,51 @@ function fillFrames(color, arr, callback) {
 
 //sButtons 
 function sButtonClick(block, operation, min, max, numPerClick, param) {
-    var numB = doc(block).querySelector('div.counterT')
-    var button = doc(block).querySelectorAll('div.counterB')
-    var currN = parseInt(numB.innerHTML)
-    var conf = function(currN, currNModified, param) {
+    var numB = doc(block).querySelector('div.counterT'),
+        button = doc(block).querySelectorAll('div.counterB'),
+        currN = parseInt(numB.innerHTML),
+        conf = function(currN, currNModified, param) {
         if (param == '') {
             doc('createBlock').querySelector('#frame' + currN).style.display = 'none'
             doc('createBlock').querySelector('#frame' + currNModified).style.display = 'block'
         } else {
-            param.split('.')[1] != undefined? anim[param.split('.')[0]][param.split('.')[1]] = currNModified : anim[param] = currNModified
+            if (doc('edit').getAttribute('active') != 'true') {
+                param.split('.')[1] != undefined? anim[param.split('.')[0]][param.split('.')[1]] = currNModified : anim[param] = currNModified
+            } else {
+                param.split('.')[1] != undefined? animEdit[param.split('.')[0]][param.split('.')[1]] = currNModified : animEdit[param] = currNModified
+            }
         }
     }
 
-    if (operation == '-') {
-        if (currN > min) {
-            var currNModified = currN - numPerClick
-            numB.innerHTML = currNModified
+    if (button[0].style.opacity != .4 || button[1].style.opacity != .4) {
+        if (operation == '-') {
+            if (currN > min) {
+                var currNModified = currN - numPerClick
+                numB.innerHTML = currNModified
 
-            if (currNModified == min) {
-                button[0].style.opacity = .4
-            } else {
-                button[0].style.opacity = 1
-            }
+                if (currNModified == min) {
+                    button[0].style.opacity = .4
+                } else {
+                    button[0].style.opacity = 1
+                }
 
-            button[1].style.opacity = 1
-            conf(currN, currNModified, param)
-        }
-    } else {
-        if (currN < max) {
-            var currNModified = currN + numPerClick
-            numB.innerHTML = currNModified
-        
-            if (currNModified == max) {
-                button[1].style.opacity = .4
-            } else {
                 button[1].style.opacity = 1
+                conf(currN, currNModified, param)
             }
+        } else {
+            if (currN < max) {
+                var currNModified = currN + numPerClick
+                numB.innerHTML = currNModified
+            
+                if (currNModified == max) {
+                    button[1].style.opacity = .4
+                } else {
+                    button[1].style.opacity = 1
+                }
 
-            button[0].style.opacity = 1
-            conf(currN, currNModified, param)
+                button[0].style.opacity = 1
+                conf(currN, currNModified, param)
+            }
         }
     }
 }
@@ -422,11 +428,11 @@ function switchB() {
     var switchBlock = doc('replayS').querySelector('div.switch')
     if (switchBlock.innerHTML == '1 - 2 - 3 - 2 - ...') {
         switchBlock.innerHTML = '1 - 2 - 3 - 1 - ...'
-        anim.replay = 0
+        doc('edit').getAttribute('active') != 'true'? anim.replay = 0 : animEdit.replay = 0
         switchBlock.style.backgroundColor = 'var(--red)'
     } else {
         switchBlock.innerHTML = '1 - 2 - 3 - 2 - ...'
-        anim.replay = 1
+        doc('edit').getAttribute('active') != 'true'? anim.replay = 1 : animEdit.replay = 1
         switchBlock.style.backgroundColor = 'var(--green)'
     }
 }
@@ -435,9 +441,9 @@ function switchB() {
 function changePixColor(block) {
     if (block.style.backgroundColor != colorP[currColor]) {
         block.style.backgroundColor = colorP[currColor]
-        var currF = parseInt(block.parentElement.parentElement.id.split('frame')[1]) - 1
-        var currL = parseInt(block.parentElement.id.split('L')[1]) - 1
-        var currB = parseInt(block.id.split('B')[1]) - 1
+        var currF = parseInt(block.parentElement.parentElement.id.split('frame')[1]) - 1,
+            currL = parseInt(block.parentElement.id.split('L')[1]) - 1,
+            currB = parseInt(block.id.split('B')[1]) - 1
         anim.frames[currF][currL][currB] = currColor
     }
 }
@@ -457,26 +463,82 @@ document.addEventListener('DOMContentLoaded', (e) => {
     location.search.split('?')[1] != undefined? animStr = location.search.split('?')[1] : null
 
     strToArr(animStr, (r) => {
+        animEdit = r
         prepareFrames(doc('contentBlock'), doc('main'), r, 1, (block, framesC, fDispTime, replay) => playAnim(block, framesC, fDispTime, replay))
     })//test
 
-    doc('newA').addEventListener('click', (e) => {
-        if (e.target.getAttribute('active') == 'true') {
-            e.target.setAttribute('active', 'false')
-            setTimeout(() => doc('main').setAttribute('pause', 'false'), 500)
-            console.warn('Continue')
-            doc('settingsBlock').className = 'content settings'
-            doc('contentBlock').className = 'content'
-            e.target.className = 'icon'
-        } else {
-            e.target.setAttribute('active', 'true')
-            doc('main').setAttribute('pause', 'true')
-            console.warn('Pause')
-            doc('settingsBlock').className = 'content'
-            doc('contentBlock').className = 'content toRight'
-            e.target.className = 'icon iconR'
+    var animSettings = function(e) {
+        var editA = e.target.id == 'edit' && doc('newA').getAttribute('active') != 'true',
+            newA = e.target.id == 'newA' && doc('edit').getAttribute('active') != 'true'
+        if (editA == true || newA == true) {
+            var animV
+            e.target.id == 'edit'? animV = animEdit : animV = anim
+
+            var sConf = function(block, min, max, curr, param) {
+                document.querySelector(block + ' div.counterT').innerText = curr
+
+                if (param == 1) {
+                    document.querySelectorAll(block + ' div.counterB')[0].style.opacity = .4
+                    document.querySelectorAll(block + ' div.counterB')[1].style.opacity = .4
+                } else if (curr > min && curr < max) {
+                    document.querySelectorAll(block + ' div.counterB')[0].style.opacity = 1
+                    document.querySelectorAll(block + ' div.counterB')[1].style.opacity = 1
+                } else if (curr == min) {
+                    document.querySelectorAll(block + ' div.counterB')[0].style.opacity = .4
+                    document.querySelectorAll(block + ' div.counterB')[1].style.opacity = 1
+                } else if (curr == max) {
+                    document.querySelectorAll(block + ' div.counterB')[0].style.opacity = 1
+                    document.querySelectorAll(block + ' div.counterB')[1].style.opacity = .4
+                }
+            }
+
+            var param
+            e.target.id == 'edit'? param = 1 : param = 0
+            sConf('div#framesCountS', 2, 10, animV.framesC, param)
+            sConf('div#plotPlatesS', 2, 10, animV.plotPlates, param)
+            sConf('div#borderRadiudS', 0, 50, animV.customS.bRadius)
+            sConf('div#fDispTimeS', 300, 1000, animV.fDispTime)
+            var replay = document.querySelector('div#replayS div.counterT')
+            if (animV.replay == 0) {
+                replay.innerText = '1 - 2 - 3 - 1 - ...'
+                replay.style.backgroundColor = 'var(--red)'
+            } else {
+                replay.innerText = '1 - 2 - 3 - 2 - ...'
+                replay.style.backgroundColor = 'var(--green)'
+            }
+
+            if (e.target.getAttribute('active') == 'true') {
+                e.target.setAttribute('active', 'false')
+                setTimeout(() => doc('main').setAttribute('pause', 'false'), 500)
+                console.warn('Continue')
+                doc('settingsBlock').className = 'content settings'
+                doc('contentBlock').className = 'content'
+                if (e.target.id != 'edit') {
+                    doc('edit').style.opacity = ''
+                    e.target.className = 'icon'
+                } else {
+                    doc('newA').style.opacity = ''
+                    e.target.className = 'icon r'
+                }
+            } else {
+                e.target.setAttribute('active', 'true')
+                doc('main').setAttribute('pause', 'true')
+                console.warn('Pause')
+                doc('settingsBlock').className = 'content'
+                doc('contentBlock').className = 'content toRight'
+                if (e.target.id != 'edit' && doc('edit').getAttribute('active') != 'true') {
+                    doc('edit').style.opacity = '.4'
+                    e.target.className = 'icon iconR'
+                } else if (doc('newA').getAttribute('active') != 'true') {
+                    doc('newA').style.opacity = '.4'
+                    e.target.className = 'icon iconR r'
+                }   
+            }
         }
-    })
+    }
+
+    doc('newA').addEventListener('click', (e) => animSettings(e))
+    doc('edit').addEventListener('click', (e) => animSettings(e))
 
     doc('palette').addEventListener('click', (e) => {
         e.target.className = 'icon iconR90'
@@ -495,12 +557,23 @@ document.addEventListener('DOMContentLoaded', (e) => {
         doc('iconB', 0).className = 'iconB'
         doc('iconB', 1).className = 'noDisp'
         doc('iconB', 1).className = 'iconB' 
-        setTimeout(() => {
-            fillFrames('g', anim, () => prepareFrames(doc('createBlock'), doc('create'), anim, 0, () => {
-                doc('createBlock').querySelector('#frame1').style.display = 'block'
-                doc('preload').style.display = 'none'
-            }))
-        }, 500)
+
+        if (doc('edit').getAttribute('active') != 'true') {
+            setTimeout(() => {
+                fillFrames('g', anim, () => prepareFrames(doc('createBlock'), doc('create'), anim, 0, () => {
+                    doc('createBlock').querySelector('#frame1').style.display = 'block'
+                    doc('preload').style.display = 'none'
+                }))
+            }, 500)
+        } else {
+            anim = animEdit
+            setTimeout(() => {
+                prepareFrames(doc('createBlock'), doc('create'), anim, 0, () => {
+                    doc('createBlock').querySelector('#frame1').style.display = 'block'
+                    doc('preload').style.display = 'none'
+                })
+            }, 500)
+        }
     })
 
     doc('share').addEventListener('click', () => {
