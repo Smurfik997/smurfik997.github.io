@@ -51,6 +51,12 @@ function resize() {
     if (winH == undefined || winW == undefined) {
         console.error('#001')
     } else { 
+        var preloadIMG = document.querySelector('div#preload img')
+        if (preloadIMG.clientHeight < winH && preloadIMG.clientWidth < winW) {
+            winH > winW? preloadIMG.style.height = 'auto' : preloadIMG.style.width = 'auto' 
+            preloadIMG.style.visibility = 'unset'
+        }
+
         var css = function(len) {
             var padding = Math.trunc(len * 0.02) + 'px',
                 size = Math.trunc(len * 0.96) + 'px',

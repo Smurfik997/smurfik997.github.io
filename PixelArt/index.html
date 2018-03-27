@@ -19,12 +19,14 @@
         </div>
         <div id="preload">
             <div class="preloadI">
-                <img src="images/svg/icon160.svg" alt="Логотип" style="height: 50%; visibility: hidden"/>
+                <img src="images/svg/icon160.svg" alt="Логотип" style="width: 50%; height: 50%; visibility: hidden;"/>
             </div>
         </div>
         <script id="windowE">
-            if (document.querySelector('div#preload img').clientHeight < window.innerHeight) {
-                document.querySelector('div#preload img').style.visibility = 'unset'
+            var preloadIMG = document.querySelector('div#preload img')
+            if (preloadIMG.clientHeight < window.innerHeight && preloadIMG.clientWidth < window.innerWidth) {
+                window.innerHeight > window.innerWidth? preloadIMG.style.height = 'auto' : preloadIMG.style.width = 'auto' 
+                preloadIMG.style.visibility = 'unset'
             }
             window.addEventListener('error', function(e) {
                 if (e.error == undefined && document.getElementById('error') != undefined) {
