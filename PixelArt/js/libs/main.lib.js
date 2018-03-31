@@ -579,6 +579,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
         var drag = false
 
+        //dragPainting
         doc('createBlock').addEventListener('mouseup', (e) => {
             drag = false
         })
@@ -586,6 +587,19 @@ document.addEventListener('DOMContentLoaded', (e) => {
             drag = true
         })
         doc('createBlock').addEventListener('mousemove', (e) => {
+            if (drag == true && e.target.id.split('B')[0] == '') {
+                e.target.click()
+            }
+        })
+
+        //phone
+        doc('createBlock').addEventListener('touchup', (e) => {
+            drag = false
+        })
+        doc('createBlock').addEventListener('touchdown', (e) => {
+            drag = true
+        })
+        doc('createBlock').addEventListener('touchmove', (e) => {
             if (drag == true && e.target.id.split('B')[0] == '') {
                 e.target.click()
             }
