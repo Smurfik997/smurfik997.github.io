@@ -602,6 +602,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
         doc('createBlock').addEventListener('touchmove', (e) => {
             if (drag == true && e.target.id.split('B')[0] == '') {
                 e.target.click()
+                doc('fCurrNumCounter').querySelectorAll('div.counterB')[0].innerText = e.target.id
             }
         })
 
