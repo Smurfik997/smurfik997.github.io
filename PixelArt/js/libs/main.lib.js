@@ -53,7 +53,13 @@ function resize() {
     } else { 
         var preloadIMG = document.querySelector('div#preload img')
         if (preloadIMG.clientHeight < winH && preloadIMG.clientWidth < winW) {
-            winH > winW? preloadIMG.style.height = 'auto' : preloadIMG.style.width = 'auto' 
+            if (winH > winW) {
+                preloadIMG.style.height = 'auto'
+                preloadIMG.style.width = '50%'
+            } else {
+                preloadIMG.style.height = '50%'
+                preloadIMG.style.width = 'auto'
+            }
             preloadIMG.style.visibility = 'unset'
         }
 
