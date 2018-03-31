@@ -63,6 +63,8 @@ function resize() {
             preloadIMG.style.visibility = 'unset'
         }
 
+        doc('title').style.fontSize = winH * .1 + 'px'
+
         var css = function(len) {
             var padding = Math.trunc(len * .02) + 'px',
                 size = Math.trunc(len * .96) + 'px',
@@ -92,7 +94,7 @@ function resize() {
                 }
             })
 
-            var fCurrNumW = Math.trunc(window.innerHeight * .072 * 3.5)
+            var fCurrNumW = Math.trunc(winH * .072 * 3.5)
             doc('fCurrNum').querySelector('div.counter').style.width = fCurrNumW
             doc('fCurrNum').querySelector('div.counter').style.marginLeft = Math.trunc((len * .7 - fCurrNumW) / 2)
             doc('createM').style.fontSize = len * .06 + 'px'
