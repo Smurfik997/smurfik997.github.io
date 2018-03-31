@@ -598,7 +598,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
             draw = true
         })
         doc('createBlock').addEventListener('mousemove', (e) => {
-            if (draw == true && e.target.id.split('B')[0] == '' && String(e.target.id).length > 0) {
+            if (draw == true && e.target.id.split('B')[0] == '' && String(e.target.id).length > 0 && parseInt(e.target.id.split('B')[1]) != NaN) {
                 changePixColor(e.target)
             }
         })
@@ -613,7 +613,7 @@ document.addEventListener('DOMContentLoaded', (e) => {
         doc('createBlock').addEventListener('touchmove', (e) => {
             var target = document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY)
             
-            if (draw == true && target.id.split('B')[0] == '' && String(target.id).length > 0) {
+            if (draw == true && target.id.split('B')[0] == '' && String(target.id).length > 0 && parseInt(target.id.split('B')[1]) != NaN) {
                 changePixColor(target)
             }
         })
