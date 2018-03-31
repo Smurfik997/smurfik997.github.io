@@ -58,9 +58,9 @@ function resize() {
         }
 
         var css = function(len) {
-            var padding = Math.trunc(len * 0.02) + 'px',
-                size = Math.trunc(len * 0.96) + 'px',
-                sSize = Math.trunc(len * 0.96) + 2 * Math.trunc(len * 0.02)
+            var padding = Math.trunc(len * .02) + 'px',
+                size = Math.trunc(len * .96) + 'px',
+                sSize = Math.trunc(len * .96) + 2 * Math.trunc(len * .02)
             new Map([
                 ['height', size],
                 ['width', size],
@@ -86,25 +86,25 @@ function resize() {
                 }
             })
 
-            var fCurrNumW = Math.trunc(window.innerHeight * 0.072 * 3.5)
+            var fCurrNumW = Math.trunc(window.innerHeight * .072 * 3.5)
             doc('fCurrNum').querySelector('div.counter').style.width = fCurrNumW
-            doc('fCurrNum').querySelector('div.counter').style.marginLeft = Math.trunc((len * 0.7 - fCurrNumW) / 2)
-            doc('createM').style.fontSize = len * 0.06 + 'px'
+            doc('fCurrNum').querySelector('div.counter').style.marginLeft = Math.trunc((len * .7 - fCurrNumW) / 2)
+            doc('createM').style.fontSize = len * .06 + 'px'
             doc('createM').querySelectorAll('div.counter').forEach((e) => {
-                e.style.fontSize = len * 0.05 + 'px'
+                e.style.fontSize = len * .05 + 'px'
             })
-            var bR = Math.trunc(len * 0.03)
+            var bR = Math.trunc(len * .03)
             doc('colors').querySelectorAll('div.colorB')[0].style.borderRadius = bR + 'px ' + bR + 'px 0 0'
             doc('colors').querySelectorAll('div.colorB')[6].style.borderRadius = '0 0 ' + bR + 'px ' + bR + 'px'
             doc('createM').querySelectorAll('div.sItem')[0].style.borderRadius = bR + 'px ' + bR + 'px 0 0'
             doc('createM').querySelector('div#continueB').style.borderRadius = '0 0 ' + bR + 'px ' + bR + 'px'
             var counterB = doc('createM').querySelector('div.counterB')
-            doc('createM').querySelector('div.switch').style.borderRadius = counterB.clientHeight * 0.2 + 'px'
+            doc('createM').querySelector('div.switch').style.borderRadius = counterB.clientHeight * .2 + 'px'
             doc('title').querySelectorAll('div')[0].style.width = len + 'px'
             doc('title').querySelectorAll('div')[0].style.marginLeft = Math.trunc((winW - len) / 2) + 'px'
         }
 
-        winW >= winH? css(Math.trunc(winH * 0.88)) : css(Math.trunc(winW * 0.88 - winH * 0.12))
+        winW >= winH? css(Math.trunc(winH * .9)) : css(Math.trunc(winW * .9))
     }
 }
 
