@@ -588,32 +588,32 @@ document.addEventListener('DOMContentLoaded', (e) => {
         doc('iconB', 1).className = 'noDisp'
         doc('iconB', 1).className = 'iconB' 
 
-        var drag = false
+        var draw = false
 
-        //dragPainting
+        //draw
         doc('createBlock').addEventListener('mouseup', (e) => {
-            drag = false
+            draw = false
         })
         doc('createBlock').addEventListener('mousedown', (e) => {
-            drag = true
+            draw = true
         })
         doc('createBlock').addEventListener('mousemove', (e) => {
-            if (drag == true && e.target.id.split('B')[0] == '') {
+            if (draw == true && e.target.id.split('B')[0] == '' && String(e.target.id).length > 0) {
                 changePixColor(e.target)
             }
         })
 
         //phone
         doc('createBlock').addEventListener('touchend', (e) => {
-            drag = false
+            draw = false
         })
         doc('createBlock').addEventListener('touchstart', (e) => {
-            drag = true
+            draw = true
         })
         doc('createBlock').addEventListener('touchmove', (e) => {
             var target = document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY)
             
-            if (drag == true && target.id.split('B')[0] == '') {
+            if (draw == true && target.id.split('B')[0] == '' && String(target.id).length > 0) {
                 changePixColor(target)
             }
         })
