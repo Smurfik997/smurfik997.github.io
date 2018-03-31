@@ -593,10 +593,10 @@ document.addEventListener('DOMContentLoaded', (e) => {
         })
 
         //phone
-        doc('createBlock').addEventListener('touchup', (e) => {
+        doc('createBlock').addEventListener('touchend', (e) => {
             drag = false
         })
-        doc('createBlock').addEventListener('touchdown', (e) => {
+        doc('createBlock').addEventListener('touchstart', (e) => {
             drag = true
         })
         doc('createBlock').addEventListener('touchmove', (e) => {
