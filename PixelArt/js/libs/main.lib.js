@@ -594,14 +594,17 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
         //phone
         doc('createBlock').addEventListener('touchend', (e) => {
+            doc('fCurrNumCounter').querySelectorAll('div.counterB')[0].innerText = 'e'
             drag = false
         })
         doc('createBlock').addEventListener('touchstart', (e) => {
+            doc('fCurrNumCounter').querySelectorAll('div.counterB')[0].innerText = 's'
             drag = true
         })
         doc('createBlock').addEventListener('touchmove', (e) => {
             if (drag == true && e.target.id.split('B')[0] == '') {
-                changePixColor(e.target)
+                doc('fCurrNumCounter').querySelectorAll('div.counterB')[0].innerText = e.target.id
+                //changePixColor(e.target)
             }
         })
 
