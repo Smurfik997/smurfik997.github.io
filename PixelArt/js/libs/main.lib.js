@@ -577,6 +577,20 @@ document.addEventListener('DOMContentLoaded', (e) => {
         doc('iconB', 1).className = 'noDisp'
         doc('iconB', 1).className = 'iconB' 
 
+        var drag = false
+
+        doc('createBlock').addEventListener('mouseup', (e) => {
+            drag = false
+        })
+        doc('createBlock').addEventListener('mousedown', (e) => {
+            drag = true
+        })
+        doc('createBlock').addEventListener('mousemove', (e) => {
+            if (drag == true && e.target.id.split('B')[0] == '') {
+                e.target.click()
+            }
+        })
+
         if (doc('edit').getAttribute('active') != 'true') {
             setTimeout(() => {
                 fillFrames('g', anim, () => prepareFrames(doc('createBlock'), doc('create'), anim, 0, () => {
