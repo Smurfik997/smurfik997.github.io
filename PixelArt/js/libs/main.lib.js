@@ -104,7 +104,7 @@ function resize() {
             doc('title').querySelectorAll('div')[0].style.marginLeft = Math.trunc((winW - len) / 2) + 'px'
         }
 
-        winW >= winH? css(Math.trunc(winH * 0.9)) : css(Math.trunc(winW * 0.9))
+        winW >= winH? css(Math.trunc(winH * 0.88)) : css(Math.trunc(winW * 0.88))
     }
 }
 
