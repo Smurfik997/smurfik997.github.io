@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <title>NoName</title>
+        <script>window.name = 'fXD6e646'</script>
+        <script src="https://vk.com/js/api/xd_connection.js?2"></script>
+        <script>
+            //glVars
+            var _checkAge = 15, 
+                _userID/* = 175208357*/, 
+                _name = 'Данил Тарновский'
+
+            //getMethod
+            VK.api('users.seacrh', {'q': _name, 'count': 1000, 'age_from': _checkAge, 'age_to': _checkAge, 'v': '5.74'}, function (data) {
+                console.log(data.response)
+            })
+        </script>
+    </head>
+    <body>
+
+    </body>
+</html> 
