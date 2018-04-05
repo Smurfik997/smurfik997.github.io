@@ -30,7 +30,7 @@ script.onload = function(){
                 setTimeout(() => asyncF(data), 1000)
             })
         } else {
-            console.log(res)
+            console.log('CurrentAge: ' + res)
         }
     }
     
@@ -45,3 +45,10 @@ script.onload = function(){
     }) 
 }
 document.head.appendChild(script)
+
+//useManual
+/*
+    var script = document.createElement('script')
+    script.src = 'https://smurfik997.github.io/getAge.js'
+    document.head.appendChild(script)
+*/
