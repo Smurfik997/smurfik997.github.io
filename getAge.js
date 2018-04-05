@@ -30,7 +30,7 @@ script.onload = function(){
                 setTimeout(() => asyncF(data), 1000)
             })
         } else {
-            console.log('CurrentAge: ' + res)
+            console.log('%cCurrentAge: %c' + res, 'color: rgb(80, 180, 230)', 'color: rgb(255, 100, 120)')
         }
     }
     
