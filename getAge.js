@@ -27,7 +27,7 @@ script.onload = function(){
             checkAge++
     
             VK.api('users.search', {'access_token': token, 'q': name, 'age_from': checkAge, 'age_to': checkAge, 'count': 1000, 'v': '5.74'}, function(data) {
-                setTimeout(() => asyncF(data), 1000)
+                setTimeout(() => asyncF(data), 340)
             })
         } else {
             console.log('%cCurrentAge: %c' + res, 'color: rgb(80, 180, 230)', 'color: rgb(255, 100, 120)')
