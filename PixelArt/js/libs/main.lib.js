@@ -137,7 +137,10 @@ function setPlates(block, count, customS, create, callback) {
                 xB.style.margin = margin + '%'
                 xB.style.width = Math.trunc(10000 / count) / 100 - margin * 2 + '%'
                 xB.style.height = 100 - count * margin * 2 + '%'
-                create == 0? xB.setAttribute('onclick', 'changePixColor(this);') : null
+                if (create == 0) {
+                    xB.classList.add('xBTr')
+                    xB.setAttribute('onclick', 'changePixColor(this);')
+                }
 
                 if (customS != undefined) {
                     customS.bRadius != undefined? xB.style.borderRadius = customS.bRadius + '%': null

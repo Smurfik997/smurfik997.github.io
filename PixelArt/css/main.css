@@ -170,6 +170,10 @@ span {
     /*border-radius: 50%;*/
 }
 
+.xBTr {
+    transition: ease-in-out background-color .5s;
+}
+
 .sItem {
     height: 16.7%;
     width: 100%;
