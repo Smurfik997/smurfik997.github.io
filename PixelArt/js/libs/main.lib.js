@@ -7,7 +7,7 @@ var winW, winH, err, animEdit,
     b: 'rgb(150, 150, 150)', //gray
     c: 'rgb(0, 180, 230)', //blue
     d: 'rgb(255, 100, 120)', //red
-    e: 'rgb(0, 255, 200)', //green
+    e: 'rgb(0, 235, 200)', //green
     f: 'rgb(244, 255, 142)', //yellow
     g: 'rgb(235, 235, 235)', //light-gray
 },
