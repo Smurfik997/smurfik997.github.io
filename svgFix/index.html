@@ -1,0 +1,284 @@
+<html>
+    <head>
+        <title>Canvas Test</title>
+        <meta charset="utf-8">
+        <link rel="icon" href="icon.png">
+        <!-- some styles -->
+        <style type="text/css">
+            body {
+                margin: auto;
+                min-height: 500px;
+                min-width: 500px;
+                font: 15pt/7pt Arial; /* style, size (12pt/14pt) 14pt - отступ между строками, family */
+                color: black;
+            }
+
+            #plot {
+                position: absolute;
+                top: calc(50% - 200px - 20px);
+                left: calc(50% - 200px); /* calc!!!!! */
+                box-shadow: 0px 0px 200px 1px rgba(120, 120, 120, .2); /* x, y, rShad, r */
+                background-color: rgba(120, 120, 120, .2);
+                transition: background-color 2s;
+            }
+
+            #preload {
+                width: 100%;
+                height: 100%;
+                background-color: white;
+                position: fixed;
+                z-index: 1;
+                /* display: none; */ /* temporary */
+            }
+
+            #preload div {
+                position: fixed;
+                width: 50px;
+                height: 50px;
+                top: calc(50% - 25px);
+                border-radius: 50%;
+                border: 0;
+                background-color: rgb(120, 120, 120);
+                transition: top .23s;
+            }
+
+            #preload #point1 {
+                left: calc(50% - 100px);
+                top: calc(50% - 40px);
+            }
+
+            #preload #point2 {
+                left: calc(50% - 25px);
+            }
+
+            #preload #point3 {
+                left: calc(50% + 50px);
+            }
+
+            #colorFixButton {
+                height: 20px;
+                position: fixed;
+                bottom: 10px;
+                border-radius: 50%;
+                transition: width .3s, left .3s, box-shadow .2s;
+            }
+
+            #colorFixButton:hover {
+                box-shadow: 0px 0px 25px 1px rgba(120, 120, 120, .5) inset, 0px 0px 25px 1px rgba(120, 120, 120, .5); /* x, y, rShad, r */
+            }
+
+            #colorFixButton[active="true"] {
+                background-color: rgb(40, 200, 20);
+            }
+
+            #colorFixButton[active="false"] {
+                background-color: rgb(250, 60, 40);
+            }
+
+            #colorFixButton[state="change"] {
+                width: 0px;
+                left: 50%;
+            }
+
+            #colorFixButton[state="stable"] {
+                width: 20px;
+                left: calc(50% - 10px);
+            }
+        </style>
+    </head>
+    <!-- start of page -->
+    <body>
+        <div id="preload">
+            <div id="point1"></div>
+            <div id="point2"></div>
+            <div id="point3"></div>
+        </div>
+        <canvas id="plot" width="400px" height="400px">
+            <!-- Wow CANVAS -->
+        </canvas>
+        <div id="colorFixButton" active="true" state="stable"></div>
+    </body>
+    <!-- and scripts -->
+    <script type="text/javascript">
+        // custom console using
+        class customConsole {
+            l(...args) {
+                console.log(...args)
+            }
+
+            w(...args) {
+                console.warn(...args)
+            }
+
+            e(...args) {
+                console.error(...args)
+            }
+        }
+
+        const c = new customConsole
+
+        // get by name, class, id
+        const doc = function(a, b) {
+            let block;
+
+            if (b) {
+                block = a[0] == '/'? document.getElementsByName(a.substr(1)[b]) : block = document.getElementsByClassName(a)[b]
+            } else {
+                block = document.getElementById(a)
+            }
+
+            return block? block : 'err'
+        }
+    </script>
+    <script type="text/javascript" id="preloadLogic">
+        class preload {
+            constructor(points, delayTime) {
+                this.points = points
+                this.delayTime = delayTime
+                this.i = 1
+            }
+
+            show() {
+                setTimeout(() => {
+                    doc(`point${(this.i - 1) % this.points + 1}`).style.top = 'calc(50% - 25px)'
+                    doc(`point${this.i % this.points + 1}`).style.top = 'calc(50% - 40px)'
+                    this.i++
+                    doc('preload').style.display != 'none'? this.show() : 'end'
+                }, this.delayTime)
+            }
+
+            hide(timeout, callback) {
+                setTimeout(() => {
+                    doc('preload').style.display = 'none'
+                    if (callback) callback()
+                }, timeout? this.delayTime * this.points : 0)
+            }
+        }
+
+        preload = new preload(3, 230)
+        preload.show()
+    </script>
+    <script type="text/javascript">
+        const canvas = doc('plot'),
+            plot = canvas.getContext? canvas.getContext('2d') : undefined
+
+        if (plot) {
+            c.l('ready..')
+
+            // some code here
+            class imageData400 {
+                constructor(imgData) {
+                    this.imgData = imgData.data
+                }
+
+                process() {
+                    let temporaryData = []
+
+                    for (let value = 0; value + 4 <= this.imgData.length; value += 4) {
+                        temporaryData.push([
+                            this.imgData[value], 
+                            this.imgData[value + 1], 
+                            this.imgData[value + 2], 
+                            this.imgData[value + 3]
+                        ])
+                    }
+
+                    this.processed = temporaryData   
+                    return this.processed
+                }
+
+                colorFix(filter) {
+                    if (!filter) filter = []
+                    let temporaryDataColorFixed = []
+
+                    if (this.processed) {
+                        let colorCoeff = [],
+                            colors = []
+                        
+                        for (let value = 0; value < this.processed.length; value++) {
+                            let minDiff = 1, 
+                                inFilter = false
+
+                            for (let color = 0; color < colors.length; color++) {
+                                const [rDiff, gDiff, bDiff, aDiff, maxDiff] = [
+                                    Math.pow(this.processed[value][0] - colors[color][0], 2), 
+                                    Math.pow(this.processed[value][1] - colors[color][1], 2),
+                                    Math.pow(this.processed[value][2] - colors[color][2], 2),
+                                    Math.pow(this.processed[value][3] - colors[color][3], 2),
+                                    Math.sqrt(4 * Math.pow(255, 2))
+                                ]
+                                
+                                let currDiff = Math.sqrt(rDiff + gDiff + bDiff + aDiff) / maxDiff
+                                colorCoeff.push(currDiff)
+                                if (currDiff < minDiff) minDiff = currDiff
+                            }
+
+                            if (filter.includes(this.processed[value].join(',')) == true || filter.includes(this.processed[value].join(', ')) == true) {
+                                inFilter = true
+                            }
+
+                            if (minDiff < .1 /*  0.25 */ && (inFilter == false || minDiff == 0)) { // color coeff
+                                temporaryDataColorFixed.push(colors[colorCoeff.indexOf(minDiff)])
+                            } else {
+                                colors.push(this.processed[value]) 
+                                temporaryDataColorFixed.push(this.processed[value])
+                            }
+
+                            colorCoeff = []
+                        }
+
+                        this.colors = colors
+                        return this.dataColorFixed = temporaryDataColorFixed
+                    } else {
+                        return undefined
+                    }
+                }
+
+                getPixel(x, y) {
+                    return this.processed? this.processed[y * 400 + x] : undefined
+                }
+            }
+
+            let shape = new Image(),
+                imgData
+            shape.src = 'sea.png'
+
+            shape.onload = () => {
+                plot.drawImage(shape, 0, 0, 400, 400)
+                imgData = new imageData400(plot.getImageData(0, 0, 400, 400))
+                imgData.process()
+                imgData.colorFix(/* ['255, 255, 255, 255'] */)
+                c.l(imgData)
+                preload.hide(true)
+            }
+
+            shape.onerror = () => {
+                doc('colorFixButton').remove()
+                preload.hide(true, () => doc('plot').style.backgroundColor = 'rgb(220, 70, 40)')
+                c.e('Image load failure')
+            }
+
+            doc('colorFixButton').addEventListener('click', (e) => {
+                const lastState = e.target.getAttribute('active')
+                e.target.setAttribute('state', 'change')
+                e.target.setAttribute('active', e.target.getAttribute('active') == 'true'? 'false' : 'true')
+
+                setTimeout(() => {
+                    plot.clearRect(0, 0, 400, 400)
+
+                    if (e.target.getAttribute('active') == 'true') {
+                        plot.putImageData(new ImageData(Uint8ClampedArray.from(imgData.imgData), 400, 400), 0, 0)
+                    } else {
+                        plot.putImageData(new ImageData(Uint8ClampedArray.from(imgData.dataColorFixed.join(',').split(',')), 400, 400), 0, 0)
+                    }
+                }, 300)
+
+                setTimeout(() => {
+                    e.target.setAttribute('state', 'stable')
+                }, 150)
+            })
+        } else {
+            c.e('Canvas doesn\'t supported')
+        }
+    </script>
+</html>
