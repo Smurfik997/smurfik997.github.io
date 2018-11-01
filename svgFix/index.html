@@ -2,7 +2,7 @@
     <head>
         <title>Canvas Test</title>
         <meta charset="utf-8">
-        <link rel="icon" href="icon.png">
+        <link rel="icon" href="test.png">
         <!-- some styles -->
         <style type="text/css">
             body {
@@ -19,7 +19,11 @@
                 left: calc(50% - 200px); /* calc!!!!! */
                 box-shadow: 0px 0px 200px 1px rgba(120, 120, 120, .2); /* x, y, rShad, r */
                 background-color: rgba(120, 120, 120, .2);
-                transition: background-color 2s;
+                transition: background-color 2s, top .3s;
+            }
+
+            #plot[top="true"] {
+                top: calc(50% - 200px);
             }
 
             #preload {
@@ -44,7 +48,7 @@
 
             #preload #point1 {
                 left: calc(50% - 100px);
-                top: calc(50% - 40px);
+                /* top: calc(50% - 40px); */
             }
 
             #preload #point2 {
@@ -84,6 +88,82 @@
                 width: 20px;
                 left: calc(50% - 10px);
             }
+
+            #colorsBox {
+                position: fixed;
+                height: 20px;
+                top: -20px;
+                width: calc(30px * var(--colors));
+                left: calc(50% - (30px * var(--colors)) / 2  - 5px);
+                transition: top .3s;
+            }
+
+            #colorsBox[active="true"]{
+                top: 10px;
+            }
+
+            #colorsBox div:hover {
+                box-shadow: 0px 0px 25px 1px rgba(120, 120, 120, .3);
+            }
+
+            #colorsBox div[active="true"] {
+                box-shadow: 0px 0px 25px 1px rgba(120, 120, 120, .3);
+            }
+
+            #colorsBox div {
+                height: 20px;
+                width: 20px;
+                border-radius: 50%;
+                transition: box-shadow .2s;
+                margin-left: 10px;
+                float: left;
+            }
+
+            #colorsBox div[style="background-color: rgb(255, 255, 255);"] {
+                height: 18px;
+                width: 18px;
+                border: solid 1px rgb(235, 235, 235);
+            }
+
+            [colors="1"] {
+                --colors: 1;
+            }
+            [colors="2"] {
+                --colors: 2;
+            }
+            [colors="3"] {
+                --colors: 3;
+            }
+            [colors="4"] {
+                --colors: 4;
+            }
+            [colors="5"] {
+                --colors: 5;
+            }
+            [colors="6"] {
+                --colors: 6;
+            }
+            [colors="7"] {
+                --colors: 7;
+            }
+            [colors="8"] {
+                --colors: 8;
+            }
+            [colors="9"] {
+                --colors: 9;
+            }
+            [colors="10"] {
+                --colors: 10;
+            }
+            [colors="11"] {
+                --colors: 11;
+            }
+            [colors="12"] {
+                --colors: 12;
+            }
+            [colors="13"] {
+                --colors: 13;
+            }
         </style>
     </head>
     <!-- start of page -->
@@ -93,7 +173,8 @@
             <div id="point2"></div>
             <div id="point3"></div>
         </div>
-        <canvas id="plot" width="400px" height="400px">
+        <div id="colorsBox" active="false" colors="1"></div>
+        <canvas id="plot" width="400px" height="400px" top="false">
             <!-- Wow CANVAS -->
         </canvas>
         <div id="colorFixButton" active="true" state="stable"></div>
@@ -187,7 +268,7 @@
                     return this.processed
                 }
 
-                colorFix(filter) {
+                colorFix(minDiffCoeff, filter) {
                     if (!filter) filter = []
                     let temporaryDataColorFixed = []
 
@@ -195,9 +276,10 @@
                         let colorCoeff = [],
                             colors = []
                         
+                        for (let i = 0; i < filter.length; i++) colors.push(filter[i].split(', ').map(parseFloat))
+                        
                         for (let value = 0; value < this.processed.length; value++) {
-                            let minDiff = 1, 
-                                inFilter = false
+                            let minDiff = 1
 
                             for (let color = 0; color < colors.length; color++) {
                                 const [rDiff, gDiff, bDiff, aDiff, maxDiff] = [
@@ -213,11 +295,7 @@
                                 if (currDiff < minDiff) minDiff = currDiff
                             }
 
-                            if (filter.includes(this.processed[value].join(',')) == true || filter.includes(this.processed[value].join(', ')) == true) {
-                                inFilter = true
-                            }
-
-                            if (minDiff < .1 /*  0.25 */ && (inFilter == false || minDiff == 0)) { // color coeff
+                            if (minDiff < minDiffCoeff /*  0.25 */) { // color coeff
                                 temporaryDataColorFixed.push(colors[colorCoeff.indexOf(minDiff)])
                             } else {
                                 colors.push(this.processed[value]) 
@@ -229,6 +307,25 @@
 
                         this.colors = colors
                         return this.dataColorFixed = temporaryDataColorFixed
+                    } else {
+                        return undefined
+                    }
+                }
+
+                sortByColor() {
+                    if (this.dataColorFixed) {
+                        let sortedByColor = []
+
+                        for (let i = 0; i < this.colors.length; i++) {
+                            const backgroundColor = `${this.colors[i]}` == `${[255, 255, 255, 255]}`? Array(this.dataColorFixed.length).fill([225, 225, 225, 255]) : Array(this.dataColorFixed.length).fill([255, 255, 255, 255])
+                            sortedByColor.push(backgroundColor)
+                        }
+                        
+                        for (let i = 0; i < this.dataColorFixed.length; i++) {
+                            sortedByColor[this.colors.indexOf(this.dataColorFixed[i])][i] = this.dataColorFixed[i]
+                        }
+                        
+                        return this.sortedByColor = sortedByColor
                     } else {
                         return undefined
                     }
@@ -246,9 +343,12 @@
             shape.onload = () => {
                 plot.drawImage(shape, 0, 0, 400, 400)
                 imgData = new imageData400(plot.getImageData(0, 0, 400, 400))
+                let start = new Date().getTime()
                 imgData.process()
-                imgData.colorFix(/* ['255, 255, 255, 255'] */)
+                imgData.colorFix(.14, /* ['241, 241, 241, 241', '255, 255, 255, 255'] */)
+                if (imgData.colors.length <= 13) imgData.sortByColor()
                 c.l(imgData)
+                c.l(new Date().getTime() - start)
                 preload.hide(true)
             }
 
@@ -259,7 +359,6 @@
             }
 
             doc('colorFixButton').addEventListener('click', (e) => {
-                const lastState = e.target.getAttribute('active')
                 e.target.setAttribute('state', 'change')
                 e.target.setAttribute('active', e.target.getAttribute('active') == 'true'? 'false' : 'true')
 
@@ -270,6 +369,32 @@
                         plot.putImageData(new ImageData(Uint8ClampedArray.from(imgData.imgData), 400, 400), 0, 0)
                     } else {
                         plot.putImageData(new ImageData(Uint8ClampedArray.from(imgData.dataColorFixed.join(',').split(',')), 400, 400), 0, 0)
+                    }
+
+                    if (imgData.colors.length <= 13) {
+                        doc('colorsBox').innerHTML = ''
+                        doc('colorsBox').setAttribute('colors', imgData.colors.length)
+
+                        for (let i = 0; i < imgData.colors.length; i++) {
+                            let color = document.createElement('div')
+                            color.style.backgroundColor = `rgb(${imgData.colors[i].join(', ')})`
+                            color.setAttribute('color', i)
+                            color.addEventListener('click', (e) => {
+                                const active = doc('colorsBox').querySelectorAll('div[active="true"]')
+                                if (active[0] && active[0] != e.target) active[0].setAttribute('active', 'false')
+                                e.target.setAttribute('active', e.target.getAttribute('active') == 'true'? 'false' : 'true')
+
+                                if (doc('colorsBox').querySelectorAll('div[active="true"]').length > 0) {
+                                    plot.putImageData(new ImageData(Uint8ClampedArray.from(imgData.sortedByColor[color.getAttribute('color')].join(',').split(',')), 400, 400), 0, 0)
+                                } else {
+                                    plot.putImageData(new ImageData(Uint8ClampedArray.from(imgData.dataColorFixed.join(',').split(',')), 400, 400), 0, 0)
+                                }
+                            })
+                            doc('colorsBox').appendChild(color)
+                        }
+
+                        doc('colorsBox').setAttribute('active', doc('colorsBox').getAttribute('active') == 'true'? 'false' : 'true')
+                        doc('plot').setAttribute('top', doc('plot').getAttribute('top') == 'true'? 'false' : 'true')
                     }
                 }, 300)
 
@@ -282,3 +407,114 @@
         }
     </script>
 </html>
+
+<!-- [
+  {
+    "elementType": "labels",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.country",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.land_parcel",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.locality",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.neighborhood",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.province",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "landscape.man_made",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "road.arterial",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway.controlled_access",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "road.local",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "featureType": "transit.line",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  }
+] -->
