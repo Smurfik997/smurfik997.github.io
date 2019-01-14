@@ -1,0 +1,290 @@
+<html>
+    <head>
+        <title>Title</title>
+        <meta charset="utf-8">
+        <style>
+            @font-face {
+                font-family: Font;
+                src: url('EtelkaMonospace.otf');
+            }
+
+            @font-face {
+                font-family: FontB;
+                src: url('EtelkaMonospace-bold.otf');
+            }
+
+            @font-face {
+                font-family: Gulim;
+                src: url('gulim.ttf');
+            }
+
+            body {
+                margin: 0 auto;
+                font-family: Gulim;
+                font-weight: 600;
+                user-select: none;
+                min-height: calc(700px * var(--heightR));
+                background: url(test.png) repeat;
+                background-position: 0px 0px;
+                --heightR: 1;
+                --green: rgb(0, 235, 200);
+                --greenHover: rgb(0, 205, 185);
+                --red: rgb(255, 100, 120);
+                --gray: rgb(245, 245, 245);
+            }
+
+            /********************************/
+            /* bots info bots info bots info*/
+            /********************************/
+            div[info="botsCount"] {
+                height: calc(430px * var(--heightR));
+                color: rgb(255, 255, 255);
+            }
+
+            /* first in botsCount */
+            div[info="botsCount"] > div:nth-child(1) {
+                position: absolute;
+                height: calc(350px * var(--heightR));
+                width: 95%;  
+                left: 2.5%;
+                z-index: 0;
+                /* box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.1); */
+                background-color: var(--gray);
+                border-radius: 0px 0px calc(60px * var(--heightR)) calc(60px * var(--heightR));
+                font-size: calc(65px * var(--heightR));
+                text-align: center; 
+                line-height: calc(117px * var(--heightR));
+            }
+
+                div[info="botsCount"] > div:nth-child(1) > div {
+                    width: 33.33%;
+                    height: 100%;
+                    float: left;
+                }
+
+                div[info="botsCount"] > div:nth-child(1) > div:nth-child(1) {
+                    background-color: var(--gray);
+                    border-radius: 0px 0px 0px calc(60px * var(--heightR));
+                }
+
+                div[info="botsCount"] > div:nth-child(1) > div:nth-child(2) {
+                    background-color: rgb(250, 250, 250);
+                }
+
+                div[info="botsCount"] > div:nth-child(1) > div:nth-child(3) {
+                    background-color: var(--gray);
+                    border-radius: 0px 0px calc(60px * var(--heightR)) 0px;
+                }
+
+                    div[info="botsCount"] > div:nth-child(1) > div > div[type="title"] {
+                        width: 100%;
+                        height: calc(50px * var(--heightR));
+                        font-size: calc(22px * var(--heightR));
+                        line-height: calc(50px * var(--heightR));
+                        background: var(--green);
+                    }
+
+            /* second in botsCount */
+            div[info="botsCount"] > div:nth-child(2) {
+                position: absolute;
+                height: calc(120px * var(--heightR)); 
+                width: calc(600px * var(--heightR));
+                z-index: 2;
+                /* box-shadow: 5px 5px 20px 5px rgba(255, 100, 120, 0.2); */
+                background-color: var(--red);
+                top: calc(290px * var(--heightR));
+                left: calc(50% - 300px * var(--heightR));
+                border-radius: calc(60px * var(--heightR)); 
+                font-size: calc(65px * var(--heightR));
+                text-align: center; 
+                line-height: calc(120px * var(--heightR));
+                transition: width .7s, left .7s, background-color .7s, box-shadow .7s;
+            }
+
+                div[info="botsCount"][active="true"] > div:nth-child(2) {
+                    width: calc(640px * var(--heightR));
+                    /* box-shadow: 5px 5px 20px 5px rgba(0, 235, 200, 0.15); */
+                    background-color: var(--green);
+                    left: calc(50% - 320px * var(--heightR));
+                }
+
+            div[info="botsCount"] > div:nth-child(2) > div {
+                height: calc(120px * var(--heightR));
+                box-sizing: border-box; 
+            }
+
+                div[info="botsCount"] > div:nth-child(2) > div:nth-child(2) {
+                    width: calc(120px * var(--heightR));
+                    border-radius: calc(60px * var(--heightR));
+                    font-size: calc(60px * var(--heightR));
+                    background-color: var(--red);
+                    line-height:  calc(119px * var(--heightR));
+                    transition: background-color .7s;
+                    float: right;         
+                }
+
+                    div[info="botsCount"] > div:nth-child(2) > div:nth-child(2)[one="2"] {
+                        padding-left: calc(6px * var(--heightR));
+                    }
+
+                    div[info="botsCount"] > div:nth-child(2) > div:nth-child(2)[one="1"] {
+                        padding-right: calc(6px * var(--heightR));
+                    }
+
+                    div[info="botsCount"] > div:nth-child(2) > div:nth-child(2)[four="1"] {
+                        padding-right: calc(2px * var(--heightR));
+                    }
+
+                    div[info="botsCount"][active="true"] > div:nth-child(2) > div:nth-child(2) {
+                        background-color: var(--greenHover);
+                    }
+
+                div[info="botsCount"] > div:nth-child(2) > div:nth-child(1) {
+                    width: calc(460px * var(--heightR));
+                    font-size: calc(45px * var(--heightR));
+                    padding-left: calc(30px * var(--heightR));
+                    transition: width .7s;
+                    float: left;
+                }
+
+                    div[info="botsCount"][active="true"] > div:nth-child(2) > div:nth-child(1) {
+                        width: calc(500px * var(--heightR));
+                    }
+
+            /* third in botsCount */
+            div[info="botsCount"] > div:nth-child(3) {
+                position: absolute;
+                height: calc(80px * var(--heightR)); 
+                width: calc(640px * var(--heightR));
+                background: url(test.png) repeat; /* background-color: rgb(255, 255, 255); */
+                background-position-x: calc(320px * var(--heightR) - 50vw);
+                background-position-y: calc(-270px * var(--heightR));
+                z-index: 1;
+                top: calc(270px * var(--heightR)); 
+                left: calc(50% - 320px * var(--heightR));
+                border-radius: calc(80px * var(--heightR)) calc(80px * var(--heightR)) 0px 0px;
+                transition: left .7s, width .7s, background-position .7s;
+            }
+
+                div[info="botsCount"][active="true"] > div:nth-child(3) {
+                    width: calc(680px * var(--heightR));
+                    left: calc(50% - 340px * var(--heightR));
+                    background-position-x: calc(340px * var(--heightR) - 50vw);
+                }
+
+            /********************************/
+            /*main block main block main    */
+            /********************************/
+            #main {
+                width: 95%;
+                height: calc();
+                margin-left: 2.5%;
+            }
+
+                #main > div {
+                    min-height: calc(250px * var(--heightR));
+                    height: calc(100% - 450px * var(--heightR));
+                    background-color: var(--gray);
+                    border-radius: calc(30px * var(--heightR));
+                    float: left;
+                }
+
+                #main > div:nth-child(1) {
+                    margin-left: 10%;
+                    width: 50%;
+                }
+
+                #main > div:nth-child(2) {
+                    width: calc(30% - 20px * var(--heightR));
+                    margin-left: calc(20px * var(--heightR));
+                }
+
+            /* button */
+            #order {
+                position: relative;
+                width: calc(340px * var(--heightR));
+                height: calc(75px * var(--heightR));
+                top: calc(50% - 37.5px * var(--heightR));
+                left: calc(50% - 170px * var(--heightR));
+                line-height: calc(75px * var(--heightR));
+                border-radius: calc(25px * var(--heightR));
+                box-sizing: border-box;
+                text-align: center;
+                color: rgb(255, 255, 255);
+                font-size: calc(30px * var(--heightR));
+                background-color: var(--green);
+                transition: background-color .5s, left .5s, border-radius .5s, width .5s;
+            }
+
+            #order:hover {
+                width: 100%;
+                background-color: var(--greenHover);
+                left: 0px;
+                border-radius: 0px;
+            }
+        </style>
+    </head>
+    <body>
+        <script>
+            window.onresize = (e) => {
+                document.body.style = `--heightR: ${window.innerWidth / 1920}`
+            }
+            
+            document.body.style = `--heightR: ${window.innerWidth / 1920}`
+        </script>
+        <div info="botsCount" active="false">
+            <div>
+                <div>
+                    <div type="title">ВСЕГО СООБЩЕНИЙ</div>
+                </div>
+                <div>
+                    <div type="title">НАШ ТОП</div>
+                </div>
+                <div>
+                    <div type="title">О НАС</div>
+                </div>
+            </div>
+            <div id="botsCountMask">
+                <div>АКТИВНЫХ БОТОВ</div>
+                <div data="botsCount">0</div>
+            </div>
+            <div></div>
+        </div>
+        <div id="main">
+            <div></div>
+            <div>
+                <div id="order">ОФОРМИТЬ ЗАКАЗ</div>
+            </div>
+        </div>
+    </body>
+    <script>
+        let req = new XMLHttpRequest()
+
+        req.onreadystatechange = () => {
+            if (req.status === 200 && req.readyState === 4) {
+                console.log(JSON.parse(req.responseText))
+                incCount(JSON.parse(req.responseText).chatters.length)
+                document.querySelector('div[info="botsCount"]').setAttribute('active', 'true')
+            } else if (req.readyState === 4) {
+                console.log('Trying again...')
+                req.open('GET', 'https://api.streamelements.com/kappa/v2/chatstats/tryhub_project60/stats')
+                setTimeout(req.send(), 1000)
+            }
+        }
+
+        req.open('GET', 'https://api.streamelements.com/kappa/v2/chatstats/tryhub_project60/stats')
+        req.send()
+
+        const incCount = (count) => {
+            let block = document.querySelector('div[data="botsCount"]')
+            block.setAttribute('one', 'false')
+            block.setAttribute('four', 'false')
+            if (String(parseInt(block.innerText) + 1).search('1') == 1 || parseInt(block.innerText) + 1 == 11) block.setAttribute('one', '2')
+            if (String(parseInt(block.innerText) + 1).search('1') == 0 && parseInt(block.innerText) + 1 != 11 && parseInt(block.innerText) + 1 != 1) block.setAttribute('one', '1')
+            if (String(parseInt(block.innerText) + 1).search('4') != -1 && parseInt(block.innerText) + 1 != 14) block.setAttribute('four', '1')
+            block.innerText = parseInt(block.innerText) + 1
+
+            if (parseInt(block.innerText)  < count) setTimeout(() => {incCount(count)}, 700 / count)
+        }
+    </script>
+</html>
