@@ -28,10 +28,11 @@
                 background-position: 0px 0px;
                 --heightR: 1;
                 --green: rgb(0, 235, 200);
-                --greenHover: rgb(0, 205, 185);
+                --greenHover: rgb(0, 220, 200) /* rgb(0, 205, 185) */;
                 --red: rgb(255, 100, 120);
-                --redHover: rgb(250, 80, 110);
+                --redHover: rgb(250, 85, 110) /* rgb(250, 80, 110) */;
                 --gray: rgb(245, 245, 245);
+                --white: rgb(255, 255, 255);
             }
 
             /********************************/
@@ -39,7 +40,7 @@
             /********************************/
             div[info="botsCount"] {
                 height: calc(430px * var(--heightR));
-                color: rgb(255, 255, 255);
+                color: var(--white);
             }
 
             /* first in botsCount */
@@ -211,7 +212,7 @@
                 border-radius: calc(25px * var(--heightR));
                 box-sizing: border-box;
                 text-align: center;
-                color: rgb(255, 255, 255);
+                color: var(--white);
                 font-size: calc(30px * var(--heightR));
                 background-color: var(--green);
                 transition: background-color .5s, left .5s, border-radius .5s, width .5s;
