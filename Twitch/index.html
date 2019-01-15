@@ -66,16 +66,16 @@
 
                 div[info="botsCount"] > div:nth-child(1) > div:nth-child(1) {
                     background-color: var(--gray);
-                    border-radius: 0px 0px 0px calc(60px * var(--heightR));
+                    border-radius: 0px 0px 0px calc(30px * var(--heightR));
                 }
 
                 div[info="botsCount"] > div:nth-child(1) > div:nth-child(2) {
-                    background-color: rgb(250, 250, 250);
+                    /* background-color: rgb(250, 250, 250); */
                 }
 
                 div[info="botsCount"] > div:nth-child(1) > div:nth-child(3) {
                     background-color: var(--gray);
-                    border-radius: 0px 0px calc(60px * var(--heightR)) 0px;
+                    border-radius: 0px 0px calc(30px * var(--heightR)) 0px;
                 }
 
                     div[info="botsCount"] > div:nth-child(1) > div > div[type="title"] {
@@ -224,6 +224,60 @@
                 left: 0px;
                 border-radius: 0px;
             }
+
+            /* messagesElem */
+            div[type="messagesElem"] {
+                width: 92%;
+                background-color: var(--white);
+                margin: calc(10px * var(--heightR)) 4%;
+                border-radius: calc(12px * var(--heightR));
+                height: calc(48px * var(--heightR));
+            }
+
+            div[type="messagesElem"][pos="1"] {
+                
+            }
+
+            div[type="messagesElem"][pos="2"] {
+               
+            }
+
+            div[type="messagesElem"][pos="3"] {
+                
+            }
+
+            div[type="messagesElem"][pos="4"] {
+                
+            }
+
+            div[type="messagesElem"][pos="5"] {
+                width: calc(47.5vw - 320px * var(--heightR) - 6.5%);
+                transition: width .7s;
+            }
+
+            div[info="botsCount"][active="true"] > div > div > div[type="messagesElem"][pos="5"] {
+                width: calc(47.5vw - 340px * var(--heightR) - 6.5%);
+            }
+
+            /* topElem */
+            div[type="topElem"] {
+                width: 100%;
+                background-color: var(--white);
+                margin: calc(10px * var(--heightR)) 0px;
+                border-radius: calc(12px * var(--heightR));;
+            }
+
+            div[type="topElem"][pos="first"] {
+                height: calc(70px * var(--heightR));
+            }
+
+            div[type="topElem"][pos="second"] {
+                height: calc(60px * var(--heightR));
+            }
+
+            div[type="topElem"][pos="third"] {
+                height: calc(50px * var(--heightR));
+            }
         </style>
     </head>
     <body>
@@ -238,9 +292,29 @@
             <div>
                 <div>
                     <div type="title">ВСЕГО СООБЩЕНИЙ</div>
+                    <div type="messagesElem" pos="1"></div>
+                    <div type="messagesElem" pos="2"></div>
+                    <div type="messagesElem" pos="3"></div>
+                    <div type="messagesElem" pos="4"></div>
+                    <div type="messagesElem" pos="5"></div>
                 </div>
                 <div>
                     <div type="title">НАШ ТОП</div>
+                    <div type="topElem" pos="first">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                    <div type="topElem" pos="second">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                    <div type="topElem" pos="third">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
                 </div>
                 <div>
                     <div type="title">О НАС</div>
@@ -269,12 +343,12 @@
                 document.querySelector('div[info="botsCount"]').setAttribute('active', 'true')
             } else if (req.readyState === 4) {
                 console.log('Trying again...')
-                req.open('GET', 'https://api.streamelements.com/kappa/v2/chatstats/tryhub_project60/stats')
+                req.open('GET', 'https://api.streamelements.com/kappa/v2/chatstats/teagroup/stats')
                 setTimeout(req.send(), 1000)
             }
         }
 
-        req.open('GET', 'https://api.streamelements.com/kappa/v2/chatstats/tryhub_project60/stats')
+        req.open('GET', 'https://api.streamelements.com/kappa/v2/chatstats/teagroup/stats')
         req.send()
 
         const incCount = (count) => {
