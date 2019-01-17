@@ -20,6 +20,8 @@
 
             body {
                 margin: 0 auto;
+                opacity: 0;
+                transition: opacity .5s;
                 font-family: Gulim, Calibri;
                 font-weight: 600;
                 user-select: none;
@@ -33,6 +35,10 @@
                 --redHover: rgb(250, 85, 110) /* rgb(250, 80, 110) */;
                 --gray: rgb(245, 245, 245);
                 --white: rgb(255, 255, 255);
+            }
+
+            body[font="ready"] {
+                opacity: 1;
             }
 
             /********************************/
@@ -267,9 +273,49 @@
                 border-radius: calc(12px * var(--heightR));;
             }
 
+                div[type="topElem"] > div {
+                    float: left;
+                }      
+
             div[type="topElem"][pos="first"] {
                 height: calc(70px * var(--heightR));
+                line-height: calc(44px * var(--heightR));
+                --num: 1;
+                --fontR: calc(44 / (44 + 16 * (var(--num) - 1)));
+                font-size: calc(26px * var(--fontR) * var(--heightR));
+                color: rgb(120, 120, 120);
             }
+
+                div[type="topElem"][pos="first"] > div {
+                        margin: calc(13px * var(--heightR));
+                        height: calc(44px * var(--heightR));
+                        opacity: 0;
+                        transition: opacity .7s;
+                }
+
+                div[type="topElem"][pos="first"][data="loaded"] > div {
+                    opacity: 1;
+                }
+
+                div[type="topElem"][pos="first"] > div:nth-child(1) {
+                        width: calc(44px * var(--heightR));
+                        background-position: center;
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                }
+
+                div[type="topElem"][pos="first"] > div:nth-child(2) {
+                    width: calc(100% - (140px - 16px * (var(--num) - 1)) * var(--heightR));
+                    margin: calc(13px * var(--heightR)) 0px;
+                    line-height: calc(42px * var(--heightR));
+                    box-sizing: border-box;
+                    padding-left: calc(18px * var(--heightR));
+                }
+
+                div[type="topElem"][pos="first"] > div:nth-child(3) {
+                    width: calc((44px + 16px * (var(--num) - 1)) * var(--heightR));
+                    color: var(--green);
+                }
 
             div[type="topElem"][pos="second"] {
                 height: calc(60px * var(--heightR));
@@ -287,6 +333,10 @@
             }
             
             document.body.style = `--heightR: ${window.innerWidth / 1920}`
+
+            document.fonts.onloadingdone = () => {
+                document.body.setAttribute('font', 'ready')
+            }
         </script>
         <div info="botsCount" active="false">
             <div>
@@ -301,7 +351,7 @@
                 <div>
                     <div type="title">НАШ ТОП</div>
                     <div type="topElem" pos="first">
-                        <div></div>
+                        <div style="background-image: url('error');"></div>
                         <div></div>
                         <div></div>
                     </div>
@@ -338,9 +388,15 @@
 
         req.onreadystatechange = () => {
             if (req.status === 200 && req.readyState === 4) {
-                console.log(JSON.parse(req.responseText))
-                incCount(JSON.parse(req.responseText).chatters.length)
+                const response = JSON.parse(req.responseText)
+                console.log(response)
+                incCount(response.chatters.length)
                 document.querySelector('div[info="botsCount"]').setAttribute('active', 'true')
+
+                document.querySelector('div[type="topElem"][pos="first"]').setAttribute('data', 'loaded');
+                document.querySelectorAll('div[type="topElem"][pos="first"] div')[0].style.backgroundImage = `url('https://static-cdn.jtvnw.net/emoticons/v1/${response.twitchEmotes[0].id}/5.0`
+                document.querySelectorAll('div[type="topElem"][pos="first"] div')[1].innerText = `Всеми давно любимый ${response.twitchEmotes[0].emote}`
+                document.querySelectorAll('div[type="topElem"][pos="first"] div')[2].innerText = response.twitchEmotes[0].amount
             } else if (req.readyState === 4) {
                 console.log('Trying again...')
                 req.open('GET', 'https://api.streamelements.com/kappa/v2/chatstats/teagroup/stats')
