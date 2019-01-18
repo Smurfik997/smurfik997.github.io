@@ -34,6 +34,7 @@
                 --red: rgb(255, 100, 120);
                 --redHover: rgb(250, 85, 110) /* rgb(250, 80, 110) */;
                 --gray: rgb(245, 245, 245);
+                --darkGray: rgb(120, 120, 120);
                 --white: rgb(255, 255, 255);
             }
 
@@ -195,12 +196,23 @@
                     background-color: var(--gray);
                     border-radius: calc(30px * var(--heightR));
                     float: left;
+                    text-align: center;
                 }
 
                 #main > div:nth-child(1) {
                     margin-left: 10%;
                     width: 50%;
                 }
+
+                    #main > div:nth-child(1) > div[type="info"] {
+                        position: relative;
+                        left: 28%;
+                        top: calc(50% - 30px * var(--heightR));
+                        width: 44%;
+                        color: var(--darkGray);
+                        font-size: calc(22px * var(--heightR));
+                        line-height: calc(30px * var(--heightR));
+                    }
 
                 #main > div:nth-child(2) {
                     width: calc(30% - 20px * var(--heightR));
@@ -217,7 +229,6 @@
                 line-height: calc(75px * var(--heightR));
                 border-radius: calc(25px * var(--heightR));
                 box-sizing: border-box;
-                text-align: center;
                 color: var(--white);
                 font-size: calc(30px * var(--heightR));
                 background-color: var(--green);
@@ -230,6 +241,10 @@
                 left: 0px;
                 border-radius: 0px;
             }
+
+            /********************************/
+            /* topElem topElem topElem topE */
+            /********************************/
 
             /* messagesElem */
             div[type="messagesElem"] {
@@ -283,7 +298,7 @@
                 --num: 1;
                 --fontR: calc(44 / (44 + 16 * (var(--num) - 1)));
                 font-size: calc(26px * var(--fontR) * var(--heightR));
-                color: rgb(120, 120, 120);
+                color: var(--darkGray);
             }
 
                 div[type="topElem"][pos="first"] > div {
@@ -377,7 +392,9 @@
             <div></div>
         </div>
         <div id="main">
-            <div></div>
+            <div>
+                <div type="info">В данный момент активных заказов нету</div>
+            </div>
             <div>
                 <div id="order">ОФОРМИТЬ ЗАКАЗ</div>
             </div>
