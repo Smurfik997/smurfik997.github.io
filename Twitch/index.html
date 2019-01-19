@@ -222,26 +222,15 @@
             /* messagesElem */
             div[type="messagesElem"] {
                 width: 92%;
-                background-color: var(--white);
+                height: calc(48px * var(--heightR));
                 margin: calc(10px * var(--heightR)) 4%;
                 border-radius: calc(12px * var(--heightR));
-                height: calc(48px * var(--heightR));
-            }
-
-            div[type="messagesElem"][pos="1"] {
-                
-            }
-
-            div[type="messagesElem"][pos="2"] {
-               
-            }
-
-            div[type="messagesElem"][pos="3"] {
-                
-            }
-
-            div[type="messagesElem"][pos="4"] {
-                
+                background-color: var(--white);
+                line-height: calc(32px * var(--heightR));
+                --num: 1;
+                --fontR: calc(32 / (32 + 1 * (var(--num) - 1)));
+                font-size: calc(24px * var(--fontR) * var(--heightR));
+                color: var(--darkGray);
             }
 
             div[type="messagesElem"][pos="5"] {
@@ -252,6 +241,40 @@
             div[info="botsCount"][active="true"] > div > div > div[type="messagesElem"][pos="5"] {
                 width: calc(47.5vw - 340px * var(--heightR) - 6.5%);
             }
+
+            
+                div[type="messagesElem"] > div {
+                    float: left;
+                    margin: calc(8px * var(--heightR)) calc(11px * var(--heightR));
+                    height: calc(32px * var(--heightR));
+                    opacity: 0;
+                    transition: opacity .7s;
+                }
+
+                div[type="messagesElem"][data="loaded"] > div {
+                    opacity: 1;
+                }
+
+                div[type="messagesElem"] > div:nth-child(1) {
+                    width: calc(32px * var(--heightR));
+                    background-position: center;
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    background-image: url('hashtag.png');
+                }
+
+                div[type="messagesElem"] > div:nth-child(2) {
+                    width: calc(100% - (108px + 6px * (var(--num) - 1)) * var(--heightR));
+                    margin: calc(8px * var(--heightR)) 0px;
+                    box-sizing: border-box;
+                    padding-left: calc(12px * var(--heightR) * var(--fontR));
+                    text-align: left;
+                }
+
+                div[type="messagesElem"] > div:nth-child(3) {
+                    width: calc((32px + 6px * (var(--num) - 1)) * var(--heightR));
+                    color: var(--green);
+                }
 
             /* topElem */
             div[type="topElem"] {
@@ -269,7 +292,7 @@
 
                 div[type="topElem"] > div {
                     float: left;
-                    margin: calc(10px * var(--heightR)) calc(13px * var(--heightR));
+                    margin: calc(10px * var(--heightR)) calc(15px * var(--heightR));
                     height: calc(40px * var(--heightR));
                     opacity: 0;
                     transition: opacity .7s;
@@ -280,7 +303,7 @@
                 }
 
                 div[type="topElem"] > div:nth-child(1) {
-                    width: calc(44px * var(--heightR));
+                    width: calc(40px * var(--heightR));
                     background-position: center;
                     background-size: contain;
                     background-repeat: no-repeat;
@@ -295,7 +318,7 @@
                 }
 
                 div[type="topElem"] > div:nth-child(3) {
-                    width: calc((44px + 9px * (var(--num) - 1)) * var(--heightR));
+                    width: calc((40px + 9px * (var(--num) - 1)) * var(--heightR));
                     color: var(--green);
                 }
         </style>
@@ -321,10 +344,26 @@
                         <div></div>
                         <div></div>
                     </div>
-                    <div type="messagesElem" pos="2"></div>
-                    <div type="messagesElem" pos="3"></div>
-                    <div type="messagesElem" pos="4"></div>
-                    <div type="messagesElem" pos="5"></div>
+                    <div type="messagesElem" pos="2">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                    <div type="messagesElem" pos="3">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                    <div type="messagesElem" pos="4">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                    <div type="messagesElem" pos="5">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
                 </div>
                 <div>
                     <div type="title">НАШ ТОП</div>
@@ -385,17 +424,26 @@
                 }
 
                 const word = [
-                    'Всеми давно любимый',
-                    'Всемирно известный',
-                    'Давно уже популярный',
-                    'Всем давно известный'
+                    [
+                        'Всеми давно любимый',
+                        'Всемирно известный',
+                        'Давно уже популярный',
+                        'Всем давно известный'
+                    ],
+                    [
+                        'Лучший из лучших',
+                        'Душа компании',
+                        'Невероятный',
+                        'Скромный',
+                        'Сладкий бот'
+                    ]
                 ]
 
                 console.log(topSorted)
 
                 for (let i = 0, len = topSorted.length; i < len; i++) {
                     document.querySelector(`div[type="topElem"][pos="${i + 1}"]`).style.cssText = `--num: ${String(topSorted[i].amount).length}`
-                    document.querySelectorAll(`div[type="topElem"][pos="${i + 1}"] div`)[1].innerText = `${word[i]} ${topSorted[i].emote || topSorted[i].hashtag}`
+                    document.querySelectorAll(`div[type="topElem"][pos="${i + 1}"] div`)[1].innerText = `${word[0][i]} ${topSorted[i].emote || topSorted[i].hashtag}`
                     document.querySelectorAll(`div[type="topElem"][pos="${i + 1}"] div`)[2].innerText = topSorted[i].amount
 
                     if (topSorted[i].id) {
@@ -409,6 +457,13 @@
                         document.querySelectorAll(`div[type="topElem"][pos="${i + 1}"] div`)[0].style.backgroundImage = `url('hashtag.png')`
                         document.querySelector(`div[type="topElem"][pos="${i + 1}"]`).setAttribute('data', 'loaded')
                     }
+                }
+
+                for (let i = 0, len = response.chatters.length; i < len; i++) {
+                    document.querySelector(`div[type="messagesElem"][pos="${i + 1}"]`).style.cssText = `--num: ${String(response.chatters[i].amount).length}`
+                    document.querySelectorAll(`div[type="messagesElem"][pos="${i + 1}"] div`)[1].innerText = `${word[1][i]} #${response.chatters[i].name}`
+                    document.querySelectorAll(`div[type="messagesElem"][pos="${i + 1}"] div`)[2].innerText = response.chatters[i].amount
+                    document.querySelector(`div[type="messagesElem"][pos="${i + 1}"]`).setAttribute('data', 'loaded')
                 }
             } else if (req.readyState === 4) {
                 console.log('Trying again...')
