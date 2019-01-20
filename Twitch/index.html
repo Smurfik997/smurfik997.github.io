@@ -260,19 +260,27 @@
                     background-position: center;
                     background-size: contain;
                     background-repeat: no-repeat;
-                    background-image: url('hashtag.png');
+                    background-image: url('bot64.png');
                 }
 
                 div[type="messagesElem"] > div:nth-child(2) {
-                    width: calc(100% - (108px + 6px * (var(--num) - 1)) * var(--heightR));
+                    width: calc(100% - (108px + 8px * (var(--num) - 1)) * var(--heightR));
                     margin: calc(8px * var(--heightR)) 0px;
                     box-sizing: border-box;
                     padding-left: calc(12px * var(--heightR) * var(--fontR));
                     text-align: left;
                 }
 
+                    div[type="messagesElem"] > div:nth-child(2) > div {
+                        float: left;
+                    }
+
+                    div[type="messagesElem"] > div:nth-child(2) > div:nth-child(2) {
+                        color: rgb(0, 180, 230);
+                    }
+
                 div[type="messagesElem"] > div:nth-child(3) {
-                    width: calc((32px + 6px * (var(--num) - 1)) * var(--heightR));
+                    width: calc((32px + 8px * (var(--num) - 1)) * var(--heightR));
                     color: var(--green);
                 }
 
@@ -317,10 +325,52 @@
                     text-align: left;
                 }
 
+                    div[type="topElem"] > div:nth-child(2) > div {
+                        float: left;
+                    }
+
+                    div[type="topElem"] > div:nth-child(2) > div:nth-child(2) {
+                        color: rgb(0, 180, 230);
+                    }
+
                 div[type="topElem"] > div:nth-child(3) {
                     width: calc((40px + 9px * (var(--num) - 1)) * var(--heightR));
                     color: var(--green);
                 }
+
+            /* ********************* */
+            /* aboutus aboutus       */
+            /* ********************* */
+            /* messagesElem */
+            div[type="aboutus"] {
+                width: 92%;
+                height: calc(48px * var(--heightR));
+                margin: calc(10px * var(--heightR)) 4%;
+                border-radius: calc(12px * var(--heightR));
+                background-color: var(--white);
+                line-height: calc(32px * var(--heightR));
+                --num: 1;
+                --fontR: calc(32 / (32 + 1 * (var(--num) - 1)));
+                font-size: calc(24px * var(--fontR) * var(--heightR));
+                color: var(--darkGray);
+                box-sizing: border-box;
+                padding: 8px;
+            }
+
+            div[type="aboutus"][pos="1"]  {
+                height: calc(222px * var(--heightR));
+            }
+
+            div[type="aboutus"][pos="2"] {
+                width: calc(47.5vw - 320px * var(--heightR) - 6.5%);
+                float: right;
+                margin-top: 0px;
+                transition: width .7s, margin-left .7s;
+            }
+
+            div[info="botsCount"][active="true"] > div > div > div[type="aboutus"][pos="2"] {
+                width: calc(47.5vw - 340px * var(--heightR) - 6.5%);
+            }
         </style>
     </head>
     <body>
@@ -341,27 +391,42 @@
                     <div type="title">ВСЕГО СООБЩЕНИЙ</div>
                     <div type="messagesElem" pos="1">
                         <div></div>
-                        <div></div>
+                        <div>
+                            <div></div>
+                            <div></div>
+                        </div>
                         <div></div>
                     </div>
                     <div type="messagesElem" pos="2">
                         <div></div>
-                        <div></div>
+                        <div>
+                            <div></div>
+                            <div></div>
+                        </div>
                         <div></div>
                     </div>
                     <div type="messagesElem" pos="3">
                         <div></div>
-                        <div></div>
+                        <div>
+                            <div></div>
+                            <div></div>
+                        </div>
                         <div></div>
                     </div>
                     <div type="messagesElem" pos="4">
                         <div></div>
-                        <div></div>
+                        <div>
+                            <div></div>
+                            <div></div>
+                        </div>
                         <div></div>
                     </div>
                     <div type="messagesElem" pos="5">
                         <div></div>
-                        <div></div>
+                        <div>
+                            <div></div>
+                            <div></div>
+                        </div>
                         <div></div>
                     </div>
                 </div>
@@ -369,22 +434,33 @@
                     <div type="title">НАШ ТОП</div>
                     <div type="topElem" pos="1">
                         <div></div>
-                        <div></div>
+                        <div>
+                            <div></div>
+                            <div></div>
+                        </div>
                         <div></div>
                     </div>
                     <div type="topElem" pos="2">
                         <div></div>
-                        <div></div>
+                        <div>
+                            <div></div>
+                            <div></div>
+                        </div>
                         <div></div>
                     </div>
                     <div type="topElem" pos="3">
                         <div></div>
-                        <div></div>
+                        <div>
+                            <div></div>
+                            <div></div>
+                        </div>
                         <div></div>
                     </div>
                 </div>
                 <div>
                     <div type="title">О НАС</div>
+                    <div type="aboutus" pos="1"></div>
+                    <div type="aboutus" pos="2"></div>
                 </div>
             </div>
             <div id="botsCountMask">
@@ -416,8 +492,9 @@
                     topSorted = []
 
                 for (let i = 0, len = top.length; i < len; i++) sort[i] = top[i].amount
-                sort.sort()
-                
+                sort.sort((a, b) => {return a - b})
+                console.log(sort)
+
                 for (let i = 0, len = top.length; i < len; i++) {
                     topSorted[len - sort.indexOf(top[i].amount) - 1] = top[i]
                     sort[sort.indexOf(top[i].amount)] = -1
@@ -432,19 +509,28 @@
                     ],
                     [
                         'Лучший из лучших',
-                        'Душа компании',
-                        'Невероятный',
-                        'Скромный',
-                        'Сладкий бот'
+                        'Душа их компании',
+                        'Невероятный рємбо',
+                        'Скромный робот',
+                        'Сладкий ботик'
                     ]
                 ]
 
-                console.log(topSorted)
-
                 for (let i = 0, len = topSorted.length; i < len; i++) {
-                    document.querySelector(`div[type="topElem"][pos="${i + 1}"]`).style.cssText = `--num: ${String(topSorted[i].amount).length}`
-                    document.querySelectorAll(`div[type="topElem"][pos="${i + 1}"] div`)[1].innerText = `${word[0][i]} ${topSorted[i].emote || topSorted[i].hashtag}`
-                    document.querySelectorAll(`div[type="topElem"][pos="${i + 1}"] div`)[2].innerText = topSorted[i].amount
+                    const amount = String(topSorted[i].amount),
+                        shape = [
+                            amount.substr(0, amount.length % 3),
+                            amount.substr(amount.length % 3, 3)? ` ${amount.substr(amount.length % 3, 3)}` : '',
+                            amount.substr(amount.length % 3 + 3, 3)? ` ${amount.substr(amount.length % 3 + 3, 3)}` : '',
+                            amount.substr(amount.length % 3 + 6, 3)? ` ${amount.substr(amount.length % 3 + 6, 3)}` : '',
+                            amount.substr(amount.length % 3 + 9, 3)? ` ${amount.substr(amount.length % 3 + 9, 3)}` : '',
+                            amount.substr(amount.length % 3 + 12, 3)? ` ${amount.substr(amount.length % 3 + 12, 3)}` : ''
+                        ]
+                    document.querySelector(`div[type="topElem"][pos="${i + 1}"]`).style.cssText = `--num: ${shape.join('').length}`
+                    document.querySelectorAll(`div[type="topElem"][pos="${i + 1}"] div`)[2].innerHTML = `${word[0][i]}&nbsp`
+                    topSorted[i].hashtag = topSorted[i].hashtag == '#teagroup'? '#TeaGroup' : topSorted[i].hashtag
+                    document.querySelectorAll(`div[type="topElem"][pos="${i + 1}"] div`)[3].innerText = `${topSorted[i].emote || topSorted[i].hashtag}`
+                    document.querySelectorAll(`div[type="topElem"][pos="${i + 1}"] div`)[4].innerText = shape.join('')
 
                     if (topSorted[i].id) {
                         let icon = new Image()
@@ -460,9 +546,28 @@
                 }
 
                 for (let i = 0, len = response.chatters.length; i < len; i++) {
-                    document.querySelector(`div[type="messagesElem"][pos="${i + 1}"]`).style.cssText = `--num: ${String(response.chatters[i].amount).length}`
-                    document.querySelectorAll(`div[type="messagesElem"][pos="${i + 1}"] div`)[1].innerText = `${word[1][i]} #${response.chatters[i].name}`
-                    document.querySelectorAll(`div[type="messagesElem"][pos="${i + 1}"] div`)[2].innerText = response.chatters[i].amount
+                    const amount = String(response.chatters[i].amount),
+                        shapeNum = [
+                            amount.substr(0, amount.length % 3),
+                            amount.substr(amount.length % 3, 3)? ` ${amount.substr(amount.length % 3, 3)}` : '',
+                            amount.substr(amount.length % 3 + 3, 3)? ` ${amount.substr(amount.length % 3 + 3, 3)}` : '',
+                            amount.substr(amount.length % 3 + 6, 3)? ` ${amount.substr(amount.length % 3 + 6, 3)}` : '',
+                            amount.substr(amount.length % 3 + 9, 3)? ` ${amount.substr(amount.length % 3 + 9, 3)}` : '',
+                            amount.substr(amount.length % 3 + 12, 3)? ` ${amount.substr(amount.length % 3 + 12, 3)}` : ''
+                        ]
+                    document.querySelector(`div[type="messagesElem"][pos="${i + 1}"]`).style.cssText = `--num: ${shapeNum.join('').length}`
+                    document.querySelectorAll(`div[type="messagesElem"][pos="${i + 1}"] div`)[2].innerHTML = `${word[1][i]}&nbsp`
+                    const name = response.chatters[i].name,
+                        shape = [
+                            name[0].toUpperCase(),
+                            name.substr(1, 2),
+                            name[3].toUpperCase(),
+                            name.substr(4, 4),
+                            name[8]? name[8].toUpperCase() : '',
+                            name[8]? name.substr(9, name.length - 9) : ''
+                        ]
+                    document.querySelectorAll(`div[type="messagesElem"][pos="${i + 1}"] div`)[3].innerText = `${shape.join('')}`
+                    document.querySelectorAll(`div[type="messagesElem"][pos="${i + 1}"] div`)[4].innerText = shapeNum.join('')
                     document.querySelector(`div[type="messagesElem"][pos="${i + 1}"]`).setAttribute('data', 'loaded')
                 }
             } else if (req.readyState === 4) {
