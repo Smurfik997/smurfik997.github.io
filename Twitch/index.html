@@ -26,6 +26,7 @@
                 --gray: rgb(245, 245, 245);
                 --darkGray: rgb(120, 120, 120);
                 --white: rgb(255, 255, 255);
+                --blue: rgb(0, 180, 230);
             }
 
             body[font="ready"] {
@@ -276,7 +277,7 @@
                     }
 
                     div[type="messagesElem"] > div:nth-child(2) > div:nth-child(2) {
-                        color: rgb(0, 180, 230);
+                        color: var(--blue);
                     }
 
                 div[type="messagesElem"] > div:nth-child(3) {
@@ -330,7 +331,7 @@
                     }
 
                     div[type="topElem"] > div:nth-child(2) > div:nth-child(2) {
-                        color: rgb(0, 180, 230);
+                        color: var(--blue);
                     }
 
                 div[type="topElem"] > div:nth-child(3) {
@@ -348,13 +349,12 @@
                 margin: calc(10px * var(--heightR)) 4%;
                 border-radius: calc(12px * var(--heightR));
                 background-color: var(--white);
-                line-height: calc(32px * var(--heightR));
-                --num: 1;
-                --fontR: calc(32 / (32 + 1 * (var(--num) - 1)));
-                font-size: calc(24px * var(--fontR) * var(--heightR));
+                line-height: calc(22px * var(--heightR));
+                font-size: calc(17px * var(--heightR));
+                text-align: justify;
                 color: var(--darkGray);
                 box-sizing: border-box;
-                padding: 8px;
+                padding: calc(12px * var(--heightR)) calc(15px * var(--heightR));
             }
 
             div[type="aboutus"][pos="1"]  {
@@ -362,6 +362,8 @@
             }
 
             div[type="aboutus"][pos="2"] {
+                text-align: center;
+                color: var(--blue);
                 width: calc(47.5vw - 320px * var(--heightR) - 6.5%);
                 float: right;
                 margin-top: 0px;
@@ -459,8 +461,16 @@
                 </div>
                 <div>
                     <div type="title">О НАС</div>
-                    <div type="aboutus" pos="1"></div>
-                    <div type="aboutus" pos="2"></div>
+                    <div type="aboutus" pos="1">
+                        Проект был создан выдуманной компанией TeaGroup с благой целью - дать возможность кому-угодно продвинуть свой смайл или хэштег в топ твича.
+                        Мы надеемся, что наш сервис сможет помочь вам познать все прелести славы за символическую плату.
+                        Все наши боты находятся в открытом доступе и вы всегда можете проверить, что этот сайт не фейк.
+                        Все данные размещенные на сайте и сам сайт - интелектуальная собственностю физического лица Тригуб А.П.
+                        Спасибо за внимание.
+                    </div>
+                    <div type="aboutus" pos="2">
+                        Tryhub A.P. - All rights reserved (2019)
+                    </div>
                 </div>
             </div>
             <div id="botsCountMask">
