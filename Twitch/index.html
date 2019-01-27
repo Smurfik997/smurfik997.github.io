@@ -176,7 +176,68 @@
                 #main > div:nth-child(1) {
                     margin-left: 10%;
                     width: 50%;
-                }
+                }   
+
+                    #main > div:nth-child(1) > div[type="ordersHead"] {
+                        background-color: var(--green);
+                        color: var(--white);
+                        font-size: calc(22px * var(--heightR));
+                        height: calc(50px * var(--heightR));
+                        width: 100%;
+                        line-height: calc(50px * var(--heightR));
+                        text-align: center;
+                        padding: 0px calc(95vw * 0.3333 * 0.04);
+                        box-sizing: border-box;
+                        border-radius: calc(30px * var(--heightR)) calc(30px * var(--heightR)) 0px 0px;
+                        margin: 0px;
+                        display: none;
+                    }
+
+                    #main > div:nth-child(1)[data="loaded"] > div[type="ordersHead"] {
+                        display: block;
+                    }
+
+                        #main > div:nth-child(1) > div[type="ordersHead"] > div:nth-child(4) {
+                            color: var(--white);
+                        }
+
+                    #main > div:nth-child(1) > div[type="ordersList"] {
+                        width: calc(100% - 95vw * 0.3333 * 0.04);
+                        margin: 10px calc(95vw * 0.3333 * 0.04);
+                        display: none;
+                    }
+
+                    #main > div:nth-child(1)[data="loaded"] > div[type="ordersList"] {
+                        display: block;
+                    }
+
+                        div[elem="order"] {
+                            width: calc(100% - 95vw * 0.3333 * 0.04);
+                            height: calc(50px * var(--heightR));
+                            font-size: calc(22px * var(--heightR));
+                            line-height: calc(50px * var(--heightR));
+                            border-radius: calc(12px * var(--heightR));
+                            background-color: var(--white);
+                            color: var(--darkGray);
+                            margin: calc(10px * var(--heightR)) 0px;
+                        }
+
+                        div[elem="order"] > div {
+                            float: left;
+                            width: calc(33.3% - 20px * var(--heightR));
+                        }
+
+                        div[elem="order"] > div:nth-child(1) {
+                            width: calc(60px * var(--heightR));
+                        }
+
+                        div[elem="order"] > div:nth-child(3) > span {
+                            color: var(--blue);
+                        }
+
+                        div[elem="order"] > div:nth-child(4) {
+                            color: var(--green);
+                        }
 
                     #main > div:nth-child(1) > div[type="info"] {
                         position: relative;
@@ -186,6 +247,11 @@
                         color: var(--darkGray);
                         font-size: calc(22px * var(--heightR));
                         line-height: calc(30px * var(--heightR));
+                        display: block;
+                    }
+
+                    #main > div:nth-child(1)[data="loaded"] > div[type="info"] {
+                        display: none;
                     }
 
                 #main > div:nth-child(2) {
@@ -481,6 +547,14 @@
         </div>
         <div id="main">
             <div>
+                <div type="ordersHead" elem="order">
+                    <div>#</div>
+                    <div>ДАТА</div>
+                    <div>СОДЕРЖИМОЕ</div>
+                    <div>СТАТУС</div>
+                </div>
+                <div type="ordersList">
+                </div>
                 <div type="info">В данный момент активных заказов нету</div>
             </div>
             <div>
@@ -489,6 +563,46 @@
         </div>
     </body>
     <script>
+        /*get orders */
+        let getOrders = document.createElement('script')
+        getOrders.src = 'http://twitch-spam.herokuapp.com/api.getOrders?callback=inputOrders'
+        document.body.appendChild(getOrders)
+        
+        const inputOrders = (orders) => {
+            const word = [
+                [ 
+                    'Хэштег',
+                    'Смайлик'
+                ],
+                [
+                    'января',
+                    'февраля',
+                    'марта',
+                    'апреля',
+                    'мая',
+                    'июня',
+                    'июля',
+                    'августа',
+                    'сентября',
+                    'октября',
+                    'декабря'
+                ]
+            ]
+
+            const orders = JSON.parse(getOrders.responseText)
+
+            for (let i = 0, len = orders.length; i < len; i++) {
+                const date = orders[i].date.split('.')
+                let order = document.createElement('div')
+                order.setAttribute('elem', 'order')
+                order.innerHTML = `<div>${orders[i].offerNumber}</div><div>${date[0]} ${word[1][parseInt(date[1])]} ${parseInt(date[2]) + 1900}</div><div>${word[0][parseInt(orders[i].type)]} <span>${orders[i].caption}</span></div><div>${orders[i].completedCount}/${orders[i].totalCount}</div>`
+                document.querySelector('div[type="ordersList"]').appendChild(order)
+            }
+
+            if (orders.length > 0) document.querySelectorAll('#main div')[0].setAttribute('data', 'loaded')
+        }
+
+        /* get stats */
         let req = new XMLHttpRequest()
 
         req.onreadystatechange = () => {
@@ -522,6 +636,7 @@
                         'Душа их компании',
                         'Невероятный рємбо',
                         'Скромный робот',
+                        'Пушистый котэбот',
                         'Сладкий ботик'
                     ]
                 ]
@@ -583,7 +698,7 @@
             } else if (req.readyState === 4) {
                 console.log('Trying again...')
                 req.open('GET', 'https://api.streamelements.com/kappa/v2/chatstats/teagroup/stats')
-                setTimeout(req.send(), 1000)
+                setTimeout(() => {getOrders.send()}, 1000)
             }
         }
 
