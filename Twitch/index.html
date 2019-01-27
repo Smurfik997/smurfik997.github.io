@@ -24,6 +24,7 @@
                 --red: rgb(255, 100, 120);
                 --redHover: rgb(250, 85, 110) /* rgb(250, 80, 110) */;
                 --gray: rgb(245, 245, 245);
+                --midGray: rgb(150, 150, 150);
                 --darkGray: rgb(120, 120, 120);
                 --white: rgb(255, 255, 255);
                 --blue: rgb(0, 180, 230);
@@ -31,6 +32,18 @@
 
             body[font="ready"] {
                 opacity: 1;
+            }
+
+            ::-webkit-scrollbar {
+                width: calc(7px * var(--heightR));
+            }
+            
+            ::-webkit-scrollbar-thumb {
+                background-color: var(--midGray);
+            }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background-color: var(--darkGray);
             }
 
             /********************************/
@@ -202,8 +215,11 @@
                         }
 
                     #main > div:nth-child(1) > div[type="ordersList"] {
-                        width: calc(100% - 95vw * 0.3333 * 0.04);
-                        margin: 10px calc(95vw * 0.3333 * 0.04);
+                        width: 100%;
+                        height: calc(100% - 60px * var(--heightR));
+                        padding: 0px calc(95vw * 0.3333 * 0.04) 10px calc(95vw * 0.3333 * 0.04);
+                        box-sizing: border-box;
+                        overflow: overlay;
                         display: none;
                     }
 
@@ -212,7 +228,7 @@
                     }
 
                         div[elem="order"] {
-                            width: calc(100% - 95vw * 0.3333 * 0.04);
+                            width: 100%;
                             height: calc(50px * var(--heightR));
                             font-size: calc(22px * var(--heightR));
                             line-height: calc(50px * var(--heightR));
@@ -565,7 +581,7 @@
     <script>
         /*get orders */
         let getOrders = document.createElement('script')
-        getOrders.src = '//twitch-spam.herokuapp.com/api.getOrders?callback=inputOrders'
+        getOrders.src = `${document.location.origin == 'file://'? 'http:' : ''}//twitch-spam.herokuapp.com/api.getOffers?callback=inputOrders`
         document.body.appendChild(getOrders)
         
         const inputOrders = (orders) => {
@@ -588,8 +604,6 @@
                     'декабря'
                 ]
             ]
-
-            const orders = JSON.parse(getOrders.responseText)
 
             for (let i = 0, len = orders.length; i < len; i++) {
                 const date = orders[i].date.split('.')
