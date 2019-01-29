@@ -191,6 +191,15 @@
                     width: 50%;
                 }   
 
+                    #main > div:nth-child(1) > div[type="ordersHead"][elem="bottom"] {
+                        border-radius: 0px 0px calc(30px * var(--heightR)) calc(30px * var(--heightR));
+                        transition: background-color .5s;
+                    }
+
+                    #main > div:nth-child(1) > div[type="ordersHead"][elem="bottom"]:hover {
+                        background-color: var(--greenHover);
+                    }
+
                     #main > div:nth-child(1) > div[type="ordersHead"] {
                         background-color: var(--green);
                         color: var(--white);
@@ -216,7 +225,7 @@
 
                     #main > div:nth-child(1) > div[type="ordersList"] {
                         width: 100%;
-                        height: calc(100% - 50px * var(--heightR));
+                        height: calc(100% - 100px * var(--heightR));
                         padding: 0px calc(95vw * 0.3333 * 0.04);
                         box-sizing: border-box;
                         overflow: overlay;
@@ -331,7 +340,7 @@
                     margin: calc(8px * var(--heightR)) calc(11px * var(--heightR));
                     height: calc(32px * var(--heightR));
                     opacity: 0;
-                    transition: opacity .7s;
+                    transition: opacity .5s;
                 }
 
                 div[type="messagesElem"][data="loaded"] > div {
@@ -386,7 +395,7 @@
                     margin: calc(10px * var(--heightR)) calc(15px * var(--heightR));
                     height: calc(40px * var(--heightR));
                     opacity: 0;
-                    transition: opacity .7s;
+                    transition: opacity .5s;
                 }
 
                 div[type="topElem"][data="loaded"] > div {
@@ -571,6 +580,7 @@
                 </div>
                 <div type="ordersList">
                 </div>
+                <div type="ordersHead" elem="bottom" onclick="window.open('https://stats.streamelements.com/c/teagroup', '_blank');">ПОСМОТРЕТЬ СТАТИСТИКУ</div>
                 <div type="info">В данный момент активных заказов нету</div>
             </div>
             <div>
