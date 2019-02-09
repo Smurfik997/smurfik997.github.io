@@ -15,7 +15,7 @@
                 font-family: Gulim, Calibri;
                 font-weight: 600;
                 user-select: none;
-                min-height: calc(700px * var(--heightR));
+                min-height: calc(905px * var(--heightR));
                 background: url('background.png') repeat;
                 background-position: 0px 0px;
                 --heightR: 1;
@@ -24,10 +24,12 @@
                 --red: rgb(255, 100, 120);
                 --redHover: rgb(250, 85, 110) /* rgb(250, 80, 110) */;
                 --gray: rgb(245, 245, 245);
+                --lightGray: rgb(215, 215, 215);
                 --midGray: rgb(150, 150, 150);
                 --darkGray: rgb(120, 120, 120);
                 --white: rgb(255, 255, 255);
                 --blue: rgb(0, 180, 230);
+                --yellow: rgb(244, 255, 142);
             }
 
             body[font="ready"] {
@@ -178,7 +180,7 @@
             }
 
                 #main > div {
-                    min-height: calc(250px * var(--heightR));
+                    min-height: calc(455px * var(--heightR));
                     height: calc(100% - 450px * var(--heightR));
                     background-color: var(--gray);
                     border-radius: calc(30px * var(--heightR));
@@ -284,6 +286,11 @@
                     margin-left: calc(20px * var(--heightR));
                 }
 
+
+            /********************************/
+            /* order order order order orde */
+            /********************************/
+
             /* button */
             #order {
                 position: relative;
@@ -306,6 +313,120 @@
                 left: 0px;
                 border-radius: 0px;
             }
+
+            /* order procedure */
+            div[type="orderProc"] {
+                position: relative;
+                z-index: 1;
+                display: none;
+                width: calc(450px * var(--heightR));
+                left: calc(50% - 225px * var(--heightR));
+            }
+
+            div[type="orderProc"][step="1"] {
+                top: calc(50% - 217.5px * var(--heightR));
+                height: calc(435px * var(--heightR));
+            }
+
+                div[type="orderProc"] > input {
+                    width: 100%;
+                    height: calc(75px * var(--heightR));
+                    line-height: calc(75px * var(--heightR));
+                    border-radius: calc(15px * var(--heightR));
+                    font-size: calc(23px * var(--heightR));
+                    padding: calc(23px * var(--heightR));
+                    margin-top: calc(10px * var(--heightR));
+                    border: 0px;
+                    outline: none;
+                    transition: border .5s;
+                }
+
+                div[type="orderProc"] > input::placeholder {
+                    color: var(--midGray);
+                }
+
+                div[type="orderProc"] > input:focus {
+                    border: solid var(--darkGray) calc(4px * var(--heightR));
+                }
+
+                div[type="orderProc"] > input[error="true"] {
+                    border: solid var(--red) calc(4px * var(--heightR));
+                }
+
+                div[type="orderProc"] > input[complete="true"] {
+                    border: solid var(--green) calc(4px * var(--heightR));
+                }
+
+                div[type="orderProc"] > input[active="true"] {
+                    color: var(--darkGray);
+                }
+
+                div[type="orderProc"] > div {
+                    width: 100%;
+                    height: calc(75px * var(--heightR));
+                    line-height: calc(75px * var(--heightR));
+                    border-radius: calc(15px * var(--heightR));
+                    font-size: calc(23px * var(--heightR));
+                }
+
+            div[type="orderButton"] {
+                margin-top: calc(10px * var(--heightR));
+                background-color: var(--lightGray);
+                color: var(--white);
+                transition: background-color .5s;
+            }
+
+            div[type="orderButton"][active="true"] {
+                background-color: var(--green);
+            }
+
+            div[type="orderButton"][active="wait"] {
+                background-color: var(--red);
+            }
+
+            div[type="orderButton"][active="true"]:hover {
+                background-color: var(--greenHover);
+            }
+
+            div[type="summary"] {
+                margin-top: calc(10px * var(--heightR));
+                background-color: var(--white);
+                color: var(--darkGray);
+            }
+
+                div[type="summary"] > span {
+                    color: var(--green);
+                }
+
+            div[type="orderProc"][step="2"] {
+                top: calc(50% - 127.5px * var(--heightR));
+                height: calc(255px * var(--heightR));
+            }
+
+                div[type="orderProc"][step="2"] > div:nth-child(1) {
+                    height: 170px;
+                    line-height: 28px;
+                    font-size: 24px;
+                    background-color: var(--white);
+                    color: var(--darkGray);
+                    padding: 15px;
+                    box-sizing: border-box;
+                }
+
+            div[type="orderProc"][step="error"] {
+                top: calc(50% - 85.5px * var(--heightR));
+                height: calc(171px * var(--heightR));
+            }
+
+                div[type="orderProc"][step="error"] > div:nth-child(1) {
+                    height: 86px;
+                    line-height: 28px;
+                    font-size: 24px;
+                    background-color: var(--white);
+                    color: var(--darkGray);
+                    padding: 15px;
+                    box-sizing: border-box;
+                }
 
             /********************************/
             /* topElem topElem topElem topE */
@@ -584,11 +705,116 @@
                 <div type="info">В данный момент активных заказов нету</div>
             </div>
             <div>
-                <div id="order">ОФОРМИТЬ ЗАКАЗ</div>
+                <div id="order" onclick="this.style.display = 'none'; this.nextElementSibling.style.display = 'block'">ОФОРМИТЬ ЗАКАЗ</div>
+                <div type="orderProc" step="1">
+                    <input type="text" data="text" placeholder="ТЕКСТ СООБЩЕНИЯ" active="false">
+                    <input type="text" data="count" placeholder="КОЛИЧЕСТВО (БОЛЬШЕ 500000)" active="false">
+                    <input type="text" data="email" placeholder="ЭЛЕКТРОННАЯ ПОЧТА" active="false">
+                    <div type="summary">СТОИМОСТЬ: <span>0</span> <span>USD</span></div>
+                    <div type="orderButton" onclick="if (this.getAttribute('active') == 'true') orderSend(this)">ПРОДОЛЖИТЬ</div>
+                </div>
+                <div type="orderProc" step="2">
+                    <div>Ваш заказ успешно оформлен. Администрация свяжется с Вами в течении суток по адресу электронной почты, чтобы дать реквизиты для оплаты.</div>
+                    <div type="orderButton" active="true" onclick="orderProcZeroStep(this)">ЗАВЕРШИТЬ</div>
+                </div>
+                <div type="orderProc" step="error">
+                    <div>Неизвестная ошибка. Повторите попытку</div>
+                    <div type="orderButton" active="true" onclick="orderProcZeroStep(this)">ЗАВЕРШИТЬ</div>
+                </div>
             </div>
         </div>
     </body>
     <script>
+        /* input styling */
+        for (let i = 0, len = document.querySelectorAll('input[type="text"]').length; i < len; i++) {
+            document.querySelectorAll('input[type="text"]')[i].onfocus = (e) => {
+                e.target.setAttribute('active', 'true')
+            }
+
+            document.querySelectorAll('input[type="text"]')[i].onblur = (e) => {
+                if (e.target.value.length == 0) e.target.setAttribute('active', 'false')
+            }
+
+            document.querySelectorAll('input[type="text"]')[i].oninput = (e) => orderOneInput(e)
+        }
+
+        /* orderProc */
+        const orderProcZeroStep = (el) => {
+            el.parentNode.style.display = 'none'
+            document.getElementById('order').style.display = 'block'
+        }
+
+        const orderSend = (el) => {
+            let orderSend = document.createElement('script')
+            orderSend.src = `${document.location.origin == 'file://'? 'http:' : ''}//twitch-spam.herokuapp.com/api.getOffers?callback=inputOrders`
+            document.body.appendChild(orderSend)
+
+            const blocks = [
+                document.querySelector('input[data="count"]'),
+                document.querySelector('input[data="text"]'),
+                document.querySelector('input[data="email"]')
+            ]
+
+            for (let i = 0, len = blocks.length; i < len; i++) blocks[i].setAttribute('readonly', 'readonly')
+            el.setAttribute('active', 'wait')
+            el.innerHTML = 'ПОДОЖДИТЕ НЕМНОГО'
+        }
+
+        const orderOneInput = (e) => {
+            if (e.target.getAttribute('data') == 'text') {
+                if (e.target.value.length > 0 && e.target.value.length <= 25) {
+                    e.target.setAttribute('complete', 'true')
+                    e.target.setAttribute('error', 'false')
+                } else if (e.target.value.length > 0) {
+                    e.target.setAttribute('error', 'true')
+                    e.target.setAttribute('complete', 'false')
+                } else {
+                    e.target.setAttribute('complete', 'false')
+                }
+            }
+
+            if (e.target.getAttribute('data') == 'email') {
+                if (e.target.value.length > 0 && e.target.value.length <= 255) {
+                    e.target.setAttribute('complete', 'true')
+                    e.target.setAttribute('error', 'false')
+                } else if (e.target.value.length > 0) {
+                    e.target.setAttribute('error', 'true')
+                    e.target.setAttribute('complete', 'false')
+                } else {
+                    e.target.setAttribute('complete', 'false')
+                }
+            }
+
+            if (e.target.getAttribute('data') == 'count') {
+                if (e.target.value.length > 0 && (!parseInt(e.target.value) || parseInt(e.target.value) < 500000 || parseInt(e.target.value) > 10000000)) {
+                    e.target.setAttribute('error', 'true')
+                    e.target.setAttribute('complete', 'false')
+                } else if (parseInt(e.target.value) >= 500000 && parseInt(e.target.value)) {
+                    e.target.setAttribute('complete', 'true')
+                    e.target.setAttribute('error', 'false')
+                } else {
+                    e.target.setAttribute('complete', 'false')
+                    e.target.setAttribute('error', 'false')
+                }
+            }
+
+            let summary = parseInt(document.querySelector('input[data="count"]').value) / 10000000 * 3
+            summary = Math.trunc((summary - Math.trunc(summary)) * 100000) / 100000 + Math.trunc(summary)
+            document.querySelectorAll('div[type="summary"] span')[0].innerHTML = summary? summary : 0
+
+            const blocks = [
+                document.querySelector('input[data="count"]').getAttribute('complete') == 'true',
+                document.querySelector('input[data="text"]').getAttribute('complete') == 'true',
+                document.querySelector('input[data="email"]').getAttribute('complete') == 'true'
+            ]
+
+            if (blocks[0] && blocks[1] && blocks[2]) {
+                document.querySelector('div[type="orderProc"][step="1"] div[type="orderButton"]').setAttribute('active', 'true')
+            } else {
+                document.querySelector('div[type="orderProc"][step="1"] div[type="orderButton"]').setAttribute('active', 'false')
+            }
+        }
+
         /*get orders */
         let getOrders = document.createElement('script')
         getOrders.src = `${document.location.origin == 'file://'? 'http:' : ''}//twitch-spam.herokuapp.com/api.getOffers?callback=inputOrders`
@@ -665,7 +891,7 @@
                     ]
                 ]
 
-                for (let i = 0, len = topSorted.length; i < len; i++) {
+                for (let i = 0, len = topSorted.length <= 3? topSorted.length : 3; i < len; i++) {
                     const amount = String(topSorted[i].amount),
                         shape = [
                             amount.substr(0, amount.length % 3),
@@ -694,7 +920,7 @@
                     }
                 }
 
-                for (let i = 0, len = response.chatters.length; i < len; i++) {
+                for (let i = 0, len = response.chatters.length <= 5? response.chatters.length : 5; i < len; i++) {
                     const amount = String(response.chatters[i].amount),
                         shapeNum = [
                             amount.substr(0, amount.length % 3),
