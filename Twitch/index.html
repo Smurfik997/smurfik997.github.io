@@ -885,7 +885,7 @@
                 }
             }
 
-            if (orders.length > 0) document.querySelectorAll('#main div')[0].setAttribute('data', 'loaded')
+            if (document.querySelector('div[type="ordersList"]').childElementCount > 0) document.querySelectorAll('#main div')[0].setAttribute('data', 'loaded')
         }
 
         /* get stats */
