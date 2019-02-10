@@ -406,12 +406,12 @@
             }
 
                 div[type="orderProc"][step="2"] > div:nth-child(1) {
-                    height: 170px;
-                    line-height: 28px;
-                    font-size: 24px;
+                    height: calc(170px * var(--heightR));
+                    line-height: calc(28px * var(--heightR));
+                    font-size: calc(24px * var(--heightR));
                     background-color: var(--white);
                     color: var(--darkGray);
-                    padding: 15px;
+                    padding: calc(15px * var(--heightR));
                     box-sizing: border-box;
                 }
 
@@ -421,12 +421,12 @@
             }
 
                 div[type="orderProc"][step="error"] > div:nth-child(1) {
-                    height: 86px;
-                    line-height: 28px;
-                    font-size: 24px;
+                    height: calc(86px * var(--heightR));
+                    line-height: calc(28px * var(--heightR));
+                    font-size: calc(24px * var(--heightR));
                     background-color: var(--white);
                     color: var(--darkGray);
-                    padding: 15px;
+                    padding: calc(15px * var(--heightR));
                     box-sizing: border-box;
                 }
 
