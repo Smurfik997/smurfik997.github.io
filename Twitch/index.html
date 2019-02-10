@@ -304,7 +304,15 @@
                 color: var(--white);
                 font-size: calc(30px * var(--heightR));
                 background-color: var(--green);
+                display: none;
+                opacity: 0;
                 transition: background-color .5s, left .5s, border-radius .5s, width .5s, opacity .25s;
+            }
+
+            #order[display="block"] {
+                animation: orderProcDisp .25s linear;
+                display: block;
+                opacity: 1;
             }
 
             #order:hover {
@@ -323,6 +331,21 @@
                 left: calc(50% - 225px * var(--heightR));
                 opacity: 0;
                 transition: opacity .25s;
+            }
+
+            div[type="orderProc"][display="block"] {
+                animation: orderProcDisp .25s linear;
+                display: block;
+                opacity: 1;
+            }
+
+            @keyframes orderProcDisp {
+                0% {
+                    opacity: 0;
+                }
+                100% {
+                    opacity: 1;
+                }
             }
 
             div[type="orderProc"][step="1"] {
@@ -707,7 +730,7 @@
                 <div type="info">В данный момент активных заказов нету</div>
             </div>
             <div>
-                <div id="order" onclick="this.style.opacity = 0; setTimeout(() => {this.style.display = 'none'; this.nextElementSibling.style.display = 'block'; setTimeout(() => {this.nextElementSibling.style.opacity = 1;}, 50);}, 250);">ОФОРМИТЬ ЗАКАЗ</div>
+                <div id="order" display="block" onclick="this.style.opacity = 0; setTimeout(() => {this.setAttribute('display', 'none'); this.style.opacity = ''; this.nextElementSibling.setAttribute('display', 'block')}, 250)">ОФОРМИТЬ ЗАКАЗ</div>
                 <div type="orderProc" step="1">
                     <input type="text" data="text" placeholder="ТЕКСТ СООБЩЕНИЯ" active="false">
                     <input type="text" data="count" placeholder="КОЛИЧЕСТВО (БОЛЬШЕ 500000)" active="false">
@@ -744,9 +767,9 @@
         const orderProcZeroStep = (el) => {
             el.parentNode.style.opacity = 0
             setTimeout(() => {
-                el.parentNode.style.display = 'none'
-                document.getElementById('order').style.display = 'block'
-                setTimeout(() => {document.getElementById('order').style.opacity = 1;}, 50)
+                el.parentNode.setAttribute('display', 'none')
+                el.parentNode.style.opacity = ''
+                document.getElementById('order').setAttribute('display', 'block')
             }, 250)
         }
 
@@ -768,7 +791,8 @@
         const orderCallback = (res) => {
             document.querySelector('div[type="orderProc"][step="1"]').style.opacity = 0
             setTimeout(() => {
-                document.querySelector('div[type="orderProc"][step="1"]').style.display = 'none'
+                document.querySelector('div[type="orderProc"][step="1"]').setAttribute('display', 'none')
+                document.querySelector('div[type="orderProc"][step="1"]').style.opacity = ''
                 const blocks = [
                     document.querySelector('input[data="count"]'),
                     document.querySelector('input[data="text"]'),
@@ -785,11 +809,9 @@
                 document.querySelector('div[type="orderProc"][step="1"] div[type="orderButton"]').innerHTML = 'ПРОДОЛЖИТЬ'
 
                 if (res == 'ok') {
-                    document.querySelector('div[type="orderProc"][step="2"]').style.display = 'block'
-                    setTimeout(() => {document.querySelector('div[type="orderProc"][step="2"]').style.opacity = 1;}, 50)
+                    document.querySelector('div[type="orderProc"][step="2"]').setAttribute('display', 'block')
                 } else {
-                    document.querySelector('div[type="orderProc"][step="error"]').style.display = 'block'
-                    setTimeout(() => {document.querySelector('div[type="orderProc"][step="error"]').style.opacity = 1;}, 50)
+                    document.querySelector('div[type="orderProc"][step="error"]').setAttribute('display', 'block')
                 }
             }, 250)
         }
