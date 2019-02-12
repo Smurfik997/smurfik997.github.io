@@ -780,7 +780,7 @@
                 document.querySelector('input[data="email"]')
             ]
             let orderSend = document.createElement('script')
-            orderSend.src = `${document.location.origin == 'file://'? 'http:' : ''}//twitch-spam.herokuapp.com/api.addOrder?count=${blocks[0].value}&caption=${blocks[1].value}&email=${blocks[2].value}&callback=orderCallback`
+            orderSend.src = `${document.location.origin == 'file://'? 'http:' : ''}//twitch-spam.herokuapp.com/api.addOrder?count=${encodeURIComponent(blocks[0].value)}&caption=${encodeURIComponent(blocks[1].value)}&email=${encodeURIComponent(blocks[2].value)}&callback=orderCallback`
             document.body.appendChild(orderSend)
 
             for (let i = 0, len = blocks.length; i < len; i++) blocks[i].setAttribute('readonly', 'readonly')
