@@ -1,0 +1,257 @@
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>2048</title>
+        <style>
+            body {
+                margin: 0;
+                font-family: Verdana;
+                color: #505050;
+            }
+
+                #main {
+                    position: fixed;
+                    top: 10vh;
+                    left: calc(50% - 40vh);
+                    width: 80vh;
+                    height: 80vh;
+                    background-color: #e6e6e6;
+                    border-radius: 2vh;
+                    box-sizing: border-box;
+                    padding: 2vh;
+                }
+
+                    .num {
+                        position: absolute;
+                        z-index: 2;
+                        width: 17.5vh;
+                        height: 17.5vh;
+                        background-color: #ffffff;
+                        background-image: url('arrow.png');
+                        background-repeat: no-repeat;
+                        background-size: cover;
+                        border-radius: 1.2vh;
+                        line-height: 17.5vh;
+                        text-align: center;
+                        transition: linear .3s top, linear .3s left;
+                    }
+
+                        .num[y="1"] {
+                            top: 2vh;
+                        }
+                        .num[y="2"] {
+                            top: 21.5vh;
+                        }
+                        .num[y="3"] {
+                            top: 41vh;
+                        }
+                        .num[y="4"] {
+                            top: 60.5vh;
+                        }
+
+                        .num[x="1"] {
+                            left: 2vh;
+                        }
+                        .num[x="2"] {
+                            left: 21.5vh;
+                        }
+                        .num[x="3"] {
+                            left: 41vh;
+                        }
+                        .num[x="4"] {
+                            left: 60.5vh;
+                        }
+
+                        .num[id="cursor"] {
+                            z-index: 1000;
+                            background-image: none;
+                            background-color: #61ca66;
+                        }
+
+                        .num[val="1"] {
+                            transform: rotate(-90deg);
+                        }
+                        .num[val="3"] {
+                            transform: rotate(90deg);
+                        }
+                        .num[val="4"] {
+                            transform: rotate(180deg);
+                        }
+
+                        .num[val="-1"] {
+                            background-image: none;
+                        }
+        </style>
+    </head>
+    <body>
+        <div id="main">
+            <div class="num" x="1" y="1"></div>
+            <div class="num" x="2" y="1"></div>
+            <div class="num" x="3" y="1"></div>
+            <div class="num" x="4" y="1"></div>
+
+            <div class="num" x="1" y="2"></div>
+            <div class="num" x="2" y="2"></div>
+            <div class="num" x="3" y="2"></div>
+            <div class="num" x="4" y="2"></div>
+
+            <div class="num" x="1" y="3"></div>
+            <div class="num" x="2" y="3"></div>
+            <div class="num" x="3" y="3"></div>
+            <div class="num" x="4" y="3"></div>
+
+            <div class="num" x="1" y="4"></div>
+            <div class="num" x="2" y="4"></div>
+            <div class="num" x="3" y="4"></div>
+            <div class="num" x="4" y="4"></div>
+
+            <!-- <div id="cursor" class="num" x="4" y="4"></div> -->
+        </div>
+    </body>
+    <script>
+        let movesCount = 0
+
+        window.addEventListener('keydown', (e) => {
+            let cursor = document.querySelector('#cursor'),
+                x = parseInt(cursor.getAttribute('x')),
+                y = parseInt(cursor.getAttribute('y')),
+                tile = document.querySelector(`[x="${x}"][y="${y}"]`)
+
+            if (movesCount < 24) {
+                if (e.key == 'ArrowUp' && y > 1) cursor.setAttribute('y', y - 1)
+                if (e.key == 'ArrowDown' && y < 4) cursor.setAttribute('y', y + 1)
+                if (e.key == 'ArrowLeft' && x > 1) cursor.setAttribute('x', x - 1)
+                if (e.key == 'ArrowRight' && x < 4) cursor.setAttribute('x', x + 1)
+                
+                if (e.key == 'ArrowUp' && tile.getAttribute('val') == '1') tile.setAttribute('val', '-1')
+                if (e.key == 'ArrowDown' && tile.getAttribute('val') == '3') tile.setAttribute('val', '-1')
+                if (e.key == 'ArrowLeft' && tile.getAttribute('val') == '4') tile.setAttribute('val', '-1')
+                if (e.key == 'ArrowRight' && tile.getAttribute('val') == '2') tile.setAttribute('val', '-1')
+
+                movesCount++
+            }
+        })
+
+        class Arrow {
+            constructor (size) {
+                this.size = size
+            }
+
+            init() {
+                try {
+                    this.matr = Array(this.size).fill().map(() => Array(this.size).fill(0))
+                    for (let x = 0; x < this.size; x++)
+                        for (let y = 0; y < this.size; y++)
+                            this.matr[x][y] = this.genRand(1, 4)
+
+                    return this.matr
+                } catch {
+                    return false
+                }
+            }
+
+            genRand(min, max) {
+                if (!max) {
+                    max = min
+                    min = 0
+                }
+
+                try {
+                    return Math.floor(Math.random() * (max - min + 1) + min)
+                } catch {
+                    return false
+                }
+            }
+        }
+
+        let matr = new Arrow(4)
+        if (matr.init()) {
+            let cursor = document.createElement('div')
+            cursor.className = 'num'
+            cursor.id = 'cursor'
+            const [x, y] = [matr.genRand(1, matr.size), matr.genRand(1, matr.size)]
+            cursor.setAttribute('x', x)
+            cursor.setAttribute('y', y)
+            document.querySelector('#main').appendChild(cursor)
+            matr.matr[x - 1][y - 1] = -1
+
+            for (let x = 0; x < matr.size; x++)
+                for (let y = 0; y < matr.size; y++)
+                    document.querySelector(`[y="${y + 1}"][x="${x + 1}"]`).setAttribute('val', matr.matr[x][y])
+        }
+        /* class G2048 {
+            constructor (size) {
+                this.size = size
+            }
+
+            init() {
+                this.matr = Array(this.size).fill().map(() => Array(this.size).fill(0))
+                this.fillRand()
+                this.fillRand()
+                return true
+            }
+
+            setVal([x, y], val) {
+                try {
+                    this.matr[x][y] = val
+                    return true
+                } catch {
+                    return 'error'
+                }
+            }
+
+            genRand(max) {
+                return Math.floor(Math.random() * max)
+            }
+
+            genNum() { 
+                return Math.random() > 0.1? 2 : 4
+            }
+
+            fillRand() {
+                const empty = this.getEmpty(),
+                    rand = this.genRand(empty.length)
+
+                if (empty.length > 0) {
+                    this.setVal([Math.floor(empty[rand] / this.size), empty[rand] % this.size], this.genNum())
+                    return true
+                } else return 'error'
+            }
+
+            getAll() {
+                return this.matr
+            }
+            
+            getEmpty() {
+                if (this.matr) {
+                    let res = []
+
+                    for (let y = 0; y < this.size; y++)
+                        for (let x = 0; x < this.size; x++)
+                            if (this.matr[x][y] == 0) res.push(x * this.size + y)
+
+                    return res
+                } else return 'error'
+            }
+
+            replace(matr) {
+                this.matr = matr
+                return true
+            }
+        }
+        
+        let matr = new G2048(4)
+        matr.init()
+
+        window.addEventListener('keydown', (e) => {
+            if (key == 'ArrowUp') {
+                let _matr = matr.getAll(),
+                    _size = _matr.length
+
+                for (let x = 0; x < _size; x++)
+                    for (let y = 0; y < _size; y++)
+                        if (_matr[x][y] == 0) 
+            }
+        }) */
+    </script>
+</html>
