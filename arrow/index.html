@@ -33,7 +33,7 @@
                         border-radius: 1.2vh;
                         line-height: 17.5vh;
                         text-align: center;
-                        transition: linear .3s top, linear .3s left;
+                        transition: linear .3s top, linear .3s left, linear .3s background-color;
                     }
 
                         .num[y="1"] {
@@ -65,8 +65,12 @@
                         .num[id="cursor"] {
                             z-index: 1000;
                             background-image: none;
-                            background-color: #61ca66;
+                            background-color: #53c0ef;
                         }
+
+                            .num[id="cursor"][active="false"] {
+                                background-color: #ffffff;
+                            }
 
                         .num[val="1"] {
                             transform: rotate(-90deg);
@@ -104,8 +108,6 @@
             <div class="num" x="2" y="4"></div>
             <div class="num" x="3" y="4"></div>
             <div class="num" x="4" y="4"></div>
-
-            <!-- <div id="cursor" class="num" x="4" y="4"></div> -->
         </div>
     </body>
     <script>
@@ -129,6 +131,8 @@
                 if (e.key == 'ArrowRight' && tile.getAttribute('val') == '2') tile.setAttribute('val', '-1')
 
                 movesCount++
+            } else {
+                cursor.setAttribute('active', 'false')
             }
         })
 
@@ -179,79 +183,5 @@
                 for (let y = 0; y < matr.size; y++)
                     document.querySelector(`[y="${y + 1}"][x="${x + 1}"]`).setAttribute('val', matr.matr[x][y])
         }
-        /* class G2048 {
-            constructor (size) {
-                this.size = size
-            }
-
-            init() {
-                this.matr = Array(this.size).fill().map(() => Array(this.size).fill(0))
-                this.fillRand()
-                this.fillRand()
-                return true
-            }
-
-            setVal([x, y], val) {
-                try {
-                    this.matr[x][y] = val
-                    return true
-                } catch {
-                    return 'error'
-                }
-            }
-
-            genRand(max) {
-                return Math.floor(Math.random() * max)
-            }
-
-            genNum() { 
-                return Math.random() > 0.1? 2 : 4
-            }
-
-            fillRand() {
-                const empty = this.getEmpty(),
-                    rand = this.genRand(empty.length)
-
-                if (empty.length > 0) {
-                    this.setVal([Math.floor(empty[rand] / this.size), empty[rand] % this.size], this.genNum())
-                    return true
-                } else return 'error'
-            }
-
-            getAll() {
-                return this.matr
-            }
-            
-            getEmpty() {
-                if (this.matr) {
-                    let res = []
-
-                    for (let y = 0; y < this.size; y++)
-                        for (let x = 0; x < this.size; x++)
-                            if (this.matr[x][y] == 0) res.push(x * this.size + y)
-
-                    return res
-                } else return 'error'
-            }
-
-            replace(matr) {
-                this.matr = matr
-                return true
-            }
-        }
-        
-        let matr = new G2048(4)
-        matr.init()
-
-        window.addEventListener('keydown', (e) => {
-            if (key == 'ArrowUp') {
-                let _matr = matr.getAll(),
-                    _size = _matr.length
-
-                for (let x = 0; x < _size; x++)
-                    for (let y = 0; y < _size; y++)
-                        if (_matr[x][y] == 0) 
-            }
-        }) */
     </script>
 </html>
