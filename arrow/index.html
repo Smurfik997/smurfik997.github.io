@@ -1,7 +1,15 @@
 <html>
     <head>
         <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0"/>
+        <!-- <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0"/> -->
+        <script>
+            if (window.innerHeight > window.innerWidth) {
+                let meta = document.createElement('meta')
+                meta.name = 'viewport'
+                content = 'height=device-width'
+                document.head.appendChild(meta)
+            }
+        </script>
         <title>2048</title>
         <style>
             body {
@@ -198,10 +206,10 @@
                 _y = e.changedTouches[0].pageY,
                 event
 
-            if (x > _x && 0.95 < y/_y && y/_y < 1.05) event = new CustomEvent('keydown', {detail: {'key': 'ArrowLeft'}})
-            else if (x < _x && 0.95 < y/_y && y/_y < 1.05) event = new CustomEvent('keydown', {detail: {'key': 'ArrowRight'}})
-            else if (y > _y && 0.95 < x/_x && x/_x < 1.05) event = new CustomEvent('keydown', {detail: {'key': 'ArrowUp'}})
-            else if (y < _y && 0.95 < x/_x && x/_x < 1.05) event = new CustomEvent('keydown', {detail: {'key': 'ArrowDown'}})
+            if (x > _x && 0.8 < y/_y && y/_y < 1.2) event = new CustomEvent('keydown', {detail: {'key': 'ArrowLeft'}})
+            else if (x < _x && 0.8 < y/_y && y/_y < 1.2) event = new CustomEvent('keydown', {detail: {'key': 'ArrowRight'}})
+            else if (y > _y && 0.8 < x/_x && x/_x < 1.2) event = new CustomEvent('keydown', {detail: {'key': 'ArrowUp'}})
+            else if (y < _y && 0.8 < x/_x && x/_x < 1.2) event = new CustomEvent('keydown', {detail: {'key': 'ArrowDown'}})
             
             if (event) window.dispatchEvent(event)
         })
