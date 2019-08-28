@@ -190,12 +190,12 @@
 
         let x, y
         document.querySelector('#main').addEventListener('touchstart', (e) => {
-            x = e.screenX
-            y = e.screenY
+            x = e.changedTouches[0].pageX
+            y = e.changedTouches[0].pageY
         })
         document.querySelector('#main').addEventListener('touchend', (e) => {
-            let _x = e.screenX,
-                _y = e.screenY,
+            let _x = e.changedTouches[0].pageX,
+                _y = e.changedTouches[0].pageY,
                 event
 
             if (x > _x && 0.95 < y/_y && y/_y < 1.05) event = new CustomEvent('keydown', {detail: {'key': 'ArrowLeft'}})
