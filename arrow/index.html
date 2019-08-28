@@ -2,20 +2,13 @@
     <head>
         <meta charset="utf-8"/>
         <!-- <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0"/> -->
-        <script>
-            if (window.innerHeight > window.innerWidth) {
-                let meta = document.createElement('meta')
-                meta.name = 'viewport'
-                meta.content = 'height=device-width, initial-scale=1.0'
-                document.head.appendChild(meta)
-            }
-        </script>
         <title>2048</title>
         <style>
             body {
                 margin: 0;
                 font-family: Verdana;
                 color: #505050;
+                overflow: hidden;
             }
 
                 #main {
@@ -29,6 +22,15 @@
                     box-sizing: border-box;
                     padding: 2vh;
                     user-select: none;
+                }
+
+                body[mobile="true"] #main {
+                    top: calc(50% - 40vw);
+                    left: 10vw;
+                    width: 80vw;
+                    height: 80vw;
+                    border-radius: 2vw;
+                    padding: 2vw;
                 }
 
                     .num {
@@ -46,6 +48,13 @@
                         transition: linear .3s top, linear .3s left, linear .3s background-color;
                     }
 
+                        body[mobile="true"] .num {
+                            width: 17.5vw;
+                            height: 17.5vw;
+                            border-radius: 1.2vw;
+                            line-height: 17.5vw;
+                        }
+
                         .num[y="1"] {
                             top: 2vh;
                         }
@@ -59,6 +68,19 @@
                             top: 60.5vh;
                         }
 
+                        body[mobile="true"] .num[y="1"] {
+                            top: 2vw;
+                        }
+                        body[mobile="true"] .num[y="2"] {
+                            top: 21.5vw;
+                        }
+                        body[mobile="true"] .num[y="3"] {
+                            top: 41vw;
+                        }
+                        body[mobile="true"] .num[y="4"] {
+                            top: 60.5vw;
+                        }
+
                         .num[x="1"] {
                             left: 2vh;
                         }
@@ -70,6 +92,19 @@
                         }
                         .num[x="4"] {
                             left: 60.5vh;
+                        }
+
+                        body[mobile="true"] .num[x="1"] {
+                            left: 2vw;
+                        }
+                        body[mobile="true"] .num[x="2"] {
+                            left: 21.5vw;
+                        }
+                        body[mobile="true"] .num[x="3"] {
+                            left: 41vw;
+                        }
+                        body[mobile="true"] .num[x="4"] {
+                            left: 60.5vw;
                         }
 
                         .num[id="cursor"] {
@@ -121,6 +156,10 @@
         </div>
     </body>
     <script>
+        if (window.innerHeight > window.innerWidth) {
+            document.body.setAttribute('mobile', 'true')
+        }
+
         let movesCount = 0
 
         window.addEventListener('keydown', (e) => {
