@@ -1,6 +1,7 @@
 <html>
     <head>
         <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0"/>
         <title>2048</title>
         <style>
             body {
@@ -19,6 +20,7 @@
                     border-radius: 2vh;
                     box-sizing: border-box;
                     padding: 2vh;
+                    user-select: none;
                 }
 
                     .num {
@@ -119,6 +121,8 @@
                 y = parseInt(cursor.getAttribute('y')),
                 tile = document.querySelector(`[x="${x}"][y="${y}"]`)
 
+            if (e.detail.key) e.key = e.detail.key
+
             if (movesCount < 24) {
                 if (e.key == 'ArrowUp' && y > 1) cursor.setAttribute('y', y - 1)
                 if (e.key == 'ArrowDown' && y < 4) cursor.setAttribute('y', y + 1)
@@ -183,5 +187,23 @@
                 for (let y = 0; y < matr.size; y++)
                     document.querySelector(`[y="${y + 1}"][x="${x + 1}"]`).setAttribute('val', matr.matr[x][y])
         }
+
+        let x, y
+        document.querySelector('#main').addEventListener('touchstart', (e) => {
+            x = e.screenX
+            y = e.screenY
+        })
+        document.querySelector('#main').addEventListener('touchend', (e) => {
+            let _x = e.screenX,
+                _y = e.screenY,
+                event
+
+            if (x > _x && 0.95 < y/_y && y/_y < 1.05) event = new CustomEvent('keydown', {detail: {'key': 'ArrowLeft'}})
+            else if (x < _x && 0.95 < y/_y && y/_y < 1.05) event = new CustomEvent('keydown', {detail: {'key': 'ArrowRight'}})
+            else if (y > _y && 0.95 < x/_x && x/_x < 1.05) event = new CustomEvent('keydown', {detail: {'key': 'ArrowUp'}})
+            else if (y < _y && 0.95 < x/_x && x/_x < 1.05) event = new CustomEvent('keydown', {detail: {'key': 'ArrowDown'}})
+            
+            if (event) window.dispatchEvent(event)
+        })
     </script>
 </html>
