@@ -1,0 +1,16 @@
+@font-face {
+    font-family: Comfortaa;
+    src: url("Comfortaa.ttf");
+}
+
+body, header, main, footer, span, p, button, input,
+div, ul, ol, li, img, figure, figcaption, a, table, caption,
+thead, tbody, td, th, em, tr, h1, h2, h3, h4 {
+    margin: 0 auto;
+    padding: 0;
+
+    text-align: left;
+    text-decoration: none;
+
+    font-family: Comfortaa, sans-serif;
+}
