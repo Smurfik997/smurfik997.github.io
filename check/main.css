@@ -18,11 +18,12 @@ section {
     position: absolute;
     width: 100%;
     height: 100%;
-    transition: linear .4s top;
+    transition: linear .4s top, linear .15s opacity;
 }
 
 section[main] {
     top: 0;
+    opacity: 1;
 }
 
 section[login] {
@@ -31,6 +32,7 @@ section[login] {
 
 body[login] section[main] {
     top: -100%;
+    opacity: 0;
 }
 
 body[login] section[login] {
@@ -85,7 +87,7 @@ main {
     transform: translateY(-50%);
 }
 
-main > button, main input[type="text"] {
+main > button, form[login] input[type="text"] {
     width: 310px;
     height: 76px;
 
@@ -102,7 +104,7 @@ main > button, main input[type="text"] {
     border-radius: 0;
 }
 
-main input[type="text"] {
+form[login] input[type="text"] {
     width: 270px;
     height: 32px;
     padding: 6px 0;
@@ -110,29 +112,41 @@ main input[type="text"] {
     border-bottom: 2px solid var(--main-color);
 }
 
-main input[type="text"]:not(:invalid) {
-    padding-right: 26px;
-    width: 284px;
+form[login] input[type="text"]:not(:invalid) {
+    padding: 6px 30px;
+    width: 250px;
 }
 
 /* main input[type="text"]:focus {
     width: 310px;
 } */
 
-main input[type="text"]::placeholder {
+form[login] input[type="text"]::placeholder {
     color: var(--main-color);
     opacity: .5;
     transition: inherit;
 }
 
-main input[type="text"]:focus::placeholder {
+form[login] input[type="text"]:focus::placeholder {
     opacity: 0;
 }
 
-main input[type="submit"] {
+form[login] label[for="submit"] {
     position: absolute;
-    margin-top: 8px;
-    margin-left: -15px;
+    display: inline-block;
+
+    width: 30px;
+    height: 44px;
+    font-size: 0;
+    margin-left: -30px;
+
+    transition: linear .2s opacity;
+    visibility: hidden;
+    opacity: 0;
+}
+
+form[login] input[type="submit"] {
+    margin: 8px 16px;
 
     width: 20px;
     height: 20px;
@@ -148,13 +162,9 @@ main input[type="submit"] {
     border-radius: 0;
     border-top: 2px solid var(--main-color);
     border-right: 2px solid var(--main-color);
-
-    transition: linear .2s opacity;
-    visibility: hidden;
-    opacity: 0;
 }
 
-main input[type="text"]:not(:invalid) + input[type="submit"] {
+form[login] input[type="text"]:not(:invalid) + label[for="submit"] {
     visibility: visible;
     opacity: 1;
 }
