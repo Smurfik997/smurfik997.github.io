@@ -8,33 +8,33 @@
         <title lang="en">Cashier's Check</title>
     </head>
     <body>
-        <section main>
+        <section data-main>
             <header>
                 <h1 lang="en">Cashier's Check</h1>
                 <p>...створений з натхненням <br/> для  простих цілей</p>
             </header>
             <main>
-                <button onclick="document.body.setAttribute('login', '')">увійти</button>
+                <button onclick="document.body.setAttribute('data-login', '')">увійти</button>
             </main>
             <footer>
-                <div arrow></div>
+                <div data-arrow></div>
             </footer>
         </section>
-        <section login>
+        <section data-login>
             <header>
-                <h1 visible>Авторизація</h1>
+                <h1 data-visible>Авторизація</h1>
             </header>
             <main>
-                <form login>
+                <form data-login>
                     <label for="invite-code">Код-запрошення</label><!--
                     --><input type="text" id="invite-code" name="invite-code" placeholder="код-запрошення" maxlength="10" required>
                     <label for="submit">
                         Submit
-                        <input type="submit" value="Увійти">
+                        <input id="submit" type="submit" value="Увійти">
                     </label>
                 </form>
             </main>
         </section>
+        <script src="main.js"></script>
     </body>
-    <script src="main.js"></script>
 </html>

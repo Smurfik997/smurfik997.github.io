@@ -13,6 +13,12 @@ body {
     font-size: 32px;
 }
 
+@media (max-width: 350px) {
+    body {
+        font-size: 28px;
+    }
+}
+
 @keyframes overflow-anim {
     0% {
         overflow: hidden;
@@ -22,7 +28,7 @@ body {
     }
 }
 
-body[login] {
+body[data-login] {
     animation: linear .4s overflow-anim;
 }
 
@@ -33,17 +39,17 @@ section {
     transition: linear .4s top, linear .25s opacity;
 }
 
-section[main] {
+section[data-main] {
     top: 0;
     opacity: 1;
 }
 
-section[login] {
+section[data-login] {
     display: none;
     top: 100%;
 }
 
-body[login] section[main] {
+body[data-login] section[data-main] {
     top: -100%;
     opacity: 0;
 }
@@ -57,7 +63,7 @@ body[login] section[main] {
     }
 }
 
-body[login] section[login] {
+body[data-login] section[data-login] {
     display: block;
     animation: .4s linear login-display forwards;
 }
@@ -78,7 +84,7 @@ label {
 } */
 
 header {
-    padding: 25px;
+    padding: 32px;
 }
 
 header > p {
@@ -92,7 +98,7 @@ header > h1 {
     font-size: 0;
 }
 
-header > h1[visible] {
+header > h1[data-visible] {
     font-size: 100%;
     text-align: center;
 }
@@ -109,9 +115,11 @@ main {
     transform: translateY(-50%);
 }
 
-main > button, form[login] input[type="text"] {
+main button, form[data-login] input[type="text"] {
     width: 310px;
+    max-width: 85%;
     height: 76px;
+    margin: 6px 0;
 
     text-align: center;
     font-size: 75%;
@@ -126,36 +134,40 @@ main > button, form[login] input[type="text"] {
     border-radius: 0;
 }
 
-form[login] input[type="text"] {
+form[data-login] input[type="text"] {
     width: 270px;
-    height: 32px;
+    max-width: 75%;
+    height: 46px;
+    box-sizing: border-box;
     padding: 6px 0;
     border: 0;
     border-bottom: 2px solid var(--main-color);
 }
 
-form[login] input[type="text"]:not(:invalid) {
+form[data-login] input[type="text"]:not(:invalid) {
     padding: 6px 30px;
-    width: 250px;
+    width: 310px;
+    max-width: 85%;
 }
 
-form[login] input[type="text"]::placeholder {
+form[data-login] input[type="text"]::placeholder {
     color: var(--main-color);
     opacity: .5;
     transition: inherit;
 }
 
-form[login] input[type="text"]:focus::placeholder {
+form[data-login] input[type="text"]:focus::placeholder {
     opacity: 0;
 }
 
-form[login] label[for="submit"] {
+form[data-login] label[for="submit"] {
     position: absolute;
     display: inline-block;
 
     width: 30px;
     height: 44px;
     font-size: 0;
+    margin: 6px 0;
     margin-left: -30px;
 
     transition: linear .15s opacity;
@@ -163,7 +175,7 @@ form[login] label[for="submit"] {
     opacity: 0;
 }
 
-form[login] input[type="submit"] {
+form[data-login] input[type="submit"] {
     margin: 8px 16px;
 
     width: 20px;
@@ -182,7 +194,7 @@ form[login] input[type="submit"] {
     border-right: 2px solid var(--main-color);
 }
 
-form[login] input[type="text"]:not(:invalid) + label[for="submit"] {
+form[data-login] input[type="text"]:not(:invalid) + label[for="submit"] {
     visibility: visible;
     opacity: 1;
 }
@@ -207,13 +219,21 @@ footer {
     height: 30px;
 }
 
-footer div[arrow] {
+footer div[data-arrow] {
     margin: 5px auto;
     width: 20px;
     height: 20px;
     transform: rotate(45deg);
     border-top: 2px solid var(--main-color);
     border-left: 2px solid var(--main-color);
+}
+
+footer div[data-circle] {
+    margin: 0 auto;
+    width: 15px;
+    height: 15px;
+    border: 2px solid var(--main-color);
+    border-radius: 15px;
 }
 
 /* footer div::after {
