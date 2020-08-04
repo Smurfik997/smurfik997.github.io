@@ -5,12 +5,12 @@
         <meta content="width=device-width,height=device-height,initial-scale=1.0,minimum-scale=1.0,shrink-to-fit=no" name="viewport">
         <link rel="stylesheet" href="default.css">
         <link rel="stylesheet" href="main.css">
-        <title lang="en">Cashier's Check</title>
+        <title lang="en">Sales Slip</title>
     </head>
     <body>
         <section data-main>
             <header>
-                <h1 lang="en">Cashier's Check</h1>
+                <h1 lang="en">Sales Slip</h1>
                 <p>...створений з натхненням <br/> для  простих цілей</p>
             </header>
             <main>
@@ -25,16 +25,23 @@
                 <h1 data-visible>Авторизація</h1>
             </header>
             <main>
-                <form data-login>
+                <form data-login name="login-form">
                     <label for="invite-code">Код-запрошення</label><!--
                     --><input type="text" id="invite-code" name="invite-code" placeholder="код-запрошення" maxlength="10" required>
                     <label for="submit">
                         Submit
                         <input id="submit" type="submit" value="Увійти">
                     </label>
-                </form>
+                </form><!--
+                --><div role="error-block" id="error-block">
+                    Error
+                </div>
             </main>
         </section>
+        <script>
+            if (document.cookie.search('apikey') != -1)
+                document.location.pathname = '/profile.html'
+        </script>
         <script src="main.js"></script>
     </body>
 </html>
