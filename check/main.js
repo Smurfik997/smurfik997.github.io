@@ -5,11 +5,16 @@ loginCallback = (res) => {
         document.getElementById('error-block').removeAttribute('data-visible')
         document.cookie = 'apikey=' + res.apikey
         document.location.reload()
-    } else
+    } else {
+        document.getElementById('error-block').innerText = res.ERR.uk
         document.getElementById('error-block').setAttribute('data-visible', '')
+    }
 }
 
 apiRequest = (method, params, callback) => {
+    if (document.getElementById('apiRequest'))
+        return false
+
     params = JSON.stringify(params)
     params = params.replace(/:/g, '=')
     params = params.replace(/"/g, '')
@@ -18,9 +23,16 @@ apiRequest = (method, params, callback) => {
     params = params.replace(/}/, '')
 
     let js = document.createElement('script')
+    js.id = 'apiRequest'
     js.src = 'https://sales-slip.herokuapp.com/' + method + '?' + params + '&callback=' + callback
     js.onload = (e) => {
         document.body.removeChild(js)
+    }
+    js.onerror = (e) => {
+        document.body.removeChild(js)
+        document.forms['login-form'].removeAttribute('data-loading')
+        document.getElementById('error-block').innerText = 'Сервер недоступний'
+        document.getElementById('error-block').setAttribute('data-visible', '')
     }
     document.body.appendChild(js)
 }
@@ -37,5 +49,5 @@ if (document.forms['login-form'])
 
 logout = () => {
     document.cookie = 'apikey=; max-age=0'
-    document.location.pathname = ''
+    document.location.href = 'index.html'
 }

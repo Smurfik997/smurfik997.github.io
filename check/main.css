@@ -162,6 +162,7 @@ form[data-login] input[type="text"] {
     padding: 6px 0;
     border: 0;
     border-bottom: 2px solid var(--main-color);
+    transition: linear .4s border-color;
 }
 
 @keyframes login-loading {
@@ -216,6 +217,10 @@ form[data-login] label[for="submit"] {
     transition: linear .15s opacity;
     visibility: hidden;
     opacity: 0;
+}
+
+form[data-login][data-loading] label[for="submit"] {
+    opacity: 0 !important;
 }
 
 form[data-login] input[type="submit"] {
