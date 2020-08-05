@@ -133,6 +133,19 @@ main div[role="error-block"] {
 
 main div[role="error-block"][data-visible] {
     opacity: 1;
+    animation: linear 1.35s .15s error-block-anim forwards;
+}
+
+@keyframes error-block-anim {
+    /* 0% {
+        opacity: 1;
+    } */
+    70% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
 }
 
 main button, form[data-login] input[type="text"] {

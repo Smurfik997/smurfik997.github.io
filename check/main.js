@@ -2,12 +2,13 @@ loginCallback = (res) => {
     document.forms['login-form'].removeAttribute('data-loading')
 
     if (res.apikey) {
-        document.getElementById('error-block').removeAttribute('data-visible')
+        // document.getElementById('error-block').removeAttribute('data-visible')
         document.cookie = 'apikey=' + res.apikey
         document.location.href = 'profile.html'
     } else {
         document.getElementById('error-block').innerText = res.ERR.uk
         document.getElementById('error-block').setAttribute('data-visible', '')
+        setTimeout(() => document.getElementById('error-block').removeAttribute('data-visible'), 1500)
     }
 }
 
@@ -33,6 +34,7 @@ apiRequest = (method, params, callback) => {
         document.forms['login-form'].removeAttribute('data-loading')
         document.getElementById('error-block').innerText = 'Сервер недоступний'
         document.getElementById('error-block').setAttribute('data-visible', '')
+        setTimeout(() => document.getElementById('error-block').removeAttribute('data-visible'), 1500)
     }
     document.body.appendChild(js)
 }
