@@ -4,7 +4,7 @@ loginCallback = (res) => {
     if (res.apikey) {
         document.getElementById('error-block').removeAttribute('data-visible')
         document.cookie = 'apikey=' + res.apikey
-        document.location.reload()
+        document.location.href = 'profile.html'
     } else {
         document.getElementById('error-block').innerText = res.ERR.uk
         document.getElementById('error-block').setAttribute('data-visible', '')

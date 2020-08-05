@@ -162,7 +162,6 @@ form[data-login] input[type="text"] {
     padding: 6px 0;
     border: 0;
     border-bottom: 2px solid var(--main-color);
-    transition: linear .4s border-color;
 }
 
 @keyframes login-loading {
