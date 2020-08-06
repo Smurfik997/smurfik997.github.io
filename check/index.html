@@ -26,8 +26,20 @@
             </header>
             <main>
                 <form data-login name="login-form">
+                    <datalist id="products">
+                        <!-- <option value="Ahahah">shi?</option>
+                        <option value="A Classic Voda Litl 0.5"></option>
+                        <option value="aEdge">
+                        <option value="AFirefox">
+                        <option value="AChrome">
+                        <option value="aOpera">
+                        <option value="aSafari"> -->
+                        <option label="aVolvo" value="0123456789">asdsadsaa dasd asda dsadsd</option>
+                    </datalist>
                     <label for="invite-code">Код-запрошення</label><!--
-                    --><input type="text" id="invite-code" name="invite-code" placeholder="код-запрошення" maxlength="10" required>
+                    --><input type="text" id="invite-code" name="invite-code" 
+                        placeholder="код-запрошення" maxlength="10" list="products"
+                        autocomplete="off" spellcheck="off" required>
                     <label for="submit">
                         Submit
                         <input id="submit" type="submit" value="Увійти">
