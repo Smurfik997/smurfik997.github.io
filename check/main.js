@@ -1,21 +1,29 @@
-loginCallback = (res) => {
-    document.forms['login-form'].removeAttribute('data-loading')
+const doc = document
 
-    if (res.apikey) {
-        // document.getElementById('error-block').removeAttribute('data-visible')
-        document.cookie = 'apikey=' + res.apikey
-        document.location.href = 'profile.html'
-    } else {
-        document.getElementById('error-block').innerText = res.ERR.uk
-        if (document.getElementById('error-block').getAttribute('data-visible') == null) {
-            document.getElementById('error-block').setAttribute('data-visible', '')
-            setTimeout(() => document.getElementById('error-block').removeAttribute('data-visible'), 1000)
-        }
-    }
+getElement = (query, option, element) => {
+    let byId, byTagName, byClassName, byName
+
+    if (!element) element = doc
+
+    if (element == doc && (option == 'byId' || !option) && (byId = element.getElementById(query)))
+        return byId
+
+    if ((option == 'byName' || !option) && (byName = element.getElementsByName(query)) && byName.length > 0)
+        return byName
+
+    if ((option == 'byClassName' || !option) && (byClassName = element.getElementsByClassName(query)) && byClassName.length > 0)
+        return byClassName
+
+    if ((option == 'byTagName' || !option) && (byTagName = element.getElementsByTagName(query)) && byTagName.length > 0)
+        return byTagName
 }
 
-apiRequest = (method, params, callback) => {
-    if (document.getElementById('apiRequest'))
+HTMLElement.prototype.setAttr = HTMLElement.prototype.setAttribute
+HTMLElement.prototype.getAttr = HTMLElement.prototype.getAttribute
+HTMLElement.prototype.rmAttr = HTMLElement.prototype.removeAttribute
+
+const apiRequest = (method, params, callback) => {
+    if (getElement(method, 'byId'))
         return false
 
     params = JSON.stringify(params)
@@ -25,37 +33,23 @@ apiRequest = (method, params, callback) => {
     params = params.replace(/{/, '')
     params = params.replace(/}/, '')
 
-    let js = document.createElement('script')
-    js.id = 'apiRequest'
+    let js = doc.createElement('script')
+    js.id = method
     js.src = 'https://sales-slip.herokuapp.com/' + method + '?' + params + '&callback=' + callback
-    js.onload = (e) => {
-        document.body.removeChild(js)
+    js.onload = () => {
+        doc.body.removeChild(js)
     }
-    js.onerror = (e) => {
-        document.body.removeChild(js)
-        document.forms['login-form'].removeAttribute('data-loading')
-        document.getElementById('error-block').innerText = 'Сервер недоступний'
-        if (document.getElementById('error-block').getAttribute('data-visible') == null) {
-            document.getElementById('error-block').setAttribute('data-visible', '')
-            setTimeout(() => document.getElementById('error-block').removeAttribute('data-visible'), 1000)
-        }
-    }
-    document.body.appendChild(js)
-}
-
-if (document.forms['login-form'])
-    document.forms['login-form'].onsubmit = (e) => {
-        e.preventDefault()
-        
-        document.forms['login-form'].setAttribute('data-loading', '')
-        apiRequest('api/login', {
-            'invite-code': document.forms['login-form']['invite-code'].value
-        }, 'loginCallback')
+    js.onerror = () => {
+        doc.body.removeChild(js)
+        eval(`${callback}({
+            'ERR': {
+                'en': 'Server error',
+                'uk': 'Сервер недоступний'
+            }
+        })`)
     }
 
-logout = () => {
-    document.cookie = 'apikey=; max-age=0'
-    document.location.href = 'index.html'
+    doc.body.appendChild(js)
 }
 
 // datalist = document.createElement('datalist')

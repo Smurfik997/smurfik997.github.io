@@ -13,7 +13,7 @@
         </header>
         <main>
             <button>переглянути</button>
-            <button>додати запис</button>
+            <button onclick="document.location.href = 'create.html'">додати запис</button>
         </main>
         <!-- <footer>
             <div data-circle></div>
@@ -22,5 +22,11 @@
             <button onclick="logout()">Вийти</button>
         </footer>
         <script src="main.js"></script>
+        <script>
+            const logout = () => {
+                doc.cookie = 'apikey=; max-age=0'
+                doc.location.href = 'index.html'
+            }
+        </script>
     </body>
 </html>

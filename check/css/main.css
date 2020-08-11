@@ -19,6 +19,78 @@ body {
     }
 }
 
+body #preloader {
+    display: none !important;
+}
+
+#preloader {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    opacity: 1;
+    height: 100%;
+    width: 100%;
+    background: var(--back-color);
+    display: block;
+    transition: linear .4s;
+    transition-property: color, top, opacity;
+}
+
+#preloader-text {
+    position: absolute;
+    max-width: 85%;
+    text-align: center;
+    top: 54%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 60%;
+    transition: linear .4s top;
+}
+
+#preloader div[data-icon] {
+    position: absolute;
+    left: 50%;
+    top: 46%;
+    width: 1em;
+    height: 1em;
+    border: 4px solid;
+    border-radius: 50%;
+    border-color: var(--main-color) rgb(200, 200, 200) rgb(200, 200, 200);
+    transform: translate(-50%, -50%) rotate(0);
+    animation: ease-in-out 1s rotating infinite;
+    transition: linear .4s opacity;
+}    
+
+#preloader[data-error] div[data-icon],
+#preloader[data-loaded] div[data-icon] {
+    opacity: 0;
+}
+
+#preloader[data-error] #preloader-text,
+#preloader[data-loaded] #preloader-text {
+    top: 50%;
+}   
+
+@keyframes rotating {
+    0% {
+        transform: translate(-50%, -50%) rotate(0)
+    }    
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg)
+    }    
+}    
+
+#preloader[data-loaded] {
+    opacity: 0;
+    top: -100%;
+    color: rgb(50, 180, 140);
+}    
+
+#preloader[data-error] {
+    color: rgb(200, 30, 60);
+}
+
 @keyframes overflow-anim {
     0% {
         overflow: hidden;
@@ -119,7 +191,7 @@ section[data-login] main {
     transform: translateY(-29px);
 }
 
-main div[role="error-block"] {
+main div[role="alert"] {
     width: 100%;
     margin: 6px auto;
 
@@ -131,7 +203,7 @@ main div[role="error-block"] {
     /* transition: linear .15s opacity; */
 }
 
-main div[role="error-block"][data-visible] {
+main div[role="alert"][data-visible] {
     opacity: 1;
     animation: linear 1s error-block-anim forwards;
 }
@@ -151,13 +223,15 @@ main div[role="error-block"][data-visible] {
     }
 }
 
-main button, form[data-login] input[type="text"] {
+main button, form input/*[type="text"]*/, form select {
     width: 310px;
     max-width: 85%;
     height: 76px;
     margin: 6px 0;
 
     text-align: center;
+    text-align-last: center;
+
     font-size: 75%;
     color: inherit;
     user-select: none;
@@ -170,22 +244,37 @@ main button, form[data-login] input[type="text"] {
     border-radius: 2px;
 }
 
+form select, form input[type="number"],
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+    appearance: none;
+}
+
 main button {
     border-radius: 4px; /* experimental */
 }
 
-form[data-login] input[type="text"] {
+main > button:focus {
+    background-color: var(--main-color);
+    color: var(--back-color);
+    border-color: transparent;
+}
+
+
+
+
+
+form input/*[type="text"]*/, form select {
     width: 270px;
     max-width: 75%;
-    height: 46px;
+    height: 40px;
     box-sizing: border-box;
-    padding: 6px 0;
+    padding: 0;
     border: 0;
     border-bottom: 2px solid var(--main-color);
 }
 
-form[data-login] input[type="text"]::-webkit-calendar-picker-indicator, 
-form[data-login] input[type="text"]::-webkit-list-button {
+form input/*[type="text"]*/::-webkit-calendar-picker-indicator, 
+form input/*[type="text"]*/::-webkit-list-button {
     display: none !important;
     opacity: 0  !important;
     width: 0 !important;
@@ -216,18 +305,18 @@ form[data-login][data-loading] input[type="text"] {
 } */
 
 form[data-login] input[type="text"]:not(:invalid) {
-    padding: 6px 30px;
+    padding: 0 30px;
     width: 310px;
     max-width: 85%;
 }
 
-form[data-login] input[type="text"]::placeholder {
+form input/*[type="text"]*/::placeholder {
     color: var(--main-color);
     opacity: .5;
     transition: inherit;
 }
 
-form[data-login] input[type="text"]:focus::placeholder {
+form input/*[type="text"]*/:focus::placeholder {
     opacity: 0;
 }
 
@@ -236,7 +325,7 @@ form[data-login] label[for="submit"] {
     display: inline-block;
 
     width: 30px;
-    height: 44px;
+    height: 40px;
     font-size: 0;
     margin: 6px 0;
     margin-left: -30px;
@@ -251,7 +340,7 @@ form[data-login][data-loading] label[for="submit"] {
 }
 
 form[data-login] input[type="submit"] {
-    margin: 7px 16px;
+    margin: 4px 16px;
 
     width: 20px;
     height: 20px;
@@ -259,6 +348,7 @@ form[data-login] input[type="submit"] {
     background:  transparent;
     outline: none;
     -webkit-tap-highlight-color: transparent !important;
+    -webkit-appearance: none;
 
     transform-origin: 0 0;
     transform: rotate(45deg);
@@ -274,12 +364,175 @@ form[data-login] input[type="text"]:not(:invalid) + label[for="submit"] {
     opacity: 1;
 }
 
-main > button:hover, main > button:focus {
-    background-color: var(--main-color);
-    color: var(--back-color);
-    border-color: transparent;
+
+
+
+body[data-create-page] header {
+    height: 0;
+    padding: 0;
 }
 
+body[data-create-page] main {
+    position: static;
+    transform: none;
+}
+
+input#shopname {
+    display: block;
+    margin: 32px auto;
+    margin-bottom: 0;
+}
+
+input#date {
+    display: block;
+    width: auto;
+    border: 0;
+    line-height: 40px;
+    font-size: 60%;
+    margin: 32px auto;
+    margin-top: 0;
+    -webkit-appearance: none;
+    transition: linear 0s text-indent;
+}
+
+body[data-mobile] input#date {
+    text-indent: 1em;
+}
+
+thead {
+    display: none;
+}
+
+table {
+    display: block;
+    width: 310px;
+    max-width: 85%;
+    border: 0;
+    border-spacing: 0;
+}
+
+table input, table select {
+    font-size: 100%;
+    height: 34px;
+}
+
+tr {
+    font-size: 60%;
+    margin-bottom: 24px;
+}
+
+tr:last-child {
+    margin-bottom: 0;
+}
+
+tr, tbody {
+    display: block;
+    transition: linear .15s height;
+}
+
+td {
+    display: inline-block;
+}
+
+td:first-child {
+    display: block;
+    width: 100%;
+}
+
+td:nth-child(2) {
+    width: 42%;
+}
+
+td:nth-child(3) {
+    width: 16%;
+}
+
+td:nth-child(4) {
+    width: 42%;
+}
+
+td input {
+    width: 100%;
+    max-width: 100%;
+    border-width: 1px;
+    border-radius: 1px;
+    text-overflow: ellipsis;
+    margin: 0;
+}
+
+td {
+    text-align: center;
+}
+
+td select {
+    display: block;
+    margin: 0 auto;
+    width: auto;
+    max-width: 100%;
+    border: 0
+}
+
+tr:not([data-edit]) td:nth-child(n + 2) {
+    display: none;
+}
+
+tr[data-edit] td:first-child {
+    margin-bottom: 6px;
+}
+
+tr {
+    height: 34px;
+}
+
+tr[data-edit] {
+    height: 74px;
+}
+
+form[name="create-form"] #new_field_button {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    border: 2px solid var(--main-color);
+    line-height: 40px;
+    margin: 0 auto;
+    margin-top: 24px;
+    opacity: .75;
+    -webkit-appearance: none;
+    padding: 0;
+}
+
+form[name="create-form"] .space_container {
+    width: 100%;
+    height: 70px;
+}
+
+form[name="create-form"] .submit_container {
+    display: block;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 40px;
+    width: 100%;
+    text-align: center;
+    background: var(--back-color);
+    box-shadow: 0 0 15px 20px var(--back-color);
+}
+
+form[name="create-form"] input[type="submit"] {
+    display: block;
+    width: auto;
+    height: 40px;
+    max-width: 100%;
+    border: 0;
+    margin: 0 auto;
+    margin-top: -10px;
+    font-size: 70%;
+
+    background: transparent;
+    outline: none;
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-appearance: none;
+}
 
 
 

@@ -25,27 +25,16 @@
                 <h1 data-visible>Авторизація</h1>
             </header>
             <main>
-                <form data-login name="login-form">
-                    <datalist id="products">
-                        <!-- <option value="Ahahah">shi?</option>
-                        <option value="A Classic Voda Litl 0.5"></option>
-                        <option value="aEdge">
-                        <option value="AFirefox">
-                        <option value="AChrome">
-                        <option value="aOpera">
-                        <option value="aSafari"> -->
-                        <option label="aVolvo" value="0123456789">asdsadsaa dasd asda dsadsd</option>
-                    </datalist>
-                    <label for="invite-code">Код-запрошення</label><!--
-                    --><input type="text" id="invite-code" name="invite-code" 
-                        placeholder="код-запрошення" maxlength="10" list="products"
-                        autocomplete="off" spellcheck="off" required>
+                <form data-login name="login-form" onsubmit="login(event)">
+                    <input type="text" id="invite-code" name="invite-code"
+                        placeholder="код-запрошення" aria-label="код-запрошення"
+                        maxlength="10" spellcheck="false" pattern="[a-zA-Z]+" required>
                     <label for="submit">
                         Submit
                         <input id="submit" type="submit" value="Увійти">
                     </label>
-                </form><!--
-                --><div role="error-block" id="error-block">
+                </form>
+                <div role="alert" id="error-block">
                     Error
                 </div>
             </main>
@@ -55,5 +44,33 @@
                 document.location.href = 'profile.html'
         </script>
         <script src="main.js"></script>
+        <script>
+            const loginCallback = (res) => {
+                doc.forms['login-form'].rmAttr('data-loading')
+
+                if (res.apikey) {
+                    doc.cookie = 'apikey=' + res.apikey
+                    doc.location.href = 'profile.html'
+                } else {
+                    getElement('error-block').innerText = res.ERR.uk
+
+                    if (getElement('error-block').getAttr('data-visible') == null) {
+                        getElement('error-block').setAttr('data-visible', '')
+                        setTimeout(() => getElement('error-block').rmAttr('data-visible'), 1000)
+                    }
+                }
+            }
+
+            const login = (e) => {
+                e.preventDefault()
+                
+                doc.forms['login-form'].setAttr('data-loading', '')
+                apiRequest('api/login', {
+                    'invite-code': doc.forms['login-form']['invite-code'].value
+                }, 'loginCallback')
+
+                return false
+            }
+        </script>
     </body>
 </html>

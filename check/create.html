@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="uk">
+    <head>
+        <meta charset="utf-8">
+        <meta content="width=device-width,height=device-height,initial-scale=1.0,minimum-scale=1.0,shrink-to-fit=no" name="viewport">
+        <link rel="stylesheet" href="css/default.css">
+        <link rel="stylesheet" href="css/main.css">
+        <title lang="en">Sales Slip</title>
+    </head>
+    <body data-create-page>
+        <div id="preloader">
+            <div data-icon></div>
+            <div id="preloader-text">Завантаження</div>
+        </div>
+        <header>
+            <h1>Create page</h1>
+        </header>
+        <main>
+            <form id="create-form" name="create-form" autocomplete="on">
+                <input type="text" id="shopname" placeholder="Назва закладу" aria-label="Назва закладу" list="shops">
+                <input type="date" id="date">
+                <table id="main-table">
+                    <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Count</th>
+                            <th>Units</th>
+                            <th>Total Price</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body">
+                        <tr data-edit oninput="rowChange(this)" onfocusout="rmField(this)">
+                            <td>
+                                <input type="text" list="products" onfocus="editField(this)" placeholder="найменування товару" aria-label="найменування товару"></td>
+                            <td><input type="number" step="any" placeholder="кількість" aria-label="кількість"></td><!--
+                            --><td><select aria-label="одиниці вимірювання">
+                                <option lang="en" selected>pcs</option>
+                                <option lang="en">kgs</option>
+                            </select></td><!--
+                            --><td><input type="number" step="any" placeholder="вартість" aria-label="вартість"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- <input type="button" id="new_field_button" value="+" aria-label="додати товар"> -->
+                <div class="space_container"></div>
+                <div class="submit_container">
+                    <input type="submit" value="Зберегти">
+                </div>
+            </form>
+        </main>
+        <script src="main.js"></script>
+        <script>
+            class getList {
+                constructor() {
+                    this.loaded = 0
+                    this.error = false
+                    this.textholder = getElement('preloader-text')
+                    this.preloader = getElement('preloader')
+                }
+
+                callback(type, res) {
+                    this.loaded++
+
+                    if (res.ERR) {
+                        this.error = true
+                        this.textholder.innerHTML = res.ERR.uk
+                        this.preloader.setAttr('data-error', '')
+                    } else if (!this.error) {
+                        let list = document.createElement('datalist')
+                        list.id = type + 's'
+        
+                        res[type + 's'].forEach(val => {
+                            list.innerHTML += `<option value="${val[`${type}-name`]}" data-id="${val.id}"></option>`
+                        })
+        
+                        getElement('create-form').appendChild(list)
+
+                        if (this.loaded == 2) {
+                            this.textholder.innerHTML = 'Успіх'
+                            this.preloader.setAttr('data-loaded', '')
+                            setTimeout(() => {this.preloader.style.display = 'none'}, 400)
+                        }
+                    }
+                }
+
+                shops(res) { this.callback('shop', res) }
+                products(res) { this.callback('product', res) }
+            }
+
+            const getListCallback = new getList()
+
+            apiRequest('api/getShops', null, 'getListCallback.shops')
+            apiRequest('api/getProducts', null, 'getListCallback.products')
+
+            getElement('date').value = new Date().toISOString().substr(0, 10)
+            getElement('date').max = new Date().toISOString().substr(0, 10)
+
+            if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) 
+                document.body.setAttr('data-mobile', '')
+
+            const rowChange = (element) => {
+                const inputCollection = getElement('input', 'byTagName', element)
+                
+                if (inputCollection[0].value && inputCollection[1].value && inputCollection[2].value)
+                    if (!element.nextElementSibling) {
+                        const currentElement = document.activeElement
+                        const tr = addField()
+                        getElement('input', 'byTagName', tr)[0].focus()
+                        editField(currentElement)
+                        currentElement.focus()
+                    }
+            }
+
+            const editField = (element) => {
+                const tr = element.parentNode.parentNode
+
+                if (tr.getAttr('data-edit') == null) {
+                    const prevEl = document.querySelector('form tr[data-edit]')
+                    if (prevEl) prevEl.rmAttr('data-edit')
+                    tr.setAttr('data-edit', '')
+                    const inputCollection = getElement('input', 'byTagName', tr)
+                    inputCollection[2].focus()
+                    inputCollection[0].focus()
+                }
+            }
+
+            const rmField = (element) => {
+                const inputCollection = getElement('input', 'byTagName', element)
+                
+                if (!inputCollection[0].value && !inputCollection[1].value && !inputCollection[2].value)
+                    if (element.nextElementSibling)
+                        element.remove()
+            }
+
+            const addField = (element) => {
+                let tr = document.createElement('tr')
+                tr.innerHTML = `
+                    <td>
+                        <input type="text" list="products" onfocus="editField(this)" placeholder="найменування товару" aria-label="найменування товару"></td>
+                    <td><input type="number" step="any" placeholder="кількість" aria-label="кількість"></td><!--
+                    --><td><select aria-label="одиниці вимірювання">
+                        <option lang="en" selected>pcs</option>
+                        <option lang="en">kgs</option>
+                    </select></td><!--
+                    --><td><input type="number" step="any" placeholder="вартість" aria-label="вартість"></td>
+                `
+                tr.oninput = () => rowChange(tr)
+                tr.addEventListener('focusout', () => rmField(tr))
+
+                getElement('table-body').appendChild(tr)
+
+                return tr
+            }
+        </script>
+        <!-- <footer>
+            <button>+</button>
+        </footer> -->
+    </body>
+</html>
