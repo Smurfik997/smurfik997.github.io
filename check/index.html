@@ -5,13 +5,18 @@
         <meta content="width=device-width,height=device-height,initial-scale=1.0,minimum-scale=1.0,shrink-to-fit=no" name="viewport">
         <link rel="stylesheet" href="css/default.css">
         <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/login-page.css">
         <title lang="en">Sales Slip</title>
     </head>
     <body>
+        <script>
+            if (document.cookie.search('apikey') != -1)
+                document.location.href = 'profile.html'
+        </script>
         <section data-main>
             <header>
                 <h1 lang="en">Sales Slip</h1>
-                <p>...створений з натхненням <br/> для  простих цілей</p>
+                <p>...створений з натхненням <br/> для простих цілей</p>
             </header>
             <main>
                 <button onclick="document.body.setAttribute('data-login', '')">увійти</button>
@@ -39,10 +44,6 @@
                 </div>
             </main>
         </section>
-        <script>
-            if (document.cookie.search('apikey') != -1)
-                document.location.href = 'profile.html'
-        </script>
         <script src="main.js"></script>
         <script>
             const loginCallback = (res) => {

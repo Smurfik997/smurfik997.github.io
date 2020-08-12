@@ -5,20 +5,23 @@
         <meta content="width=device-width,height=device-height,initial-scale=1.0,minimum-scale=1.0,shrink-to-fit=no" name="viewport">
         <link rel="stylesheet" href="css/default.css">
         <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/create-page.css">
         <title lang="en">Sales Slip</title>
     </head>
     <body data-create-page>
-        <div id="preloader">
+        <!-- <div id="preloader">
             <div data-icon></div>
             <div id="preloader-text">Завантаження</div>
-        </div>
+        </div> -->
         <header>
             <h1>Create page</h1>
         </header>
         <main>
             <form id="create-form" name="create-form" autocomplete="on">
+                <datalist id="shops"></datalist>
+                <datalist id="products"></datalist>
                 <input type="text" id="shopname" placeholder="Назва закладу" aria-label="Назва закладу" list="shops">
-                <input type="date" id="date">
+                <input type="date" id="date" aria-label="Дата">
                 <table id="main-table">
                     <thead>
                         <tr>
@@ -31,17 +34,24 @@
                     <tbody id="table-body">
                         <tr data-edit oninput="rowChange(this)" onfocusout="rmField(this)">
                             <td>
-                                <input type="text" list="products" onfocus="editField(this)" placeholder="найменування товару" aria-label="найменування товару"></td>
-                            <td><input type="number" step="any" placeholder="кількість" aria-label="кількість"></td><!--
-                            --><td><select aria-label="одиниці вимірювання">
-                                <option lang="en" selected>pcs</option>
-                                <option lang="en">kgs</option>
-                            </select></td><!--
-                            --><td><input type="number" step="any" placeholder="вартість" aria-label="вартість"></td>
+                                <input type="text" list="products" onfocus="editField(this)" 
+                                placeholder="найменування товару" aria-label="найменування товару">
+                            </td>
+                            <td>
+                                <input type="number" step="any" placeholder="кількість" aria-label="кількість">
+                            </td>
+                            <td>
+                                <select aria-label="одиниці вимірювання">
+                                    <option lang="en" selected>pcs</option>
+                                    <option lang="en">kgs</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="number" step="any" placeholder="вартість" aria-label="вартість">
+                            </td>
                         </tr>
                     </tbody>
                 </table>
-                <!-- <input type="button" id="new_field_button" value="+" aria-label="додати товар"> -->
                 <div class="space_container"></div>
                 <div class="submit_container">
                     <input type="submit" value="Зберегти">
@@ -66,20 +76,17 @@
                         this.textholder.innerHTML = res.ERR.uk
                         this.preloader.setAttr('data-error', '')
                     } else if (!this.error) {
-                        let list = document.createElement('datalist')
-                        list.id = type + 's'
+                        let list = getElement(type + 's')
         
                         res[type + 's'].forEach(val => {
                             list.innerHTML += `<option value="${val[`${type}-name`]}" data-id="${val.id}"></option>`
                         })
-        
-                        getElement('create-form').appendChild(list)
 
-                        if (this.loaded == 2) {
-                            this.textholder.innerHTML = 'Успіх'
-                            this.preloader.setAttr('data-loaded', '')
-                            setTimeout(() => {this.preloader.style.display = 'none'}, 400)
-                        }
+                        // if (this.loaded == 2) {
+                        //     this.textholder.innerHTML = 'Успіх'
+                        //     this.preloader.setAttr('data-loaded', '')
+                        //     setTimeout(() => {this.preloader.style.display = 'none'}, 400)
+                        // }
                     }
                 }
 
@@ -105,8 +112,9 @@
                     if (!element.nextElementSibling) {
                         const currentElement = document.activeElement
                         const tr = addField()
-                        getElement('input', 'byTagName', tr)[0].focus()
-                        editField(currentElement)
+                        const firstInNewRow = getElement('input', 'byTagName', tr)[0]
+                        firstInNewRow.focus()
+                        firstInNewRow.onfocus = () => editField(firstInNewRow)
                         currentElement.focus()
                     }
             }
@@ -136,7 +144,7 @@
                 let tr = document.createElement('tr')
                 tr.innerHTML = `
                     <td>
-                        <input type="text" list="products" onfocus="editField(this)" placeholder="найменування товару" aria-label="найменування товару"></td>
+                        <input type="text" list="products" placeholder="найменування товару" aria-label="найменування товару"></td>
                     <td><input type="number" step="any" placeholder="кількість" aria-label="кількість"></td><!--
                     --><td><select aria-label="одиниці вимірювання">
                         <option lang="en" selected>pcs</option>
@@ -152,8 +160,5 @@
                 return tr
             }
         </script>
-        <!-- <footer>
-            <button>+</button>
-        </footer> -->
     </body>
 </html>

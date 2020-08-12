@@ -1,0 +1,164 @@
+body[data-create-page] header {
+    height: 0;
+    padding: 0;
+}
+
+body[data-create-page] main {
+    position: static;
+    transform: none;
+}
+
+
+
+
+
+/* главные поля формы */
+input#shopname {
+    margin: 32px 0;
+    margin-bottom: 0;
+}
+
+input#date {
+    display: block;
+    border: 0;
+    margin: 32px auto;
+    margin-top: 0;
+    -webkit-appearance: none;
+    
+    font-size: 60%;
+    line-height: 40px;
+    text-indent: 0;
+    transition: linear 0s text-indent;
+}
+
+body[data-mobile] input#date {
+    text-indent: 1em;
+}
+
+
+
+
+
+table {
+    width: 310px;
+    max-width: 85%;
+    border: 0;
+    border-spacing: 0;
+}
+
+thead {
+    display: none;
+}
+
+
+
+
+
+/* строки */
+tr {
+    display: block;
+    height: 30px;
+    margin-bottom: 10px;
+    transition: linear .15s height;
+}
+
+tr[data-edit] {
+    height: 66px;
+    margin: 20px 0;
+}
+
+tr:first-child {
+    margin-top: 0;
+}
+
+tr:last-child {
+    margin-bottom: 0;
+}
+
+tr:not([data-edit]) td:nth-child(n + 2) {
+    display: none;
+}
+
+
+
+
+
+/* содержимое строк */
+td {
+    text-align: center;
+}
+
+td:first-child {
+    display: block;
+    width: 100%;
+    margin-bottom: 6px;
+}
+
+tr:not([data-edit]) td:first-child {
+    margin-bottom: 0;
+}
+
+td:nth-child(2) {
+    width: 42%;
+}
+
+td:nth-child(3) {
+    width: 16%;
+}
+
+td:nth-child(4) {
+    width: 42%;
+}
+
+td input, td select {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    font-size: 60%;
+    height: 30px;
+    border-width: 1px;
+    border-radius: 1px;
+    text-overflow: ellipsis;
+    margin: 0 auto;
+}
+
+td select {
+    width: auto;
+    border: 0;
+}
+
+
+
+
+
+/* кнопка отправки*/
+form[name="create-form"] .space_container {
+    width: 100%;
+    height: 70px;
+}
+
+form[name="create-form"] .submit_container {
+    display: block;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 40px;
+    width: 100%;
+    text-align: center;
+    background: var(--back-color);
+    box-shadow: 0 0 15px 20px var(--back-color);
+}
+
+form[name="create-form"] input[type="submit"] {
+    display: block;
+    width: auto;
+    height: 40px;
+    border: 0;
+    margin: 0 auto;
+    margin-top: -10px;
+    font-size: 70%;
+
+    background: transparent;
+    outline: none;
+    -webkit-tap-highlight-color: transparent !important;
+}

@@ -19,7 +19,7 @@ body {
     }
 }
 
-body #preloader {
+/* body #preloader {
     display: none !important;
 }
 
@@ -89,71 +89,11 @@ body #preloader {
 
 #preloader[data-error] {
     color: rgb(200, 30, 60);
-}
-
-@keyframes overflow-anim {
-    0% {
-        overflow: hidden;
-    }
-    100% {
-        overflow: hidden;
-    }
-}
-
-body[data-login] {
-    animation: linear .4s overflow-anim;
-}
-
-section {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    transition: linear .4s top, linear .25s opacity;
-}
-
-section[data-main] {
-    top: 0;
-    opacity: 1;
-}
-
-section[data-login] {
-    display: none;
-    top: 100%;
-}
-
-body[data-login] section[data-main] {
-    top: -100%;
-    opacity: 0;
-}
-
-@keyframes login-display {
-    0% {
-        top: 100%;
-    }
-    100% {
-        top: 0;
-    }
-}
-
-body[data-login] section[data-login] {
-    display: block;
-    animation: .4s linear login-display forwards;
-}
-
-label {
-    font-size: 0;
-}
-
-/* body::before {
-    content: '';
-    position: fixed;
-    width: 100%;
-    z-index: -1000;
-    height: 100%;
-    background: url(background.png) no-repeat;
-    background-size: cover;
-    opacity: 0.02;
 } */
+
+
+
+
 
 header {
     padding: 32px;
@@ -187,10 +127,11 @@ main {
     transform: translateY(-50%);
 }
 
-section[data-login] main {
-    transform: translateY(-29px);
-}
 
+
+
+
+/* сообщение об ошибке, текст */
 main div[role="alert"] {
     width: 100%;
     margin: 6px auto;
@@ -199,16 +140,9 @@ main div[role="alert"] {
     font-size: 60%;
     color: rgb(200, 30, 60);
     opacity: 0;
-    
-    /* transition: linear .15s opacity; */
 }
 
-main div[role="alert"][data-visible] {
-    opacity: 1;
-    animation: linear 1s error-block-anim forwards;
-}
-
-@keyframes error-block-anim {
+@keyframes alert-anim {
     0% {
         opacity: 0;
     }
@@ -223,11 +157,21 @@ main div[role="alert"][data-visible] {
     }
 }
 
-main button, form input/*[type="text"]*/, form select {
+main div[role="alert"][data-visible] {
+    animation: linear 1s alert-anim forwards;
+}
+
+
+
+
+
+/* основные кнопки, поля ввода, выбора */
+main button, form input, form select {
     width: 310px;
     max-width: 85%;
     height: 76px;
     margin: 6px 0;
+    box-sizing: border-box;
 
     text-align: center;
     text-align-last: center;
@@ -244,13 +188,8 @@ main button, form input/*[type="text"]*/, form select {
     border-radius: 2px;
 }
 
-form select, form input[type="number"],
-input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
-    appearance: none;
-}
-
 main button {
-    border-radius: 4px; /* experimental */
+    border-radius: 4px;
 }
 
 main > button:focus {
@@ -259,280 +198,38 @@ main > button:focus {
     border-color: transparent;
 }
 
-
-
-
-
-form input/*[type="text"]*/, form select {
-    width: 270px;
-    max-width: 75%;
-    height: 40px;
-    box-sizing: border-box;
-    padding: 0;
-    border: 0;
-    border-bottom: 2px solid var(--main-color);
+form select, form input,
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+    appearance: none;
+    -webkit-appearance: none;
 }
 
-form input/*[type="text"]*/::-webkit-calendar-picker-indicator, 
-form input/*[type="text"]*/::-webkit-list-button {
+form input::-webkit-calendar-picker-indicator, 
+form input::-webkit-list-button {
     display: none !important;
     opacity: 0  !important;
     width: 0 !important;
     height: 0 !important;
 }
 
-@keyframes login-loading {
-    0% {
-        /* color: var(--main-color); */
-        border-color: var(--main-color);
-    }
-    50% {
-        /* color: rgba(250, 180, 100); */
-        border-color: rgba(250, 180, 100);
-    }
-    100% {
-        /* color: var(--main-color); */
-        border-color: var(--main-color);
-    }
+form input, form select {
+    width: 270px;
+    max-width: 75%;
+    height: 40px;
+    border: 0;
+    border-bottom: 2px solid var(--main-color);
 }
 
-form[data-login][data-loading] input[type="text"] {
-    animation: linear 1.5s login-loading .4s both infinite;
-}
-
-/* form[data-login][data-loading] input[type="submit"] {
-    animation: linear 1.5s login-loading .4s both infinite;
-} */
-
-form[data-login] input[type="text"]:not(:invalid) {
-    padding: 0 30px;
-    width: 310px;
-    max-width: 85%;
-}
-
-form input/*[type="text"]*/::placeholder {
+form input::placeholder {
     color: var(--main-color);
     opacity: .5;
     transition: inherit;
 }
 
-form input/*[type="text"]*/:focus::placeholder {
+form input:focus::placeholder {
     opacity: 0;
 }
 
-form[data-login] label[for="submit"] {
-    position: absolute;
-    display: inline-block;
-
-    width: 30px;
-    height: 40px;
-    font-size: 0;
-    margin: 6px 0;
-    margin-left: -30px;
-
-    transition: linear .15s opacity;
-    visibility: hidden;
-    opacity: 0;
-}
-
-form[data-login][data-loading] label[for="submit"] {
-    opacity: 0 !important;
-}
-
-form[data-login] input[type="submit"] {
-    margin: 4px 16px;
-
-    width: 20px;
-    height: 20px;
-    font-size: 0;
-    background:  transparent;
-    outline: none;
-    -webkit-tap-highlight-color: transparent !important;
-    -webkit-appearance: none;
-
-    transform-origin: 0 0;
-    transform: rotate(45deg);
-
-    border: 0; 
-    border-radius: 2px; /* experimental */
-    border-top: 2px solid var(--main-color);
-    border-right: 2px solid var(--main-color);
-}
-
-form[data-login] input[type="text"]:not(:invalid) + label[for="submit"] {
-    visibility: visible;
-    opacity: 1;
-}
-
-
-
-
-body[data-create-page] header {
-    height: 0;
-    padding: 0;
-}
-
-body[data-create-page] main {
-    position: static;
-    transform: none;
-}
-
-input#shopname {
-    display: block;
-    margin: 32px auto;
-    margin-bottom: 0;
-}
-
-input#date {
-    display: block;
-    width: auto;
-    border: 0;
-    line-height: 40px;
-    font-size: 60%;
-    margin: 32px auto;
-    margin-top: 0;
-    -webkit-appearance: none;
-    transition: linear 0s text-indent;
-}
-
-body[data-mobile] input#date {
-    text-indent: 1em;
-}
-
-thead {
-    display: none;
-}
-
-table {
-    display: block;
-    width: 310px;
-    max-width: 85%;
-    border: 0;
-    border-spacing: 0;
-}
-
-table input, table select {
-    font-size: 100%;
-    height: 34px;
-}
-
-tr {
-    font-size: 60%;
-    margin-bottom: 24px;
-}
-
-tr:last-child {
-    margin-bottom: 0;
-}
-
-tr, tbody {
-    display: block;
-    transition: linear .15s height;
-}
-
-td {
-    display: inline-block;
-}
-
-td:first-child {
-    display: block;
-    width: 100%;
-}
-
-td:nth-child(2) {
-    width: 42%;
-}
-
-td:nth-child(3) {
-    width: 16%;
-}
-
-td:nth-child(4) {
-    width: 42%;
-}
-
-td input {
-    width: 100%;
-    max-width: 100%;
-    border-width: 1px;
-    border-radius: 1px;
-    text-overflow: ellipsis;
-    margin: 0;
-}
-
-td {
-    text-align: center;
-}
-
-td select {
-    display: block;
-    margin: 0 auto;
-    width: auto;
-    max-width: 100%;
-    border: 0
-}
-
-tr:not([data-edit]) td:nth-child(n + 2) {
-    display: none;
-}
-
-tr[data-edit] td:first-child {
-    margin-bottom: 6px;
-}
-
-tr {
-    height: 34px;
-}
-
-tr[data-edit] {
-    height: 74px;
-}
-
-form[name="create-form"] #new_field_button {
-    width: 40px;
-    height: 40px;
-    border-radius: 20px;
-    border: 2px solid var(--main-color);
-    line-height: 40px;
-    margin: 0 auto;
-    margin-top: 24px;
-    opacity: .75;
-    -webkit-appearance: none;
-    padding: 0;
-}
-
-form[name="create-form"] .space_container {
-    width: 100%;
-    height: 70px;
-}
-
-form[name="create-form"] .submit_container {
-    display: block;
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    height: 40px;
-    width: 100%;
-    text-align: center;
-    background: var(--back-color);
-    box-shadow: 0 0 15px 20px var(--back-color);
-}
-
-form[name="create-form"] input[type="submit"] {
-    display: block;
-    width: auto;
-    height: 40px;
-    max-width: 100%;
-    border: 0;
-    margin: 0 auto;
-    margin-top: -10px;
-    font-size: 70%;
-
-    background: transparent;
-    outline: none;
-    -webkit-tap-highlight-color: transparent !important;
-    -webkit-appearance: none;
-}
 
 
 
@@ -550,6 +247,7 @@ footer {
     height: 60px;
 }
 
+/* стрелка внизу */
 footer div[data-arrow] {
     margin: 5px auto;
     margin-top: 35px;
@@ -558,17 +256,10 @@ footer div[data-arrow] {
     transform: rotate(45deg);
     border-top: 2px solid var(--main-color);
     border-left: 2px solid var(--main-color);
-    border-radius: 2px; /* experimental */
+    border-radius: 2px;
 }
 
-footer div[data-circle] {
-    margin: 0 auto;
-    width: 15px;
-    height: 15px;
-    border: 2px solid var(--main-color);
-    border-radius: 15px;
-}
-
+/* текстовая кнопка внизу */
 footer button {
     border: none;
     border-bottom: solid 2px var(--main-color);
@@ -583,13 +274,3 @@ footer button {
 footer button:active, footer button:focus {
     opacity: 1;
 }
-
-/* footer div::after {
-    content: '';
-    position: absolute;
-    margin: 3px;
-    width: 10px;
-    height: 10px;
-    border-top: 2px solid var(--main-color);
-    border-left: 2px solid var(--main-color);
-} */

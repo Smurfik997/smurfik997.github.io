@@ -15,15 +15,13 @@
             <button>переглянути</button>
             <button onclick="document.location.href = 'create.html'">додати запис</button>
         </main>
-        <!-- <footer>
-            <div data-circle></div>
-        </footer> -->
         <footer>
             <button onclick="logout()">Вийти</button>
         </footer>
-        <script src="main.js"></script>
+        <!-- <script src="main.js"></script> -->
         <script>
             const logout = () => {
+                doc = document
                 doc.cookie = 'apikey=; max-age=0'
                 doc.location.href = 'index.html'
             }
