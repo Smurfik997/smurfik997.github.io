@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="uk">
+    <head>
+        <meta charset="utf-8">
+        <meta content="width=device-width,height=device-height,initial-scale=1.0,minimum-scale=1.0,shrink-to-fit=no" name="viewport">
+        <link rel="stylesheet" href="css/default.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/transfer.css">
+        <title lang="en">Sales Slip</title>
+    </head>
+    <body>
+        <header>
+            <h1>Transfer Page</h1>
+        </header>
+        <main data-loading>
+            <p id="status">Зв'язок з сервером</p>
+            <p>Завантажено: <span id="data-loaded">0</span><span>/2</span></p>
+        </main>
+        <script src="main.js"></script>
+        <script>
+            localStorage.clear()
+            
+            class getList {
+                constructor() {
+                    this.loaded = 0
+                    this.error = false
+                    this.status = getElement('status')
+                    this.countholder = getElement('data-loaded')
+                    this.main = getElement('main', 'byTagName')[0]
+                }
+
+                callback(type, res) {
+                    if (res.ERR) {
+                        this.error = true
+                        this.status.innerHTML = res.ERR.uk
+                        this.main.rmAttr('data-loading')
+                        this.main.setAttr('data-error', '')
+                    } else if (!this.error) {
+                        this.loaded++
+                        this.countholder.innerHTML = this.loaded
+                        localStorage.setItem(type + 's', JSON.stringify(res))
+
+                        if (this.loaded == 2) {
+                            this.status.innerHTML = ''
+                            this.main.rmAttr('data-loading')
+                            this.main.setAttr('data-loaded', '')
+                            doc.location.href = 'create.html'
+                        }
+                    }
+                }
+
+                shops(res) { this.callback('shop', res) }
+                products(res) { this.callback('product', res) }
+            }
+
+            const getListCallback = new getList()
+
+            apiRequest('api/getShops', null, 'getListCallback.shops')
+            apiRequest('api/getProducts', null, 'getListCallback.products')
+        </script>
+    </body>
+</html>

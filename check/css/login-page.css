@@ -66,7 +66,7 @@ body[data-login] section[data-login] {
         border-color: var(--main-color);
     }
     50% {
-        border-color: rgba(250, 180, 100);
+        border-color: var(--orange);
     }
     100% {
         border-color: var(--main-color);

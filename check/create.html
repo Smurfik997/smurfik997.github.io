@@ -60,44 +60,16 @@
         </main>
         <script src="main.js"></script>
         <script>
-            class getList {
-                constructor() {
-                    this.loaded = 0
-                    this.error = false
-                    this.textholder = getElement('preloader-text')
-                    this.preloader = getElement('preloader')
-                }
+            ['shop', 'product'].forEach(type => {
+                const list = getElement(type + 's')
+                const listData = JSON.parse(localStorage.getItem(type + 's'))
 
-                callback(type, res) {
-                    this.loaded++
+                if (!listData) doc.location.href = 'transfer.html'
 
-                    if (res.ERR) {
-                        this.error = true
-                        this.textholder.innerHTML = res.ERR.uk
-                        this.preloader.setAttr('data-error', '')
-                    } else if (!this.error) {
-                        let list = getElement(type + 's')
-        
-                        res[type + 's'].forEach(val => {
-                            list.innerHTML += `<option value="${val[`${type}-name`]}" data-id="${val.id}"></option>`
-                        })
-
-                        // if (this.loaded == 2) {
-                        //     this.textholder.innerHTML = 'Успіх'
-                        //     this.preloader.setAttr('data-loaded', '')
-                        //     setTimeout(() => {this.preloader.style.display = 'none'}, 400)
-                        // }
-                    }
-                }
-
-                shops(res) { this.callback('shop', res) }
-                products(res) { this.callback('product', res) }
-            }
-
-            const getListCallback = new getList()
-
-            apiRequest('api/getShops', null, 'getListCallback.shops')
-            apiRequest('api/getProducts', null, 'getListCallback.products')
+                listData[type + 's'].forEach(val => {
+                    list.innerHTML += `<option value="${val[`${type}-name`]}" data-id="${val.id}"></option>`
+                })
+            })
 
             getElement('date').value = new Date().toISOString().substr(0, 10)
             getElement('date').max = new Date().toISOString().substr(0, 10)

@@ -1,6 +1,9 @@
 :root {
     --back-color: rgb(245, 245, 245);
     --main-color: rgb(40, 40, 40);
+    --orange: rgb(250, 180, 100);
+    --red: rgb(200, 30, 60);
+    --green: rgb(20, 130, 110);
 }
 
 html {
@@ -18,78 +21,6 @@ body {
         font-size: 28px;
     }
 }
-
-/* body #preloader {
-    display: none !important;
-}
-
-#preloader {
-    position: fixed;
-    z-index: 1000;
-    top: 0;
-    left: 0;
-    opacity: 1;
-    height: 100%;
-    width: 100%;
-    background: var(--back-color);
-    display: block;
-    transition: linear .4s;
-    transition-property: color, top, opacity;
-}
-
-#preloader-text {
-    position: absolute;
-    max-width: 85%;
-    text-align: center;
-    top: 54%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 60%;
-    transition: linear .4s top;
-}
-
-#preloader div[data-icon] {
-    position: absolute;
-    left: 50%;
-    top: 46%;
-    width: 1em;
-    height: 1em;
-    border: 4px solid;
-    border-radius: 50%;
-    border-color: var(--main-color) rgb(200, 200, 200) rgb(200, 200, 200);
-    transform: translate(-50%, -50%) rotate(0);
-    animation: ease-in-out 1s rotating infinite;
-    transition: linear .4s opacity;
-}    
-
-#preloader[data-error] div[data-icon],
-#preloader[data-loaded] div[data-icon] {
-    opacity: 0;
-}
-
-#preloader[data-error] #preloader-text,
-#preloader[data-loaded] #preloader-text {
-    top: 50%;
-}   
-
-@keyframes rotating {
-    0% {
-        transform: translate(-50%, -50%) rotate(0)
-    }    
-    100% {
-        transform: translate(-50%, -50%) rotate(360deg)
-    }    
-}    
-
-#preloader[data-loaded] {
-    opacity: 0;
-    top: -100%;
-    color: rgb(50, 180, 140);
-}    
-
-#preloader[data-error] {
-    color: rgb(200, 30, 60);
-} */
 
 
 
@@ -138,7 +69,7 @@ main div[role="alert"] {
 
     text-align: center;
     font-size: 60%;
-    color: rgb(200, 30, 60);
+    color: var(--red);
     opacity: 0;
 }
 
@@ -178,7 +109,6 @@ main button, form input, form select {
 
     font-size: 75%;
     color: inherit;
-    user-select: none;
     outline: none;
     transition: linear .15s all;
 
@@ -189,10 +119,13 @@ main button, form input, form select {
 }
 
 main button {
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
     border-radius: 4px;
 }
 
-main > button:focus {
+main button:focus, main button:active, main button:hover {
     background-color: var(--main-color);
     color: var(--back-color);
     border-color: transparent;
@@ -266,11 +199,12 @@ footer button {
     background:  transparent;
     outline: none;
     -webkit-tap-highlight-color: transparent !important;
+    -webkit-user-select: none;
 
     font-size: 55%;
     opacity: 0.75;
 }
 
-footer button:active, footer button:focus {
+footer button:active, footer button:focus, footer button:hover {
     opacity: 1;
 }

@@ -1,0 +1,34 @@
+p {
+    font-size: 60%;
+    line-height: 30px;
+    text-align: center;
+    transition: linear .4s color;
+}
+
+main[data-loaded] {
+    color: var(--green);
+}
+
+main[data-error] {
+    color: var(--red);
+}
+
+@keyframes dots {
+    0% {
+        content: '';
+    }
+    25% {
+        content: '.';
+    }
+    50% {
+        content: '..';
+    }
+    100% {
+        content: '...';
+    }
+}
+
+main[data-loading] p#status::after {
+    content: '';
+    animation: dots 1s ease-in-out infinite;
+}
