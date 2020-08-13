@@ -119,6 +119,7 @@ td input, td select {
     max-width: 100%;
     font-size: 60%;
     height: 30px;
+    line-height: 30px;
     border-width: 1px;
     border-radius: 1px;
     text-overflow: ellipsis;

@@ -149,6 +149,7 @@ form input, form select {
     width: 270px;
     max-width: 75%;
     height: 40px;
+    line-height: 40px;
     border: 0;
     border-bottom: 2px solid var(--main-color);
 }
