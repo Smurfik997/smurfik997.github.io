@@ -35,7 +35,7 @@ const apiRequest = (method, params, callback) => {
 
     let js = doc.createElement('script')
     js.id = method
-    js.src = 'https://sales-slip.herokuapp.com/' + method + '?' + params + '&callback=' + callback
+    js.src = 'https://purchase-history.herokuapp.com/' + method + '?' + params + '&callback=' + callback
     js.onload = () => {
         doc.body.removeChild(js)
     }

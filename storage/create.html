@@ -3,18 +3,19 @@
     <head>
         <meta charset="utf-8">
         <meta content="width=device-width,height=device-height,initial-scale=1.0,minimum-scale=1.0,shrink-to-fit=no" name="viewport">
+        <link rel="preload" crossorigin="anonymous" href="fonts/Comfortaa-Cyrillic-Bold.woff2" as="font">
+        <link rel="preload" crossorigin="anonymous" href="fonts/Comfortaa-Cyrillic.woff2" as="font">
+        <link rel="preload" crossorigin="anonymous" href="fonts/Comfortaa-Latin.woff2" as="font">
         <link rel="stylesheet" href="css/default.css">
+        <link rel="icon" href="imgs/icon.png">
+        <link rel="apple-touch-icon" href="imgs/apple-icon.png">
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/create-page.css">
-        <title lang="en">Sales Slip</title>
+        <title>Purchase History - Редагування</title>
     </head>
     <body data-create-page>
-        <!-- <div id="preloader">
-            <div data-icon></div>
-            <div id="preloader-text">Завантаження</div>
-        </div> -->
         <header>
-            <h1>Create page</h1>
+            <h1>Редагування чека</h1>
         </header>
         <main>
             <form id="create-form" name="create-form" autocomplete="on">
@@ -60,7 +61,14 @@
         </main>
         <script src="main.js"></script>
         <script>
-            ['shop', 'product'].forEach(type => {
+            if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent))
+                document.body.setAttr('data-mobile', '')
+
+            getElement('date').value = new Date().toISOString().substr(0, 10)
+            getElement('date').max = new Date().toISOString().substr(0, 10)
+
+            const types = ['shop', 'product']
+            types.forEach(type => {
                 const list = getElement(type + 's')
                 const listData = JSON.parse(localStorage.getItem(type + 's'))
 
@@ -70,12 +78,6 @@
                     list.innerHTML += `<option value="${val[`${type}-name`]}" data-id="${val.id}"></option>`
                 })
             })
-
-            getElement('date').value = new Date().toISOString().substr(0, 10)
-            getElement('date').max = new Date().toISOString().substr(0, 10)
-
-            if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) 
-                document.body.setAttr('data-mobile', '')
 
             const rowChange = (element) => {
                 const inputCollection = getElement('input', 'byTagName', element)

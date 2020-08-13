@@ -3,9 +3,14 @@
     <head>
         <meta charset="utf-8">
         <meta content="width=device-width,height=device-height,initial-scale=1.0,minimum-scale=1.0,shrink-to-fit=no" name="viewport">
+        <link rel="preload" crossorigin="anonymous" href="fonts/Comfortaa-Cyrillic-Bold.woff2" as="font">
+        <link rel="preload" crossorigin="anonymous" href="fonts/Comfortaa-Cyrillic.woff2" as="font">
+        <link rel="preload" crossorigin="anonymous" href="fonts/Comfortaa-Latin.woff2" as="font">
         <link rel="stylesheet" href="css/default.css">
+        <link rel="icon" href="imgs/icon.png">
+        <link rel="apple-touch-icon" href="imgs/apple-icon.png">
         <link rel="stylesheet" href="css/main.css">
-        <title lang="en">Sales Slip</title>
+        <title lang="en">Purchase History - Профіль</title>
     </head>
     <body>
         <header>
@@ -18,7 +23,6 @@
         <footer>
             <button onclick="logout()">Вийти</button>
         </footer>
-        <!-- <script src="main.js"></script> -->
         <script>
             const logout = () => {
                 doc = document

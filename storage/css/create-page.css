@@ -20,7 +20,10 @@ input#shopname {
 
 input#date {
     display: block;
+    min-width: 120px;
+    width: auto;
     border: 0;
+    padding: 0 4px;
     margin: 32px auto;
     margin-top: 0;
     -webkit-appearance: none;
