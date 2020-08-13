@@ -22,7 +22,7 @@ HTMLElement.prototype.setAttr = HTMLElement.prototype.setAttribute
 HTMLElement.prototype.getAttr = HTMLElement.prototype.getAttribute
 HTMLElement.prototype.rmAttr = HTMLElement.prototype.removeAttribute
 
-const apiRequest = (method, params, callback) => {
+const apiRequest = (method, params, callback, callbackData) => {
     if (getElement(method, 'byId'))
         return false
 
@@ -36,6 +36,10 @@ const apiRequest = (method, params, callback) => {
     let js = doc.createElement('script')
     js.id = method
     js.src = 'https://purchase-history.herokuapp.com/' + method + '?' + params + '&callback=' + callback
+    if (callbackData != undefined) {
+        js.id += '-' + callbackData
+        js.src += '&callback-data=' + callbackData
+    }
     js.onload = () => {
         doc.body.removeChild(js)
     }
@@ -51,11 +55,3 @@ const apiRequest = (method, params, callback) => {
 
     doc.body.appendChild(js)
 }
-
-// datalist = document.createElement('datalist')
-// datalist.id = 'products'
-// document.forms['login-form'].appendChild(datalist)
-// option = document.createElement('option')
-// option.value = 'KU'
-// datalist.appendChild(option)
-// option.value = 'LOL'

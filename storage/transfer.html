@@ -21,48 +21,161 @@
         <main data-loading>
             <p id="status">Зв'язок з сервером</p>
             <p>Завантажено: <span id="data-loaded">0</span><span>/2</span></p>
+            <p>Надіслано: <span id="data-sended">0</span><span>/</span><span id="data-total">0</span></p>
         </main>
         <script src="main.js"></script>
         <script>
-            localStorage.clear()
-            
-            class getList {
-                constructor() {
-                    this.loaded = 0
-                    this.error = false
-                    this.status = getElement('status')
-                    this.countholder = getElement('data-loaded')
-                    this.main = getElement('main', 'byTagName')[0]
+            let data, sendCallback, recordCallback, getListCallback
+
+            if (data = JSON.parse(localStorage.getItem('form-data'))) {
+                const main = getElement('main', 'byTagName')[0]
+                const status = getElement('status')
+                main.setAttr('data-send', '')
+                let apikey
+                try {
+                    apikey = encodeURIComponent(doc.cookie.split('apikey=')[1].split(';')[0])
+                } catch {
+                    main.rmAttr('data-loading')
+                    main.setAttr('data-error', '')
+                    status.innerHTML = 'Невірний код'
+                    throw new Error('apikey fault')
+                }
+                
+                const sendedholder = getElement('data-sended')
+                const totalholder = getElement('data-total')
+                
+                let sended = 0
+                let total = 0
+
+                const addRecord = () => {
+                    status.innerHTML = 'Завершення надсилання'
+                    total++
+                    totalholder.innerHTML = total
+
+                    let finalData = data['shop-name'] + '_' + data['date']
+
+                    data['products'].forEach(el => {
+                        finalData += '_' + el.product + '_' + el.count
+
+                        if (el.type == 'kgs')
+                            finalData += '_0'
+                        else
+                            finalData += '_1'
+                        
+                        finalData += '_' + el.price
+                    })
+
+                    apiRequest('api/addRecord', {
+                        'data': finalData,
+                        'apikey': apikey
+                    }, 'recordCallback')
                 }
 
-                callback(type, res) {
+                recordCallback = (res) => {
                     if (res.ERR) {
-                        this.error = true
-                        this.status.innerHTML = res.ERR.uk
-                        this.main.rmAttr('data-loading')
-                        this.main.setAttr('data-error', '')
-                    } else if (!this.error) {
-                        this.loaded++
-                        this.countholder.innerHTML = this.loaded
-                        localStorage.setItem(type + 's', JSON.stringify(res))
+                        main.rmAttr('data-loading')
+                        main.setAttr('data-error', '')
+                        status.innerHTML = res.ERR.uk
+                        return
+                    }
 
-                        if (this.loaded == 2) {
-                            this.status.innerHTML = ''
+                    sended++
+                    sendedholder.innerHTML = sended
+
+                    status.innerHTML = 'Збережено'
+                    main.rmAttr('data-loading')
+                    main.setAttr('data-loaded', '')
+                    localStorage.clear()
+
+                    doc.location.href = 'profile.html'
+                }
+                
+                sendCallback = (res) => {
+                    if (main.getAttr('data-error'))
+                        return
+
+                    if (res.ERR) {
+                        main.rmAttr('data-loading')
+                        main.setAttr('data-error', '')
+                        status.innerHTML = res.ERR.uk
+                        return
+                    }
+
+                    sended++
+                    sendedholder.innerHTML = sended
+                    
+                    if (res['callback-data'] == 'shop')
+                        data['shop-name'] = res.id
+                    else
+                        data['products'][res['callback-data']].product = res.id
+
+                    if (sended == total)
+                        addRecord()
+                }
+                
+                data.products.forEach((el, index) => {
+                    if (!parseInt(el['product'])) {
+                        total++
+                        totalholder.innerHTML = total
+                        apiRequest('api/addProduct', {
+                            'product-name': el['product'],
+                            'apikey': apikey
+                        }, 'sendCallback', index)
+                    }
+                })
+
+                if (!parseInt(data['shop-name'])) {
+                    total++
+                    totalholder.innerHTML = total
+                    apiRequest('api/addShop', {
+                        'shop-name': data['shop-name'],
+                        'apikey': apikey
+                    }, 'sendCallback', 'shop')
+                }
+
+                if (total == 0)
+                    addRecord()
+            } else {
+                localStorage.clear()
+                
+                class getList {
+                    constructor() {
+                        this.loaded = 0
+                        this.error = false
+                        this.status = getElement('status')
+                        this.countholder = getElement('data-loaded')
+                        this.main = getElement('main', 'byTagName')[0]
+                    }
+
+                    callback(type, res) {
+                        if (res.ERR) {
+                            this.error = true
+                            this.status.innerHTML = res.ERR.uk
                             this.main.rmAttr('data-loading')
-                            this.main.setAttr('data-loaded', '')
-                            doc.location.href = 'create.html'
+                            this.main.setAttr('data-error', '')
+                        } else if (!this.error) {
+                            this.loaded++
+                            this.countholder.innerHTML = this.loaded
+                            localStorage.setItem(type + 's', JSON.stringify(res))
+
+                            if (this.loaded == 2) {
+                                this.status.innerHTML = ''
+                                this.main.rmAttr('data-loading')
+                                this.main.setAttr('data-loaded', '')
+                                doc.location.href = 'create.html'
+                            }
                         }
                     }
+
+                    shops(res) { this.callback('shop', res) }
+                    products(res) { this.callback('product', res) }
                 }
 
-                shops(res) { this.callback('shop', res) }
-                products(res) { this.callback('product', res) }
+                getListCallback = new getList()
+
+                apiRequest('api/getShops', null, 'getListCallback.shops')
+                apiRequest('api/getProducts', null, 'getListCallback.products')
             }
-
-            const getListCallback = new getList()
-
-            apiRequest('api/getShops', null, 'getListCallback.shops')
-            apiRequest('api/getProducts', null, 'getListCallback.products')
         </script>
     </body>
 </html>

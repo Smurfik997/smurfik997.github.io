@@ -5,6 +5,14 @@ p {
     transition: linear .4s color;
 }
 
+main:not([data-send]) p:last-child {
+    display: none;
+}
+
+main[data-send] p:nth-child(2) {
+    display: none;
+}
+
 main[data-loaded] {
     color: var(--green);
 }
