@@ -1,4 +1,6 @@
 const doc = document
+if (!/index.html/.test(doc.location.href) && !/apikey/.test(doc.cookie))
+    doc.location.href = 'index.html'
 
 getElement = (query, option, element) => {
     let byId, byTagName, byClassName, byName
