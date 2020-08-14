@@ -187,6 +187,9 @@ form fieldset {
 
 select:disabled, input:disabled {
     opacity: 1;
+    -webkit-text-fill-color: var(--main-color);
+    text-shadow: none;
+    box-shadow: none;
 }
 
 /* form {

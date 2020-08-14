@@ -22,7 +22,7 @@
                 <datalist id="shops"></datalist>
                 <datalist id="products"></datalist>
                 <fieldset disabled>
-                    <input type="text" id="shopname" name="shopname" aria-label="Назва закладу">
+                    <input type="text" id="shopname" name="shopname" aria-label="Назва закладу" onscroll="this.scrollTo(0, 0)">
                     <input type="date" id="date" name="date" aria-label="Дата">
                     <table id="main-table">
                         <thead>
@@ -73,7 +73,7 @@
 
                 tr.innerHTML = `
                 <td>
-                    <input type="text" name="product" aria-label="найменування товару"
+                    <input type="text" name="product" aria-label="найменування товару" onscroll="this.scrollTo(0, 0)"
                     value="${products.querySelector(`option[data-id="${data[i]}"]`).value}">
                 </td>
                 <td>
