@@ -16,6 +16,7 @@ body[data-create-page] main {
 input#shopname {
     margin: 32px 0;
     margin-bottom: 0;
+    text-overflow: ellipsis;
 }
 
 input#date {
@@ -43,6 +44,7 @@ body[data-mobile] input#date {
 
 
 table {
+    display: block;
     width: 310px;
     max-width: 85%;
     border: 0;

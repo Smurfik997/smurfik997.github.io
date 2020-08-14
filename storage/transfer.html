@@ -28,6 +28,7 @@
             let data, sendCallback, recordCallback, getListCallback
 
             if (data = JSON.parse(localStorage.getItem('form-data'))) {
+                localStorage.clear()
                 const main = getElement('main', 'byTagName')[0]
                 const status = getElement('status')
                 main.setAttr('data-send', '')
@@ -52,9 +53,15 @@
                     total++
                     totalholder.innerHTML = total
 
+                    if (!parseInt(data['shop-name']))
+                        data['shop-name'] = localStorage.getItem(data['shop-name'])
+
                     let finalData = data['shop-name'] + '_' + data['date']
 
                     data['products'].forEach(el => {
+                        if (!parseInt(el.product))
+                            el.product = localStorage.getItem(el.product)
+
                         finalData += '_' + el.product + '_' + el.count
 
                         if (el.type == 'kgs')
@@ -65,6 +72,7 @@
                         finalData += '_' + el.price
                     })
 
+                    localStorage.clear()
                     apiRequest('api/addRecord', {
                         'data': finalData,
                         'apikey': apikey
@@ -85,7 +93,6 @@
                     status.innerHTML = 'Збережено'
                     main.rmAttr('data-loading')
                     main.setAttr('data-loaded', '')
-                    localStorage.clear()
 
                     doc.location.href = 'profile.html'
                 }
@@ -105,22 +112,27 @@
                     sendedholder.innerHTML = sended
                     
                     if (res['callback-data'] == 'shop')
-                        data['shop-name'] = res.id
+                        localStorage.setItem(res['shop-name'], res.id)
                     else
-                        data['products'][res['callback-data']].product = res.id
+                        localStorage.setItem(res['product-name'], res.id)
 
                     if (sended == total)
                         addRecord()
                 }
-                
+
                 data.products.forEach((el, index) => {
                     if (!parseInt(el['product'])) {
+                        const productName = encodeURIComponent(el['product'])
+                        if (getElement('api/addProduct-' + productName))
+                            return
+
                         total++
                         totalholder.innerHTML = total
+
                         apiRequest('api/addProduct', {
-                            'product-name': el['product'],
+                            'product-name': productName,
                             'apikey': apikey
-                        }, 'sendCallback', index)
+                        }, 'sendCallback', productName)
                     }
                 })
 
@@ -128,7 +140,7 @@
                     total++
                     totalholder.innerHTML = total
                     apiRequest('api/addShop', {
-                        'shop-name': data['shop-name'],
+                        'shop-name': encodeURIComponent(data['shop-name']),
                         'apikey': apikey
                     }, 'sendCallback', 'shop')
                 }
