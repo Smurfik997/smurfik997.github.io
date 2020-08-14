@@ -185,7 +185,7 @@ form fieldset {
     border: 0;
 }
 
-select:disabled {
+select:disabled, input:disabled {
     opacity: 1;
 }
 
