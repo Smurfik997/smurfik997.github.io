@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="uk">
+    <head>
+        <meta charset="utf-8">
+        <meta content="width=device-width,height=device-height,initial-scale=1.0,minimum-scale=1.0,shrink-to-fit=no" name="viewport">
+        <link rel="preload" crossorigin="anonymous" href="fonts/Comfortaa-Cyrillic-Bold.woff2" as="font">
+        <link rel="preload" crossorigin="anonymous" href="fonts/Comfortaa-Cyrillic.woff2" as="font">
+        <link rel="preload" crossorigin="anonymous" href="fonts/Comfortaa-Latin.woff2" as="font">
+        <link rel="stylesheet" href="css/default.css">
+        <link rel="icon" href="imgs/icon.png">
+        <link rel="apple-touch-icon" href="imgs/apple-icon.png">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/create-page.css">
+        <title>Purchase History - Перегляд</title>
+    </head>
+    <body data-create-page>
+        <header>
+            <h1>Перегляд чека</h1>
+        </header>
+        <main>
+            <form id="view-form" name="create-form">
+                <datalist id="shops"></datalist>
+                <datalist id="products"></datalist>
+                <fieldset disabled>
+                    <input type="text" id="shopname" name="shopname" aria-label="Назва закладу">
+                    <input type="date" id="date" name="date" aria-label="Дата">
+                    <table id="main-table">
+                        <thead>
+                            <tr>
+                                <th>Product Name</th>
+                                <th>Count</th>
+                                <th>Units</th>
+                                <th>Total Price</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body"></tbody>
+                    </table>
+                </fieldset>
+                <div class="space_container"></div>
+                <div class="submit_container">
+                    <input type="button" onclick="doc.location.href = 'profile.html'" value="Повернутися">
+                </div>
+            </form>
+        </main>
+        <script src="scripts/main.js"></script>
+        <script>
+            if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent))
+                document.body.setAttr('data-mobile', '')
+
+            const types = ['shop', 'product']
+            types.forEach(type => {
+                const list = getElement(type + 's')
+                const listData = JSON.parse(localStorage.getItem(type + 's'))
+
+                if (!listData) doc.location.href = 'transfer.html'
+
+                listData[type + 's'].forEach(val => {
+                    list.innerHTML += `<option value="${val[`${type}-name`]}" data-id="${val.id}"></option>`
+                })
+            })
+
+            const data = sessionStorage.getItem('data').split('_')
+            const shops = getElement('shops')
+            const products = getElement('products')
+            const tbody = getElement('table-body')
+
+            getElement('shopname').value = shops.querySelector(`option[data-id="${data[0]}"]`).value
+            getElement('date').value = data[1]
+
+            for (let i = 2; i < data.length; i += 4) {
+                let tr = document.createElement('tr')
+                tr.setAttr('data-edit', '')
+
+                tr.innerHTML = `
+                <td>
+                    <input type="text" name="product" aria-label="найменування товару"
+                    value="${products.querySelector(`option[data-id="${data[i]}"]`).value}">
+                </td>
+                <td>
+                    <input type="number" name="count" aria-label="кількість" value="${data[i + 1]}">
+                </td>
+                <td>
+                    <select name="type" aria-label="одиниці вимірювання">
+                        <option lang="en" ${data[i + 2] == 1? 'selected' : ''}>pcs</option>
+                        <option lang="en" ${data[i + 2] == 0? 'selected' : ''}>kgs</option>
+                    </select>
+                </td>
+                <td>
+                    <input type="number" name="price" aria-label="вартість" value="${data[i + 3]}">
+                </td>
+                `
+
+                tbody.appendChild(tr)
+            }
+        </script>
+    </body>
+</html>

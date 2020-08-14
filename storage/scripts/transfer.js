@@ -46,6 +46,7 @@ if (data = JSON.parse(localStorage.getItem('form-data'))) {
         })
 
         localStorage.clear()
+        sessionStorage.setItem('data', finalData)
         apiRequest('api/addRecord', {
             'data': finalData,
             'apikey': apikey
@@ -54,6 +55,7 @@ if (data = JSON.parse(localStorage.getItem('form-data'))) {
 
     recordCallback = (res) => {
         if (res.ERR) {
+            sessionStorage.clear()
             main.rmAttr('data-loading')
             main.setAttr('data-error', '')
             status.innerHTML = res.ERR.uk
@@ -67,7 +69,8 @@ if (data = JSON.parse(localStorage.getItem('form-data'))) {
         main.rmAttr('data-loading')
         main.setAttr('data-loaded', '')
 
-        doc.location.href = 'profile.html'
+        doc.location.href = 'transfer.html#view'
+        doc.location.reload()
     }
     
     sendCallback = (res) => {
@@ -147,7 +150,10 @@ if (data = JSON.parse(localStorage.getItem('form-data'))) {
                     this.status.innerHTML = ''
                     this.main.rmAttr('data-loading')
                     this.main.setAttr('data-loaded', '')
-                    doc.location.href = 'create.html'
+                    if (!doc.location.hash)
+                        doc.location.href = 'create.html'
+                    else
+                        doc.location.href = doc.location.hash.split('#')[1] + '.html'
                 }
             }
         }
