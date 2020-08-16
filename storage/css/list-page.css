@@ -1,0 +1,139 @@
+header {
+    padding: 24px;
+}
+
+main {
+    position: static;
+    transform: none;
+}
+
+
+
+
+
+table {
+    display: block;
+    width: 310px;
+    max-width: 85%;
+    border: 0;
+    border-spacing: 0;
+}
+
+thead {
+    display: none;
+}
+
+tbody {
+    display: block;
+}
+
+
+
+
+
+/* строки */
+tr {
+    display: block;
+    height: 50px;
+    transition: linear .15s height;
+}
+
+tr:first-child {
+    border-radius: 8px 8px 0 0;
+}
+
+tr:nth-child(2n + 1) {
+    background: var(--main-color);
+    color: var(--back-color);
+}
+
+tr:nth-child(2n) {
+    border: 3px solid var(--main-color);
+}
+
+tr:last-child {
+    border-radius: 0 0 8px 8px;
+}
+
+
+
+
+
+/* ячейки */
+td {
+    display: inline-block;
+    width: 50%;
+    font-size: 55%;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    
+}
+
+span {
+    opacity: .8;
+}
+
+
+
+
+
+/* кнопки */
+.space_container {
+    width: 100%;
+    height: 85px;
+}
+
+.navigation_container {
+    display: block;
+    position: fixed;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    height: 50px;
+    width: 310px;
+    max-width: 85%;
+    text-align: center;
+    background: var(--back-color);
+    box-shadow: 0 0 15px 20px var(--back-color);
+}
+
+.navigation_container input {
+    position: relative;
+    display: inline-block;
+    width: 50%;
+    top: -10px;
+    margin: 0;
+    height: 45px;
+    border: 1px solid var(--main-color);
+    font-size: 55%;
+    line-height: 55%;
+    text-transform: lowercase;
+
+    background: transparent;
+    outline: none;
+    -webkit-tap-highlight-color: transparent !important;
+}
+
+.navigation_container input:first-child {
+    border-radius: 4px 0 0 4px;
+    border-right: 0;
+}
+
+.navigation_container input:last-child {
+    border-radius: 0 4px 4px 0;
+    border-left: 0;
+}
+
+.navigation_container input:only-child {
+    border-width: 1px;
+    color: var(--back-color);
+    background: var(--main-color);
+    width: 60%;
+    border-radius: 4px;
+}
+
+.navigation_container input:hover, .navigation_container input:active,
+.navigation_container input:focus {
+    opacity: .85;
+}

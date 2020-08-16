@@ -47,10 +47,18 @@ if (data = JSON.parse(localStorage.getItem('form-data'))) {
 
         localStorage.clear()
         sessionStorage.setItem('data', finalData)
-        apiRequest('api/addRecord', {
-            'data': finalData,
-            'apikey': apikey
-        }, 'recordCallback')
+        let id
+        if (id = sessionStorage.getItem('data-id'))
+            apiRequest('api/updateRecord', {
+                'data': finalData,
+                'id': id,
+                'apikey': apikey
+            }, 'recordCallback')
+        else
+            apiRequest('api/addRecord', {
+                'data': finalData,
+                'apikey': apikey
+            }, 'recordCallback')
     }
 
     recordCallback = (res) => {
@@ -69,6 +77,7 @@ if (data = JSON.parse(localStorage.getItem('form-data'))) {
         main.rmAttr('data-loading')
         main.setAttr('data-loaded', '')
 
+        sessionStorage.setItem('data-id', res.id)
         doc.location.href = 'transfer.html#view'
         doc.location.reload()
     }

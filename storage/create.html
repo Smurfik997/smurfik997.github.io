@@ -17,6 +17,12 @@
         <header>
             <h1>Редагування чека</h1>
         </header>
+        <section id="tutor" data-hidden>
+            <p>Порада<br><br><i>...вводьте назви товарів так само, як вказано на чеку</i></p>
+            <div class="submit_container">
+                <input type="button" value="Продовжити" onclick="hideTutor()">
+            </div>
+        </section>
         <main>
             <form id="create-form" name="create-form" onsubmit="submitForm(event)" autocomplete="off">
                 <datalist id="shops"></datalist>
@@ -26,10 +32,10 @@
                 <table id="main-table">
                     <thead>
                         <tr>
-                            <th>Product Name</th>
-                            <th>Count</th>
-                            <th>Units</th>
-                            <th>Total Price</th>
+                            <th>Найменуання товару</th>
+                            <th>Кількість</th>
+                            <th>Одиниці вимірювання</th>
+                            <th>Загальна ціна</th>
                         </tr>
                     </thead>
                     <tbody id="table-body">
@@ -62,6 +68,14 @@
         </main>
         <script src="scripts/main.js"></script>
         <script>
+            if (/tutor=1/.test(doc.cookie))
+                getElement('tutor').rmAttr('data-hidden')
+
+            const hideTutor = () => {
+                doc.cookie = 'tutor=; max-age=0'
+                getElement('tutor').setAttr('data-hidden', '')
+            }
+
             if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent))
                 document.body.setAttr('data-mobile', '')
 
@@ -74,6 +88,7 @@
                 const listData = JSON.parse(localStorage.getItem(type + 's'))
 
                 if (!listData) doc.location.href = 'transfer.html'
+                localStorage.removeItem(type + 's')
 
                 listData[type + 's'].forEach(val => {
                     list.innerHTML += `<option value="${val[`${type}-name`]}" data-id="${val.id}"></option>`
@@ -115,24 +130,25 @@
                         element.remove()
             }
 
-            const addField = (element) => {
+            const addField = (value) => {
                 let tr = document.createElement('tr')
+                if (!value) value = {}
                 tr.innerHTML = `
                 <td>
-                    <input type="text" name="product" list="products" 
-                    placeholder="найменування товару" aria-label="найменування товару">
+                    <input type="text" name="product" list="products" value="${value.product? value.product : ''}"
+                    placeholder="найменування товару" aria-label="найменування товару" onfocus="${value.product? 'editField(this)' : ''}">
                 </td>
                 <td>
-                    <input type="number" name="count" step="any" placeholder="кількість" aria-label="кількість">
+                    <input type="number" name="count" step="any" placeholder="кількість" aria-label="кількість" value="${value.count? value.count : ''}">
                 </td>
                 <td>
                     <select name="type" aria-label="одиниці вимірювання">
-                        <option lang="en" selected>pcs</option>
-                        <option lang="en">kgs</option>
+                        <option lang="en" ${value.type? (value.type == 1? 'selected' : '') : 'selected'}>pcs</option>
+                        <option lang="en" ${value.type? (value.type == 0? 'selected' : '') : ''}>kgs</option>
                     </select>
                 </td>
                 <td>
-                    <input type="number" name="price" step="any" placeholder="вартість" aria-label="вартість">
+                    <input type="number" name="price" step="any" placeholder="вартість" aria-label="вартість" value="${value.price? value.price : ''}">
                 </td>
                 `
                 tr.oninput = () => rowChange(tr)
@@ -176,6 +192,34 @@
                 localStorage.clear()
                 localStorage.setItem('form-data', JSON.stringify(finalData))
                 doc.location.href = 'transfer.html'
+            }
+
+            if (sessionStorage.getItem('data')) {
+                const data = sessionStorage.getItem('data').split('_')
+                const shops = getElement('shops')
+                const products = getElement('products')
+                const tbody = getElement('table-body')
+                tbody.innerHTML = ''
+
+                const shopname = shops.querySelector(`option[data-id="${data[0]}"]`)
+                getElement('shopname').value = shopname? shopname.value : 'deleted'
+                getElement('date').value = data[1]
+
+                for (let i = 2; i < data.length; i += 4) {
+                    const product = products.querySelector(`option[data-id="${data[i]}"]`)
+                    addField({
+                        'product': product? product.value : 'deleted',
+                        'count': data[i + 1],
+                        'type': data[i + 2],
+                        'price': data[i + 3]
+                    })
+                }
+
+                
+                const tr = addField()
+                const firstInNewRow =  getElement('input', 'byTagName', tr)[0]
+                firstInNewRow.onfocus = () => editField(firstInNewRow)
+                tr.setAttr('data-edit', '')
             }
         </script>
     </body>

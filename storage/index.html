@@ -52,19 +52,20 @@
         </section>
         <script src="scripts/main.js"></script>
         <script>
+            doc.forms['login-form']['invite-code'].oninput = () => {
+                getElement('error-block').rmAttr('data-visible')
+            }
+
             const loginCallback = (res) => {
                 doc.forms['login-form'].rmAttr('data-loading')
 
                 if (res.apikey) {
-                    doc.cookie = 'apikey=' + res.apikey
+                    doc.cookie = 'apikey=' + res.apikey + '; max-age=' + 3600 * 24 * 365 * 1000
+                    if (res.tutor) doc.cookie = 'tutor=1'
                     doc.location.href = 'profile.html'
                 } else {
                     getElement('error-block').innerText = res.ERR.uk
-
-                    if (getElement('error-block').getAttr('data-visible') == null) {
-                        getElement('error-block').setAttr('data-visible', '')
-                        setTimeout(() => getElement('error-block').rmAttr('data-visible'), 1000)
-                    }
+                    getElement('error-block').setAttr('data-visible', '')
                 }
             }
 

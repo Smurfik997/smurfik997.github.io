@@ -71,25 +71,11 @@ main div[role="alert"] {
     font-size: 60%;
     color: var(--red);
     opacity: 0;
-}
-
-@keyframes alert-anim {
-    0% {
-        opacity: 0;
-    }
-    15% {
-        opacity: 1;
-    }
-    85% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-    }
+    transition: linear .4s opacity;
 }
 
 main div[role="alert"][data-visible] {
-    animation: linear 1s alert-anim forwards;
+    opacity: 1;
 }
 
 
@@ -97,7 +83,7 @@ main div[role="alert"][data-visible] {
 
 
 /* основные кнопки, поля ввода, выбора */
-main button, form input, form select {
+main button, input, select {
     width: 310px;
     max-width: 85%;
     height: 76px;
@@ -131,21 +117,21 @@ main button:focus, main button:active, main button:hover {
     border-color: transparent;
 }
 
-form select, form input,
+select, input,
 input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
     appearance: none;
     -webkit-appearance: none;
 }
 
-form input::-webkit-calendar-picker-indicator, 
-form input::-webkit-list-button {
+input::-webkit-calendar-picker-indicator, 
+input::-webkit-list-button {
     display: none !important;
     opacity: 0  !important;
     width: 0 !important;
     height: 0 !important;
 }
 
-form input, form select {
+input, select {
     width: 270px;
     max-width: 75%;
     height: 40px;
@@ -154,13 +140,13 @@ form input, form select {
     border-bottom: 2px solid var(--main-color);
 }
 
-form input::placeholder {
+input::placeholder {
     color: var(--main-color);
     opacity: .5;
     transition: inherit;
 }
 
-form input:focus::placeholder {
+input:focus::placeholder {
     opacity: 0;
 }
 

@@ -55,6 +55,10 @@ thead {
     display: none;
 }
 
+tbody {
+    display: block;
+}
+
 
 
 
@@ -143,7 +147,7 @@ form .space_container {
     height: 75px;
 }
 
-form .submit_container {
+.submit_container {
     display: block;
     position: fixed;
     left: 50%;
@@ -157,7 +161,7 @@ form .submit_container {
     box-shadow: 0 0 15px 20px var(--back-color);
 }
 
-form .submit_container input {
+.submit_container input {
     position: relative;
     display: inline-block;
     width: 50%;
@@ -175,27 +179,28 @@ form .submit_container input {
     -webkit-tap-highlight-color: transparent !important;
 }
 
-form[name="view-form"] .submit_container input {
-    color: var(--back-color);
-    background: var(--main-color);
-    width: 60%;
-    border-radius: 4px;
-}
-
-form[name="create-form"] .submit_container input:first-child {
+.submit_container input:first-child {
     color: var(--back-color);
     background: var(--main-color);
     border-radius: 4px 0 0 4px;
 }
 
-form[name="create-form"] .submit_container input:last-child {
+.submit_container input:last-child {
     border-radius: 0 4px 4px 0;
     border-left: 0;
 }
 
-form .submit_container input:hover, form .submit_container input:active, form .submit_container input:focus {
+.submit_container input:hover, .submit_container input:active,
+.submit_container input:focus {
     opacity: .85;
 } 
+
+section#tutor input {
+    color: var(--back-color);
+    background: var(--main-color);
+    width: 60%;
+    border-radius: 4px;
+}
 
 
 
@@ -215,6 +220,37 @@ select:disabled, input:disabled {
     box-shadow: none;
 }
 
+
+
+
+
+section#tutor[data-hidden] {
+    display: none;
+}
+
+section#tutor {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+    background: var(--back-color);
+}
+
+section#tutor p {
+    position: relative;
+    top: 50%;
+    width: 310px;
+    max-width: 85%;
+    transform: translateY(calc(-50% - 25px));
+    font-size: 60%;
+    text-align: center;
+}
+
+section#tutor i {
+    font-size: 80%;
+}
 /* form {
     box-shadow: 0px 8px 40px -20px var(--main-color);
     border-radius: 0 0 15px 15px;

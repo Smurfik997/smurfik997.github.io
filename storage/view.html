@@ -27,10 +27,10 @@
                     <table id="main-table">
                         <thead>
                             <tr>
-                                <th>Product Name</th>
-                                <th>Count</th>
-                                <th>Units</th>
-                                <th>Total Price</th>
+                                <th>Найменуання товару</th>
+                                <th>Кількість</th>
+                                <th>Одиниці вимірювання</th>
+                                <th>Загальна ціна</th>
                             </tr>
                         </thead>
                         <tbody id="table-body"></tbody>
@@ -38,7 +38,8 @@
                 </fieldset>
                 <div class="space_container"></div>
                 <div class="submit_container">
-                    <input type="button" onclick="doc.location.href = 'profile.html'" value="Повернутися">
+                    <input type="button" onclick="doc.location.href = 'profile.html'" value="Повернутися"><!--
+                    --><input type="button" onclick="doc.location.href = 'transfer.html'" value="Редагувати">
                 </div>
             </form>
         </main>
@@ -64,17 +65,19 @@
             const products = getElement('products')
             const tbody = getElement('table-body')
 
-            getElement('shopname').value = shops.querySelector(`option[data-id="${data[0]}"]`).value
+            const shopname = shops.querySelector(`option[data-id="${data[0]}"]`)
+            getElement('shopname').value = shopname? shopname.value : 'deleted'
             getElement('date').value = data[1]
 
             for (let i = 2; i < data.length; i += 4) {
                 let tr = document.createElement('tr')
                 tr.setAttr('data-edit', '')
+                const product = products.querySelector(`option[data-id="${data[i]}"]`)
 
                 tr.innerHTML = `
                 <td>
                     <input type="text" name="product" aria-label="найменування товару" onscroll="this.scrollTo(0, 0)"
-                    value="${products.querySelector(`option[data-id="${data[i]}"]`).value}">
+                    value="${product? product.value : 'deleted'}">
                 </td>
                 <td>
                     <input type="number" name="count" aria-label="кількість" value="${data[i + 1]}">
