@@ -62,7 +62,7 @@
                 <div class="space_container"></div>
                 <div class="submit_container">
                     <input type="submit" value="Зберегти"><!--
-                    --><input type="button" onclick="doc.location.href = 'profile.html'" value="Скасувати">
+                    --><input type="button" onclick="cancel()" value="Скасувати">
                 </div>
             </form>
         </main>
@@ -194,7 +194,10 @@
                 doc.location.href = 'transfer.html'
             }
 
+            let cancel = () => { doc.location.href = 'profile.html' }
+
             if (sessionStorage.getItem('data')) {
+                cancel = () => { doc.location.href = 'transfer.html#view' }
                 const data = sessionStorage.getItem('data').split('_')
                 const shops = getElement('shops')
                 const products = getElement('products')

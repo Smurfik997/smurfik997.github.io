@@ -25,56 +25,86 @@
                         <th>Дата</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Чек<span>#0001</span></td><!--
-                        --><td>2020-08-15</td>
-                    </tr>
-                    <tr>
-                        <td>Чек<span>#0002</span></td><!--
-                        --><td>2020-08-15</td>
-                    </tr>
-                    <tr>
-                        <td>Чек<span>#0003</span></td><!--
-                        --><td>2020-08-15</td>
-                    </tr>
-                    <tr>
-                        <td>Чек<span>#0004</span></td><!--
-                        --><td>2020-08-15</td>
-                    </tr>
-                    <tr>
-                        <td>Чек<span>#0005</span></td><!--
-                        --><td>2020-08-15</td>
-                    </tr>
-                    <tr>
-                        <td>Чек<span>#0006</span></td><!--
-                        --><td>2020-08-15</td>
-                    </tr>
-                    <tr>
-                        <td>Чек<span>#0007</span></td><!--
-                        --><td>2020-08-15</td>
-                    </tr>
-                    <tr>
-                        <td>Чек<span>#0008</span></td><!--
-                        --><td>2020-08-15</td>
-                    </tr>
-                    <tr>
-                        <td>Чек<span>#0009</span></td><!--
-                        --><td>2020-08-15</td>
-                    </tr>
-                    <tr>
-                        <td>Чек<span>#0010</span></td><!--
-                        --><td>2020-08-15</td>
-                    </tr>
+                <tbody id="table-body">
+                    
                 </tbody>
             </table>
+            <div id="alert" data-visible>Порожньо</div>
             <div class="space_container"></div>
             <div class="navigation_container">
-                <input type="button" onclick="doc.location.href = 'profile.html'" value="Попередня"><!--
-                --><input type="button" onclick="doc.location.href = 'profile.html'" value="Наступна">
+                <input id="more" type="button" onclick="this.blur(); more()" value="Більше"><!--
+                --><input type="button" onclick="sessionStorage.clear(); doc.location.href = 'profile.html'" value="Повернутися">
             </div>
         </main>
         <script src="scripts/main.js"></script>
-        <script></script>
+        <script>
+            if (!sessionStorage.getItem('sales-slips')) {
+                sessionStorage.setItem('sales-slips', JSON.stringify({
+                    'offset': 0,
+                    'limit': 5 + 1,
+                    'max': false,
+                    'records': []
+                }))
+            }
+
+            let storage = JSON.parse(sessionStorage.getItem('sales-slips'))
+            const tbody = getElement('table-body')
+
+            const appendElements = (records) => {
+                if (records.length > 0)
+                    getElement('alert').rmAttr('data-visible')
+
+                records.forEach(el => {
+                    let tr = document.createElement('tr')
+                    tr.setAttr('data', el.data)
+                    tr.onclick = () => {
+                        sessionStorage.setItem('sales-slips', JSON.stringify(storage))
+                        sessionStorage.setItem('data', el.data)
+                        sessionStorage.setItem('data-id', el.id)
+                        doc.location.href = 'view.html'
+                    }
+
+                    tr.innerHTML = `
+                    <td>Чек<span>#${String(el.id).padStart(4, '0')}</span></td><!--
+                    --><td>${el.data.split('_')[1]}</td>
+                    `
+
+                    tbody.appendChild(tr)
+                })
+            }
+
+            const getCallback = (res) => {
+                if (res.ERR) {
+                    return
+                }
+
+                if (res.count < storage.limit) {
+                    storage.max = true
+                    getElement('more').remove()
+                }
+
+                storage.offset += res.count
+                if (res.count == storage.limit) {
+                    storage.offset--
+                    res.records.pop()
+                }
+                storage.records = storage.records.concat(res.records)
+                appendElements(res.records)
+            }
+
+            const more = () => 
+                apiRequest('api/getRecords', {
+                    'offset': storage.offset,
+                    'limit': storage.limit,
+                    'apikey': encodeURIComponent(doc.cookie.split('apikey=')[1].split(';')[0])
+                }, 'getCallback')
+
+            if (storage.records.length == 0)
+                more()
+            else {
+                if (storage.max) getElement('more').remove()
+                appendElements(storage.records)
+            }
+        </script>
     </body>
 </html>

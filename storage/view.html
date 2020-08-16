@@ -38,7 +38,7 @@
                 </fieldset>
                 <div class="space_container"></div>
                 <div class="submit_container">
-                    <input type="button" onclick="doc.location.href = 'profile.html'" value="Повернутися"><!--
+                    <input type="button" onclick="doc.location.href = 'list.html'" value="Повернутися"><!--
                     --><input type="button" onclick="doc.location.href = 'transfer.html'" value="Редагувати">
                 </div>
             </form>
@@ -47,6 +47,18 @@
         <script>
             if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent))
                 document.body.setAttr('data-mobile', '')
+
+            if (sessionStorage.getItem('sales-slips')) {
+                let recordsData = JSON.parse(sessionStorage.getItem('sales-slips'))
+                const id = sessionStorage.getItem('data-id')
+                recordsData.records.forEach(el => {
+                    if (el.id != id)
+                        return
+
+                    el.data = sessionStorage.getItem('data')
+                })
+                sessionStorage.setItem('sales-slips', JSON.stringify(recordsData))
+            }
 
             const types = ['shop', 'product']
             types.forEach(type => {
