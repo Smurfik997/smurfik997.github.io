@@ -192,6 +192,7 @@ form .space_container {
 .submit_container[data-edit] input:nth-child(2) {
     border-left: 0;
     border-radius: 0;
+    border-right: 0;
 }
 
 .submit_container[data-edit] input:last-child {
@@ -199,7 +200,7 @@ form .space_container {
     background-color: var(--main-color);
     background-image: url('../imgs/trash.svg');
     background-size: contain;
-    /* background-origin: border-box; */
+    background-origin: border-box;
     font-size: 0;
     vertical-align: bottom;
 }
