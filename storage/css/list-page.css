@@ -34,10 +34,18 @@ div#alert {
 div#alert[data-visible] {
     display: block;
     position: absolute;
+    width: 310px;
+    max-width: 85%;
     top: 50%;
     left: 50%;
-    font-size: 75%;
+    font-size: 60%;
     transform: translate(-50%, -50%);
+    transition: linear .4s color;
+    text-align: center;
+}
+
+div#alert[data-error] {
+    color: var(--red);
 }
 
 
@@ -84,6 +92,8 @@ td {
     height: 50px;
     line-height: 50px;
     text-align: center;
+    user-select: none;
+    -webkit-user-select: none;
     
 }
 
@@ -143,7 +153,11 @@ span {
     border-left: 0;
 }
 
-.navigation_container input:only-child {
+.navigation_container input[data-hidden] {
+    display: none;
+}
+
+.navigation_container input[data-hidden] + input {
     border-width: 1px;
     color: var(--back-color);
     background: var(--main-color);

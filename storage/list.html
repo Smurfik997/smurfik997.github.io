@@ -29,10 +29,10 @@
                     
                 </tbody>
             </table>
-            <div id="alert" data-visible>Порожньо</div>
+            <div id="alert">Порожньо</div>
             <div class="space_container"></div>
             <div class="navigation_container">
-                <input id="more" type="button" onclick="this.blur(); more()" value="Більше"><!--
+                <input id="more" type="button" onclick="this.blur(); more()" value="Більше" data-hidden><!--
                 --><input type="button" onclick="sessionStorage.clear(); doc.location.href = 'profile.html'" value="Повернутися">
             </div>
         </main>
@@ -51,8 +51,11 @@
             const tbody = getElement('table-body')
 
             const appendElements = (records) => {
-                if (records.length > 0)
-                    getElement('alert').rmAttr('data-visible')
+                if (records.length == 0)
+                    getElement('alert').setAttr('data-visible', '')
+
+                if (!storage.max)
+                    getElement('more').rmAttr('data-hidden')
 
                 records.forEach(el => {
                     let tr = document.createElement('tr')
@@ -75,12 +78,16 @@
 
             const getCallback = (res) => {
                 if (res.ERR) {
-                    return
+                    const alert = getElement('alert')
+                    alert.innerHTML = res.ERR.uk
+                    alert.setAttr('data-visible', '')
+                    alert.setAttr('data-visible', '')
+                    alert.setAttr('data-error', '')
                 }
 
                 if (res.count < storage.limit) {
                     storage.max = true
-                    getElement('more').remove()
+                    getElement('more').setAttr('data-hidden', '')
                 }
 
                 storage.offset += res.count
@@ -101,10 +108,8 @@
 
             if (storage.records.length == 0)
                 more()
-            else {
-                if (storage.max) getElement('more').remove()
+            else
                 appendElements(storage.records)
-            }
         </script>
     </body>
 </html>
