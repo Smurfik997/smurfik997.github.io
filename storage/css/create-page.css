@@ -196,7 +196,8 @@ form .space_container {
 
 .submit_container[data-edit] input:last-child {
     width: 45px;
-    background: var(--main-color) url('../imgs/trash.svg');
+    background: var(--main-color) url('../imgs/trash.png');
+    background-size: contain;
     background-origin: border-box;
     font-size: 0;
     vertical-align: bottom;
