@@ -196,9 +196,10 @@ form .space_container {
 
 .submit_container[data-edit] input:last-child {
     width: 45px;
-    background: var(--main-color) url('../imgs/trash.png');
+    background-color: var(--main-color);
+    background-image: url('../imgs/trash.svg');
     background-size: contain;
-    background-origin: border-box;
+    /* background-origin: border-box; */
     font-size: 0;
     vertical-align: bottom;
 }
