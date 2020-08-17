@@ -1,4 +1,4 @@
-let data, sendCallback, recordCallback, getListCallback
+let data, sendCallback, recordCallback, getListCallback, deleteRecordCallback
 
 if (data = JSON.parse(localStorage.getItem('form-data'))) {
     localStorage.clear()
@@ -20,6 +20,48 @@ if (data = JSON.parse(localStorage.getItem('form-data'))) {
     
     let sended = 0
     let total = 0
+
+    deleteRecordCallback = (res) => {
+        if (res.ERR) {
+            sessionStorage.clear()
+            main.rmAttr('data-loading')
+            main.setAttr('data-error', '')
+            status.innerHTML = res.ERR.uk
+            return
+        }
+
+        sended++
+        sendedholder.innerHTML = sended
+
+        status.innerHTML = 'Видалено'
+        main.rmAttr('data-loading')
+        main.setAttr('data-loaded', '')
+
+        let recordsData = JSON.parse(sessionStorage.getItem('sales-slips'))
+
+        recordsData.records.forEach((el, index) => {
+            if (el.id == res.id)
+                recordsData.records.splice(index, 1)
+        })
+        recordsData.offset--
+        sessionStorage.setItem('sales-slips', JSON.stringify(recordsData))
+        sessionStorage.removeItem('data-id')
+        doc.location.href = 'transfer.html#list'
+        doc.location.reload()
+    }
+
+    if (data.delete) {
+        status.innerHTML = 'Видалення'
+        total++
+        totalholder.innerHTML = total
+
+        apiRequest('api/deleteRecord', {
+            'id': sessionStorage.getItem('data-id'),
+            'apikey': apikey
+        }, 'deleteRecordCallback')
+
+        throw new Error('delete proccess')
+    }
 
     const addRecord = () => {
         status.innerHTML = 'Завершення надсилання'
@@ -48,13 +90,13 @@ if (data = JSON.parse(localStorage.getItem('form-data'))) {
         localStorage.clear()
         sessionStorage.setItem('data', finalData)
         let id
-        if (id = sessionStorage.getItem('data-id'))
+        if (id = sessionStorage.getItem('data-id')) {
             apiRequest('api/updateRecord', {
                 'data': finalData,
                 'id': id,
                 'apikey': apikey
             }, 'recordCallback')
-        else
+        } else
             apiRequest('api/addRecord', {
                 'data': finalData,
                 'apikey': apikey

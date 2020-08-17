@@ -185,6 +185,23 @@ form .space_container {
     border-radius: 4px 0 0 4px;
 }
 
+.submit_container[data-edit] input {
+    width: calc(50% - 45px/2);
+}
+
+.submit_container[data-edit] input:nth-child(2) {
+    border-left: 0;
+    border-radius: 0;
+}
+
+.submit_container[data-edit] input:last-child {
+    width: 45px;
+    background: var(--main-color) url('../imgs/trash.svg');
+    background-origin: border-box;
+    font-size: 0;
+    vertical-align: bottom;
+}
+
 .submit_container input:last-child {
     border-radius: 0 4px 4px 0;
     border-left: 0;

@@ -62,8 +62,8 @@
                 <div class="space_container"></div>
                 <div class="submit_container">
                     <input type="submit" value="Зберегти"><!--
-                    --><input type="button" onclick="cancel()" value="Скасувати">
-                </div>
+                    --><input type="button" onclick="cancel()" value="Скасувати"><!--
+                --></div>
             </form>
         </main>
         <script src="scripts/main.js"></script>
@@ -197,6 +197,13 @@
             let cancel = () => { doc.location.href = 'profile.html' }
 
             if (sessionStorage.getItem('data')) {
+                const submit_container = getElement('submit_container', 'byClassName')[1]
+                submit_container.setAttr('data-edit', '')
+                submit_container.innerHTML += `<input
+                id="delete" type="button" 
+                onclick="localStorage.setItem('form-data', '{&quot;delete&quot;: true}'); 
+                doc.location.href = 'transfer.html'" value="Видалити"
+                >`
                 cancel = () => { doc.location.href = 'transfer.html#view' }
                 const data = sessionStorage.getItem('data').split('_')
                 const shops = getElement('shops')
