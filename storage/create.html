@@ -173,7 +173,7 @@
                         'product': el.value.trim(),
                         'count': form["count"][index].value,
                         'type': form["type"][index].value,
-                        'price': form["price"][index].value.replace(',', '.')
+                        'price': parseFloat(form["price"][index].value).toFixed(2)
                     })
 
                     if (id = products.querySelector(`option[value="${el.value}"]`))
