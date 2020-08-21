@@ -170,18 +170,18 @@
                     if (!el.value) return
 
                     data.push({
-                        'product': el.value.trim(),
-                        'count': form["count"][index].value,
+                        'product': el.value.trim().replace(/"/g, '&quot;'),
+                        'count': parseFloat(form["count"][index].value),
                         'type': form["type"][index].value,
                         'price': parseFloat(form["price"][index].value).toFixed(2)
                     })
 
-                    if (id = products.querySelector(`option[value="${el.value}"]`))
+                    if (id = products.querySelector(`option[value="${el.value.trim().replace(/"/g, '&quot;')}"]`))
                         data[data.length - 1]['product'] = id.getAttr('data-id')
                 })
 
                 let finalData = {
-                    'shop-name': form["shopname"].value,
+                    'shop-name': form["shopname"].value.replace(/"/g, '&quot;'),
                     'date': form["date"].value,
                     'products': data
                 }

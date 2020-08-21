@@ -89,7 +89,7 @@
                 tr.innerHTML = `
                 <td>
                     <input type="text" name="product" aria-label="найменування товару" onscroll="this.scrollTo(0, 0)"
-                    value="${product? product.value : 'deleted'}">
+                    value="${product? product.value.replace(/"/g, '&quot;') : 'deleted'}">
                 </td>
                 <td>
                     <input type="number" name="count" aria-label="кількість" value="${data[i + 1]}">
